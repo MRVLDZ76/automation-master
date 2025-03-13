@@ -1,0 +1,69 @@
+{
+    "levels": [
+        {
+            "title": "Pet Services",
+            "categories": [
+                {
+                    "title": "Pet Care",
+                    "subcategories": [
+                        {"title": "Dog Walking"},
+                        {"title": "Pet Sitting"},
+                        {"title": "Overnight Pet Care"},
+                        {"title": "Pet Transportation"},
+                        {"title": "Pet Medication Administration"}
+                    ]
+                },
+                {
+                    "title": "Pet Training",
+                    "subcategories": [
+                        {"title": "Puppy Training"},
+                        {"title": "Obedience Training"},
+                        {"title": "Behavior Modification"},
+                        {"title": "Agility Training"},
+                        {"title": "Service Dog Training"}
+                    ]
+                },
+                {
+                    "title": "Pet Grooming",
+                    "subcategories": [
+                        {"title": "Full Service Grooming"},
+                        {"title": "Bath & Brush"},
+                        {"title": "Nail Trimming"},
+                        {"title": "De-matting"},
+                        {"title": "Pet Styling"}
+                    ]
+                },
+                {
+                    "title": "Specialized Pet Services",
+                    "subcategories": [
+                        {"title": "Pet Photography"},
+                        {"title": "Pet Massage"},
+                        {"title": "Pet Nutrition Consulting"},
+                        {"title": "Pet First Aid"},
+                        {"title": "Pet Waste Removal"}
+                    ]
+                },
+                {
+                    "title": "Cat Services",
+                    "subcategories": [
+                        {"title": "Cat Sitting"},
+                        {"title": "Cat Grooming"},
+                        {"title": "Litter Box Maintenance"},
+                        {"title": "Cat Behavior Training"},
+                        {"title": "Cat Medical Care"}
+                    ]
+                },
+                {
+                    "title": "Pet Health & Wellness",
+                    "subcategories": [
+                        {"title": "Pet Exercise Programs"},
+                        {"title": "Pet Diet Planning"},
+                        {"title": "Pet Health Monitoring"},
+                        {"title": "Senior Pet Care"},
+                        {"title": "Pet Recovery Assistance"}
+                    ]
+                }
+            ]
+        }
+    ]
+}

@@ -1,0 +1,69 @@
+{
+    "levels": [
+        {
+            "title": "Home Services & Repairs",
+            "categories": [
+                {
+                    "title": "Electrical Services",
+                    "subcategories": [
+                        {"title": "Electrical Repairs"},
+                        {"title": "Lighting Installation"},
+                        {"title": "Panel Upgrades"},
+                        {"title": "Outlet Installation"},
+                        {"title": "Smart Home Wiring"}
+                    ]
+                },
+                {
+                    "title": "Plumbing Services",
+                    "subcategories": [
+                        {"title": "Leak Repair"},
+                        {"title": "Pipe Installation"},
+                        {"title": "Water Heater Service"},
+                        {"title": "Drain Cleaning"},
+                        {"title": "Fixture Installation"}
+                    ]
+                },
+                {
+                    "title": "HVAC Services",
+                    "subcategories": [
+                        {"title": "AC Repair"},
+                        {"title": "Heating Service"},
+                        {"title": "Duct Cleaning"},
+                        {"title": "System Installation"},
+                        {"title": "Preventive Maintenance"}
+                    ]
+                },
+                {
+                    "title": "Handyman Services",
+                    "subcategories": [
+                        {"title": "General Repairs"},
+                        {"title": "Furniture Assembly"},
+                        {"title": "TV Mounting"},
+                        {"title": "Drywall Repair"},
+                        {"title": "Door Repair"}
+                    ]
+                },
+                {
+                    "title": "Cleaning Services",
+                    "subcategories": [
+                        {"title": "House Cleaning"},
+                        {"title": "Deep Cleaning"},
+                        {"title": "Move-in/out Cleaning"},
+                        {"title": "Carpet Cleaning"},
+                        {"title": "Window Cleaning"}
+                    ]
+                },
+                {
+                    "title": "Home Maintenance",
+                    "subcategories": [
+                        {"title": "Pest Control"},
+                        {"title": "Gutter Cleaning"},
+                        {"title": "Chimney Service"},
+                        {"title": "Roof Maintenance"},
+                        {"title": "Home Inspection"}
+                    ]
+                }
+            ]
+        }
+    ]
+}

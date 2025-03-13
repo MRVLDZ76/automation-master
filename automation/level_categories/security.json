@@ -1,0 +1,69 @@
+{
+    "levels": [
+        {
+            "title": "Security & Safety",
+            "categories": [
+                {
+                    "title": "Home Security",
+                    "subcategories": [
+                        {"title": "Security System Installation"},
+                        {"title": "Camera Installation"},
+                        {"title": "Smart Lock Setup"},
+                        {"title": "Video Doorbell Installation"},
+                        {"title": "Security Assessment"}
+                    ]
+                },
+                {
+                    "title": "Business Security",
+                    "subcategories": [
+                        {"title": "Access Control Systems"},
+                        {"title": "Commercial Surveillance"},
+                        {"title": "Security Guard Services"},
+                        {"title": "Asset Protection"},
+                        {"title": "Emergency Response Systems"}
+                    ]
+                },
+                {
+                    "title": "Safety Training",
+                    "subcategories": [
+                        {"title": "First Aid Training"},
+                        {"title": "CPR Certification"},
+                        {"title": "Fire Safety Training"},
+                        {"title": "Active Shooter Training"},
+                        {"title": "Workplace Safety"}
+                    ]
+                },
+                {
+                    "title": "Fire Protection",
+                    "subcategories": [
+                        {"title": "Fire Alarm Installation"},
+                        {"title": "Sprinkler Systems"},
+                        {"title": "Fire Extinguisher Service"},
+                        {"title": "Emergency Lighting"},
+                        {"title": "Fire Safety Inspection"}
+                    ]
+                },
+                {
+                    "title": "Cybersecurity",
+                    "subcategories": [
+                        {"title": "Network Security"},
+                        {"title": "Data Protection"},
+                        {"title": "Security Auditing"},
+                        {"title": "Incident Response"},
+                        {"title": "Employee Training"}
+                    ]
+                },
+                {
+                    "title": "Event Security",
+                    "subcategories": [
+                        {"title": "Crowd Control"},
+                        {"title": "VIP Protection"},
+                        {"title": "Event Risk Assessment"},
+                        {"title": "Security Planning"},
+                        {"title": "Emergency Response"}
+                    ]
+                }
+            ]
+        }
+    ]
+}

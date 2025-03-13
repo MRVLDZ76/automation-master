@@ -1,0 +1,69 @@
+{
+    "levels": [
+        {
+            "title": "Events & Entertainment",
+            "categories": [
+                {
+                    "title": "Photography",
+                    "subcategories": [
+                        {"title": "Wedding Photography"},
+                        {"title": "Portrait Photography"},
+                        {"title": "Event Photography"},
+                        {"title": "Commercial Photography"},
+                        {"title": "Real Estate Photography"}
+                    ]
+                },
+                {
+                    "title": "Event Planning",
+                    "subcategories": [
+                        {"title": "Wedding Planning"},
+                        {"title": "Corporate Events"},
+                        {"title": "Birthday Parties"},
+                        {"title": "Baby Showers"},
+                        {"title": "Holiday Events"}
+                    ]
+                },
+                {
+                    "title": "Catering",
+                    "subcategories": [
+                        {"title": "Wedding Catering"},
+                        {"title": "Corporate Catering"},
+                        {"title": "Private Chef Services"},
+                        {"title": "Buffet Service"},
+                        {"title": "Food Truck Service"}
+                    ]
+                },
+                {
+                    "title": "Entertainment",
+                    "subcategories": [
+                        {"title": "Live Band"},
+                        {"title": "DJ Services"},
+                        {"title": "Magicians"},
+                        {"title": "Face Painting"},
+                        {"title": "Clowns & Characters"}
+                    ]
+                },
+                {
+                    "title": "Videography",
+                    "subcategories": [
+                        {"title": "Wedding Videography"},
+                        {"title": "Event Videos"},
+                        {"title": "Commercial Videos"},
+                        {"title": "Real Estate Videos"},
+                        {"title": "Drone Videography"}
+                    ]
+                },
+                {
+                    "title": "Event Rentals",
+                    "subcategories": [
+                        {"title": "Furniture Rentals"},
+                        {"title": "Audio/Visual Equipment"},
+                        {"title": "Tent Rentals"},
+                        {"title": "Decor & Lighting"},
+                        {"title": "Bounce House Rentals"}
+                    ]
+                }
+            ]
+        }
+    ]
+}

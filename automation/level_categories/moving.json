@@ -1,0 +1,69 @@
+{
+    "levels": [
+        {
+            "title": "Moving & Storage",
+            "categories": [
+                {
+                    "title": "Local Moving",
+                    "subcategories": [
+                        {"title": "Residential Moving"},
+                        {"title": "Apartment Moving"},
+                        {"title": "Small Moves"},
+                        {"title": "Same Day Moving"},
+                        {"title": "Internal Moving"}
+                    ]
+                },
+                {
+                    "title": "Long Distance Moving",
+                    "subcategories": [
+                        {"title": "Interstate Moving"},
+                        {"title": "Cross Country Moving"},
+                        {"title": "State to State Moving"},
+                        {"title": "Corporate Relocation"},
+                        {"title": "Military Moving"}
+                    ]
+                },
+                {
+                    "title": "Specialized Moving",
+                    "subcategories": [
+                        {"title": "Piano Moving"},
+                        {"title": "Pool Table Moving"},
+                        {"title": "Art & Antiques Moving"},
+                        {"title": "Safe Moving"},
+                        {"title": "Heavy Equipment Moving"}
+                    ]
+                },
+                {
+                    "title": "Storage Solutions",
+                    "subcategories": [
+                        {"title": "Short Term Storage"},
+                        {"title": "Long Term Storage"},
+                        {"title": "Climate Controlled Storage"},
+                        {"title": "Vehicle Storage"},
+                        {"title": "Business Storage"}
+                    ]
+                },
+                {
+                    "title": "Packing Services",
+                    "subcategories": [
+                        {"title": "Full Packing Service"},
+                        {"title": "Partial Packing"},
+                        {"title": "Unpacking Service"},
+                        {"title": "Furniture Disassembly"},
+                        {"title": "Specialty Item Packing"}
+                    ]
+                },
+                {
+                    "title": "Junk Removal",
+                    "subcategories": [
+                        {"title": "Furniture Removal"},
+                        {"title": "Appliance Removal"},
+                        {"title": "Construction Debris"},
+                        {"title": "Estate Cleanout"},
+                        {"title": "Yard Waste Removal"}
+                    ]
+                }
+            ]
+        }
+    ]
+}

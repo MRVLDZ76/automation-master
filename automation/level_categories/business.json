@@ -1,0 +1,69 @@
+{
+    "levels": [
+        {
+            "title": "Business Support",
+            "categories": [
+                {
+                    "title": "Administrative Services",
+                    "subcategories": [
+                        {"title": "Virtual Assistant"},
+                        {"title": "Data Entry"},
+                        {"title": "Office Organization"},
+                        {"title": "Document Management"},
+                        {"title": "Calendar Management"}
+                    ]
+                },
+                {
+                    "title": "Marketing Services",
+                    "subcategories": [
+                        {"title": "Social Media Management"},
+                        {"title": "Email Marketing"},
+                        {"title": "Digital Advertising"},
+                        {"title": "Lead Generation"},
+                        {"title": "Market Research"}
+                    ]
+                },
+                {
+                    "title": "Business Technology",
+                    "subcategories": [
+                        {"title": "IT Support"},
+                        {"title": "Software Integration"},
+                        {"title": "Cloud Services"},
+                        {"title": "Cybersecurity"},
+                        {"title": "Network Setup"}
+                    ]
+                },
+                {
+                    "title": "Business Operations",
+                    "subcategories": [
+                        {"title": "Process Optimization"},
+                        {"title": "Inventory Management"},
+                        {"title": "Supply Chain Management"},
+                        {"title": "Quality Control"},
+                        {"title": "Risk Assessment"}
+                    ]
+                },
+                {
+                    "title": "Professional Writing",
+                    "subcategories": [
+                        {"title": "Business Plans"},
+                        {"title": "Grant Writing"},
+                        {"title": "Proposal Writing"},
+                        {"title": "Technical Documentation"},
+                        {"title": "Policy Writing"}
+                    ]
+                },
+                {
+                    "title": "Financial Services",
+                    "subcategories": [
+                        {"title": "Bookkeeping"},
+                        {"title": "Payroll Services"},
+                        {"title": "Tax Preparation"},
+                        {"title": "Financial Analysis"},
+                        {"title": "Business Valuation"}
+                    ]
+                }
+            ]
+        }
+    ]
+}

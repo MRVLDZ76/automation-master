@@ -1,0 +1,69 @@
+{
+    "levels": [
+        {
+            "title": "Wedding Services",
+            "categories": [
+                {
+                    "title": "Wedding Planning",
+                    "subcategories": [
+                        {"title": "Full Service Planning"},
+                        {"title": "Day-of Coordination"},
+                        {"title": "Destination Weddings"},
+                        {"title": "Wedding Consulting"},
+                        {"title": "Budget Planning"}
+                    ]
+                },
+                {
+                    "title": "Wedding Beauty",
+                    "subcategories": [
+                        {"title": "Bridal Makeup"},
+                        {"title": "Wedding Hair Styling"},
+                        {"title": "Bridal Party Makeup"},
+                        {"title": "Pre-wedding Beauty"},
+                        {"title": "Men's Grooming"}
+                    ]
+                },
+                {
+                    "title": "Wedding Fashion",
+                    "subcategories": [
+                        {"title": "Dress Alterations"},
+                        {"title": "Custom Dressmaking"},
+                        {"title": "Suit Tailoring"},
+                        {"title": "Accessories Styling"},
+                        {"title": "Preservation Services"}
+                    ]
+                },
+                {
+                    "title": "Wedding Decor",
+                    "subcategories": [
+                        {"title": "Floral Design"},
+                        {"title": "Lighting Design"},
+                        {"title": "Table Settings"},
+                        {"title": "Backdrop Design"},
+                        {"title": "Wedding Signage"}
+                    ]
+                },
+                {
+                    "title": "Wedding Music",
+                    "subcategories": [
+                        {"title": "Wedding Band"},
+                        {"title": "Wedding DJ"},
+                        {"title": "Ceremony Music"},
+                        {"title": "Cocktail Hour Music"},
+                        {"title": "Sound Equipment"}
+                    ]
+                },
+                {
+                    "title": "Wedding Vendors",
+                    "subcategories": [
+                        {"title": "Wedding Cakes"},
+                        {"title": "Wedding Rentals"},
+                        {"title": "Transportation"},
+                        {"title": "Favors & Gifts"},
+                        {"title": "Invitation Design"}
+                    ]
+                }
+            ]
+        }
+    ]
+}

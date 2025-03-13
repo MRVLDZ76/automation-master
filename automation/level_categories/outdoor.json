@@ -1,0 +1,69 @@
+{
+    "levels": [
+        {
+            "title": "Outdoor & Landscaping",
+            "categories": [
+                {
+                    "title": "Lawn Care",
+                    "subcategories": [
+                        {"title": "Lawn Mowing"},
+                        {"title": "Fertilization"},
+                        {"title": "Weed Control"},
+                        {"title": "Aeration"},
+                        {"title": "Lawn Disease Treatment"}
+                    ]
+                },
+                {
+                    "title": "Landscaping",
+                    "subcategories": [
+                        {"title": "Landscape Design"},
+                        {"title": "Garden Installation"},
+                        {"title": "Hardscape Installation"},
+                        {"title": "Water Features"},
+                        {"title": "Outdoor Lighting"}
+                    ]
+                },
+                {
+                    "title": "Tree Services",
+                    "subcategories": [
+                        {"title": "Tree Trimming"},
+                        {"title": "Tree Removal"},
+                        {"title": "Stump Grinding"},
+                        {"title": "Tree Disease Treatment"},
+                        {"title": "Emergency Tree Service"}
+                    ]
+                },
+                {
+                    "title": "Outdoor Structures",
+                    "subcategories": [
+                        {"title": "Deck Building"},
+                        {"title": "Fence Installation"},
+                        {"title": "Pergola Construction"},
+                        {"title": "Gazebo Building"},
+                        {"title": "Retaining Walls"}
+                    ]
+                },
+                {
+                    "title": "Irrigation",
+                    "subcategories": [
+                        {"title": "Sprinkler Installation"},
+                        {"title": "Drip System Setup"},
+                        {"title": "Irrigation Repair"},
+                        {"title": "Drainage Solutions"},
+                        {"title": "Rain Collection Systems"}
+                    ]
+                },
+                {
+                    "title": "Outdoor Maintenance",
+                    "subcategories": [
+                        {"title": "Gutter Cleaning"},
+                        {"title": "Pressure Washing"},
+                        {"title": "Pool Maintenance"},
+                        {"title": "Snow Removal"},
+                        {"title": "Leaf Removal"}
+                    ]
+                }
+            ]
+        }
+    ]
+}

@@ -1,0 +1,69 @@
+{
+    "levels": [
+        {
+            "title": "Professional Services",
+            "categories": [
+                {
+                    "title": "Legal Services",
+                    "subcategories": [
+                        {"title": "Estate Planning"},
+                        {"title": "Business Law"},
+                        {"title": "Family Law"},
+                        {"title": "Real Estate Law"},
+                        {"title": "Immigration Law"}
+                    ]
+                },
+                {
+                    "title": "Financial Services",
+                    "subcategories": [
+                        {"title": "Tax Preparation"},
+                        {"title": "Financial Planning"},
+                        {"title": "Bookkeeping"},
+                        {"title": "Accounting"},
+                        {"title": "Investment Advisory"}
+                    ]
+                },
+                {
+                    "title": "Business Consulting",
+                    "subcategories": [
+                        {"title": "Marketing Strategy"},
+                        {"title": "Business Planning"},
+                        {"title": "Social Media Management"},
+                        {"title": "SEO Services"},
+                        {"title": "Web Development"}
+                    ]
+                },
+                {
+                    "title": "Real Estate Services",
+                    "subcategories": [
+                        {"title": "Real Estate Agents"},
+                        {"title": "Property Management"},
+                        {"title": "Home Inspection"},
+                        {"title": "Real Estate Photography"},
+                        {"title": "Home Staging"}
+                    ]
+                },
+                {
+                    "title": "Career Services",
+                    "subcategories": [
+                        {"title": "Resume Writing"},
+                        {"title": "Career Counseling"},
+                        {"title": "Interview Coaching"},
+                        {"title": "LinkedIn Profile Optimization"},
+                        {"title": "Job Search Strategy"}
+                    ]
+                },
+                {
+                    "title": "Technical Services",
+                    "subcategories": [
+                        {"title": "IT Support"},
+                        {"title": "Computer Repair"},
+                        {"title": "Data Recovery"},
+                        {"title": "Network Setup"},
+                        {"title": "Cybersecurity"}
+                    ]
+                }
+            ]
+        }
+    ]
+}

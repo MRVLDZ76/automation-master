@@ -1,0 +1,69 @@
+{
+    "levels": [
+        {
+            "title": "Educational Services",
+            "categories": [
+                {
+                    "title": "Academic Tutoring",
+                    "subcategories": [
+                        {"title": "Math Tutoring"},
+                        {"title": "Science Tutoring"},
+                        {"title": "English & Writing"},
+                        {"title": "History & Social Studies"},
+                        {"title": "SAT/ACT Prep"}
+                    ]
+                },
+                {
+                    "title": "Language Instruction",
+                    "subcategories": [
+                        {"title": "ESL Teaching"},
+                        {"title": "Spanish Language"},
+                        {"title": "Mandarin Chinese"},
+                        {"title": "French Language"},
+                        {"title": "Business Language"}
+                    ]
+                },
+                {
+                    "title": "Test Preparation",
+                    "subcategories": [
+                        {"title": "GRE Prep"},
+                        {"title": "GMAT Prep"},
+                        {"title": "LSAT Prep"},
+                        {"title": "MCAT Prep"},
+                        {"title": "State Exam Prep"}
+                    ]
+                },
+                {
+                    "title": "Computer Skills",
+                    "subcategories": [
+                        {"title": "Programming"},
+                        {"title": "Microsoft Office"},
+                        {"title": "Web Development"},
+                        {"title": "Graphic Design"},
+                        {"title": "Digital Marketing"}
+                    ]
+                },
+                {
+                    "title": "Arts Education",
+                    "subcategories": [
+                        {"title": "Music Lessons"},
+                        {"title": "Art Classes"},
+                        {"title": "Dance Instruction"},
+                        {"title": "Photography Classes"},
+                        {"title": "Acting Lessons"}
+                    ]
+                },
+                {
+                    "title": "Special Education",
+                    "subcategories": [
+                        {"title": "Learning Disabilities"},
+                        {"title": "ADHD Support"},
+                        {"title": "Autism Spectrum"},
+                        {"title": "Early Intervention"},
+                        {"title": "Gifted Education"}
+                    ]
+                }
+            ]
+        }
+    ]
+}

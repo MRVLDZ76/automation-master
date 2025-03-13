@@ -1,0 +1,69 @@
+{
+    "levels": [
+        {
+            "title": "Automotive Services",
+            "categories": [
+                {
+                    "title": "Mobile Mechanics",
+                    "subcategories": [
+                        {"title": "Diagnostic Services"},
+                        {"title": "Oil Changes"},
+                        {"title": "Brake Service"},
+                        {"title": "Battery Replacement"},
+                        {"title": "Emergency Repairs"}
+                    ]
+                },
+                {
+                    "title": "Auto Detailing",
+                    "subcategories": [
+                        {"title": "Interior Detailing"},
+                        {"title": "Exterior Detailing"},
+                        {"title": "Paint Correction"},
+                        {"title": "Ceramic Coating"},
+                        {"title": "Headlight Restoration"}
+                    ]
+                },
+                {
+                    "title": "Window Services",
+                    "subcategories": [
+                        {"title": "Windshield Replacement"},
+                        {"title": "Chip Repair"},
+                        {"title": "Window Tinting"},
+                        {"title": "Mirror Replacement"},
+                        {"title": "Paint Protection Film"}
+                    ]
+                },
+                {
+                    "title": "Body Work",
+                    "subcategories": [
+                        {"title": "Dent Removal"},
+                        {"title": "Paint Touch-up"},
+                        {"title": "Collision Repair"},
+                        {"title": "Rust Repair"},
+                        {"title": "Bumper Repair"}
+                    ]
+                },
+                {
+                    "title": "Specialty Services",
+                    "subcategories": [
+                        {"title": "Car Audio Installation"},
+                        {"title": "Remote Start Installation"},
+                        {"title": "Performance Upgrades"},
+                        {"title": "Custom Wheels"},
+                        {"title": "Vehicle Wraps"}
+                    ]
+                },
+                {
+                    "title": "Maintenance Services",
+                    "subcategories": [
+                        {"title": "Tire Services"},
+                        {"title": "AC Service"},
+                        {"title": "Transmission Service"},
+                        {"title": "Engine Tune-up"},
+                        {"title": "Fleet Maintenance"}
+                    ]
+                }
+            ]
+        }
+    ]
+}

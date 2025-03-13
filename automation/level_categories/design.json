@@ -1,0 +1,69 @@
+{
+    "levels": [
+        {
+            "title": "Design & Creative",
+            "categories": [
+                {
+                    "title": "Graphic Design",
+                    "subcategories": [
+                        {"title": "Logo Design"},
+                        {"title": "Brand Identity"},
+                        {"title": "Marketing Materials"},
+                        {"title": "Social Media Graphics"},
+                        {"title": "Packaging Design"}
+                    ]
+                },
+                {
+                    "title": "Web Design",
+                    "subcategories": [
+                        {"title": "Website Development"},
+                        {"title": "UI/UX Design"},
+                        {"title": "E-commerce Design"},
+                        {"title": "Mobile App Design"},
+                        {"title": "Landing Page Design"}
+                    ]
+                },
+                {
+                    "title": "Interior Design",
+                    "subcategories": [
+                        {"title": "Residential Design"},
+                        {"title": "Commercial Design"},
+                        {"title": "Space Planning"},
+                        {"title": "Color Consultation"},
+                        {"title": "Furniture Selection"}
+                    ]
+                },
+                {
+                    "title": "Video Production",
+                    "subcategories": [
+                        {"title": "Corporate Videos"},
+                        {"title": "Social Media Content"},
+                        {"title": "Animation"},
+                        {"title": "Product Videos"},
+                        {"title": "Event Coverage"}
+                    ]
+                },
+                {
+                    "title": "Art Services",
+                    "subcategories": [
+                        {"title": "Custom Paintings"},
+                        {"title": "Digital Art"},
+                        {"title": "Murals"},
+                        {"title": "Portrait Art"},
+                        {"title": "Illustration"}
+                    ]
+                },
+                {
+                    "title": "Content Creation",
+                    "subcategories": [
+                        {"title": "Copywriting"},
+                        {"title": "Blog Writing"},
+                        {"title": "Technical Writing"},
+                        {"title": "Content Strategy"},
+                        {"title": "SEO Content"}
+                    ]
+                }
+            ]
+        }
+    ]
+}

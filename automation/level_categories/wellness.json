@@ -1,0 +1,69 @@
+{
+    "levels": [
+        {
+            "title": "Wellness & Health",
+            "categories": [
+                {
+                    "title": "Mental Health",
+                    "subcategories": [
+                        {"title": "Counseling"},
+                        {"title": "Therapy"},
+                        {"title": "Stress Management"},
+                        {"title": "Anxiety Treatment"},
+                        {"title": "Depression Support"}
+                    ]
+                },
+                {
+                    "title": "Alternative Medicine",
+                    "subcategories": [
+                        {"title": "Acupuncture"},
+                        {"title": "Reiki"},
+                        {"title": "Herbal Medicine"},
+                        {"title": "Naturopathy"},
+                        {"title": "Ayurvedic Medicine"}
+                    ]
+                },
+                {
+                    "title": "Physical Therapy",
+                    "subcategories": [
+                        {"title": "Rehabilitation"},
+                        {"title": "Sports Recovery"},
+                        {"title": "Post-Surgery Care"},
+                        {"title": "Injury Prevention"},
+                        {"title": "Mobility Training"}
+                    ]
+                },
+                {
+                    "title": "Nutrition Services",
+                    "subcategories": [
+                        {"title": "Diet Planning"},
+                        {"title": "Meal Preparation"},
+                        {"title": "Nutritional Counseling"},
+                        {"title": "Weight Management"},
+                        {"title": "Sports Nutrition"}
+                    ]
+                },
+                {
+                    "title": "Senior Care",
+                    "subcategories": [
+                        {"title": "In-Home Care"},
+                        {"title": "Companion Care"},
+                        {"title": "Memory Care"},
+                        {"title": "Medication Management"},
+                        {"title": "Senior Transportation"}
+                    ]
+                },
+                {
+                    "title": "Holistic Health",
+                    "subcategories": [
+                        {"title": "Meditation Coaching"},
+                        {"title": "Yoga Instruction"},
+                        {"title": "Mindfulness Training"},
+                        {"title": "Energy Healing"},
+                        {"title": "Breathing Techniques"}
+                    ]
+                }
+            ]
+        }
+    ]
+}

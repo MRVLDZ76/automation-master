@@ -1,0 +1,69 @@
+{
+    "levels": [
+        {
+            "title": "Construction & Remodeling",
+            "categories": [
+                {
+                    "title": "Kitchen Remodeling",
+                    "subcategories": [
+                        {"title": "Cabinet Installation"},
+                        {"title": "Countertop Installation"},
+                        {"title": "Kitchen Design"},
+                        {"title": "Appliance Installation"},
+                        {"title": "Kitchen Flooring"}
+                    ]
+                },
+                {
+                    "title": "Bathroom Remodeling",
+                    "subcategories": [
+                        {"title": "Shower Installation"},
+                        {"title": "Bathtub Replacement"},
+                        {"title": "Vanity Installation"},
+                        {"title": "Tile Work"},
+                        {"title": "Plumbing Fixtures"}
+                    ]
+                },
+                {
+                    "title": "Home Additions",
+                    "subcategories": [
+                        {"title": "Room Additions"},
+                        {"title": "Second Story Addition"},
+                        {"title": "Garage Conversion"},
+                        {"title": "Basement Finishing"},
+                        {"title": "Attic Conversion"}
+                    ]
+                },
+                {
+                    "title": "Exterior Construction",
+                    "subcategories": [
+                        {"title": "Roofing"},
+                        {"title": "Siding Installation"},
+                        {"title": "Window Replacement"},
+                        {"title": "Door Installation"},
+                        {"title": "Exterior Painting"}
+                    ]
+                },
+                {
+                    "title": "Specialty Construction",
+                    "subcategories": [
+                        {"title": "Custom Home Building"},
+                        {"title": "ADU Construction"},
+                        {"title": "Pool Construction"},
+                        {"title": "Greenhouse Building"},
+                        {"title": "Workshop Construction"}
+                    ]
+                },
+                {
+                    "title": "Commercial Construction",
+                    "subcategories": [
+                        {"title": "Office Buildouts"},
+                        {"title": "Retail Construction"},
+                        {"title": "Restaurant Construction"},
+                        {"title": "Industrial Construction"},
+                        {"title": "Warehouse Renovation"}
+                    ]
+                }
+            ]
+        }
+    ]
+}

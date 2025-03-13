@@ -1,0 +1,69 @@
+{
+    "levels": [
+        {
+            "title": "Personal Services",
+            "categories": [
+                {
+                    "title": "Personal Training",
+                    "subcategories": [
+                        {"title": "Fitness Training"},
+                        {"title": "Weight Loss Training"},
+                        {"title": "Strength Training"},
+                        {"title": "Sports Training"},
+                        {"title": "Senior Fitness"}
+                    ]
+                },
+                {
+                    "title": "Massage Therapy",
+                    "subcategories": [
+                        {"title": "Deep Tissue Massage"},
+                        {"title": "Swedish Massage"},
+                        {"title": "Sports Massage"},
+                        {"title": "Prenatal Massage"},
+                        {"title": "Therapeutic Massage"}
+                    ]
+                },
+                {
+                    "title": "Beauty Services",
+                    "subcategories": [
+                        {"title": "Hair Styling"},
+                        {"title": "Makeup Application"},
+                        {"title": "Nail Services"},
+                        {"title": "Skincare"},
+                        {"title": "Waxing"}
+                    ]
+                },
+                {
+                    "title": "Life Coaching",
+                    "subcategories": [
+                        {"title": "Career Coaching"},
+                        {"title": "Relationship Coaching"},
+                        {"title": "Health Coaching"},
+                        {"title": "Personal Development"},
+                        {"title": "Business Coaching"}
+                    ]
+                },
+                {
+                    "title": "Private Lessons",
+                    "subcategories": [
+                        {"title": "Music Lessons"},
+                        {"title": "Language Lessons"},
+                        {"title": "Academic Tutoring"},
+                        {"title": "Art Lessons"},
+                        {"title": "Dance Lessons"}
+                    ]
+                },
+                {
+                    "title": "Personal Shopping",
+                    "subcategories": [
+                        {"title": "Wardrobe Styling"},
+                        {"title": "Gift Shopping"},
+                        {"title": "Personal Grocery Shopping"},
+                        {"title": "Home Decor Shopping"},
+                        {"title": "Special Event Shopping"}
+                    ]
+                }
+            ]
+        }
+    ]
+}
