@@ -526,10 +526,8 @@ class TaskDetailView(View):
                 {'error': 'An unexpected error occurred.'},
                 status=500
             )
-
-
-
-          
+ 
+         
 def update_main_task_status(task):
     """Update the main task status based on business statuses"""
     businesses = task.businesses.exclude(status='DISCARDED')
