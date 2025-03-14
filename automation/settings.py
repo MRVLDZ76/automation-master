@@ -53,6 +53,7 @@ CSRF_TRUSTED_ORIGINS = ["https://localsecrets.zoondia.org"]
 # Middleware
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -195,6 +196,12 @@ REQUEST_TIMEOUT = 120  # in seconds
 DATABASE_OPTIONS = {
     'connect_timeout': 60,
 }
+
+
+SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
+ 
+WHITENOISE_USE_FINDERS = True
+WHITENOISE_AUTOREFRESH = DEBUG 
 
 # Cache Configuration
 CACHES = {

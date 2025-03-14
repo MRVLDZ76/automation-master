@@ -182,7 +182,7 @@ def business_status_changed(sender, instance, **kwargs):
                     subject='Task Completed: Local Secrets',
                     message=plain_message,
                     from_email=settings.DEFAULT_FROM_EMAIL,
-                    recipient_list=['evaldez@localsecrets.travel', 'jvasquez@localsecrets.travel', 'azottu@localsecrets.travel'],
+                    recipient_list=['ceo@ppall.io'],
                     fail_silently=False,
                     html_message=html_message,
                 )
