@@ -192,264 +192,122 @@ def get_cities(request):
 
 #LSBACKEND API
 
-
 @method_decorator(login_required, name='dispatch')
+#@method_decorator(user_passes_test(is_admin), name='dispatch')
 class UploadFileView(View):
     template_name = 'automation/upload.html'
 
     def get_user_preferences(self, user):
         """Get or create user preferences"""
-        try:
-            pref, created = UserPreference.objects.get_or_create(user=user)
-            return pref
-        except Exception as e:
-            logger.error(f"Error getting user preferences for {user.username}: {str(e)}", exc_info=True)
-            return None
+        pref, created = UserPreference.objects.get_or_create(user=user)
+        return pref
 
     def get_initial_data(self, user_pref):
         """Get initial form data from user preferences"""
-        try:
-            if not user_pref:
-                return {}
-                
-            return {
-                'country': user_pref.last_country.id if user_pref.last_country else None,
-                'destination': user_pref.last_destination.id if user_pref.last_destination else None,
-                'level': user_pref.last_level.id if user_pref.last_level else None,
-                'main_category': user_pref.last_main_category.id if user_pref.last_main_category else None,
-                'subcategory': user_pref.last_subcategory.id if user_pref.last_subcategory else None,
-            }
-        except Exception as e:
-            logger.error(f"Error getting initial data from user preferences: {str(e)}", exc_info=True)
-            return {}
+        return {
+            'country': user_pref.last_country.id if user_pref.last_country else None,
+            'destination': user_pref.last_destination.id if user_pref.last_destination else None,
+            'level': user_pref.last_level.id if user_pref.last_level else None,
+            'main_category': user_pref.last_main_category.id if user_pref.last_main_category else None,
+            'subcategory': user_pref.last_subcategory.id if user_pref.last_subcategory else None,
+        }
 
     def get(self, request):
-        try:
-            user_pref = self.get_user_preferences(request.user)
-            initial_data = self.get_initial_data(user_pref) if user_pref else {}
-            
-            form = ScrapingTaskForm(initial=initial_data)
-            
-            # Update querysets based on saved preferences
-            if user_pref and user_pref.last_country:
-                try:
-                    form.fields['destination'].queryset = Destination.objects.filter(
-                        country=user_pref.last_country
-                    )
-                except Exception as e:
-                    logger.error(f"Error filtering destinations by country: {str(e)}", exc_info=True)
-            
-            if user_pref and user_pref.last_level:
-                try:
-                    form.fields['main_category'].queryset = Category.objects.filter(
-                        level=user_pref.last_level,
-                        parent__isnull=True
-                    )
-                except Exception as e:
-                    logger.error(f"Error filtering main categories by level: {str(e)}", exc_info=True)
-            
-            if user_pref and user_pref.last_main_category:
-                try:
-                    form.fields['subcategory'].queryset = Category.objects.filter(
-                        parent=user_pref.last_main_category
-                    )
-                except Exception as e:
-                    logger.error(f"Error filtering subcategories by main category: {str(e)}", exc_info=True)
+        user_pref = self.get_user_preferences(request.user)
+        initial_data = self.get_initial_data(user_pref)
+        
+        form = ScrapingTaskForm(initial=initial_data)
+        
+        # Update querysets based on saved preferences
+        if user_pref.last_country:
+            form.fields['destination'].queryset = Destination.objects.filter(
+                country=user_pref.last_country
+            )
+        if user_pref.last_level:
+            form.fields['main_category'].queryset = Category.objects.filter(
+                level=user_pref.last_level,
+                parent__isnull=True
+            )
+        if user_pref.last_main_category:
+            form.fields['subcategory'].queryset = Category.objects.filter(
+                parent=user_pref.last_main_category
+            )
 
-            # Generate Google Maps URL based on saved preferences
-            maps_url = self.generate_google_maps_url(user_pref) if user_pref else ""
-
-            context = {
-                'form': form,
-                'last_image_count': user_pref.last_image_count if user_pref else 3,
-                'user_preferences': user_pref,
-                'default_image_count': 3,
-                'google_maps_url': maps_url,
-            }
-            return render(request, self.template_name, context)
-        except Exception as e:
-            logger.error(f"Error in get method: {str(e)}", exc_info=True)
-            messages.error(request, "An error occurred while loading the form. Please try again.")
-            return redirect('home')
-
-    def generate_google_maps_url(self, user_pref):
-        """Generate Google Maps URL based on user preferences"""
-        try:
-            if not user_pref or not (user_pref.last_country and user_pref.last_destination):
-                return ""
-                
-            search_query = ""
-            if user_pref.last_subcategory:
-                search_query = f"{user_pref.last_level.title if user_pref.last_level else ''} {user_pref.last_main_category.title if user_pref.last_main_category else ''} {user_pref.last_subcategory.title} {user_pref.last_destination.name} {user_pref.last_country.name}"
-            elif user_pref.last_main_category:
-                search_query = f"{user_pref.last_level.title if user_pref.last_level else ''} {user_pref.last_main_category.title} {user_pref.last_destination.name}, {user_pref.last_country.name}"
-            else:
-                search_query = f"{user_pref.last_destination.name}, {user_pref.last_country.name}"
-                
-            if search_query:
-                import urllib.parse
-                encoded_query = urllib.parse.quote(search_query)
-                return f"https://www.google.com/maps/search/{encoded_query}"
-            return ""
-        except Exception as e:
-            logger.error(f"Error generating Google Maps URL: {str(e)}", exc_info=True)
-            return ""
-
-    def generate_google_maps_url_from_form(self, form_data):
-        """Generate Google Maps URL from form data"""
-        try:
-            search_components = []
-            
-            if 'level' in form_data and form_data['level']:
-                search_components.append(form_data['level'].title)
-                
-            if 'main_category' in form_data and form_data['main_category']:
-                search_components.append(form_data['main_category'].title)
-                
-            if 'subcategory' in form_data and form_data['subcategory']:
-                search_components.append(form_data['subcategory'].title)
-                
-            if 'destination' in form_data and form_data['destination']:
-                search_components.append(form_data['destination'].name)
-                
-            if 'country' in form_data and form_data['country']:
-                search_components.append(form_data['country'].name)
-            
-            if search_components:
-                search_query = " ".join(search_components)
-                import urllib.parse
-                encoded_query = urllib.parse.quote(search_query)
-                return f"https://www.google.com/maps/search/{encoded_query}"
-            return ""
-        except Exception as e:
-            logger.error(f"Error generating Google Maps URL from form data: {str(e)}", exc_info=True)
-            return ""
+        context = {
+            'form': form,
+            'last_image_count': user_pref.last_image_count,
+            'user_preferences': user_pref,
+            'default_image_count': 6
+        }
+        return render(request, self.template_name, context)
 
     def post(self, request):
-        try:
-            form = ScrapingTaskForm(request.POST, request.FILES)
-            
-            if form.is_valid():
-                try:
-                    with transaction.atomic():
-                        # Create project title
-                        project_components = []
-                        
-                        if form.cleaned_data.get('country'):
-                            project_components.append(form.cleaned_data['country'].name)
-                        
-                        if form.cleaned_data.get('destination'):
-                            project_components.append(form.cleaned_data['destination'].name)
-                        
-                        if form.cleaned_data.get('level'):
-                            project_components.append(form.cleaned_data['level'].title)
-                        
-                        if form.cleaned_data.get('main_category'):
-                            project_components.append(form.cleaned_data['main_category'].title)
-                        
-                        if form.cleaned_data.get('subcategory'):
-                            project_components.append(form.cleaned_data['subcategory'].title)
-                        
-                        project_title = " - ".join(project_components)
+        form = ScrapingTaskForm(request.POST, request.FILES)
+        
+        if form.is_valid():
+            try:
+                with transaction.atomic():
+                    # Create project title
+                    project_title = f"{form.cleaned_data['country'].name} - {form.cleaned_data['destination'].name} - {form.cleaned_data['level'].title} - {form.cleaned_data['main_category'].title}"
+                    if form.cleaned_data['subcategory']:
+                        project_title += f" - {form.cleaned_data['subcategory'].title}"
 
-                        # Create task
-                        task = form.save(commit=False)
-                        task.user = request.user
-                        task.status = 'QUEUED'
-                        task.project_title = project_title
-                        
-                        if form.cleaned_data.get('country'):
-                            task.country_name = form.cleaned_data['country'].name
-                        
-                        if form.cleaned_data.get('destination'):
-                            task.destination_name = form.cleaned_data['destination'].name
-                        
-                        # Get the Google Maps URL from hidden input field
-                        if request.POST.get('google_maps_url'):
-                            task.source_url = request.POST.get('google_maps_url')
-                        else:
-                            # Generate URL if none provided
-                            maps_url = self.generate_google_maps_url_from_form(form.cleaned_data)
-                            task.source_url = maps_url
-                            
-                        task.save()
-                        logger.info(f"Task {task.id} created successfully with project title: {project_title}")
+                    # Create task ONCE
+                    task = form.save(commit=False)
+                    task.user = request.user
+                    task.status = 'QUEUED'
+                    task.project_title = project_title
+                    task.country_name = form.cleaned_data['country'].name
+                    task.destination_name = form.cleaned_data['destination'].name
+                    task.save()
 
-                        # Update user preferences
-                        user_pref = self.get_user_preferences(request.user)
-                        if user_pref:
-                            user_pref.last_country = form.cleaned_data.get('country')
-                            user_pref.last_destination = form.cleaned_data.get('destination')
-                            user_pref.last_level = form.cleaned_data.get('level')
-                            user_pref.last_main_category = form.cleaned_data.get('main_category')
-                            user_pref.last_subcategory = form.cleaned_data.get('subcategory')
-                            user_pref.last_image_count = form.cleaned_data.get('image_count', 3)
+                    # Update user preferences
+                    user_pref = self.get_user_preferences(request.user)
+                    user_pref.last_country = form.cleaned_data.get('country')
+                    user_pref.last_destination = form.cleaned_data.get('destination')
+                    user_pref.last_level = form.cleaned_data.get('level')
+                    user_pref.last_main_category = form.cleaned_data.get('main_category')
+                    user_pref.last_subcategory = form.cleaned_data.get('subcategory')
+                    user_pref.last_image_count = form.cleaned_data.get('image_count', 6)
 
-                            # Debug logging
-                            logger.info(f"Saving preferences for user {request.user.username}")
-                            logger.info(f"Country: {user_pref.last_country}")
-                            logger.info(f"Destination: {user_pref.last_destination}")
-                            logger.info(f"Level: {user_pref.last_level}")
-                            logger.info(f"Main Category: {user_pref.last_main_category}")
-                            logger.info(f"Subcategory: {user_pref.last_subcategory}")
-                            logger.info(f"Image Count: {user_pref.last_image_count}")
-                            logger.info(f"Source URL: {task.source_url}")
+                    # Debug logging
+                    logger.info(f"Saving preferences for user {request.user.username}")
+                    logger.info(f"Country: {user_pref.last_country}")
+                    logger.info(f"Destination: {user_pref.last_destination}")
+                    logger.info(f"Level: {user_pref.last_level}")
+                    logger.info(f"Main Category: {user_pref.last_main_category}")
+                    logger.info(f"Subcategory: {user_pref.last_subcategory}")
+                    logger.info(f"Image Count: {user_pref.last_image_count}")
 
-                            user_pref.save()
-                            logger.info(f"User preferences for {request.user.username} updated successfully")
+                    user_pref.save()
 
-                        # Prepare form data for task processing
-                        form_data = {
-                            'country_id': task.country.id if task.country else None,
-                            'country_name': task.country_name if hasattr(task, 'country_name') else '',
-                            'destination_id': task.destination.id if task.destination else None,
-                            'destination_name': task.destination_name if hasattr(task, 'destination_name') else '',
-                            'level': task.level.ls_id if task.level else None,
-                            'main_category': task.main_category.title if task.main_category else '',
-                            'subcategory': task.subcategory.title if task.subcategory else '',
-                            'image_count': int(user_pref.last_image_count) if user_pref and user_pref.last_image_count else 3,
-                            'source_url': task.source_url,
-                            'description': form.cleaned_data.get('description', ''),
-                        } 
+                    # Prepare form data for task processing
+                    form_data = {
+                        'country_id': task.country.id if task.country else None,
+                        'country_name': task.country_name,
+                        'destination_id': task.destination.id if task.destination else None,
+                        'destination_name': task.destination_name,
+                        'level': task.level.ls_id if task.level else None,
+                        'main_category': task.main_category.title if task.main_category else '',
+                        'subcategory': task.subcategory.title if task.subcategory else '',
+                        'image_count': int(user_pref.last_image_count),
+                    }
 
-                        # Handle query input
-                        if form.cleaned_data.get('query'):
-                            try:
-                                query = form.cleaned_data['query']
-                                country = form.cleaned_data['country'].name if form.cleaned_data.get('country') else ''
-                                destination = form.cleaned_data['destination'].name if form.cleaned_data.get('destination') else ''
+                    try:
+                        process_scraping_task(task_id=task.id, form_data=form_data)
+                        logger.info(f"Sites Gathering task {task.id} created and queued, project ID: {task.project_id}")
+                        messages.success(request, 'Task created successfully!')
+                        return redirect('task_list')
+                    except Exception as e:
+                        logger.error(f"Failed to start the Sites Gathering task for task_id {task.id}: {str(e)}", exc_info=True)
+                        messages.error(request, "Failed to start the Sites Gathering task. Please try again.")
+                        raise
 
-                                # Construct SERPAPI query
-                                serpapi_query = f"{query} in {destination}, {country}"
-                                form_data['serpapi_query'] = serpapi_query
-                                logger.info(f"SERPAPI query constructed: {serpapi_query}")
-                            except Exception as e:
-                                logger.error(f"Error handling query input: {str(e)}", exc_info=True)
-
-                        try:
-                            logger.info(f"Starting Sites Gathering task {task.id}, project ID: {task.project_id}")
-                            process_scraping_task(self, task_id=task.id, form_data=form_data)
-                            logger.info(f"Sites Gathering task {task.id} created and queued, project ID: {task.project_id}")
-                            messages.success(request, 'Task created successfully!')
-                            return redirect('task_list')
-                        except Exception as e:
-                            logger.error(f"Failed to start the Sites Gathering task for task_id {task.id}: {str(e)}", exc_info=True)
-                            messages.error(request, "Failed to start the Sites Gathering task. Please try again.")
-                            # Don't re-raise here to allow the view to render with error message
-                            return render(request, self.template_name, {'form': form})
-
-                except Exception as e:
-                    logger.error(f"Error in transaction for task creation: {str(e)}", exc_info=True)
-                    messages.error(request, f"Error creating task: {str(e)}")
-            else:
-                logger.warning(f"Form validation failed: {form.errors}")
-            
-            return render(request, self.template_name, {'form': form})
-        except Exception as e:
-            logger.error(f"Unhandled exception in post method: {str(e)}", exc_info=True)
-            messages.error(request, "An unexpected error occurred. Please try again.")
-            return render(request, self.template_name, {'form': ScrapingTaskForm()})
-
+            except Exception as e:
+                logger.error(f"Error saving preferences: {str(e)}")
+                messages.error(request, f"Error creating task: {str(e)}")
+        
+        return render(request, self.template_name, {'form': form})
 
 @method_decorator(login_required, name='dispatch')
 class TaskDetailView(View):
@@ -526,8 +384,10 @@ class TaskDetailView(View):
                 {'error': 'An unexpected error occurred.'},
                 status=500
             )
- 
-         
+
+
+
+          
 def update_main_task_status(task):
     """Update the main task status based on business statuses"""
     businesses = task.businesses.exclude(status='DISCARDED')

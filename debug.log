@@ -178,3 +178,30 @@ INFO 2025-03-16 00:23:19,816 tasks 1384 37044 Finished processing query: Mobile 
 INFO 2025-03-16 00:23:19,816 tasks 1384 37044 Total results processed across all queries: 0
 INFO 2025-03-16 00:23:19,816 tasks 1384 37044 Sites Gathering task 9 completed successfully
 INFO 2025-03-16 00:23:19,819 views 1384 37044 Sites Gathering task 9 created and queued, project ID: 9dcebdbe-6d38-4ba7-9ef5-6d677268f816
+INFO 2025-03-16 00:33:44,448 views 28828 7484 Task 10 created successfully with project title: Bangladesh - Budapest - Automotive Services - Mobile Mechanics - Diagnostic Services
+INFO 2025-03-16 00:33:44,450 views 28828 7484 Saving preferences for user EdisonValdez
+INFO 2025-03-16 00:33:44,451 views 28828 7484 Country: Bangladesh - BD
+INFO 2025-03-16 00:33:44,451 views 28828 7484 Destination: Budapest, Bangladesh
+INFO 2025-03-16 00:33:44,452 views 28828 7484 Level: Automotive Services
+INFO 2025-03-16 00:33:44,452 views 28828 7484 Main Category: Mobile Mechanics
+INFO 2025-03-16 00:33:44,452 views 28828 7484 Subcategory: Diagnostic Services
+INFO 2025-03-16 00:33:44,453 views 28828 7484 Image Count: 3
+INFO 2025-03-16 00:33:44,453 views 28828 7484 Source URL: https://www.google.com/maps/search/Automotive%20Services%20Mobile%20Mechanics%20Diagnostic%20Services%20Budapest%20Bangladesh
+INFO 2025-03-16 00:33:44,455 views 28828 7484 User preferences for EdisonValdez updated successfully
+INFO 2025-03-16 00:33:44,455 views 28828 7484 Starting Sites Gathering task 10, project ID: 7c537bba-c5eb-4b63-bb81-778b23c25be9
+INFO 2025-03-16 00:33:44,455 tasks 28828 7484 Starting Sites Gathering task 10
+INFO 2025-03-16 00:33:44,706 tasks 28828 7484 Using image count: 3
+INFO 2025-03-16 00:33:44,706 tasks 28828 7484 Processing description content: https://www.google.com/maps/place/Mobile+Diesel+Repair+Service/@27.8289579,-83.3442084,7z/data=!4m10!1m2!2m1!1sAutomotive+Services+Mobile+Mechanics+Diagnostic+Services+Washington,+Fl.+United+States!3m6!1s0x88c32782f4b2acd1:0x3be1beb82efa9aa2!8m2!3d27.7088921!4d-82.3956791!15sClZBdXRvbW90aXZlIFNlcnZpY2VzIE1vYmlsZSBNZWNoYW5pY3MgRGlhZ25vc3RpYyBTZXJ2aWNlcyBXYXNoaW5ndG9uLCBGbC4gVW5pdGVkIFN0YXRlc1pWIlRhdXRvbW90aXZlIHNlcnZpY2VzIG1vYmlsZSBtZWNoYW5pY3MgZGlhZ25vc3RpYyBzZXJ2aWNlcyB3YXNoaW5ndG9uIGZsIHVuaXRlZCBzdGF0ZXOSARF0cnVja19yZXBhaXJfc2hvcJoBJENoZERTVWhOTUc5blMwVkpRMEZuU1VOUE1GQjJjREYzUlJBQuABAPoBBQioARAu!16s%2Fg%2F11lf_q0nm7?entry=ttu&g_ep=EgoyMDI1MDMxMi4wIKXMDSoJLDEwMjExNDU1SAFQAw%3D%3D
+INFO 2025-03-16 00:33:44,707 tasks 28828 7484 Reading queries from content
+INFO 2025-03-16 00:33:44,708 tasks 28828 7484 Processing URL: https://www.google.com/maps/place/Mobile+Diesel+Repair+Service/@27.8289579,-83.3442084,7z/data=!4m10!1m2!2m1!1sAutomotive+Services+Mobile+Mechanics+Diagnostic+Services+Washington,+Fl.+United+States!3m6!1s0x88c32782f4b2acd1:0x3be1beb82efa9aa2!8m2!3d27.7088921!4d-82.3956791!15sClZBdXRvbW90aXZlIFNlcnZpY2VzIE1vYmlsZSBNZWNoYW5pY3MgRGlhZ25vc3RpYyBTZXJ2aWNlcyBXYXNoaW5ndG9uLCBGbC4gVW5pdGVkIFN0YXRlc1pWIlRhdXRvbW90aXZlIHNlcnZpY2VzIG1vYmlsZSBtZWNoYW5pY3MgZGlhZ25vc3RpYyBzZXJ2aWNlcyB3YXNoaW5ndG9uIGZsIHVuaXRlZCBzdGF0ZXOSARF0cnVja19yZXBhaXJfc2hvcJoBJENoZERTVWhOTUc5blMwVkpRMEZuU1VOUE1GQjJjREYzUlJBQuABAPoBBQioARAu!16s%2Fg%2F11lf_q0nm7?entry=ttu&g_ep=EgoyMDI1MDMxMi4wIKXMDSoJLDEwMjExNDU1SAFQAw%3D%3D
+INFO 2025-03-16 00:33:44,709 tasks 28828 7484 Extracted query data: {'query': 'Mobile Diesel Repair Service', 'data_id': '0x88c32782f4b2acd1:0x3be1beb82efa9aa2', 'll': '27.7088921,-82.3956791', 'original_url': 'https://www.google.com/maps/place/Mobile+Diesel+Repair+Service/@27.8289579,-83.3442084,7z/data=!4m10!1m2!2m1!1sAutomotive+Services+Mobile+Mechanics+Diagnostic+Services+Washington,+Fl.+United+States!3m6!1s0x88c32782f4b2acd1:0x3be1beb82efa9aa2!8m2!3d27.7088921!4d-82.3956791!15sClZBdXRvbW90aXZlIFNlcnZpY2VzIE1vYmlsZSBNZWNoYW5pY3MgRGlhZ25vc3RpYyBTZXJ2aWNlcyBXYXNoaW5ndG9uLCBGbC4gVW5pdGVkIFN0YXRlc1pWIlRhdXRvbW90aXZlIHNlcnZpY2VzIG1vYmlsZSBtZWNoYW5pY3MgZGlhZ25vc3RpYyBzZXJ2aWNlcyB3YXNoaW5ndG9uIGZsIHVuaXRlZCBzdGF0ZXOSARF0cnVja19yZXBhaXJfc2hvcJoBJENoZERTVWhOTUc5blMwVkpRMEZuU1VOUE1GQjJjREYzUlJBQuABAPoBBQioARAu!16s%2Fg%2F11lf_q0nm7?entry=ttu&g_ep=EgoyMDI1MDMxMi4wIKXMDSoJLDEwMjExNDU1SAFQAw%3D%3D'}
+INFO 2025-03-16 00:33:44,710 tasks 28828 7484 Successfully read 1 queries
+INFO 2025-03-16 00:33:44,711 tasks 28828 7484 Extracted 1 queries from description URLs
+INFO 2025-03-16 00:33:44,711 tasks 28828 7484 Processing query 1/1: Mobile Diesel Repair Service (Page 1)
+INFO 2025-03-16 00:33:44,711 tasks 28828 7484 Searching for exact place with params: {'api_key': '8497ce60ccb34a61b7bb371343928ddf60dfa38ce0133f9810e06c7cf9f74cd8', 'engine': 'google_maps', 'type': 'place', 'google_domain': 'google.com', 'data': '!4m5!3m4!1s0x88c32782f4b2acd1:0x3be1beb82efa9aa2!8m2!3d27.7088921!4d-82.3956791', 'hl': 'en', 'no_cache': 'true'}
+ERROR 2025-03-16 00:33:45,228 tasks 28828 7484 API error or no results for query 'Mobile Diesel Repair Service': Your account has run out of searches.
+INFO 2025-03-16 00:33:45,229 tasks 28828 7484 Finished processing query: Mobile Diesel Repair Service
+INFO 2025-03-16 00:33:45,229 tasks 28828 7484 Total results processed across all queries: 0
+INFO 2025-03-16 00:33:45,229 tasks 28828 7484 Sites Gathering task 10 completed successfully
+INFO 2025-03-16 00:33:45,232 views 28828 7484 Sites Gathering task 10 created and queued, project ID: 7c537bba-c5eb-4b63-bb81-778b23c25be9
+INFO 2025-03-16 00:33:55,400 views 28828 7484 Accessing TaskDetailView for task 10

@@ -54,7 +54,6 @@ from geopy.geocoders import Nominatim
 from geopy.exc import GeocoderTimedOut, GeocoderServiceError
 import openai
 import pycountry
- 
 from doctran import Doctran
 from asgiref.sync import sync_to_async
 import re
@@ -71,6 +70,7 @@ from requests.exceptions import RequestException
 from django.utils.text import slugify
 from .utils import process_scraped_types
 import csv
+import pandas as pd
 from django.contrib import messages
 logger = logging.getLogger(__name__)
 User = get_user_model()
@@ -435,8 +435,9 @@ def extract_query_from_url(url):
         logger.error(f"Error parsing URL: {str(e)}")
         return None
 
-#@shared_task(bind=True)
+@shared_task(bind=True)
 def process_scraping_task(self, task_id, form_data=None):
+
     try:
         logger.info(f"Starting Sites Gathering task {task_id}")
         task = ScrapingTask.objects.get(id=task_id)
