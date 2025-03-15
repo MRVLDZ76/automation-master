@@ -221,7 +221,7 @@ LOGGING = {
         'file': {
             'level': 'DEBUG',
             'class': 'logging.FileHandler',
-            'filename': os.path.join(os.path.dirname(__file__), 'logs/debug.log'),  # Creates the logs directory if not exists
+            'filename': os.path.join(os.path.dirname(__file__), 'debug.log'),  # Creates the logs directory if not exists
         },
         'console': {
             'class': 'logging.StreamHandler',
