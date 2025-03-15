@@ -1,0 +1,180 @@
+INFO 2025-03-16 00:18:30,592 views 41868 21700 Task 3 created successfully with project title: Bangladesh - Budapest - Automotive Services - Mobile Mechanics - Diagnostic Services
+INFO 2025-03-16 00:18:30,594 views 41868 21700 Saving preferences for user EdisonValdez
+INFO 2025-03-16 00:18:30,595 views 41868 21700 Country: Bangladesh - BD
+INFO 2025-03-16 00:18:30,595 views 41868 21700 Destination: Budapest, Bangladesh
+INFO 2025-03-16 00:18:30,596 views 41868 21700 Level: Automotive Services
+INFO 2025-03-16 00:18:30,596 views 41868 21700 Main Category: Mobile Mechanics
+INFO 2025-03-16 00:18:30,596 views 41868 21700 Subcategory: Diagnostic Services
+INFO 2025-03-16 00:18:30,597 views 41868 21700 Image Count: 3
+INFO 2025-03-16 00:18:30,597 views 41868 21700 Source URL: https://www.google.com/maps/search/Automotive%20Services%20Mobile%20Mechanics%20Diagnostic%20Services%20Budapest%20Bangladesh
+INFO 2025-03-16 00:18:30,599 views 41868 21700 User preferences for EdisonValdez updated successfully
+INFO 2025-03-16 00:18:30,600 views 41868 21700 Starting Sites Gathering task 3, project ID: ae69f1ff-9fb1-4172-969f-601b4869eb93
+ERROR 2025-03-16 00:18:30,600 views 41868 21700 Failed to start the Sites Gathering task for task_id 3: process_scraping_task() missing 1 required positional argument: 'self'
+Traceback (most recent call last):
+  File "D:\proyectos\automation-master\automation\views.py", line 431, in post
+    process_scraping_task(task_id=task.id, form_data=form_data)
+TypeError: process_scraping_task() missing 1 required positional argument: 'self'
+INFO 2025-03-16 00:18:54,169 views 41868 14664 Task 4 created successfully with project title: Bangladesh - Budapest - Automotive Services - Mobile Mechanics - Diagnostic Services
+INFO 2025-03-16 00:18:54,171 views 41868 14664 Saving preferences for user EdisonValdez
+INFO 2025-03-16 00:18:54,172 views 41868 14664 Country: Bangladesh - BD
+INFO 2025-03-16 00:18:54,172 views 41868 14664 Destination: Budapest, Bangladesh
+INFO 2025-03-16 00:18:54,173 views 41868 14664 Level: Automotive Services
+INFO 2025-03-16 00:18:54,173 views 41868 14664 Main Category: Mobile Mechanics
+INFO 2025-03-16 00:18:54,173 views 41868 14664 Subcategory: Diagnostic Services
+INFO 2025-03-16 00:18:54,174 views 41868 14664 Image Count: 3
+INFO 2025-03-16 00:18:54,174 views 41868 14664 Source URL: https://www.google.com/maps/search/Automotive%20Services%20Mobile%20Mechanics%20Diagnostic%20Services%20Budapest%20Bangladesh
+INFO 2025-03-16 00:18:54,176 views 41868 14664 User preferences for EdisonValdez updated successfully
+INFO 2025-03-16 00:18:54,176 views 41868 14664 Starting Sites Gathering task 4, project ID: 26e124ad-09d4-4253-a8a1-c88b37fe4b04
+ERROR 2025-03-16 00:18:54,177 views 41868 14664 Failed to start the Sites Gathering task for task_id 4: process_scraping_task() missing 1 required positional argument: 'self'
+Traceback (most recent call last):
+  File "D:\proyectos\automation-master\automation\views.py", line 431, in post
+    process_scraping_task(task_id=task.id, form_data=form_data)
+TypeError: process_scraping_task() missing 1 required positional argument: 'self'
+INFO 2025-03-16 00:20:13,657 views 1384 42408 Task 5 created successfully with project title: Bangladesh - Budapest - Automotive Services - Mobile Mechanics - Diagnostic Services
+INFO 2025-03-16 00:20:13,660 views 1384 42408 Saving preferences for user EdisonValdez
+INFO 2025-03-16 00:20:13,661 views 1384 42408 Country: Bangladesh - BD
+INFO 2025-03-16 00:20:13,661 views 1384 42408 Destination: Budapest, Bangladesh
+INFO 2025-03-16 00:20:13,661 views 1384 42408 Level: Automotive Services
+INFO 2025-03-16 00:20:13,662 views 1384 42408 Main Category: Mobile Mechanics
+INFO 2025-03-16 00:20:13,662 views 1384 42408 Subcategory: Diagnostic Services
+INFO 2025-03-16 00:20:13,662 views 1384 42408 Image Count: 3
+INFO 2025-03-16 00:20:13,663 views 1384 42408 Source URL: https://www.google.com/maps/search/Automotive%20Services%20Mobile%20Mechanics%20Diagnostic%20Services%20Budapest%20Bangladesh
+INFO 2025-03-16 00:20:13,664 views 1384 42408 User preferences for EdisonValdez updated successfully
+INFO 2025-03-16 00:20:13,665 views 1384 42408 Starting Sites Gathering task 5, project ID: 0941199e-71d8-45c2-a649-7f955e158d53
+INFO 2025-03-16 00:20:13,665 tasks 1384 42408 Starting Sites Gathering task 5
+INFO 2025-03-16 00:20:13,674 tasks 1384 42408 Using image count: 3
+INFO 2025-03-16 00:20:13,674 tasks 1384 42408 Processing description content: https://www.google.com/maps/place/Hampton+Inn+Pickwick+Dam-At+Shiloh+Falls/@34.9990109,-88.3187368,13z/data=!4m12!1m2!2m1!1sSavannah+tenessee+vacation+rental7!3m8!1s0x887da8bd662194c7:0x980cd24fdcc8e79c!5m2!4m1!1i2!8m2!3d35.0372571!4d-88.2266119!16s%2Fg%2F1tvymjq_?entry=ttu&g_ep=EgoyMDI1MDIwOS4wIKXMDSoASAFQAw%3D%3D
+INFO 2025-03-16 00:20:13,675 tasks 1384 42408 Reading queries from content
+INFO 2025-03-16 00:20:13,676 tasks 1384 42408 Processing URL: https://www.google.com/maps/place/Hampton+Inn+Pickwick+Dam-At+Shiloh+Falls/@34.9990109,-88.3187368,13z/data=!4m12!1m2!2m1!1sSavannah+tenessee+vacation+rental7!3m8!1s0x887da8bd662194c7:0x980cd24fdcc8e79c!5m2!4m1!1i2!8m2!3d35.0372571!4d-88.2266119!16s%2Fg%2F1tvymjq_?entry=ttu&g_ep=EgoyMDI1MDIwOS4wIKXMDSoASAFQAw%3D%3D
+INFO 2025-03-16 00:20:13,677 tasks 1384 42408 Extracted query data: {'query': 'Hampton Inn Pickwick Dam-At Shiloh Falls', 'data_id': '0x887da8bd662194c7:0x980cd24fdcc8e79c', 'll': '35.0372571,-88.2266119', 'original_url': 'https://www.google.com/maps/place/Hampton+Inn+Pickwick+Dam-At+Shiloh+Falls/@34.9990109,-88.3187368,13z/data=!4m12!1m2!2m1!1sSavannah+tenessee+vacation+rental7!3m8!1s0x887da8bd662194c7:0x980cd24fdcc8e79c!5m2!4m1!1i2!8m2!3d35.0372571!4d-88.2266119!16s%2Fg%2F1tvymjq_?entry=ttu&g_ep=EgoyMDI1MDIwOS4wIKXMDSoASAFQAw%3D%3D'}
+INFO 2025-03-16 00:20:13,678 tasks 1384 42408 Successfully read 1 queries
+INFO 2025-03-16 00:20:13,678 tasks 1384 42408 Extracted 1 queries from description URLs
+INFO 2025-03-16 00:20:13,679 tasks 1384 42408 Processing query 1/1: Hampton Inn Pickwick Dam-At Shiloh Falls (Page 1)
+INFO 2025-03-16 00:20:13,679 tasks 1384 42408 Searching for exact place with params: {'api_key': '8497ce60ccb34a61b7bb371343928ddf60dfa38ce0133f9810e06c7cf9f74cd8', 'engine': 'google_maps', 'type': 'place', 'google_domain': 'google.com', 'data': '!4m5!3m4!1s0x887da8bd662194c7:0x980cd24fdcc8e79c!8m2!3d35.0372571!4d-88.2266119', 'hl': 'en', 'no_cache': 'true'}
+ERROR 2025-03-16 00:20:14,415 tasks 1384 42408 API error or no results for query 'Hampton Inn Pickwick Dam-At Shiloh Falls': Your account has run out of searches.
+INFO 2025-03-16 00:20:14,416 tasks 1384 42408 Finished processing query: Hampton Inn Pickwick Dam-At Shiloh Falls
+INFO 2025-03-16 00:20:14,416 tasks 1384 42408 Total results processed across all queries: 0
+INFO 2025-03-16 00:20:14,417 tasks 1384 42408 Sites Gathering task 5 completed successfully
+INFO 2025-03-16 00:20:14,420 views 1384 42408 Sites Gathering task 5 created and queued, project ID: 0941199e-71d8-45c2-a649-7f955e158d53
+INFO 2025-03-16 00:20:26,411 views 1384 42408 Task 6 created successfully with project title: Bangladesh - Budapest - Automotive Services - Mobile Mechanics - Diagnostic Services
+INFO 2025-03-16 00:20:26,413 views 1384 42408 Saving preferences for user EdisonValdez
+INFO 2025-03-16 00:20:26,413 views 1384 42408 Country: Bangladesh - BD
+INFO 2025-03-16 00:20:26,414 views 1384 42408 Destination: Budapest, Bangladesh
+INFO 2025-03-16 00:20:26,414 views 1384 42408 Level: Automotive Services
+INFO 2025-03-16 00:20:26,415 views 1384 42408 Main Category: Mobile Mechanics
+INFO 2025-03-16 00:20:26,415 views 1384 42408 Subcategory: Diagnostic Services
+INFO 2025-03-16 00:20:26,415 views 1384 42408 Image Count: 3
+INFO 2025-03-16 00:20:26,416 views 1384 42408 Source URL: https://www.google.com/maps/search/Automotive%20Services%20Mobile%20Mechanics%20Diagnostic%20Services%20Budapest%20Bangladesh
+INFO 2025-03-16 00:20:26,417 views 1384 42408 User preferences for EdisonValdez updated successfully
+INFO 2025-03-16 00:20:26,417 views 1384 42408 Starting Sites Gathering task 6, project ID: 1de56315-57cc-4f69-92b8-684cd0f19422
+INFO 2025-03-16 00:20:26,418 tasks 1384 42408 Starting Sites Gathering task 6
+INFO 2025-03-16 00:20:26,424 tasks 1384 42408 Using image count: 3
+INFO 2025-03-16 00:20:26,425 tasks 1384 42408 Processing description content: https://www.google.com/maps/place/Daytona+Jeep+Mechanic/@27.8289579,-83.3442084,7z/data=!4m10!1m2!2m1!1sAutomotive+Services+Mobile+Mechanics+Diagnostic+Services+Washington,+Fl.+United+States!3m6!1s0x88e6dd2bdd3abd07:0xcda65e40fcd52457!8m2!3d29.1361827!4d-81.0438661!15sClZBdXRvbW90aXZlIFNlcnZpY2VzIE1vYmlsZSBNZWNoYW5pY3MgRGlhZ25vc3RpYyBTZXJ2aWNlcyBXYXNoaW5ndG9uLCBGbC4gVW5pdGVkIFN0YXRlc1pWIlRhdXRvbW90aXZlIHNlcnZpY2VzIG1vYmlsZSBtZWNoYW5pY3MgZGlhZ25vc3RpYyBzZXJ2aWNlcyB3YXNoaW5ndG9uIGZsIHVuaXRlZCBzdGF0ZXOSAQpjYXJfcmVwYWlymgEkQ2hkRFNVaE5NRzluUzBWSlEwRm5TVVJPZVdadWFYSkJSUkFC4AEA-gEECDIQJg!16s%2Fg%2F11pxksjt35?entry=ttu&g_ep=EgoyMDI1MDMxMi4wIKXMDSoJLDEwMjExNDU1SAFQAw%3D%3D
+INFO 2025-03-16 00:20:26,440 tasks 1384 42408 Reading queries from content
+INFO 2025-03-16 00:20:26,441 tasks 1384 42408 Processing URL: https://www.google.com/maps/place/Daytona+Jeep+Mechanic/@27.8289579,-83.3442084,7z/data=!4m10!1m2!2m1!1sAutomotive+Services+Mobile+Mechanics+Diagnostic+Services+Washington,+Fl.+United+States!3m6!1s0x88e6dd2bdd3abd07:0xcda65e40fcd52457!8m2!3d29.1361827!4d-81.0438661!15sClZBdXRvbW90aXZlIFNlcnZpY2VzIE1vYmlsZSBNZWNoYW5pY3MgRGlhZ25vc3RpYyBTZXJ2aWNlcyBXYXNoaW5ndG9uLCBGbC4gVW5pdGVkIFN0YXRlc1pWIlRhdXRvbW90aXZlIHNlcnZpY2VzIG1vYmlsZSBtZWNoYW5pY3MgZGlhZ25vc3RpYyBzZXJ2aWNlcyB3YXNoaW5ndG9uIGZsIHVuaXRlZCBzdGF0ZXOSAQpjYXJfcmVwYWlymgEkQ2hkRFNVaE5NRzluUzBWSlEwRm5TVVJPZVdadWFYSkJSUkFC4AEA-gEECDIQJg!16s%2Fg%2F11pxksjt35?entry=ttu&g_ep=EgoyMDI1MDMxMi4wIKXMDSoJLDEwMjExNDU1SAFQAw%3D%3D
+INFO 2025-03-16 00:20:26,442 tasks 1384 42408 Extracted query data: {'query': 'Daytona Jeep Mechanic', 'data_id': '0x88e6dd2bdd3abd07:0xcda65e40fcd52457', 'll': '29.1361827,-81.0438661', 'original_url': 'https://www.google.com/maps/place/Daytona+Jeep+Mechanic/@27.8289579,-83.3442084,7z/data=!4m10!1m2!2m1!1sAutomotive+Services+Mobile+Mechanics+Diagnostic+Services+Washington,+Fl.+United+States!3m6!1s0x88e6dd2bdd3abd07:0xcda65e40fcd52457!8m2!3d29.1361827!4d-81.0438661!15sClZBdXRvbW90aXZlIFNlcnZpY2VzIE1vYmlsZSBNZWNoYW5pY3MgRGlhZ25vc3RpYyBTZXJ2aWNlcyBXYXNoaW5ndG9uLCBGbC4gVW5pdGVkIFN0YXRlc1pWIlRhdXRvbW90aXZlIHNlcnZpY2VzIG1vYmlsZSBtZWNoYW5pY3MgZGlhZ25vc3RpYyBzZXJ2aWNlcyB3YXNoaW5ndG9uIGZsIHVuaXRlZCBzdGF0ZXOSAQpjYXJfcmVwYWlymgEkQ2hkRFNVaE5NRzluUzBWSlEwRm5TVVJPZVdadWFYSkJSUkFC4AEA-gEECDIQJg!16s%2Fg%2F11pxksjt35?entry=ttu&g_ep=EgoyMDI1MDMxMi4wIKXMDSoJLDEwMjExNDU1SAFQAw%3D%3D'}
+INFO 2025-03-16 00:20:26,443 tasks 1384 42408 Successfully read 1 queries
+INFO 2025-03-16 00:20:26,443 tasks 1384 42408 Extracted 1 queries from description URLs
+INFO 2025-03-16 00:20:26,444 tasks 1384 42408 Processing query 1/1: Daytona Jeep Mechanic (Page 1)
+INFO 2025-03-16 00:20:26,444 tasks 1384 42408 Searching for exact place with params: {'api_key': '8497ce60ccb34a61b7bb371343928ddf60dfa38ce0133f9810e06c7cf9f74cd8', 'engine': 'google_maps', 'type': 'place', 'google_domain': 'google.com', 'data': '!4m5!3m4!1s0x88e6dd2bdd3abd07:0xcda65e40fcd52457!8m2!3d29.1361827!4d-81.0438661', 'hl': 'en', 'no_cache': 'true'}
+ERROR 2025-03-16 00:20:26,955 tasks 1384 42408 API error or no results for query 'Daytona Jeep Mechanic': Your account has run out of searches.
+INFO 2025-03-16 00:20:26,955 tasks 1384 42408 Finished processing query: Daytona Jeep Mechanic
+INFO 2025-03-16 00:20:26,956 tasks 1384 42408 Total results processed across all queries: 0
+INFO 2025-03-16 00:20:26,956 tasks 1384 42408 Sites Gathering task 6 completed successfully
+INFO 2025-03-16 00:20:26,959 views 1384 42408 Sites Gathering task 6 created and queued, project ID: 1de56315-57cc-4f69-92b8-684cd0f19422
+ERROR 2025-03-16 00:20:29,958 views 1384 42384 Error in RecentTasksView: 'NoneType' object has no attribute 'strftime'
+Traceback (most recent call last):
+  File "D:\proyectos\automation-master\automation\api\views.py", line 677, in get
+    'completed_at': task.completed_at.strftime('%Y-%m-%d %H:%M'),
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'NoneType' object has no attribute 'strftime'
+ERROR 2025-03-16 00:20:44,015 views 1384 42564 Error in RecentTasksView: 'NoneType' object has no attribute 'strftime'
+Traceback (most recent call last):
+  File "D:\proyectos\automation-master\automation\api\views.py", line 677, in get
+    'completed_at': task.completed_at.strftime('%Y-%m-%d %H:%M'),
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'NoneType' object has no attribute 'strftime'
+ERROR 2025-03-16 00:20:46,217 views 1384 2032 Error in RecentTasksView: 'NoneType' object has no attribute 'strftime'
+Traceback (most recent call last):
+  File "D:\proyectos\automation-master\automation\api\views.py", line 677, in get
+    'completed_at': task.completed_at.strftime('%Y-%m-%d %H:%M'),
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'NoneType' object has no attribute 'strftime'
+INFO 2025-03-16 00:21:02,755 views 1384 876 Task 7 created successfully with project title: Bangladesh - Budapest - Automotive Services - Mobile Mechanics - Diagnostic Services
+INFO 2025-03-16 00:21:02,757 views 1384 876 Saving preferences for user EdisonValdez
+INFO 2025-03-16 00:21:02,758 views 1384 876 Country: Bangladesh - BD
+INFO 2025-03-16 00:21:02,758 views 1384 876 Destination: Budapest, Bangladesh
+INFO 2025-03-16 00:21:02,759 views 1384 876 Level: Automotive Services
+INFO 2025-03-16 00:21:02,759 views 1384 876 Main Category: Mobile Mechanics
+INFO 2025-03-16 00:21:02,760 views 1384 876 Subcategory: Diagnostic Services
+INFO 2025-03-16 00:21:02,760 views 1384 876 Image Count: 3
+INFO 2025-03-16 00:21:02,760 views 1384 876 Source URL: https://www.google.com/maps/search/Automotive%20Services%20Mobile%20Mechanics%20Diagnostic%20Services%20Budapest%20Bangladesh
+INFO 2025-03-16 00:21:02,762 views 1384 876 User preferences for EdisonValdez updated successfully
+INFO 2025-03-16 00:21:02,763 views 1384 876 Starting Sites Gathering task 7, project ID: 0b979586-cd4f-4cad-8135-b82819417a28
+INFO 2025-03-16 00:21:02,763 tasks 1384 876 Starting Sites Gathering task 7
+INFO 2025-03-16 00:21:02,769 tasks 1384 876 Using image count: 3
+INFO 2025-03-16 00:21:02,769 tasks 1384 876 Processing description content: https://www.google.com/maps/place/Mobile+Diesel+Repair+Service/@27.8289579,-83.3442084,7z/data=!4m10!1m2!2m1!1sAutomotive+Services+Mobile+Mechanics+Diagnostic+Services+Washington,+Fl.+United+States!3m6!1s0x88c32782f4b2acd1:0x3be1beb82efa9aa2!8m2!3d27.7088921!4d-82.3956791!15sClZBdXRvbW90aXZlIFNlcnZpY2VzIE1vYmlsZSBNZWNoYW5pY3MgRGlhZ25vc3RpYyBTZXJ2aWNlcyBXYXNoaW5ndG9uLCBGbC4gVW5pdGVkIFN0YXRlc1pWIlRhdXRvbW90aXZlIHNlcnZpY2VzIG1vYmlsZSBtZWNoYW5pY3MgZGlhZ25vc3RpYyBzZXJ2aWNlcyB3YXNoaW5ndG9uIGZsIHVuaXRlZCBzdGF0ZXOSARF0cnVja19yZXBhaXJfc2hvcJoBJENoZERTVWhOTUc5blMwVkpRMEZuU1VOUE1GQjJjREYzUlJBQuABAPoBBQioARAu!16s%2Fg%2F11lf_q0nm7?entry=ttu&g_ep=EgoyMDI1MDMxMi4wIKXMDSoJLDEwMjExNDU1SAFQAw%3D%3D
+INFO 2025-03-16 00:21:02,771 tasks 1384 876 Reading queries from content
+INFO 2025-03-16 00:21:02,771 tasks 1384 876 Processing URL: https://www.google.com/maps/place/Mobile+Diesel+Repair+Service/@27.8289579,-83.3442084,7z/data=!4m10!1m2!2m1!1sAutomotive+Services+Mobile+Mechanics+Diagnostic+Services+Washington,+Fl.+United+States!3m6!1s0x88c32782f4b2acd1:0x3be1beb82efa9aa2!8m2!3d27.7088921!4d-82.3956791!15sClZBdXRvbW90aXZlIFNlcnZpY2VzIE1vYmlsZSBNZWNoYW5pY3MgRGlhZ25vc3RpYyBTZXJ2aWNlcyBXYXNoaW5ndG9uLCBGbC4gVW5pdGVkIFN0YXRlc1pWIlRhdXRvbW90aXZlIHNlcnZpY2VzIG1vYmlsZSBtZWNoYW5pY3MgZGlhZ25vc3RpYyBzZXJ2aWNlcyB3YXNoaW5ndG9uIGZsIHVuaXRlZCBzdGF0ZXOSARF0cnVja19yZXBhaXJfc2hvcJoBJENoZERTVWhOTUc5blMwVkpRMEZuU1VOUE1GQjJjREYzUlJBQuABAPoBBQioARAu!16s%2Fg%2F11lf_q0nm7?entry=ttu&g_ep=EgoyMDI1MDMxMi4wIKXMDSoJLDEwMjExNDU1SAFQAw%3D%3D
+INFO 2025-03-16 00:21:02,773 tasks 1384 876 Extracted query data: {'query': 'Mobile Diesel Repair Service', 'data_id': '0x88c32782f4b2acd1:0x3be1beb82efa9aa2', 'll': '27.7088921,-82.3956791', 'original_url': 'https://www.google.com/maps/place/Mobile+Diesel+Repair+Service/@27.8289579,-83.3442084,7z/data=!4m10!1m2!2m1!1sAutomotive+Services+Mobile+Mechanics+Diagnostic+Services+Washington,+Fl.+United+States!3m6!1s0x88c32782f4b2acd1:0x3be1beb82efa9aa2!8m2!3d27.7088921!4d-82.3956791!15sClZBdXRvbW90aXZlIFNlcnZpY2VzIE1vYmlsZSBNZWNoYW5pY3MgRGlhZ25vc3RpYyBTZXJ2aWNlcyBXYXNoaW5ndG9uLCBGbC4gVW5pdGVkIFN0YXRlc1pWIlRhdXRvbW90aXZlIHNlcnZpY2VzIG1vYmlsZSBtZWNoYW5pY3MgZGlhZ25vc3RpYyBzZXJ2aWNlcyB3YXNoaW5ndG9uIGZsIHVuaXRlZCBzdGF0ZXOSARF0cnVja19yZXBhaXJfc2hvcJoBJENoZERTVWhOTUc5blMwVkpRMEZuU1VOUE1GQjJjREYzUlJBQuABAPoBBQioARAu!16s%2Fg%2F11lf_q0nm7?entry=ttu&g_ep=EgoyMDI1MDMxMi4wIKXMDSoJLDEwMjExNDU1SAFQAw%3D%3D'}
+INFO 2025-03-16 00:21:02,774 tasks 1384 876 Successfully read 1 queries
+INFO 2025-03-16 00:21:02,774 tasks 1384 876 Extracted 1 queries from description URLs
+INFO 2025-03-16 00:21:02,775 tasks 1384 876 Processing query 1/1: Mobile Diesel Repair Service (Page 1)
+INFO 2025-03-16 00:21:02,775 tasks 1384 876 Searching for exact place with params: {'api_key': '8497ce60ccb34a61b7bb371343928ddf60dfa38ce0133f9810e06c7cf9f74cd8', 'engine': 'google_maps', 'type': 'place', 'google_domain': 'google.com', 'data': '!4m5!3m4!1s0x88c32782f4b2acd1:0x3be1beb82efa9aa2!8m2!3d27.7088921!4d-82.3956791', 'hl': 'en', 'no_cache': 'true'}
+ERROR 2025-03-16 00:21:03,431 tasks 1384 876 API error or no results for query 'Mobile Diesel Repair Service': Your account has run out of searches.
+INFO 2025-03-16 00:21:03,432 tasks 1384 876 Finished processing query: Mobile Diesel Repair Service
+INFO 2025-03-16 00:21:03,432 tasks 1384 876 Total results processed across all queries: 0
+INFO 2025-03-16 00:21:03,433 tasks 1384 876 Sites Gathering task 7 completed successfully
+INFO 2025-03-16 00:21:03,439 views 1384 876 Sites Gathering task 7 created and queued, project ID: 0b979586-cd4f-4cad-8135-b82819417a28
+INFO 2025-03-16 00:21:57,409 views 1384 2032 Task 8 created successfully with project title: Bangladesh - Budapest - Automotive Services - Mobile Mechanics - Diagnostic Services
+INFO 2025-03-16 00:21:57,411 views 1384 2032 Saving preferences for user EdisonValdez
+INFO 2025-03-16 00:21:57,412 views 1384 2032 Country: Bangladesh - BD
+INFO 2025-03-16 00:21:57,412 views 1384 2032 Destination: Budapest, Bangladesh
+INFO 2025-03-16 00:21:57,412 views 1384 2032 Level: Automotive Services
+INFO 2025-03-16 00:21:57,413 views 1384 2032 Main Category: Mobile Mechanics
+INFO 2025-03-16 00:21:57,413 views 1384 2032 Subcategory: Diagnostic Services
+INFO 2025-03-16 00:21:57,413 views 1384 2032 Image Count: 3
+INFO 2025-03-16 00:21:57,414 views 1384 2032 Source URL: https://www.google.com/maps/search/Automotive%20Services%20Mobile%20Mechanics%20Diagnostic%20Services%20Budapest%20Bangladesh
+INFO 2025-03-16 00:21:57,415 views 1384 2032 User preferences for EdisonValdez updated successfully
+INFO 2025-03-16 00:21:57,416 views 1384 2032 Starting Sites Gathering task 8, project ID: 090ced92-4634-4be1-8fa0-39e7eccfa7a5
+INFO 2025-03-16 00:21:57,416 tasks 1384 2032 Starting Sites Gathering task 8
+INFO 2025-03-16 00:21:57,422 tasks 1384 2032 Using image count: 3
+INFO 2025-03-16 00:21:57,422 tasks 1384 2032 Processing description content: https://www.google.com/maps/place/Mobile+Diesel+Repair+Service/@27.8289579,-83.3442084,7z/data=!4m10!1m2!2m1!1sAutomotive+Services+Mobile+Mechanics+Diagnostic+Services+Washington,+Fl.+United+States!3m6!1s0x88c32782f4b2acd1:0x3be1beb82efa9aa2!8m2!3d27.7088921!4d-82.3956791!15sClZBdXRvbW90aXZlIFNlcnZpY2VzIE1vYmlsZSBNZWNoYW5pY3MgRGlhZ25vc3RpYyBTZXJ2aWNlcyBXYXNoaW5ndG9uLCBGbC4gVW5pdGVkIFN0YXRlc1pWIlRhdXRvbW90aXZlIHNlcnZpY2VzIG1vYmlsZSBtZWNoYW5pY3MgZGlhZ25vc3RpYyBzZXJ2aWNlcyB3YXNoaW5ndG9uIGZsIHVuaXRlZCBzdGF0ZXOSARF0cnVja19yZXBhaXJfc2hvcJoBJENoZERTVWhOTUc5blMwVkpRMEZuU1VOUE1GQjJjREYzUlJBQuABAPoBBQioARAu!16s%2Fg%2F11lf_q0nm7?entry=ttu&g_ep=EgoyMDI1MDMxMi4wIKXMDSoJLDEwMjExNDU1SAFQAw%3D%3D
+INFO 2025-03-16 00:21:57,424 tasks 1384 2032 Reading queries from content
+INFO 2025-03-16 00:21:57,424 tasks 1384 2032 Processing URL: https://www.google.com/maps/place/Mobile+Diesel+Repair+Service/@27.8289579,-83.3442084,7z/data=!4m10!1m2!2m1!1sAutomotive+Services+Mobile+Mechanics+Diagnostic+Services+Washington,+Fl.+United+States!3m6!1s0x88c32782f4b2acd1:0x3be1beb82efa9aa2!8m2!3d27.7088921!4d-82.3956791!15sClZBdXRvbW90aXZlIFNlcnZpY2VzIE1vYmlsZSBNZWNoYW5pY3MgRGlhZ25vc3RpYyBTZXJ2aWNlcyBXYXNoaW5ndG9uLCBGbC4gVW5pdGVkIFN0YXRlc1pWIlRhdXRvbW90aXZlIHNlcnZpY2VzIG1vYmlsZSBtZWNoYW5pY3MgZGlhZ25vc3RpYyBzZXJ2aWNlcyB3YXNoaW5ndG9uIGZsIHVuaXRlZCBzdGF0ZXOSARF0cnVja19yZXBhaXJfc2hvcJoBJENoZERTVWhOTUc5blMwVkpRMEZuU1VOUE1GQjJjREYzUlJBQuABAPoBBQioARAu!16s%2Fg%2F11lf_q0nm7?entry=ttu&g_ep=EgoyMDI1MDMxMi4wIKXMDSoJLDEwMjExNDU1SAFQAw%3D%3D
+INFO 2025-03-16 00:21:57,425 tasks 1384 2032 Extracted query data: {'query': 'Mobile Diesel Repair Service', 'data_id': '0x88c32782f4b2acd1:0x3be1beb82efa9aa2', 'll': '27.7088921,-82.3956791', 'original_url': 'https://www.google.com/maps/place/Mobile+Diesel+Repair+Service/@27.8289579,-83.3442084,7z/data=!4m10!1m2!2m1!1sAutomotive+Services+Mobile+Mechanics+Diagnostic+Services+Washington,+Fl.+United+States!3m6!1s0x88c32782f4b2acd1:0x3be1beb82efa9aa2!8m2!3d27.7088921!4d-82.3956791!15sClZBdXRvbW90aXZlIFNlcnZpY2VzIE1vYmlsZSBNZWNoYW5pY3MgRGlhZ25vc3RpYyBTZXJ2aWNlcyBXYXNoaW5ndG9uLCBGbC4gVW5pdGVkIFN0YXRlc1pWIlRhdXRvbW90aXZlIHNlcnZpY2VzIG1vYmlsZSBtZWNoYW5pY3MgZGlhZ25vc3RpYyBzZXJ2aWNlcyB3YXNoaW5ndG9uIGZsIHVuaXRlZCBzdGF0ZXOSARF0cnVja19yZXBhaXJfc2hvcJoBJENoZERTVWhOTUc5blMwVkpRMEZuU1VOUE1GQjJjREYzUlJBQuABAPoBBQioARAu!16s%2Fg%2F11lf_q0nm7?entry=ttu&g_ep=EgoyMDI1MDMxMi4wIKXMDSoJLDEwMjExNDU1SAFQAw%3D%3D'}
+INFO 2025-03-16 00:21:57,426 tasks 1384 2032 Successfully read 1 queries
+INFO 2025-03-16 00:21:57,426 tasks 1384 2032 Extracted 1 queries from description URLs
+INFO 2025-03-16 00:21:57,426 tasks 1384 2032 Processing query 1/1: Mobile Diesel Repair Service (Page 1)
+INFO 2025-03-16 00:21:57,426 tasks 1384 2032 Searching for exact place with params: {'api_key': '8497ce60ccb34a61b7bb371343928ddf60dfa38ce0133f9810e06c7cf9f74cd8', 'engine': 'google_maps', 'type': 'place', 'google_domain': 'google.com', 'data': '!4m5!3m4!1s0x88c32782f4b2acd1:0x3be1beb82efa9aa2!8m2!3d27.7088921!4d-82.3956791', 'hl': 'en', 'no_cache': 'true'}
+ERROR 2025-03-16 00:21:58,094 tasks 1384 2032 API error or no results for query 'Mobile Diesel Repair Service': Your account has run out of searches.
+INFO 2025-03-16 00:21:58,094 tasks 1384 2032 Finished processing query: Mobile Diesel Repair Service
+INFO 2025-03-16 00:21:58,095 tasks 1384 2032 Total results processed across all queries: 0
+INFO 2025-03-16 00:21:58,095 tasks 1384 2032 Sites Gathering task 8 completed successfully
+INFO 2025-03-16 00:21:58,098 views 1384 2032 Sites Gathering task 8 created and queued, project ID: 090ced92-4634-4be1-8fa0-39e7eccfa7a5
+INFO 2025-03-16 00:23:19,164 views 1384 37044 Task 9 created successfully with project title: Bangladesh - Budapest - Automotive Services - Mobile Mechanics - Diagnostic Services
+INFO 2025-03-16 00:23:19,166 views 1384 37044 Saving preferences for user EdisonValdez
+INFO 2025-03-16 00:23:19,167 views 1384 37044 Country: Bangladesh - BD
+INFO 2025-03-16 00:23:19,167 views 1384 37044 Destination: Budapest, Bangladesh
+INFO 2025-03-16 00:23:19,168 views 1384 37044 Level: Automotive Services
+INFO 2025-03-16 00:23:19,168 views 1384 37044 Main Category: Mobile Mechanics
+INFO 2025-03-16 00:23:19,168 views 1384 37044 Subcategory: Diagnostic Services
+INFO 2025-03-16 00:23:19,169 views 1384 37044 Image Count: 3
+INFO 2025-03-16 00:23:19,169 views 1384 37044 Source URL: https://www.google.com/maps/search/Automotive%20Services%20Mobile%20Mechanics%20Diagnostic%20Services%20Budapest%20Bangladesh
+INFO 2025-03-16 00:23:19,170 views 1384 37044 User preferences for EdisonValdez updated successfully
+INFO 2025-03-16 00:23:19,171 views 1384 37044 Starting Sites Gathering task 9, project ID: 9dcebdbe-6d38-4ba7-9ef5-6d677268f816
+INFO 2025-03-16 00:23:19,257 tasks 1384 37044 Starting Sites Gathering task 9
+INFO 2025-03-16 00:23:19,264 tasks 1384 37044 Using image count: 3
+INFO 2025-03-16 00:23:19,264 tasks 1384 37044 Processing description content: https://www.google.com/maps/place/Mobile+Diesel+Repair+Service/@27.8289579,-83.3442084,7z/data=!4m10!1m2!2m1!1sAutomotive+Services+Mobile+Mechanics+Diagnostic+Services+Washington,+Fl.+United+States!3m6!1s0x88c32782f4b2acd1:0x3be1beb82efa9aa2!8m2!3d27.7088921!4d-82.3956791!15sClZBdXRvbW90aXZlIFNlcnZpY2VzIE1vYmlsZSBNZWNoYW5pY3MgRGlhZ25vc3RpYyBTZXJ2aWNlcyBXYXNoaW5ndG9uLCBGbC4gVW5pdGVkIFN0YXRlc1pWIlRhdXRvbW90aXZlIHNlcnZpY2VzIG1vYmlsZSBtZWNoYW5pY3MgZGlhZ25vc3RpYyBzZXJ2aWNlcyB3YXNoaW5ndG9uIGZsIHVuaXRlZCBzdGF0ZXOSARF0cnVja19yZXBhaXJfc2hvcJoBJENoZERTVWhOTUc5blMwVkpRMEZuU1VOUE1GQjJjREYzUlJBQuABAPoBBQioARAu!16s%2Fg%2F11lf_q0nm7?entry=ttu&g_ep=EgoyMDI1MDMxMi4wIKXMDSoJLDEwMjExNDU1SAFQAw%3D%3D
+INFO 2025-03-16 00:23:19,294 tasks 1384 37044 Reading queries from content
+INFO 2025-03-16 00:23:19,294 tasks 1384 37044 Processing URL: https://www.google.com/maps/place/Mobile+Diesel+Repair+Service/@27.8289579,-83.3442084,7z/data=!4m10!1m2!2m1!1sAutomotive+Services+Mobile+Mechanics+Diagnostic+Services+Washington,+Fl.+United+States!3m6!1s0x88c32782f4b2acd1:0x3be1beb82efa9aa2!8m2!3d27.7088921!4d-82.3956791!15sClZBdXRvbW90aXZlIFNlcnZpY2VzIE1vYmlsZSBNZWNoYW5pY3MgRGlhZ25vc3RpYyBTZXJ2aWNlcyBXYXNoaW5ndG9uLCBGbC4gVW5pdGVkIFN0YXRlc1pWIlRhdXRvbW90aXZlIHNlcnZpY2VzIG1vYmlsZSBtZWNoYW5pY3MgZGlhZ25vc3RpYyBzZXJ2aWNlcyB3YXNoaW5ndG9uIGZsIHVuaXRlZCBzdGF0ZXOSARF0cnVja19yZXBhaXJfc2hvcJoBJENoZERTVWhOTUc5blMwVkpRMEZuU1VOUE1GQjJjREYzUlJBQuABAPoBBQioARAu!16s%2Fg%2F11lf_q0nm7?entry=ttu&g_ep=EgoyMDI1MDMxMi4wIKXMDSoJLDEwMjExNDU1SAFQAw%3D%3D
+INFO 2025-03-16 00:23:19,295 tasks 1384 37044 Extracted query data: {'query': 'Mobile Diesel Repair Service', 'data_id': '0x88c32782f4b2acd1:0x3be1beb82efa9aa2', 'll': '27.7088921,-82.3956791', 'original_url': 'https://www.google.com/maps/place/Mobile+Diesel+Repair+Service/@27.8289579,-83.3442084,7z/data=!4m10!1m2!2m1!1sAutomotive+Services+Mobile+Mechanics+Diagnostic+Services+Washington,+Fl.+United+States!3m6!1s0x88c32782f4b2acd1:0x3be1beb82efa9aa2!8m2!3d27.7088921!4d-82.3956791!15sClZBdXRvbW90aXZlIFNlcnZpY2VzIE1vYmlsZSBNZWNoYW5pY3MgRGlhZ25vc3RpYyBTZXJ2aWNlcyBXYXNoaW5ndG9uLCBGbC4gVW5pdGVkIFN0YXRlc1pWIlRhdXRvbW90aXZlIHNlcnZpY2VzIG1vYmlsZSBtZWNoYW5pY3MgZGlhZ25vc3RpYyBzZXJ2aWNlcyB3YXNoaW5ndG9uIGZsIHVuaXRlZCBzdGF0ZXOSARF0cnVja19yZXBhaXJfc2hvcJoBJENoZERTVWhOTUc5blMwVkpRMEZuU1VOUE1GQjJjREYzUlJBQuABAPoBBQioARAu!16s%2Fg%2F11lf_q0nm7?entry=ttu&g_ep=EgoyMDI1MDMxMi4wIKXMDSoJLDEwMjExNDU1SAFQAw%3D%3D'}
+INFO 2025-03-16 00:23:19,297 tasks 1384 37044 Successfully read 1 queries
+INFO 2025-03-16 00:23:19,297 tasks 1384 37044 Extracted 1 queries from description URLs
+INFO 2025-03-16 00:23:19,297 tasks 1384 37044 Processing query 1/1: Mobile Diesel Repair Service (Page 1)
+INFO 2025-03-16 00:23:19,298 tasks 1384 37044 Searching for exact place with params: {'api_key': '8497ce60ccb34a61b7bb371343928ddf60dfa38ce0133f9810e06c7cf9f74cd8', 'engine': 'google_maps', 'type': 'place', 'google_domain': 'google.com', 'data': '!4m5!3m4!1s0x88c32782f4b2acd1:0x3be1beb82efa9aa2!8m2!3d27.7088921!4d-82.3956791', 'hl': 'en', 'no_cache': 'true'}
+ERROR 2025-03-16 00:23:19,815 tasks 1384 37044 API error or no results for query 'Mobile Diesel Repair Service': Your account has run out of searches.
+INFO 2025-03-16 00:23:19,816 tasks 1384 37044 Finished processing query: Mobile Diesel Repair Service
+INFO 2025-03-16 00:23:19,816 tasks 1384 37044 Total results processed across all queries: 0
+INFO 2025-03-16 00:23:19,816 tasks 1384 37044 Sites Gathering task 9 completed successfully
+INFO 2025-03-16 00:23:19,819 views 1384 37044 Sites Gathering task 9 created and queued, project ID: 9dcebdbe-6d38-4ba7-9ef5-6d677268f816

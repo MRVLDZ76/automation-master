@@ -428,7 +428,7 @@ class UploadFileView(View):
 
                         try:
                             logger.info(f"Starting Sites Gathering task {task.id}, project ID: {task.project_id}")
-                            process_scraping_task(task_id=task.id, form_data=form_data)
+                            process_scraping_task(self, task_id=task.id, form_data=form_data)
                             logger.info(f"Sites Gathering task {task.id} created and queued, project ID: {task.project_id}")
                             messages.success(request, 'Task created successfully!')
                             return redirect('task_list')
