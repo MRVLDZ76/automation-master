@@ -22,7 +22,7 @@ DEVELOPMENT_MODE = os.getenv('DEVELOPMENT_MODE', 'True').lower(
 if DEVELOPMENT_MODE:
     BASE_URL = 'http://localhost:8000'
 else:
-    BASE_URL = 'https://orca-app-jasq8.ondigitalocean.app'
+    BASE_URL = 'https://ppall.applikuapp.com'
 
 # Set to 'True' in production when using S3
 USE_S3 = os.getenv('USE_S3', 'False').lower() == 'true'
@@ -151,41 +151,29 @@ USE_TZ = True
 AUTH_USER_MODEL = 'automation.CustomUser'
 
 # Logging Configuration
+import os
+
 LOGGING = {
     'version': 1,
     'disable_existing_loggers': False,
-    'formatters': {
-        'verbose': {
-            'format': '{levelname} {asctime} {module} {process:d} {thread:d} {message}',
-            'style': '{',
-        },
-        'simple': {
-            'format': '{levelname} {message}',
-            'style': '{',
-        },
-    },
     'handlers': {
-        'console': {
-            'level': 'DEBUG' if DEBUG else 'INFO',
-            'class': 'logging.StreamHandler',
-            'formatter': 'verbose',
-        },
         'file': {
-            'level': 'INFO',
+            'level': 'DEBUG',
             'class': 'logging.FileHandler',
-            'filename': os.path.join(BASE_DIR, 'debug.log'),
-            'formatter': 'verbose',
+            'filename': os.path.join(os.path.dirname(__file__), 'logs/debug.log'),  # Creates the logs directory if not exists
+        },
+        'console': {
+            'class': 'logging.StreamHandler',
         },
     },
     'loggers': {
-        'automation': {
-            'handlers': ['console', 'file'],
-            'level': 'DEBUG' if DEBUG else 'INFO',
+        'django': {
+            'handlers': ['file', 'console'],
+            'level': 'DEBUG',
             'propagate': True,
-        } 
+        },
     },
 }
-
 
 # File Upload Settings
 FILE_UPLOAD_MAX_MEMORY_SIZE = 5242880  # 5 MB
