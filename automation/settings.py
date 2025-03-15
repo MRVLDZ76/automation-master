@@ -336,4 +336,3 @@ CELERY_TASK_ROUTES = {
 # Task time limits
 CELERY_TASK_TIME_LIMIT = 1800  # 30 minutes
 CELERY_TASK_SOFT_TIME_LIMIT = 1500  # 25 minutes
-
