@@ -5,6 +5,8 @@
 *.pyc
 __pycache__/
 
+# Ignore log files
+*.log
 
 # Ignore OS-generated files
 .DS_Store
