@@ -437,10 +437,6 @@ def extract_query_from_url(url):
 
 #@shared_task(bind=True)
 def process_scraping_task(self, task_id, form_data=None):
-    log_file_path = get_log_file_path(task_id)
-    file_handler = logging.FileHandler(log_file_path)
-    logger.addHandler(file_handler)
-
     try:
         logger.info(f"Starting Sites Gathering task {task_id}")
         task = ScrapingTask.objects.get(id=task_id)
@@ -568,9 +564,6 @@ def process_scraping_task(self, task_id, form_data=None):
         logger.error(f"Error in Sites Gathering task {task_id}: {str(e)}", exc_info=True)
         task.status = 'FAILED'
         task.save()
-    finally:
-        logger.removeHandler(file_handler)
-        file_handler.close()
  
 def update_image_url(business, local_path, new_path):
     try:
