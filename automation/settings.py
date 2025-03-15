@@ -214,6 +214,8 @@ USE_TZ = True
 AUTH_USER_MODEL = 'automation.CustomUser'
 
 # Logging Configuration
+import os
+
 LOGGING = {
     'version': 1,
     'disable_existing_loggers': False,
@@ -221,7 +223,7 @@ LOGGING = {
         'file': {
             'level': 'DEBUG',
             'class': 'logging.FileHandler',
-            'filename': os.path.join(os.path.dirname(__file__), 'debug.log'),  # Creates the logs directory if not exists
+            'filename': os.path.join(os.path.dirname(__file__), 'logs/debug.log'),  # Creates the logs directory if not exists
         },
         'console': {
             'class': 'logging.StreamHandler',
@@ -235,6 +237,8 @@ LOGGING = {
         },
     },
 }
+
+
 SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
 
 
