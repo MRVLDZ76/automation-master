@@ -1,18 +1,19 @@
 import os
 from pathlib import Path
+import sys
 import dj_database_url
 from django.core.management.utils import get_random_secret_key
 from dotenv import load_dotenv
+import environ  
+from django.core.files.storage import FileSystemStorage
 
+env = environ.Env()
+environ.Env.read_env()
 load_dotenv(dotenv_path='./.env')
 
 BASE_DIR = Path(__file__).resolve().parent.parent
  
-# Environment Variables
-# DEBUG = os.getenv('DEBUG', 'False').lower() == 'false' - With this one the deployment failed!
-# DEBUG = os.getenv('DEBUG', 'True').lower() == 'true' - NO It is showing the debug page
-DEBUG = os.getenv('DEBUG', 'False').lower() == 'true'
-
+DEBUG = os.getenv('DEBUG', 'False').lower() == 'true' 
 
 DEVELOPMENT_MODE = os.getenv('DEVELOPMENT_MODE', 'True').lower(
 ) == 'true'  # original in pro set true
@@ -22,7 +23,7 @@ DEVELOPMENT_MODE = os.getenv('DEVELOPMENT_MODE', 'True').lower(
 if DEVELOPMENT_MODE:
     BASE_URL = 'http://localhost:8000'
 else:
-    BASE_URL = 'https://orca-app-jasq8.ondigitalocean.app'
+    BASE_URL = 'https://ppall.applikuapp.com/'
 
 # Set to 'True' in production when using S3
 USE_S3 = os.getenv('USE_S3', 'False').lower() == 'true'
@@ -48,7 +49,11 @@ LOGIN_URL = '/login/'
 LOGIN_REDIRECT_URL = '/dashboard/'   
 
 
-CSRF_TRUSTED_ORIGINS = ["https://localsecrets.zoondia.org"]
+CSRF_TRUSTED_ORIGINS = [
+    "https://localsecrets.zoondia.org",
+    "https://ppall.applikuapp.com/"
+]
+
 
 # Middleware
 MIDDLEWARE = [
@@ -83,58 +88,116 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'automation.wsgi.application'
 
+
+
 # Configuración de la base de datos
-if DEVELOPMENT_MODE:
+import logging
+logger = logging.getLogger(__name__)
+
+# Log environment variables to help with debugging
+db_url = os.getenv('DATABASE_URL')
+dev_mode = os.getenv('DEVELOPMENT_MODE', 'False').lower() == 'true'
+db_host = os.getenv('DB_HOST')
+
+logger.debug(f"Environment variables for database connection: DATABASE_URL: {db_url}  DEVELOPMENT_MODE: {dev_mode} DB_HOST: {db_host}")
+
+# Database Configuration
+if dev_mode:
     DATABASES = {
         'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'automationppall',
-        'USER': 'postgres',
-        'PASSWORD': 'Thesecret1',
-        'HOST': 'localhost',  # or '127.0.0.1'
-        'PORT': '5432', 
+            'ENGINE': 'django.db.backends.postgresql',
+            'NAME': os.getenv('DB_NAME', 'ppall-automation'),
+            'USER': os.getenv('DB_USER', 'postgres'),
+            'PASSWORD': os.getenv('DB_PASSWORD', 'Thesecret1'),
+            'HOST': os.getenv('DB_HOST', 'localhost'),
+            'PORT': os.getenv('DB_PORT', '5432'),
         }
     }
 else:
+    # Determine SSL requirement based on host
+    # If connecting to a development-like database, disable SSL
+    ssl_required = True
+    if db_url and ('localhost' in db_url or '127.0.0.1' in db_url or '2762-db' in db_url):
+        ssl_required = False
+        logger.info(f"Detected development database in URL: {db_url}. Disabling SSL requirement.")
+    
     DATABASES = {
         'default': dj_database_url.parse(
-            os.getenv('DATABASE_URL'),
-            conn_max_age=600, ssl_require=True)}
+            db_url,
+            conn_max_age=600, 
+            ssl_require=ssl_required)
+    }
+    
+    # Log the final database configuration
+    db_config = DATABASES['default'].copy()
+    if 'PASSWORD' in db_config:
+        db_config['PASSWORD'] = '***HIDDEN***'
+    logger.info(f"Database configuration: {db_config}")
 
+ 
 # Static and Media file settings
-STATIC_URL = '/static/'
-STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
-STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]
+STATIC_URL = env.str('STATIC_URL', default="/static/")
+STATIC_ROOT = env.str('STATIC_ROOT', default=BASE_DIR / 'staticfiles')
+ 
+WHITENOISE_USE_FINDERS = True
+WHITENOISE_AUTOREFRESH = DEBUG 
 
-# Media Files Configuration
-if USE_S3:
-    # DigitalOcean Spaces (S3) settings for production
-    DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
-    AWS_ACCESS_KEY_ID = os.getenv('AWS_ACCESS_KEY_ID')
-    AWS_SECRET_ACCESS_KEY = os.getenv('AWS_SECRET_ACCESS_KEY')
-    AWS_STORAGE_BUCKET_NAME = os.getenv('AWS_STORAGE_BUCKET_NAME')
-    AWS_S3_ENDPOINT_URL = os.getenv(
-        'AWS_S3_ENDPOINT_URL', 'https://nyc3.digitaloceanspaces.com')
-    AWS_S3_REGION_NAME = os.getenv('AWS_S3_REGION_NAME', 'nyc3')
-    AWS_S3_SIGNATURE_VERSION = 's3v4'
 
-    # Correctly handle S3 custom domain
-    AWS_S3_CUSTOM_DOMAIN = os.getenv(
-        'AWS_S3_CUSTOM_DOMAIN',
-        f"{AWS_STORAGE_BUCKET_NAME}.{AWS_S3_ENDPOINT_URL.replace('https://', '')}")
+# Define base directories for different types of content
+TASK_FILES_DIR = os.path.join('task_files')
+SCRAPING_RESULTS_DIR = os.path.join('scraping_results')
+BUSINESS_IMAGES_DIR = os.path.join('business_images')
 
+# Define custom storage classes
+class TaskFilesStorage(FileSystemStorage):
+    def __init__(self, *args, **kwargs):
+        kwargs.setdefault('location', os.path.join(MEDIA_ROOT, TASK_FILES_DIR))
+        kwargs.setdefault('base_url', os.path.join(MEDIA_URL, TASK_FILES_DIR))
+        super().__init__(*args, **kwargs)
+        
+    def get_available_name(self, name, max_length=None):
+        # You can customize file naming here if needed
+        return super().get_available_name(name, max_length)
+
+class ScrapingResultsStorage(FileSystemStorage):
+    def __init__(self, *args, **kwargs):
+        kwargs.setdefault('location', os.path.join(MEDIA_ROOT, SCRAPING_RESULTS_DIR))
+        kwargs.setdefault('base_url', os.path.join(MEDIA_URL, SCRAPING_RESULTS_DIR))
+        super().__init__(*args, **kwargs)
+
+class BusinessImagesStorage(FileSystemStorage):
+    def __init__(self, *args, **kwargs):
+        kwargs.setdefault('location', os.path.join(MEDIA_ROOT, BUSINESS_IMAGES_DIR))
+        kwargs.setdefault('base_url', os.path.join(MEDIA_URL, BUSINESS_IMAGES_DIR))
+        super().__init__(*args, **kwargs)
+
+# AWS S3 settings
+AWS_ACCESS_KEY_ID = os.environ.get('AWS_ACCESS_KEY_ID')
+AWS_SECRET_ACCESS_KEY = os.environ.get('AWS_SECRET_ACCESS_KEY')
+AWS_STORAGE_BUCKET_NAME = os.environ.get('AWS_STORAGE_BUCKET_NAME')
+AWS_S3_REGION_NAME = os.environ.get('AWS_S3_REGION_NAME', 'us-east-1')
+USE_S3_STORAGE = os.environ.get('USE_S3_STORAGE', 'False') == 'True'
+
+# Use S3 as default file storage
+if USE_S3_STORAGE:
+    DEFAULT_FILE_STORAGE = 'automation.storage.S3Storage'
+    STATICFILES_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
+    AWS_S3_CUSTOM_DOMAIN = f'{AWS_STORAGE_BUCKET_NAME}.s3.{AWS_S3_REGION_NAME}.amazonaws.com'
     AWS_DEFAULT_ACL = 'public-read'
-    AWS_S3_OBJECT_PARAMETERS = {'CacheControl': 'max-age=86400'}
-
-    MEDIA_URL = f"https://{AWS_S3_CUSTOM_DOMAIN}/"
+    AWS_LOCATION = 'static'
+    STATIC_URL = f'https://{AWS_S3_CUSTOM_DOMAIN}/{AWS_LOCATION}/'
+    MEDIA_URL = f'https://{AWS_S3_CUSTOM_DOMAIN}/media/'
 else:
-    # Local file storage for development
-    DEFAULT_FILE_STORAGE = 'django.core.files.storage.FileSystemStorage'
-    MEDIA_URL = '/media/'
+    # Local storage settings (for development)
+    AWS_S3_CUSTOM_DOMAIN = f'{AWS_STORAGE_BUCKET_NAME}.s3.{AWS_S3_REGION_NAME}.amazonaws.com'
+    STATIC_URL = f'https://{AWS_S3_CUSTOM_DOMAIN}/static/'
+    MEDIA_URL = f'https://{AWS_S3_CUSTOM_DOMAIN}/media/'
+    STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
     MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
+
 # Static Files Storage
-STATICFILES_STORAGE = 'django.contrib.staticfiles.storage.StaticFilesStorage'
+#STATICFILES_STORAGE = 'django.contrib.staticfiles.storage.StaticFilesStorage'
 
 DEFAULT_IMAGE_URL = os.getenv(
     'DEFAULT_IMAGE_URL',
@@ -172,6 +235,7 @@ LOGGING = {
         },
     },
 }
+SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
 
 
 # File Upload Settings
@@ -183,12 +247,6 @@ REQUEST_TIMEOUT = 120  # in seconds
 DATABASE_OPTIONS = {
     'connect_timeout': 60,
 }
-
-
-SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
- 
-WHITENOISE_USE_FINDERS = True
-WHITENOISE_AUTOREFRESH = DEBUG 
 
 # Cache Configuration
 CACHES = {
@@ -246,9 +304,9 @@ if not DEBUG:
 
 # API keys and additional configs
 TRANSLATION_OPENAI_API_KEY = os.getenv('GENAI_OPENAI_API_KEY')
-GENAI_OPENAI_API_KEY = os.getenv('GENAI_OPENAI_API_KEY')
 
-OPENAI_API_KEY = os.getenv('OPENAI_API_KEY')
+OPENAI_API_KEY=os.getenv('OPENAI_API_KEY')
+
 FALLBACK_1_OPENAI_API_KEY = os.getenv('FALLBACK_1_OPENAI_API_KEY')
 FALLBACK_2_OPENAI_API_KEY = os.getenv('FALLBACK_2_OPENAI_API_KEY')
 
@@ -260,51 +318,8 @@ OPENAI_KEYS = [
 
 SERPAPI_KEY =  os.getenv('SERPAPI_KEY')
 
-DEFAULT_IMAGES = 6
-
-AWS_ACCESS_KEY_ID = os.environ.get('AWS_ACCESS_KEY_ID')
-AWS_SECRET_ACCESS_KEY = os.environ.get('AWS_SECRET_ACCESS_KEY')
-AWS_STORAGE_BUCKET_NAME = os.environ.get('AWS_STORAGE_BUCKET_NAME')
-AWS_S3_REGION_NAME = os.environ.get('AWS_S3_REGION_NAME')
-AWS_S3_ENDPOINT_URL = os.environ.get('AWS_S3_ENDPOINT_URL')
-
-""" 
-
-# Email Configuration
-EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-EMAIL_HOST = os.getenv('EMAIL_HOST', 'smtp.mailersend.net')
-EMAIL_PORT = int(os.getenv('EMAIL_PORT', 587))
-EMAIL_USE_TLS = os.getenv('EMAIL_USE_TLS', 'False') == 'True'
-EMAIL_HOST_USER = os.getenv(
-    'EMAIL_HOST_USER', 'communications@localsecrets.travel')
-EMAIL_HOST_PASSWORD = os.getenv('EMAIL_HOST_PASSWORD', 'Lex7Mi70bZkyhuUU')
-DEFAULT_FROM_EMAIL = os.getenv(
-    'DEFAULT_FROM_EMAIL', 'communications@localsecrets.travel')
-TOKEN = "mlsn.8180f5205222863e3187181245657328c6b7c29b64bb398549fb8725e2112aed"
-
-"""
-
-LOCAL_SECRET_BASE_URL = os.environ.get('LOCAL_SECRET_BASE_URL')
-SIGATURE_SECRET = os.environ.get('SIGATURE_SECRET')
-LS_BACKEND_API_KEY = SIGATURE_SECRET
-
-if not LS_BACKEND_API_KEY:
-    from django.core.management.utils import get_random_secret_key
-    LS_BACKEND_API_KEY = get_random_secret_key()
-    print("Warning: Using randomly generated LS_BACKEND_API_KEY for development")
+DEFAULT_IMAGES = 3
  
-LS_BACKEND_SETTINGS = {
-    'URL': LOCAL_SECRET_BASE_URL,
-    'TIMEOUT': 30,  # seconds
-    'RETRY_ATTEMPTS': 3,
-    'CACHE_ENABLED': True,
-    'DEFAULT_LANGUAGE': 'en',
-}
- 
-OAUTH_CLIENT_ID = os.environ.get('OAUTH_CLIENT_ID')
-OAUTH_CLIENT_SECRET = os.environ.get('OAUTH_CLIENT_SECRET')
- 
-
 # Celery Configuration
 CELERY_BROKER_URL = os.getenv('REDIS_URL', 'redis://localhost:6379/0')
 CELERY_RESULT_BACKEND = os.getenv('REDIS_URL', 'redis://localhost:6379/0')
@@ -324,3 +339,8 @@ CELERY_TASK_ROUTES = {
 CELERY_TASK_TIME_LIMIT = 1800  # 30 minutes
 CELERY_TASK_SOFT_TIME_LIMIT = 1500  # 25 minutes
 
+ 
+print("DEBUG: Environment variables for database connection:", file=sys.stderr)
+print(f"DATABASE_URL: {os.getenv('DATABASE_URL')}", file=sys.stderr)
+print(f"DEVELOPMENT_MODE: {os.getenv('DEVELOPMENT_MODE')}", file=sys.stderr)
+print(f"DB_HOST: {os.getenv('DB_HOST')}", file=sys.stderr)
