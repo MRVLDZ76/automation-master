@@ -435,7 +435,7 @@ def extract_query_from_url(url):
         logger.error(f"Error parsing URL: {str(e)}")
         return None
 
-@shared_task(bind=True)
+#@shared_task(bind=True)
 def process_scraping_task(self, task_id, form_data=None):
     log_file_path = get_log_file_path(task_id)
     file_handler = logging.FileHandler(log_file_path)
