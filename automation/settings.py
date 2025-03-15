@@ -154,35 +154,22 @@ AUTH_USER_MODEL = 'automation.CustomUser'
 LOGGING = {
     'version': 1,
     'disable_existing_loggers': False,
-    'formatters': {
-        'verbose': {
-            'format': '{levelname} {asctime} {module} {process:d} {thread:d} {message}',
-            'style': '{',
-        },
-        'simple': {
-            'format': '{levelname} {message}',
-            'style': '{',
-        },
-    },
     'handlers': {
-        'console': {
-            'level': 'DEBUG' if DEBUG else 'INFO',
-            'class': 'logging.StreamHandler',
-            'formatter': 'verbose',
-        },
         'file': {
-            'level': 'INFO',
+            'level': 'DEBUG',
             'class': 'logging.FileHandler',
-            'filename': os.path.join(BASE_DIR, 'debug.log'),
-            'formatter': 'verbose',
+            'filename': os.path.join(os.path.dirname(__file__), 'logs/debug.log'),  # Creates the logs directory if not exists
+        },
+        'console': {
+            'class': 'logging.StreamHandler',
         },
     },
     'loggers': {
-        'automation': {
-            'handlers': ['console', 'file'],
-            'level': 'DEBUG' if DEBUG else 'INFO',
+        'django': {
+            'handlers': ['file', 'console'],
+            'level': 'DEBUG',
             'propagate': True,
-        } 
+        },
     },
 }
 
