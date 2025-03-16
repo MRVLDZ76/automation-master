@@ -205,3 +205,65 @@ INFO 2025-03-16 00:33:45,229 tasks 28828 7484 Total results processed across all
 INFO 2025-03-16 00:33:45,229 tasks 28828 7484 Sites Gathering task 10 completed successfully
 INFO 2025-03-16 00:33:45,232 views 28828 7484 Sites Gathering task 10 created and queued, project ID: 7c537bba-c5eb-4b63-bb81-778b23c25be9
 INFO 2025-03-16 00:33:55,400 views 28828 7484 Accessing TaskDetailView for task 10
+INFO 2025-03-16 01:26:32,607 views 11660 17160 Saving preferences for user EdisonValdez
+INFO 2025-03-16 01:26:32,608 views 11660 17160 Country: Bangladesh - BD
+INFO 2025-03-16 01:26:32,608 views 11660 17160 Destination: Budapest, Bangladesh
+INFO 2025-03-16 01:26:32,608 views 11660 17160 Level: Automotive Services
+INFO 2025-03-16 01:26:32,609 views 11660 17160 Main Category: Mobile Mechanics
+INFO 2025-03-16 01:26:32,609 views 11660 17160 Subcategory: Diagnostic Services
+INFO 2025-03-16 01:26:32,609 views 11660 17160 Image Count: 6
+INFO 2025-03-16 01:26:33,606 tasks 11660 17160 Starting Sites Gathering task 11
+INFO 2025-03-16 01:26:33,613 tasks 11660 17160 Using image count: 6
+INFO 2025-03-16 01:26:33,613 tasks 11660 17160 Processing description content: https://www.google.com/maps/place/%D9%85%D8%B3%D8%AC%D8%AF+%D8%A7%D9%84%D9%85%D8%AF%D9%8A%D9%86%D8%A9%E2%80%AD/@31.6271462,-7.989471,19z/data=!4m14!1m7!3m6!1s0xdafef71363c0db5:0x54d5d713ae47ccdc!2sSabich+Marrakech+Medina!8m2!3d31.6316231!4d-7.9906648!16s%2Fg%2F11k9nz8gv9!3m5!1s0xdafef5ce85d2b43:0x7623f4f8a4842638!8m2!3d31.6269462!4d-7.9886778!16s%2Fg%2F11rcn6rt1f?entry=ttu&g_ep=EgoyMDI1MDEyOS4xIKXMDSoASAFQAw%3D%3D
+INFO 2025-03-16 01:26:33,614 tasks 11660 17160 Reading queries from content
+INFO 2025-03-16 01:26:33,614 tasks 11660 17160 Processing URL: https://www.google.com/maps/place/%D9%85%D8%B3%D8%AC%D8%AF+%D8%A7%D9%84%D9%85%D8%AF%D9%8A%D9%86%D8%A9%E2%80%AD/@31.6271462,-7.989471,19z/data=!4m14!1m7!3m6!1s0xdafef71363c0db5:0x54d5d713ae47ccdc!2sSabich+Marrakech+Medina!8m2!3d31.6316231!4d-7.9906648!16s%2Fg%2F11k9nz8gv9!3m5!1s0xdafef5ce85d2b43:0x7623f4f8a4842638!8m2!3d31.6269462!4d-7.9886778!16s%2Fg%2F11rcn6rt1f?entry=ttu&g_ep=EgoyMDI1MDEyOS4xIKXMDSoASAFQAw%3D%3D
+INFO 2025-03-16 01:26:33,930 tasks 11660 17160 Successfully read 1 queries
+INFO 2025-03-16 01:26:33,930 tasks 11660 17160 Extracted 1 queries from description URLs
+INFO 2025-03-16 01:26:33,942 tasks 11660 17160 Searching for exact place with params: {'api_key': '8497ce60ccb34a61b7bb371343928ddf60dfa38ce0133f9810e06c7cf9f74cd8', 'engine': 'google_maps', 'type': 'place', 'google_domain': 'google.com', 'data': '!4m5!3m4!1s0xdafef71363c0db5:0x54d5d713ae47ccdc!8m2!3d31.6316231!4d-7.9906648', 'hl': 'en', 'no_cache': 'true'}
+INFO 2025-03-16 01:26:34,702 tasks 11660 17160 Total results processed across all queries: 0
+INFO 2025-03-16 01:26:34,702 tasks 11660 17160 Sites Gathering task 11 completed successfully
+INFO 2025-03-16 01:26:34,705 views 11660 17160 Sites Gathering task 11 created and queued, project ID: 95ad7b40-6963-4f0e-9c95-ec2050ce985c
+INFO 2025-03-16 01:28:20,846 views 30604 41448 Saving preferences for user EdisonValdez
+INFO 2025-03-16 01:28:20,846 views 30604 41448 Country: Bangladesh - BD
+INFO 2025-03-16 01:28:20,847 views 30604 41448 Destination: Budapest, Bangladesh
+INFO 2025-03-16 01:28:20,847 views 30604 41448 Level: Automotive Services
+INFO 2025-03-16 01:28:20,848 views 30604 41448 Main Category: Mobile Mechanics
+INFO 2025-03-16 01:28:20,848 views 30604 41448 Subcategory: Diagnostic Services
+INFO 2025-03-16 01:28:20,849 views 30604 41448 Image Count: 6
+INFO 2025-03-16 01:28:20,860 tasks 30604 41448 Starting Sites Gathering task 12
+INFO 2025-03-16 01:28:20,867 tasks 30604 41448 Using image count: 6
+INFO 2025-03-16 01:28:20,867 tasks 30604 41448 Processing description content: https://www.google.com/maps/place/Zunzum+Gastrobar/@38.7118139,-9.1269042,17z/data=!3m1!4b1!4m6!3m5!1s0xd1935c45a8c3665:0x127dda29759eb7c3!8m2!3d38.7118097!4d-9.1243293!16s%2Fg%2F11jrpss65s?entry=ttu&g_ep=EgoyMDI1MDIxNy4wIKXMDSoASAFQAw%3D%3D
+INFO 2025-03-16 01:28:20,868 tasks 30604 41448 Reading queries from content
+INFO 2025-03-16 01:28:20,868 tasks 30604 41448 Processing URL: https://www.google.com/maps/place/Zunzum+Gastrobar/@38.7118139,-9.1269042,17z/data=!3m1!4b1!4m6!3m5!1s0xd1935c45a8c3665:0x127dda29759eb7c3!8m2!3d38.7118097!4d-9.1243293!16s%2Fg%2F11jrpss65s?entry=ttu&g_ep=EgoyMDI1MDIxNy4wIKXMDSoASAFQAw%3D%3D
+INFO 2025-03-16 01:28:20,870 tasks 30604 41448 Extracted query data: {'query': 'Zunzum Gastrobar', 'data_id': '0xd1935c45a8c3665:0x127dda29759eb7c3', 'll': '38.7118097,-9.1243293', 'original_url': 'https://www.google.com/maps/place/Zunzum+Gastrobar/@38.7118139,-9.1269042,17z/data=!3m1!4b1!4m6!3m5!1s0xd1935c45a8c3665:0x127dda29759eb7c3!8m2!3d38.7118097!4d-9.1243293!16s%2Fg%2F11jrpss65s?entry=ttu&g_ep=EgoyMDI1MDIxNy4wIKXMDSoASAFQAw%3D%3D'}
+INFO 2025-03-16 01:28:20,870 tasks 30604 41448 Successfully read 1 queries
+INFO 2025-03-16 01:28:20,871 tasks 30604 41448 Extracted 1 queries from description URLs
+INFO 2025-03-16 01:28:20,871 tasks 30604 41448 Processing query 1/1: Zunzum Gastrobar (Page 1)
+INFO 2025-03-16 01:28:20,871 tasks 30604 41448 Searching for exact place with params: {'api_key': '8497ce60ccb34a61b7bb371343928ddf60dfa38ce0133f9810e06c7cf9f74cd8', 'engine': 'google_maps', 'type': 'place', 'google_domain': 'google.com', 'data': '!4m5!3m4!1s0xd1935c45a8c3665:0x127dda29759eb7c3!8m2!3d38.7118097!4d-9.1243293', 'hl': 'en', 'no_cache': 'true'}
+ERROR 2025-03-16 01:28:21,406 tasks 30604 41448 API error or no results for query 'Zunzum Gastrobar': Your account has run out of searches.
+INFO 2025-03-16 01:28:21,517 tasks 30604 41448 Finished processing query: Zunzum Gastrobar
+INFO 2025-03-16 01:28:21,518 tasks 30604 41448 Total results processed across all queries: 0
+INFO 2025-03-16 01:28:21,518 tasks 30604 41448 Sites Gathering task 12 completed successfully
+INFO 2025-03-16 01:28:21,521 views 30604 41448 Sites Gathering task 12 created and queued, project ID: 3d073c14-a6a3-4b10-9350-d4aa41868b17
+INFO 2025-03-16 01:31:16,229 views 30604 41448 Saving preferences for user EdisonValdez
+INFO 2025-03-16 01:31:16,230 views 30604 41448 Country: Bangladesh - BD
+INFO 2025-03-16 01:31:16,231 views 30604 41448 Destination: Budapest, Bangladesh
+INFO 2025-03-16 01:31:16,231 views 30604 41448 Level: Automotive Services
+INFO 2025-03-16 01:31:16,231 views 30604 41448 Main Category: Mobile Mechanics
+INFO 2025-03-16 01:31:16,232 views 30604 41448 Subcategory: Diagnostic Services
+INFO 2025-03-16 01:31:16,232 views 30604 41448 Image Count: 6
+INFO 2025-03-16 01:31:16,234 tasks 30604 41448 Starting Sites Gathering task 13
+INFO 2025-03-16 01:31:16,240 tasks 30604 41448 Using image count: 6
+INFO 2025-03-16 01:31:16,240 tasks 30604 41448 Processing description content: https://www.google.com/maps/place/Berlin+Wall+Memorial/data=!4m7!3m6!1s0x47a851f217b14267:0xea53fe8afbc1b1ac!8m2!3d52.5350521!4d13.3901898!16s%2Fm%2F0kbh59w!19sChIJZ0KxF_JRqEcRrLHB-4r-U-o?authuser=0&hl=es&rclk=1
+INFO 2025-03-16 01:31:16,241 tasks 30604 41448 Reading queries from content
+INFO 2025-03-16 01:31:16,241 tasks 30604 41448 Processing URL: https://www.google.com/maps/place/Berlin+Wall+Memorial/data=!4m7!3m6!1s0x47a851f217b14267:0xea53fe8afbc1b1ac!8m2!3d52.5350521!4d13.3901898!16s%2Fm%2F0kbh59w!19sChIJZ0KxF_JRqEcRrLHB-4r-U-o?authuser=0&hl=es&rclk=1
+INFO 2025-03-16 01:31:16,242 tasks 30604 41448 Extracted query data: {'query': 'Berlin Wall Memorial', 'data_id': '0x47a851f217b14267:0xea53fe8afbc1b1ac', 'll': '52.5350521,13.3901898', 'original_url': 'https://www.google.com/maps/place/Berlin+Wall+Memorial/data=!4m7!3m6!1s0x47a851f217b14267:0xea53fe8afbc1b1ac!8m2!3d52.5350521!4d13.3901898!16s%2Fm%2F0kbh59w!19sChIJZ0KxF_JRqEcRrLHB-4r-U-o?authuser=0&hl=es&rclk=1'}
+INFO 2025-03-16 01:31:16,249 tasks 30604 41448 Successfully read 1 queries
+INFO 2025-03-16 01:31:16,250 tasks 30604 41448 Extracted 1 queries from description URLs
+INFO 2025-03-16 01:31:16,250 tasks 30604 41448 Processing query 1/1: Berlin Wall Memorial (Page 1)
+INFO 2025-03-16 01:31:16,251 tasks 30604 41448 Searching for exact place with params: {'api_key': '8497ce60ccb34a61b7bb371343928ddf60dfa38ce0133f9810e06c7cf9f74cd8', 'engine': 'google_maps', 'type': 'place', 'google_domain': 'google.com', 'data': '!4m5!3m4!1s0x47a851f217b14267:0xea53fe8afbc1b1ac!8m2!3d52.5350521!4d13.3901898', 'hl': 'en', 'no_cache': 'true'}
+ERROR 2025-03-16 01:31:16,791 tasks 30604 41448 API error or no results for query 'Berlin Wall Memorial': Your account has run out of searches.
+INFO 2025-03-16 01:31:16,791 tasks 30604 41448 Finished processing query: Berlin Wall Memorial
+INFO 2025-03-16 01:31:16,792 tasks 30604 41448 Total results processed across all queries: 0
+INFO 2025-03-16 01:31:16,792 tasks 30604 41448 Sites Gathering task 13 completed successfully
+INFO 2025-03-16 01:31:16,795 views 30604 41448 Sites Gathering task 13 created and queued, project ID: b51f4920-229b-4a15-a2af-8594cfc68a8e

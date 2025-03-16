@@ -54,6 +54,7 @@ from geopy.geocoders import Nominatim
 from geopy.exc import GeocoderTimedOut, GeocoderServiceError
 import openai
 import pycountry
+ 
 from doctran import Doctran
 from asgiref.sync import sync_to_async
 import re
@@ -70,7 +71,6 @@ from requests.exceptions import RequestException
 from django.utils.text import slugify
 from .utils import process_scraped_types
 import csv
-import pandas as pd
 from django.contrib import messages
 logger = logging.getLogger(__name__)
 User = get_user_model()
@@ -437,7 +437,6 @@ def extract_query_from_url(url):
 
 @shared_task(bind=True)
 def process_scraping_task(self, task_id, form_data=None):
-
     try:
         logger.info(f"Starting Sites Gathering task {task_id}")
         task = ScrapingTask.objects.get(id=task_id)
@@ -565,7 +564,7 @@ def process_scraping_task(self, task_id, form_data=None):
         logger.error(f"Error in Sites Gathering task {task_id}: {str(e)}", exc_info=True)
         task.status = 'FAILED'
         task.save()
- 
+
 def update_image_url(business, local_path, new_path):
     try:
         images = Image.objects.filter(business=business, local_path=local_path)
