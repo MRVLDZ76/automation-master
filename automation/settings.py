@@ -316,23 +316,4 @@ LS_BACKEND_SETTINGS = {
  
 OAUTH_CLIENT_ID = os.environ.get('OAUTH_CLIENT_ID')
 OAUTH_CLIENT_SECRET = os.environ.get('OAUTH_CLIENT_SECRET')
- 
-
-# Celery Configuration
-CELERY_BROKER_URL = os.getenv('REDIS_URL', 'redis://localhost:6379/0')
-CELERY_RESULT_BACKEND = os.getenv('REDIS_URL', 'redis://localhost:6379/0')
-CELERY_ACCEPT_CONTENT = ['json']
-CELERY_TASK_SERIALIZER = 'json'
-CELERY_RESULT_SERIALIZER = 'json'
-CELERY_TIMEZONE = 'UTC'
-
-# Task-specific settings
-CELERY_TASK_ROUTES = {
-    'automation.tasks.process_scraping_task': {'queue': 'scraping'},
-    #'automation.tasks.bulk_business_translation': {'queue': 'translation'},
-    #'automation.tasks.download_images': {'queue': 'images'},
-}
-
-# Task time limits
-CELERY_TASK_TIME_LIMIT = 1800  # 30 minutes
-CELERY_TASK_SOFT_TIME_LIMIT = 1500  # 25 minutes
+  
