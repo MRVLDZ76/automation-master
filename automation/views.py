@@ -268,7 +268,7 @@ class UploadFileView(View):
                     user_pref.last_level = form.cleaned_data.get('level')
                     user_pref.last_main_category = form.cleaned_data.get('main_category')
                     user_pref.last_subcategory = form.cleaned_data.get('subcategory')
-                    user_pref.last_image_count = form.cleaned_data.get('image_count', 6)
+                    user_pref.last_image_count = form.cleaned_data.get('image_count', 3)
 
                     # Debug logging
                     logger.info(f"Saving preferences for user {request.user.username}")
@@ -2670,50 +2670,281 @@ class BusinessDescriptionGenerator:
 
     def generate_description(self, business):
         """
-        Generate a description based on business attributes
+        Generate a dynamic description with extensive templating and value propositions
         """
         try:
-            # Basic validation
             if not business.title:
                 raise ValueError("Business title is required")
 
-            # Template for description generation
             parts = []
-            
-            # Add welcome and location
-            parts.append(f"Welcome to {business.title}")
+            business_types = business.types.split(',') if business.types else []
+            business_types = [t.strip() for t in business_types if t.strip()]
+
+            # Expanded introduction templates
+            intro_templates = {
+                'general': [
+                    f"Welcome to {business.title}",
+                    f"Discover {business.title}",
+                    f"Experience excellence at {business.title}",
+                    f"Meet {business.title}",
+                    f"Introducing {business.title}"
+                ],
+                'typed': [
+                    f"As a distinguished {0}",
+                    f"Being a recognized leader in {0}",
+                    f"{business.title} stands as a respected {0}",
+                    f"Renowned as a premium {0}",
+                    f"Setting industry standards as a {0}",
+                    f"Pioneering excellence as a {0}",
+                    f"With years of expertise as a {0}",
+                    f"Recognized for excellence as a {0}",
+                    f"Breaking new ground as an innovative {0}",
+                    f"Leading the way as a premier {0}"
+                ]
+            }
+
+            # Location templates
+            location_templates = [
+                f"serving clients in {business.city}, {business.country}",
+                f"based in the heart of {business.city}, {business.country}",
+                f"proudly operating in {business.city}, {business.country}",
+                f"bringing excellence to {business.city}, {business.country}",
+                f"establishing our presence in {business.city}, {business.country}",
+                f"with a prime location in {business.city}, {business.country}",
+                f"strategically located in {business.city}, {business.country}",
+                f"making our mark in {business.city}, {business.country}",
+                f"contributing to the community of {business.city}, {business.country}",
+                f"serving the vibrant market of {business.city}, {business.country}"
+            ]
+
+            # Define value propositions based on business level IDs
+            value_props = {
+                1: [  # Automotive Services
+                    "specializing in comprehensive automotive care and maintenance",
+                    "delivering expert vehicle services with state-of-the-art diagnostics",
+                    "providing reliable automotive solutions with certified technicians",
+                    "offering professional auto repair and maintenance services",
+                    "ensuring your vehicle's optimal performance and safety",
+                    "combining technical expertise with exceptional customer service in automotive care"
+                ],
+                
+                2: [  # Business Support
+                    "empowering businesses with comprehensive support solutions",
+                    "streamlining operations with professional business services",
+                    "providing strategic support to enhance business efficiency",
+                    "delivering customized business solutions for sustainable growth",
+                    "offering expert consultation and support for business success",
+                    "helping businesses thrive with professional support services"
+                ],
+                
+                3: [  # Construction & Remodeling
+                    "transforming spaces with expert construction and remodeling services",
+                    "bringing construction projects to life with precision and quality",
+                    "delivering excellence in construction and renovation solutions",
+                    "creating lasting value through quality construction services",
+                    "combining craftsmanship with innovative construction solutions",
+                    "building dreams into reality with professional expertise"
+                ],
+                
+                4: [  # Design & Creative
+                    "bringing creative visions to life with innovative design solutions",
+                    "crafting unique designs that capture your brand essence",
+                    "delivering creative excellence with a strategic approach",
+                    "transforming ideas into compelling visual experiences",
+                    "creating impactful designs that drive engagement",
+                    "offering creative solutions that make you stand out"
+                ],
+                
+                5: [  # Educational Services
+                    "fostering learning excellence with personalized educational programs",
+                    "providing quality education solutions for lifelong learning",
+                    "empowering growth through innovative educational services",
+                    "delivering comprehensive learning solutions for all ages",
+                    "creating engaging educational experiences that inspire",
+                    "supporting educational achievement with expert guidance"
+                ],
+                
+                6: [  # Events & Entertainment
+                    "creating memorable events with professional planning and execution",
+                    "delivering exceptional entertainment experiences",
+                    "transforming occasions into unforgettable celebrations",
+                    "offering comprehensive event management solutions",
+                    "bringing creativity and expertise to every event",
+                    "making special moments extraordinary"
+                ],
+                
+                7: [  # Home Services
+                    "providing professional solutions for all your home needs",
+                    "delivering quality home services with attention to detail",
+                    "ensuring your home maintenance and improvement needs are met",
+                    "offering comprehensive home care solutions",
+                    "maintaining and enhancing your living space",
+                    "bringing expertise to every aspect of home service"
+                ],
+                
+                8: [  # Moving & Storage
+                    "ensuring safe and efficient moving and storage solutions",
+                    "providing reliable relocation services with care",
+                    "offering secure storage and professional moving expertise",
+                    "delivering peace of mind with comprehensive moving services",
+                    "making your transition smooth and stress-free",
+                    "protecting your belongings with professional care"
+                ],
+                
+                9: [  # Outdoor & Landscaping
+                    "transforming outdoor spaces with expert landscaping services",
+                    "creating beautiful and sustainable landscape designs",
+                    "maintaining and enhancing your outdoor environment",
+                    "delivering professional outdoor solutions year-round",
+                    "bringing nature and design together beautifully",
+                    "offering comprehensive landscape management services"
+                ],
+                
+                10: [  # Personal Services
+                    "providing personalized services tailored to your needs",
+                    "delivering professional care with a personal touch",
+                    "offering customized solutions for individual requirements",
+                    "ensuring satisfaction with dedicated personal service",
+                    "bringing expertise to personal care and assistance",
+                    "creating positive experiences through professional service"
+                ],
+                
+                11: [  # Pet Services
+                    "providing loving care for your furry family members",
+                    "offering professional pet services with genuine compassion",
+                    "ensuring your pets receive the best possible care",
+                    "delivering expert pet care services with dedication",
+                    "treating every pet with professional attention and love",
+                    "creating happy, healthy experiences for pets"
+                ],
+                
+                12: [  # Professional Services
+                    "delivering expert solutions with professional excellence",
+                    "providing comprehensive professional expertise",
+                    "offering specialized services with proven results",
+                    "ensuring success through professional guidance",
+                    "bringing industry expertise to every project",
+                    "maintaining high standards in professional service delivery"
+                ],
+                
+                13: [  # Home Services & Repairs
+                    "solving home repair needs with professional expertise",
+                    "providing reliable home maintenance and repair solutions",
+                    "offering comprehensive home repair services",
+                    "ensuring quality repairs for your home",
+                    "delivering professional fixes for home issues",
+                    "maintaining your home's integrity with expert repairs"
+                ],
+                
+                14: [  # Security & Safety
+                    "protecting what matters most with professional security solutions",
+                    "ensuring peace of mind through comprehensive safety services",
+                    "delivering reliable security measures and monitoring",
+                    "providing advanced security solutions for your protection",
+                    "safeguarding your interests with expert security services",
+                    "offering state-of-the-art security and safety solutions"
+                ],
+                
+                15: [  # Wedding Services
+                    "making wedding dreams come true with professional planning",
+                    "creating unforgettable wedding experiences",
+                    "delivering exceptional wedding services with attention to detail",
+                    "ensuring your special day is perfectly executed",
+                    "bringing wedding visions to life with expertise",
+                    "offering comprehensive wedding planning solutions"
+                ],
+                
+                16: [  # Wellness & Health
+                    "promoting wellness through professional health services",
+                    "providing comprehensive health and wellness solutions",
+                    "supporting your journey to optimal health",
+                    "delivering expert guidance for wellness goals",
+                    "ensuring your well-being with professional care",
+                    "offering holistic approaches to health and wellness"
+                ],
+                
+                'default': [  # Fallback options for undefined categories
+                    "delivering professional excellence in all our services",
+                    "providing quality solutions with customer satisfaction in mind",
+                    "offering expert services tailored to your needs",
+                    "ensuring exceptional results through professional expertise",
+                    "maintaining high standards in service delivery",
+                    "bringing dedication and expertise to every project",
+                    "committed to excellence in everything we do",
+                    "providing reliable solutions with professional care"
+                ]
+            }
+ 
+
+            # Contact information templates
+            contact_templates = [
+                f"Connect with us at {business.phone}",
+                f"Reach our team at {business.phone}",
+                f"Get in touch at {business.phone}",
+                f"Contact our experts at {business.phone}",
+                f"Available for inquiries at {business.phone}",
+                f"Let's discuss your needs at {business.phone}"
+            ]
+
+            # Website call-to-action templates
+            website_templates = [
+                f"Explore our complete offerings at {business.website}",
+                f"Visit {business.website} to learn more about our expertise",
+                f"Discover our full range of solutions at {business.website}",
+                f"Find out more about our services at {business.website}",
+                f"See how we can help you at {business.website}",
+                f"Learn about our success stories at {business.website}",
+                f"Browse our portfolio at {business.website}",
+                f"Get detailed information at {business.website}"
+            ]
+
+            # Generate description using templates
+            if business_types:
+                primary_type = business_types[0].lower()
+                parts.append(random.choice(intro_templates['typed']).format(primary_type))
+            else:
+                parts.append(random.choice(intro_templates['general']))
+
             if business.city and business.country:
-                parts.append(f"located in {business.city}, {business.country}")
-            
-            # Add category information if available
-            if business.main_category:
-                parts.append(f"We specialize in {business.main_category}")
-            
-            # Add location context
-            if business.address:
-                parts.append(f"You can find us at {business.address}")
-            
+                parts.append(random.choice(location_templates))
+
+            # Add value propositions based on business types
+            added_props = set()
+            for business_type in business_types:
+                for key, props in value_props.items():
+                    if key in business_type.lower() and key not in added_props:
+                        parts.append(random.choice(props))
+                        added_props.add(key)
+                        break
+
             # Add contact information
             if business.phone:
-                parts.append(f"Contact us at {business.phone}")
-            
-            # Add website information
+                parts.append(random.choice(contact_templates))
+
             if business.website:
-                parts.append(f"Visit our website at {business.website} for more information")
-            
-            # Join all parts with proper punctuation
-            description = '. '.join(parts) + '.'
-            
-            # Validate final description
-            if len(description.strip()) < 10:  # Minimum length check
+                parts.append(random.choice(website_templates))
+
+            # Add value proposition based on business level ID
+            level_id = int(business.level) if business.level else None
+            if level_id and level_id in value_props:
+                parts.append(random.choice(value_props[level_id]))
+            else:
+                parts.append(random.choice(value_props['default']))
+
+            # Join all parts with proper punctuation and flow
+            description = '. '.join(part.strip() for part in parts if part.strip())
+            description = description.replace('..', '.') + '.'
+
+            if len(description.strip()) < 20:
                 raise ValueError("Generated description is too short")
-                
+
             return description.strip()
-            
+
         except Exception as e:
             logger.error(f"Error generating description for business {business.id}: {e}")
             self.errors.append(f"Business {business.id}: {str(e)}")
             return None
+
 
     def process_businesses(self):
         """

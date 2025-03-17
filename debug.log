@@ -267,3 +267,874 @@ INFO 2025-03-16 01:31:16,791 tasks 30604 41448 Finished processing query: Berlin
 INFO 2025-03-16 01:31:16,792 tasks 30604 41448 Total results processed across all queries: 0
 INFO 2025-03-16 01:31:16,792 tasks 30604 41448 Sites Gathering task 13 completed successfully
 INFO 2025-03-16 01:31:16,795 views 30604 41448 Sites Gathering task 13 created and queued, project ID: b51f4920-229b-4a15-a2af-8594cfc68a8e
+ERROR 2025-03-16 10:22:55,691 views 13368 30824 Error in RecentTasksView: 'NoneType' object has no attribute 'strftime'
+Traceback (most recent call last):
+  File "D:\proyectos\automation-master\automation\api\views.py", line 677, in get
+    'completed_at': task.completed_at.strftime('%Y-%m-%d %H:%M'),
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'NoneType' object has no attribute 'strftime'
+ERROR 2025-03-16 10:23:26,032 views 13368 30824 Error in RecentTasksView: 'NoneType' object has no attribute 'strftime'
+Traceback (most recent call last):
+  File "D:\proyectos\automation-master\automation\api\views.py", line 677, in get
+    'completed_at': task.completed_at.strftime('%Y-%m-%d %H:%M'),
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'NoneType' object has no attribute 'strftime'
+ERROR 2025-03-16 10:23:56,022 views 13368 18728 Error in RecentTasksView: 'NoneType' object has no attribute 'strftime'
+Traceback (most recent call last):
+  File "D:\proyectos\automation-master\automation\api\views.py", line 677, in get
+    'completed_at': task.completed_at.strftime('%Y-%m-%d %H:%M'),
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'NoneType' object has no attribute 'strftime'
+ERROR 2025-03-17 09:38:06,712 views 35436 4684 Error in RecentTasksView: 'NoneType' object has no attribute 'strftime'
+Traceback (most recent call last):
+  File "D:\proyectos\automation-master\automation\api\views.py", line 677, in get
+    'completed_at': task.completed_at.strftime('%Y-%m-%d %H:%M'),
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'NoneType' object has no attribute 'strftime'
+ERROR 2025-03-17 09:38:37,071 views 35436 4684 Error in RecentTasksView: 'NoneType' object has no attribute 'strftime'
+Traceback (most recent call last):
+  File "D:\proyectos\automation-master\automation\api\views.py", line 677, in get
+    'completed_at': task.completed_at.strftime('%Y-%m-%d %H:%M'),
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'NoneType' object has no attribute 'strftime'
+ERROR 2025-03-17 09:39:07,621 views 35436 4684 Error in RecentTasksView: 'NoneType' object has no attribute 'strftime'
+Traceback (most recent call last):
+  File "D:\proyectos\automation-master\automation\api\views.py", line 677, in get
+    'completed_at': task.completed_at.strftime('%Y-%m-%d %H:%M'),
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'NoneType' object has no attribute 'strftime'
+ERROR 2025-03-17 09:39:37,623 views 35436 4684 Error in RecentTasksView: 'NoneType' object has no attribute 'strftime'
+Traceback (most recent call last):
+  File "D:\proyectos\automation-master\automation\api\views.py", line 677, in get
+    'completed_at': task.completed_at.strftime('%Y-%m-%d %H:%M'),
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'NoneType' object has no attribute 'strftime'
+ERROR 2025-03-17 09:40:07,060 views 35436 4684 Error in RecentTasksView: 'NoneType' object has no attribute 'strftime'
+Traceback (most recent call last):
+  File "D:\proyectos\automation-master\automation\api\views.py", line 677, in get
+    'completed_at': task.completed_at.strftime('%Y-%m-%d %H:%M'),
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'NoneType' object has no attribute 'strftime'
+ERROR 2025-03-17 09:40:37,066 views 35436 4684 Error in RecentTasksView: 'NoneType' object has no attribute 'strftime'
+Traceback (most recent call last):
+  File "D:\proyectos\automation-master\automation\api\views.py", line 677, in get
+    'completed_at': task.completed_at.strftime('%Y-%m-%d %H:%M'),
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'NoneType' object has no attribute 'strftime'
+ERROR 2025-03-17 09:41:07,607 views 35436 4684 Error in RecentTasksView: 'NoneType' object has no attribute 'strftime'
+Traceback (most recent call last):
+  File "D:\proyectos\automation-master\automation\api\views.py", line 677, in get
+    'completed_at': task.completed_at.strftime('%Y-%m-%d %H:%M'),
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'NoneType' object has no attribute 'strftime'
+ERROR 2025-03-17 09:42:35,625 views 35436 4684 Error in RecentTasksView: 'NoneType' object has no attribute 'strftime'
+Traceback (most recent call last):
+  File "D:\proyectos\automation-master\automation\api\views.py", line 677, in get
+    'completed_at': task.completed_at.strftime('%Y-%m-%d %H:%M'),
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'NoneType' object has no attribute 'strftime'
+ERROR 2025-03-17 09:43:35,630 views 35436 4684 Error in RecentTasksView: 'NoneType' object has no attribute 'strftime'
+Traceback (most recent call last):
+  File "D:\proyectos\automation-master\automation\api\views.py", line 677, in get
+    'completed_at': task.completed_at.strftime('%Y-%m-%d %H:%M'),
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'NoneType' object has no attribute 'strftime'
+ERROR 2025-03-17 09:44:35,627 views 35436 4684 Error in RecentTasksView: 'NoneType' object has no attribute 'strftime'
+Traceback (most recent call last):
+  File "D:\proyectos\automation-master\automation\api\views.py", line 677, in get
+    'completed_at': task.completed_at.strftime('%Y-%m-%d %H:%M'),
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'NoneType' object has no attribute 'strftime'
+ERROR 2025-03-17 09:45:35,635 views 35436 4684 Error in RecentTasksView: 'NoneType' object has no attribute 'strftime'
+Traceback (most recent call last):
+  File "D:\proyectos\automation-master\automation\api\views.py", line 677, in get
+    'completed_at': task.completed_at.strftime('%Y-%m-%d %H:%M'),
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'NoneType' object has no attribute 'strftime'
+ERROR 2025-03-17 09:46:18,118 views 35436 4684 Error in RecentTasksView: 'NoneType' object has no attribute 'strftime'
+Traceback (most recent call last):
+  File "D:\proyectos\automation-master\automation\api\views.py", line 677, in get
+    'completed_at': task.completed_at.strftime('%Y-%m-%d %H:%M'),
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'NoneType' object has no attribute 'strftime'
+ERROR 2025-03-17 09:46:20,475 views 35436 10872 Error in RecentTasksView: 'NoneType' object has no attribute 'strftime'
+Traceback (most recent call last):
+  File "D:\proyectos\automation-master\automation\api\views.py", line 677, in get
+    'completed_at': task.completed_at.strftime('%Y-%m-%d %H:%M'),
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'NoneType' object has no attribute 'strftime'
+INFO 2025-03-17 09:48:44,845 views 35436 10872 Saving preferences for user EdisonValdez
+INFO 2025-03-17 09:48:44,846 views 35436 10872 Country: Bangladesh - BD
+INFO 2025-03-17 09:48:44,846 views 35436 10872 Destination: Budapest, Bangladesh
+INFO 2025-03-17 09:48:44,847 views 35436 10872 Level: Automotive Services
+INFO 2025-03-17 09:48:44,847 views 35436 10872 Main Category: Mobile Mechanics
+INFO 2025-03-17 09:48:44,847 views 35436 10872 Subcategory: Diagnostic Services
+INFO 2025-03-17 09:48:44,848 views 35436 10872 Image Count: 6
+INFO 2025-03-17 09:48:45,167 tasks 35436 10872 Starting Sites Gathering task 14
+INFO 2025-03-17 09:48:45,173 tasks 35436 10872 Using image count: 6
+INFO 2025-03-17 09:48:45,173 tasks 35436 10872 Using uploaded file for queries.
+INFO 2025-03-17 09:48:45,175 tasks 35436 10872 Reading queries from content
+INFO 2025-03-17 09:48:45,176 tasks 35436 10872 Processing URL: https://www.google.com/maps/place/24+Hr+Advance+Mobile+Repairs/data=!4m7!3m6!1s0x2175123c707b80b5:0x47f3db545d62ef26!8m2!3d29.8322945!4d-82.3797429!16s%2Fg%2F11l6dvqm9r!19sChIJtYB7cDwSdSERJu9iXVTb80c?authuser=0&hl=es&rclk=1
+INFO 2025-03-17 09:48:45,177 tasks 35436 10872 Extracted query data: {'query': '24 Hr Advance Mobile Repairs', 'data_id': '0x2175123c707b80b5:0x47f3db545d62ef26', 'll': '29.8322945,-82.3797429', 'original_url': 'https://www.google.com/maps/place/24+Hr+Advance+Mobile+Repairs/data=!4m7!3m6!1s0x2175123c707b80b5:0x47f3db545d62ef26!8m2!3d29.8322945!4d-82.3797429!16s%2Fg%2F11l6dvqm9r!19sChIJtYB7cDwSdSERJu9iXVTb80c?authuser=0&hl=es&rclk=1'}
+INFO 2025-03-17 09:48:45,177 tasks 35436 10872 Processing URL: https://www.google.com/maps/place/Mechanic+Dad+LLC/data=!4m7!3m6!1s0x497a8cf85b14e81d:0x486b44d3eb30f30d!8m2!3d29.6327057!4d-82.3735993!16s%2Fg%2F11s_7qjlfr!19sChIJHegUW_iMekkRDfMw69NEa0g?authuser=0&hl=es&rclk=1
+INFO 2025-03-17 09:48:45,178 tasks 35436 10872 Extracted query data: {'query': 'Mechanic Dad LLC', 'data_id': '0x497a8cf85b14e81d:0x486b44d3eb30f30d', 'll': '29.6327057,-82.3735993', 'original_url': 'https://www.google.com/maps/place/Mechanic+Dad+LLC/data=!4m7!3m6!1s0x497a8cf85b14e81d:0x486b44d3eb30f30d!8m2!3d29.6327057!4d-82.3735993!16s%2Fg%2F11s_7qjlfr!19sChIJHegUW_iMekkRDfMw69NEa0g?authuser=0&hl=es&rclk=1'}
+INFO 2025-03-17 09:48:45,178 tasks 35436 10872 Processing URL: https://www.google.com/maps/place/A+Tech+24HR+Mobile+Mechanic/data=!4m7!3m6!1s0x88e8d39d0864d745:0x6dd0df4ecb51ec21!8m2!3d29.905793!4d-82.741521!16s%2Fg%2F11j2ymmbmn!19sChIJRddkCJ3T6IgRIexRy07f0G0?authuser=0&hl=es&rclk=1
+INFO 2025-03-17 09:48:45,179 tasks 35436 10872 Extracted query data: {'query': 'A Tech 24HR Mobile Mechanic', 'data_id': '0x88e8d39d0864d745:0x6dd0df4ecb51ec21', 'll': '29.905793,-82.741521', 'original_url': 'https://www.google.com/maps/place/A+Tech+24HR+Mobile+Mechanic/data=!4m7!3m6!1s0x88e8d39d0864d745:0x6dd0df4ecb51ec21!8m2!3d29.905793!4d-82.741521!16s%2Fg%2F11j2ymmbmn!19sChIJRddkCJ3T6IgRIexRy07f0G0?authuser=0&hl=es&rclk=1'}
+INFO 2025-03-17 09:48:45,179 tasks 35436 10872 Processing URL: https://www.google.com/maps/place/Mobile+Automotive+Service+LLC/data=!4m7!3m6!1s0x88e8d9b554241d59:0xfe9b9ca041afe4e9!8m2!3d29.7712343!4d-82.8639722!16s%2Fg%2F11sw6p2fhh!19sChIJWR0kVLXZ6IgR6eSvQaCcm_4?authuser=0&hl=es&rclk=1
+INFO 2025-03-17 09:48:45,180 tasks 35436 10872 Extracted query data: {'query': 'Mobile Automotive Service LLC', 'data_id': '0x88e8d9b554241d59:0xfe9b9ca041afe4e9', 'll': '29.7712343,-82.8639722', 'original_url': 'https://www.google.com/maps/place/Mobile+Automotive+Service+LLC/data=!4m7!3m6!1s0x88e8d9b554241d59:0xfe9b9ca041afe4e9!8m2!3d29.7712343!4d-82.8639722!16s%2Fg%2F11sw6p2fhh!19sChIJWR0kVLXZ6IgR6eSvQaCcm_4?authuser=0&hl=es&rclk=1'}
+INFO 2025-03-17 09:48:45,181 tasks 35436 10872 Successfully read 4 queries
+INFO 2025-03-17 09:48:45,181 tasks 35436 10872 Total queries to process from file: 4
+INFO 2025-03-17 09:48:45,181 tasks 35436 10872 Processing query 1/4: 24 Hr Advance Mobile Repairs (Page 1)
+INFO 2025-03-17 09:48:45,181 tasks 35436 10872 Searching for exact place with params: {'api_key': '2b24aae0d70038ce430be0b58b0037d73254d42cefaa7d142a358fc432b8de52', 'engine': 'google_maps', 'type': 'place', 'google_domain': 'google.com', 'data': '!4m5!3m4!1s0x2175123c707b80b5:0x47f3db545d62ef26!8m2!3d29.8322945!4d-82.3797429', 'hl': 'en', 'no_cache': 'true'}
+INFO 2025-03-17 09:48:46,186 tasks 35436 10872 Processing 1 local results for query '24 Hr Advance Mobile Repairs' (Page 1)
+INFO 2025-03-17 09:48:46,187 tasks 35436 10872 Local result data: [{'title': '24 Hr Advance Mobile Repairs', 'place_id': 'ChIJtYB7cDwSdSERJu9iXVTb80c', 'data_id': '0x2175123c707b80b5:0x47f3db545d62ef26', 'data_cid': '5184728751424073510', 'reviews_link': 'https://serpapi.com/search.json?data_id=0x2175123c707b80b5%3A0x47f3db545d62ef26&engine=google_maps_reviews&hl=en', 'photos_link': 'https://serpapi.com/search.json?data_id=0x2175123c707b80b5%3A0x47f3db545d62ef26&engine=google_maps_photos&hl=en', 'gps_coordinates': {'latitude': 29.8322945, 'longitude': -82.3797429}, 'place_id_search': 'https://serpapi.com/search.json?engine=google_maps&google_domain=google.com&hl=en&place_id=ChIJtYB7cDwSdSERJu9iXVTb80c', 'provider_id': '/g/11l6dvqm9r', 'thumbnail': 'https://lh5.googleusercontent.com/p/AF1QipNJXpR_DdBeJGAkUNcbj-bI2oLBf_AYz9a3EkC3=w114-h86-k-no', 'rating_summary': [{'stars': 1, 'amount': 1}, {'stars': 2, 'amount': 0}, {'stars': 3, 'amount': 0}, {'stars': 4, 'amount': 0}, {'stars': 5, 'amount': 23}], 'rating': 4.8, 'reviews': 24, 'type': ['Mechanic', 'Car repair and maintenance service', 'Diesel engine repair service', 'Engine rebuilding service', 'Service establishment', 'Repair service'], 'type_ids': ['mechanic', 'car_repair', 'diesel_engine_repair_service', 'engine_rebuilding_service', 'establishment_service', 'repair_service'], 'phone': '(352) 647-7814', 'open_state': 'Open 24 hours', 'hours': [{'monday': 'Open 24 hours'}, {'tuesday': 'Open 24 hours'}, {'wednesday': 'Open 24 hours'}, {'thursday': 'Open 24 hours'}, {'friday': 'Open 24 hours'}, {'saturday': 'Open 24 hours'}, {'sunday': 'Open 24 hours'}], 'images': [{'title': 'All', 'thumbnail': 'https://lh5.googleusercontent.com/p/AF1QipNJXpR_DdBeJGAkUNcbj-bI2oLBf_AYz9a3EkC3=w397-h298-k-no'}, {'title': 'Latest', 'thumbnail': 'https://lh5.googleusercontent.com/p/AF1QipO_q17Sq_GlYUMayFeTbljNugz1mg7Kep3AOThO=w224-h298-k-no'}], 'user_reviews': {'most_relevant': [{'username': 'Alyssa Walters', 'rating': 5, 'contributor_id': '116342346181357770727', 'description': 'We just moved from Maryland to Gainesville a few months again. We knew our tires needed replaced, but we’ve been limited on funds. One of our tires finally gave out and this man didn’t hesitate to help! He ended up finding and marking a hole for us since he didn’t have any spare tire plugs. We were able to make it to Sam’s club and ask for a tire plug.', 'link': 'https://www.google.com/maps/reviews/data=!4m8!14m7!1m6!2m5!1sChdDSUhNMG9nS0VJQ0FnSUR2OE95TnhBRRAB!2m1!1s0x0:0x47f3db545d62ef26!3m1!1s2@1:CIHM0ogKEICAgIDv8OyNxAE%7CCgwIrPeCuwYQqJa2lwI%7C?hl=en-US', 'images': [{'thumbnail': 'https://lh3.googleusercontent.com/geougc-cs/AIHozJLNH0dNuFY4FLkDsg3UGJjg1_ELIO1aWl1A488BitK0lHVZ7hs1p86P8ZtqjnlZHq1dJCDrI1XirKwZVuEBfxo2P5j6wm-8RDpCj2wbUY7V7GZR4dLnH8bVM0z8TsKw13pMh10B'}, {'thumbnail': 'https://lh3.googleusercontent.com/geougc-cs/AIHozJKWVWOex1Nlr-oOVa0U7lxwagmwMXwo5jaIauMx55SIja3ccZ1Drc1u0Z_6QxnqGb2D-F95utXTMq4e9h4Me8rCHgsQtnRhHlmzpwZERSJE3jDzP3qdM-f3l7qQkjjy7GoZjQzfeQ'}], 'date': '3 months ago'}, {'username': 'Jane Doe', 'rating': 5, 'contributor_id': '103724505572303205154', 'description': 'Coming from Minnesota to Florida and the wheel bearing on my dad’s truck went and we had to get off the highway because it sounded so bad! Kyle was the only person who answered our call and stopped and grabbed all the parts needed and was to us quickly! Very good service great guy!', 'link': 'https://www.google.com/maps/reviews/data=!4m8!14m7!1m6!2m5!1sChZDSUhNMG9nS0VJQ0FnTUNRcE5faUlBEAE!2m1!1s0x0:0x47f3db545d62ef26!3m1!1s2@1:CIHM0ogKEICAgMCQpN_iIA%7CCgwI3q2PvgYQwPDlsQM%7C?hl=en-US', 'date': '2 weeks ago'}, {'username': 'Steve Gillaspie', 'rating': 5, 'contributor_id': '107472870386814066647', 'description': 'After reading reviews for emergency vehicle assistance, this young man did not disappoint!  Once on site, his attention to detail was impeccable.  We highly recommend Kyle to the rescue if broken down in his area.  Thank you sir!!', 'link': 'https://www.google.com/maps/reviews/data=!4m8!14m7!1m6!2m5!1sChdDSUhNMG9nS0VJQ0FnSURfZ3RPSDZBRRAB!2m1!1s0x0:0x47f3db545d62ef26!3m1!1s2@1:CIHM0ogKEICAgID_gtOH6AE%7CCgwIzfbEvAYQqM_U2gI%7C?hl=en-US', 'images': [{'thumbnail': 'https://lh3.googleusercontent.com/geougc-cs/AIHozJJkxnOrx3ZIbbM1OpXSAEtImtSWERcInV087YSbezyL0XyiW2-z1qPkacACb4Rwxr8A7FYoRGPMlK1eRznb6zS9uejQADXgcV3EWV5hmCiY60gygOlcuJvwv3dOSpZ1_SJVJnCp'}], 'date': 'a month ago'}, {'username': 'eugene hershman', 'rating': 5, 'contributor_id': '115308984854443244455', 'description': "Apparently Kyle could not give me a call back because where he was working he had poor phone service. Finally called and said he'd be there in an hour but never showed up. Claim that his phone broke. When he get finally call in 2 days wanted to know he still wanted to come out there and we told him NO. TOO MANY EXCUSES AND NO SHOW. He shows that he's unreliable. I'm not sure if all these other reviews are honest reviews or made up by him.", 'link': 'https://www.google.com/maps/reviews/data=!4m8!14m7!1m6!2m5!1sChZDSUhNMG9nS0VJQ0FnTUNBMjR2MVJ3EAE!2m1!1s0x0:0x47f3db545d62ef26!3m1!1s2@1:CIHM0ogKEICAgMCA24v1Rw%7CCgwIvaG5vQYQoLSztwM%7C?hl=en-US', 'date': 'a month ago'}, {'username': 'Joshua Arthur', 'rating': 5, 'contributor_id': '106414370689776227536', 'description': 'Bought a car in Florida flew out to drive it home to Dallas.  Check engine light came on on the way home. This man went above and beyond to come and get me home safe. We to three different part stores to find the part then came to me in a parking lot at 9pm to get me home safely. For sure stand up man!!', 'link': 'https://www.google.com/maps/reviews/data=!4m8!14m7!1m6!2m5!1sChdDSUhNMG9nS0VJQ0FnSUMzbDdqdXFRRRAB!2m1!1s0x0:0x47f3db545d62ef26!3m1!1s2@1:CIHM0ogKEICAgIC3l7juqQE%7CCgwI-qXAuQYQwNvGlwI%7C?hl=en-US', 'date': '4 months ago'}, {'username': 'Joshua Maio', 'rating': 5, 'contributor_id': '109947180152051657631', 'description': "Kyle showed up with a single call,ran to the parts store met us in a hotel parking lot and replaced our wheel hub on our truck at 9pm on a Saturday that's what I call service with a smile after coming from minnesota and driving 28 hours he had us back on the road to Tampa in no time shout out to you kyle thank you brother for fast speedy A1 service your awesome", 'link': 'https://www.google.com/maps/reviews/data=!4m8!14m7!1m6!2m5!1sChdDSUhNMG9nS0VJQ0FnTUNRcExfVnZBRRAB!2m1!1s0x0:0x47f3db545d62ef26!3m1!1s2@1:CIHM0ogKEICAgMCQpL_VvAE%7CCgwImK6PvgYQwPOK1QE%7C?hl=en-US', 'images': [{'thumbnail': 'https://lh3.googleusercontent.com/geougc-cs/AIHozJLcYjLtfrOm4y8ioKzfXr8_YJA5CjxTThn3x6brtR0juZ2B5zvdT0XKGwtliWNQmUevKTaOe3_1psM-FUHqFmoptfi7_NkSWiUgDUlS6Em9SLmhiweMAbjQ8koVFnyrEs4mRRY'}], 'date': '2 weeks ago'}, {'username': 'Ed Cutchins', 'rating': 5, 'contributor_id': '112318531660179781274', 'description': 'What a great person to take care of your needs. He was fast, knew what to do and on time. I would recommend his services.', 'link': 'https://www.google.com/maps/reviews/data=!4m8!14m7!1m6!2m5!1sChZDSUhNMG9nS0VJQ0FnSUNYazl6VURBEAE!2m1!1s0x0:0x47f3db545d62ef26!3m1!1s2@1:CIHM0ogKEICAgICXk9zUDA%7CCgwIhp7SuAYQwLjSjAE%7C?hl=en-US', 'images': [{'thumbnail': 'https://lh3.googleusercontent.com/geougc-cs/AIHozJLiu6C9xn6wTVXxXj0kn3stdbUu38CAVYnLA5wSXZ_chSzDegu5IGOmO0KEOFATWO9b-b22pwDOOIT3CsUGCRM0erjj7rPO0l1_hTQ2Yln6rv5FmbGwzS-6qbM5JjELFXwqctSsPw'}], 'date': '4 months ago'}, {'username': 'Solomon Bennett', 'rating': 1, 'contributor_id': '101322833261946912336', 'description': 'Well I had the same problem out this Kyle guy. His service was awful and I paid him money which was 185.00 dollars. He fixed nothing and I’m trying to post pictures. He is a big liar and I will be taking him to court. He doesn’t pick up for days and then gives you several excuses about why he didn’t show. He didn’t deserve one star because he should have never made me pay up front. It was the worst experience I ever had with a business', 'link': 'https://www.google.com/maps/reviews/data=!4m8!14m7!1m6!2m5!1sChZDSUhNMG9nS0VJQ0FnTURnOHU3WlZ3EAE!2m1!1s0x0:0x47f3db545d62ef26!3m1!1s2@1:CIHM0ogKEICAgMDg8u7ZVw%7CCgwI5KDuvQYQ6I7SygM%7C?hl=en-US', 'date': '3 weeks ago'}]}, 'web_results_link': 'https://www.google.com/search?q=local+guide+program&ibp=gwp;0,26,OiIKICIcMjQgSHIgQWR2YW5jZSBNb2JpbGUgUmVwYWlycygC&pcl=lp', 'serpapi_web_results_link': 'https://serpapi.com/search.json?device=desktop&engine=google&google_domain=google.com&ibp=gwp%3B0%2C26%2COiIKICIcMjQgSHIgQWR2YW5jZSBNb2JpbGUgUmVwYWlycygC&q=local+guide+program'}]
+INFO 2025-03-17 09:48:46,361 tasks 35436 10872 Saved results for query '24 Hr Advance Mobile Repairs' to scraping_results/14/24_Hr_Advance_Mobile_Repairs.json
+INFO 2025-03-17 09:48:46,362 tasks 35436 10872 Saving business 1/1 for query '24 Hr Advance Mobile Repairs' (Page 1)
+INFO 2025-03-17 09:48:46,362 tasks 35436 10872 Saving business data for task 14
+INFO 2025-03-17 09:48:46,364 tasks 35436 10872 Local result data: {'title': '24 Hr Advance Mobile Repairs', 'place_id': 'ChIJtYB7cDwSdSERJu9iXVTb80c', 'data_id': '0x2175123c707b80b5:0x47f3db545d62ef26', 'data_cid': '5184728751424073510', 'reviews_link': 'https://serpapi.com/search.json?data_id=0x2175123c707b80b5%3A0x47f3db545d62ef26&engine=google_maps_reviews&hl=en', 'photos_link': 'https://serpapi.com/search.json?data_id=0x2175123c707b80b5%3A0x47f3db545d62ef26&engine=google_maps_photos&hl=en', 'gps_coordinates': {'latitude': 29.8322945, 'longitude': -82.3797429}, 'place_id_search': 'https://serpapi.com/search.json?engine=google_maps&google_domain=google.com&hl=en&place_id=ChIJtYB7cDwSdSERJu9iXVTb80c', 'provider_id': '/g/11l6dvqm9r', 'thumbnail': 'https://lh5.googleusercontent.com/p/AF1QipNJXpR_DdBeJGAkUNcbj-bI2oLBf_AYz9a3EkC3=w114-h86-k-no', 'rating_summary': [{'stars': 1, 'amount': 1}, {'stars': 2, 'amount': 0}, {'stars': 3, 'amount': 0}, {'stars': 4, 'amount': 0}, {'stars': 5, 'amount': 23}], 'rating': 4.8, 'reviews': 24, 'type': ['Mechanic', 'Car repair and maintenance service', 'Diesel engine repair service', 'Engine rebuilding service', 'Service establishment', 'Repair service'], 'type_ids': ['mechanic', 'car_repair', 'diesel_engine_repair_service', 'engine_rebuilding_service', 'establishment_service', 'repair_service'], 'phone': '(352) 647-7814', 'open_state': 'Open 24 hours', 'hours': [{'monday': 'Open 24 hours'}, {'tuesday': 'Open 24 hours'}, {'wednesday': 'Open 24 hours'}, {'thursday': 'Open 24 hours'}, {'friday': 'Open 24 hours'}, {'saturday': 'Open 24 hours'}, {'sunday': 'Open 24 hours'}], 'images': [{'title': 'All', 'thumbnail': 'https://lh5.googleusercontent.com/p/AF1QipNJXpR_DdBeJGAkUNcbj-bI2oLBf_AYz9a3EkC3=w397-h298-k-no'}, {'title': 'Latest', 'thumbnail': 'https://lh5.googleusercontent.com/p/AF1QipO_q17Sq_GlYUMayFeTbljNugz1mg7Kep3AOThO=w224-h298-k-no'}], 'user_reviews': {'most_relevant': [{'username': 'Alyssa Walters', 'rating': 5, 'contributor_id': '116342346181357770727', 'description': 'We just moved from Maryland to Gainesville a few months again. We knew our tires needed replaced, but we’ve been limited on funds. One of our tires finally gave out and this man didn’t hesitate to help! He ended up finding and marking a hole for us since he didn’t have any spare tire plugs. We were able to make it to Sam’s club and ask for a tire plug.', 'link': 'https://www.google.com/maps/reviews/data=!4m8!14m7!1m6!2m5!1sChdDSUhNMG9nS0VJQ0FnSUR2OE95TnhBRRAB!2m1!1s0x0:0x47f3db545d62ef26!3m1!1s2@1:CIHM0ogKEICAgIDv8OyNxAE%7CCgwIrPeCuwYQqJa2lwI%7C?hl=en-US', 'images': [{'thumbnail': 'https://lh3.googleusercontent.com/geougc-cs/AIHozJLNH0dNuFY4FLkDsg3UGJjg1_ELIO1aWl1A488BitK0lHVZ7hs1p86P8ZtqjnlZHq1dJCDrI1XirKwZVuEBfxo2P5j6wm-8RDpCj2wbUY7V7GZR4dLnH8bVM0z8TsKw13pMh10B'}, {'thumbnail': 'https://lh3.googleusercontent.com/geougc-cs/AIHozJKWVWOex1Nlr-oOVa0U7lxwagmwMXwo5jaIauMx55SIja3ccZ1Drc1u0Z_6QxnqGb2D-F95utXTMq4e9h4Me8rCHgsQtnRhHlmzpwZERSJE3jDzP3qdM-f3l7qQkjjy7GoZjQzfeQ'}], 'date': '3 months ago'}, {'username': 'Jane Doe', 'rating': 5, 'contributor_id': '103724505572303205154', 'description': 'Coming from Minnesota to Florida and the wheel bearing on my dad’s truck went and we had to get off the highway because it sounded so bad! Kyle was the only person who answered our call and stopped and grabbed all the parts needed and was to us quickly! Very good service great guy!', 'link': 'https://www.google.com/maps/reviews/data=!4m8!14m7!1m6!2m5!1sChZDSUhNMG9nS0VJQ0FnTUNRcE5faUlBEAE!2m1!1s0x0:0x47f3db545d62ef26!3m1!1s2@1:CIHM0ogKEICAgMCQpN_iIA%7CCgwI3q2PvgYQwPDlsQM%7C?hl=en-US', 'date': '2 weeks ago'}, {'username': 'Steve Gillaspie', 'rating': 5, 'contributor_id': '107472870386814066647', 'description': 'After reading reviews for emergency vehicle assistance, this young man did not disappoint!  Once on site, his attention to detail was impeccable.  We highly recommend Kyle to the rescue if broken down in his area.  Thank you sir!!', 'link': 'https://www.google.com/maps/reviews/data=!4m8!14m7!1m6!2m5!1sChdDSUhNMG9nS0VJQ0FnSURfZ3RPSDZBRRAB!2m1!1s0x0:0x47f3db545d62ef26!3m1!1s2@1:CIHM0ogKEICAgID_gtOH6AE%7CCgwIzfbEvAYQqM_U2gI%7C?hl=en-US', 'images': [{'thumbnail': 'https://lh3.googleusercontent.com/geougc-cs/AIHozJJkxnOrx3ZIbbM1OpXSAEtImtSWERcInV087YSbezyL0XyiW2-z1qPkacACb4Rwxr8A7FYoRGPMlK1eRznb6zS9uejQADXgcV3EWV5hmCiY60gygOlcuJvwv3dOSpZ1_SJVJnCp'}], 'date': 'a month ago'}, {'username': 'eugene hershman', 'rating': 5, 'contributor_id': '115308984854443244455', 'description': "Apparently Kyle could not give me a call back because where he was working he had poor phone service. Finally called and said he'd be there in an hour but never showed up. Claim that his phone broke. When he get finally call in 2 days wanted to know he still wanted to come out there and we told him NO. TOO MANY EXCUSES AND NO SHOW. He shows that he's unreliable. I'm not sure if all these other reviews are honest reviews or made up by him.", 'link': 'https://www.google.com/maps/reviews/data=!4m8!14m7!1m6!2m5!1sChZDSUhNMG9nS0VJQ0FnTUNBMjR2MVJ3EAE!2m1!1s0x0:0x47f3db545d62ef26!3m1!1s2@1:CIHM0ogKEICAgMCA24v1Rw%7CCgwIvaG5vQYQoLSztwM%7C?hl=en-US', 'date': 'a month ago'}, {'username': 'Joshua Arthur', 'rating': 5, 'contributor_id': '106414370689776227536', 'description': 'Bought a car in Florida flew out to drive it home to Dallas.  Check engine light came on on the way home. This man went above and beyond to come and get me home safe. We to three different part stores to find the part then came to me in a parking lot at 9pm to get me home safely. For sure stand up man!!', 'link': 'https://www.google.com/maps/reviews/data=!4m8!14m7!1m6!2m5!1sChdDSUhNMG9nS0VJQ0FnSUMzbDdqdXFRRRAB!2m1!1s0x0:0x47f3db545d62ef26!3m1!1s2@1:CIHM0ogKEICAgIC3l7juqQE%7CCgwI-qXAuQYQwNvGlwI%7C?hl=en-US', 'date': '4 months ago'}, {'username': 'Joshua Maio', 'rating': 5, 'contributor_id': '109947180152051657631', 'description': "Kyle showed up with a single call,ran to the parts store met us in a hotel parking lot and replaced our wheel hub on our truck at 9pm on a Saturday that's what I call service with a smile after coming from minnesota and driving 28 hours he had us back on the road to Tampa in no time shout out to you kyle thank you brother for fast speedy A1 service your awesome", 'link': 'https://www.google.com/maps/reviews/data=!4m8!14m7!1m6!2m5!1sChdDSUhNMG9nS0VJQ0FnTUNRcExfVnZBRRAB!2m1!1s0x0:0x47f3db545d62ef26!3m1!1s2@1:CIHM0ogKEICAgMCQpL_VvAE%7CCgwImK6PvgYQwPOK1QE%7C?hl=en-US', 'images': [{'thumbnail': 'https://lh3.googleusercontent.com/geougc-cs/AIHozJLcYjLtfrOm4y8ioKzfXr8_YJA5CjxTThn3x6brtR0juZ2B5zvdT0XKGwtliWNQmUevKTaOe3_1psM-FUHqFmoptfi7_NkSWiUgDUlS6Em9SLmhiweMAbjQ8koVFnyrEs4mRRY'}], 'date': '2 weeks ago'}, {'username': 'Ed Cutchins', 'rating': 5, 'contributor_id': '112318531660179781274', 'description': 'What a great person to take care of your needs. He was fast, knew what to do and on time. I would recommend his services.', 'link': 'https://www.google.com/maps/reviews/data=!4m8!14m7!1m6!2m5!1sChZDSUhNMG9nS0VJQ0FnSUNYazl6VURBEAE!2m1!1s0x0:0x47f3db545d62ef26!3m1!1s2@1:CIHM0ogKEICAgICXk9zUDA%7CCgwIhp7SuAYQwLjSjAE%7C?hl=en-US', 'images': [{'thumbnail': 'https://lh3.googleusercontent.com/geougc-cs/AIHozJLiu6C9xn6wTVXxXj0kn3stdbUu38CAVYnLA5wSXZ_chSzDegu5IGOmO0KEOFATWO9b-b22pwDOOIT3CsUGCRM0erjj7rPO0l1_hTQ2Yln6rv5FmbGwzS-6qbM5JjELFXwqctSsPw'}], 'date': '4 months ago'}, {'username': 'Solomon Bennett', 'rating': 1, 'contributor_id': '101322833261946912336', 'description': 'Well I had the same problem out this Kyle guy. His service was awful and I paid him money which was 185.00 dollars. He fixed nothing and I’m trying to post pictures. He is a big liar and I will be taking him to court. He doesn’t pick up for days and then gives you several excuses about why he didn’t show. He didn’t deserve one star because he should have never made me pay up front. It was the worst experience I ever had with a business', 'link': 'https://www.google.com/maps/reviews/data=!4m8!14m7!1m6!2m5!1sChZDSUhNMG9nS0VJQ0FnTURnOHU3WlZ3EAE!2m1!1s0x0:0x47f3db545d62ef26!3m1!1s2@1:CIHM0ogKEICAgMDg8u7ZVw%7CCgwI5KDuvQYQ6I7SygM%7C?hl=en-US', 'date': '3 weeks ago'}]}, 'web_results_link': 'https://www.google.com/search?q=local+guide+program&ibp=gwp;0,26,OiIKICIcMjQgSHIgQWR2YW5jZSBNb2JpbGUgUmVwYWlycygC&pcl=lp', 'serpapi_web_results_link': 'https://serpapi.com/search.json?device=desktop&engine=google&google_domain=google.com&ibp=gwp%3B0%2C26%2COiIKICIcMjQgSHIgQWR2YW5jZSBNb2JpbGUgUmVwYWlycygC&q=local+guide+program'}
+INFO 2025-03-17 09:48:46,373 tasks 35436 10872 Business data to be saved: {'task': <ScrapingTask: Bangladesh - Budapest - Automotive Services - Mobile Mechanics - Diagnostic Services - Budapest (ID: 14)>, 'project_id': UUID('cab3b3b9-7d62-444a-acf9-9611c6a24c50'), 'project_title': 'Bangladesh - Budapest - Automotive Services - Mobile Mechanics - Diagnostic Services', 'main_category': 'Mobile Mechanics', 'tailored_category': 'Diagnostic Services', 'search_string': '24 Hr Advance Mobile Repairs', 'scraped_at': datetime.datetime(2025, 3, 17, 8, 48, 46, 363934, tzinfo=datetime.timezone.utc), 'level': 0, 'country': 'Bangladesh', 'city': 'Budapest', 'state': '', 'form_country_id': 17, 'form_country_name': 'Bangladesh', 'form_destination_id': 18, 'form_destination_name': 'Budapest', 'destination_id': 18, 'title': '24 Hr Advance Mobile Repairs', 'place_id': 'ChIJtYB7cDwSdSERJu9iXVTb80c', 'data_id': '0x2175123c707b80b5:0x47f3db545d62ef26', 'data_cid': '5184728751424073510', 'rating': 4.8, 'reviews_count': 24, 'phone': '(352) 647-7814', 'thumbnail': 'https://lh5.googleusercontent.com/p/AF1QipNJXpR_DdBeJGAkUNcbj-bI2oLBf_AYz9a3EkC3=w114-h86-k-no'}
+INFO 2025-03-17 09:48:46,374 tasks 35436 10872 Processed business types: Mechanic, Car repair and maintenance service, Diesel engine repair service, Engine rebuilding service, Service establishment, Repair service
+INFO 2025-03-17 09:48:46,374 tasks 35436 10872 Formatted hours data: {'monday': 'Open 24 hours', 'tuesday': 'Open 24 hours', 'wednesday': 'Open 24 hours', 'thursday': 'Open 24 hours', 'friday': 'Open 24 hours', 'saturday': 'Open 24 hours', 'sunday': 'Open 24 hours'}
+INFO 2025-03-17 09:48:46,375 tasks 35436 10872 Filling missing address components...
+INFO 2025-03-17 09:48:46,375 tasks 35436 10872 Final address components:
+INFO 2025-03-17 09:48:46,376 tasks 35436 10872 Street: 
+INFO 2025-03-17 09:48:46,376 tasks 35436 10872 Postal Code: 
+INFO 2025-03-17 09:48:46,376 tasks 35436 10872 City: Budapest
+INFO 2025-03-17 09:48:46,377 tasks 35436 10872 Country: Bangladesh
+INFO 2025-03-17 09:48:46,380 models 35436 10872 Creating new Business: 24 Hr Advance Mobile Repairs
+INFO 2025-03-17 09:48:46,453 signals 35436 10872 [SIGNAL] Recalculating Task 14 due to Business 5 change.
+INFO 2025-03-17 09:48:46,459 common 35436 10872 Task 14 counts: total=1, pending=1, reviewed=0, in_production=0
+INFO 2025-03-17 09:48:46,461 common 35436 10872 Task 14 => DONE -> COMPLETED
+INFO 2025-03-17 09:48:46,467 signals 35436 10872 Task 14 status update: previous_status=DONE, businesses=1, pending=1, reviewed=0, in_production=0, discarded=0, new_status=COMPLETED
+INFO 2025-03-17 09:48:46,468 tasks 35436 10872 New business created: 24 Hr Advance Mobile Repairs (ID: 5)
+INFO 2025-03-17 09:48:46,469 tasks 35436 10872 Additional data saved for business 5
+INFO 2025-03-17 09:48:46,469 tasks 35436 10872 All business data processed and saved for business 5
+INFO 2025-03-17 09:48:46,470 tasks 35436 10872 Address components saved - Street: , Postal Code: , City: Budapest
+INFO 2025-03-17 09:48:46,470 tasks 35436 10872 Processing download with image count: 6
+INFO 2025-03-17 09:48:48,209 tasks 35436 10872 Found 5 total photos, downloading 5 as per image_count: 6
+INFO 2025-03-17 09:48:54,332 tasks 35436 10872 Downloaded and processed image 0 for business 5
+INFO 2025-03-17 09:49:11,739 tasks 35436 10872 Downloaded and processed image 1 for business 5
+INFO 2025-03-17 09:49:20,617 tasks 35436 10872 Downloaded and processed image 2 for business 5
+INFO 2025-03-17 09:49:38,708 tasks 35436 10872 Downloaded and processed image 3 for business 5
+INFO 2025-03-17 09:49:56,426 tasks 35436 10872 Downloaded and processed image 4 for business 5
+INFO 2025-03-17 09:50:01,757 models 35436 10872 Updating Business 5: 24 Hr Advance Mobile Repairs
+INFO 2025-03-17 09:50:01,772 signals 35436 10872 [SIGNAL] Recalculating Task 14 due to Business 5 change.
+INFO 2025-03-17 09:50:01,778 common 35436 10872 Task 14 counts: total=1, pending=1, reviewed=0, in_production=0
+INFO 2025-03-17 09:50:01,782 signals 35436 10872 Task 14 status update: previous_status=DONE, businesses=1, pending=1, reviewed=0, in_production=0, discarded=0, new_status=COMPLETED
+INFO 2025-03-17 09:50:01,783 tasks 35436 10872 Set main image for business 5
+INFO 2025-03-17 09:50:01,800 tasks 35436 10872 Downloaded 5 images for business 5
+INFO 2025-03-17 09:50:01,801 tasks 35436 10872 Downloading images for business 5
+INFO 2025-03-17 09:50:01,802 tasks 35436 10872 Processing download with image count: 6
+INFO 2025-03-17 09:50:02,922 tasks 35436 10872 Found 5 total photos, downloading 5 as per image_count: 6
+INFO 2025-03-17 09:50:02,936 tasks 35436 10872 Image already exists for business 5, skipping download.
+INFO 2025-03-17 09:50:02,939 tasks 35436 10872 Image already exists for business 5, skipping download.
+INFO 2025-03-17 09:50:02,942 tasks 35436 10872 Image already exists for business 5, skipping download.
+INFO 2025-03-17 09:50:03,007 tasks 35436 10872 Image already exists for business 5, skipping download.
+INFO 2025-03-17 09:50:03,008 tasks 35436 10872 Image already exists for business 5, skipping download.
+INFO 2025-03-17 09:50:03,009 models 35436 10872 Updating Business 5: 24 Hr Advance Mobile Repairs
+INFO 2025-03-17 09:50:03,013 signals 35436 10872 [SIGNAL] Recalculating Task 14 due to Business 5 change.
+INFO 2025-03-17 09:50:03,019 common 35436 10872 Task 14 counts: total=1, pending=1, reviewed=0, in_production=0
+INFO 2025-03-17 09:50:03,025 signals 35436 10872 Task 14 status update: previous_status=COMPLETED, businesses=1, pending=1, reviewed=0, in_production=0, discarded=0, new_status=COMPLETED
+INFO 2025-03-17 09:50:03,026 tasks 35436 10872 Set main image for business 5
+INFO 2025-03-17 09:50:03,027 tasks 35436 10872 Processed 1 results on page 1 for query '24 Hr Advance Mobile Repairs'
+INFO 2025-03-17 09:50:03,027 tasks 35436 10872 No next page token found for query '24 Hr Advance Mobile Repairs'
+INFO 2025-03-17 09:50:03,028 tasks 35436 10872 Finished processing query: 24 Hr Advance Mobile Repairs
+INFO 2025-03-17 09:50:03,028 tasks 35436 10872 Processing query 2/4: Mechanic Dad LLC (Page 1)
+INFO 2025-03-17 09:50:03,029 tasks 35436 10872 Searching for exact place with params: {'api_key': '2b24aae0d70038ce430be0b58b0037d73254d42cefaa7d142a358fc432b8de52', 'engine': 'google_maps', 'type': 'place', 'google_domain': 'google.com', 'data': '!4m5!3m4!1s0x497a8cf85b14e81d:0x486b44d3eb30f30d!8m2!3d29.6327057!4d-82.3735993', 'hl': 'en', 'no_cache': 'true'}
+INFO 2025-03-17 09:50:04,757 tasks 35436 10872 Processing 1 local results for query 'Mechanic Dad LLC' (Page 1)
+INFO 2025-03-17 09:50:05,190 tasks 35436 10872 Saved results for query 'Mechanic Dad LLC' to scraping_results/14/Mechanic_Dad_LLC.json
+INFO 2025-03-17 09:50:05,191 tasks 35436 10872 Saving business 1/1 for query 'Mechanic Dad LLC' (Page 1)
+INFO 2025-03-17 09:50:05,192 tasks 35436 10872 Saving business data for task 14
+INFO 2025-03-17 09:50:05,248 tasks 35436 10872 Parsed address components from: 2112 SW 34th St pmb 278, Gainesville, FL 32608
+INFO 2025-03-17 09:50:05,249 tasks 35436 10872 Country detected: FL 32608
+INFO 2025-03-17 09:50:05,249 tasks 35436 10872 Street: 2112 SW 34th St pmb 278, Gainesville
+INFO 2025-03-17 09:50:05,250 tasks 35436 10872 Postal Code: 32608
+INFO 2025-03-17 09:50:05,250 tasks 35436 10872 Extracted address components:
+INFO 2025-03-17 09:50:05,250 tasks 35436 10872 Full Address: 2112 SW 34th St pmb 278, Gainesville, FL 32608
+INFO 2025-03-17 09:50:05,251 tasks 35436 10872 Street: 2112 SW 34th St pmb 278, Gainesville
+INFO 2025-03-17 09:50:05,251 tasks 35436 10872 Postal Code: 32608
+INFO 2025-03-17 09:50:05,251 tasks 35436 10872 Business data to be saved: {'task': <ScrapingTask: Bangladesh - Budapest - Automotive Services - Mobile Mechanics - Diagnostic Services - Budapest (ID: 14)>, 'project_id': UUID('cab3b3b9-7d62-444a-acf9-9611c6a24c50'), 'project_title': 'Bangladesh - Budapest - Automotive Services - Mobile Mechanics - Diagnostic Services', 'main_category': 'Mobile Mechanics', 'tailored_category': 'Diagnostic Services', 'search_string': 'Mechanic Dad LLC', 'scraped_at': datetime.datetime(2025, 3, 17, 8, 50, 5, 194601, tzinfo=datetime.timezone.utc), 'level': 0, 'country': 'Bangladesh', 'city': 'Budapest', 'state': '', 'form_country_id': 17, 'form_country_name': 'Bangladesh', 'form_destination_id': 18, 'form_destination_name': 'Budapest', 'destination_id': 18, 'address': '2112 SW 34th St pmb 278, Gainesville, FL 32608', 'street': '2112 SW 34th St pmb 278, Gainesville', 'postal_code': '32608', 'title': 'Mechanic Dad LLC', 'place_id': 'ChIJHegUW_iMekkRDfMw69NEa0g', 'data_id': '0x497a8cf85b14e81d:0x486b44d3eb30f30d', 'data_cid': '5218340270213493517', 'rating': 5, 'reviews_count': 16, 'phone': '(352) 870-1250', 'website': 'http://www.mechanicdad.com/', 'thumbnail': 'https://streetviewpixels-pa.googleapis.com/v1/thumbnail?panoid=qHD3PFhKzW2Ql9jclGfosg&cb_client=search.gws-prod.gps&w=86&h=86&yaw=210.88538&pitch=0&thumbfov=100'}
+INFO 2025-03-17 09:50:05,253 tasks 35436 10872 Processed business types: Car repair and maintenance service, Auto repair shop
+INFO 2025-03-17 09:50:05,254 tasks 35436 10872 Formatted hours data: {'monday': '9\u202fAM–5\u202fPM', 'tuesday': '9\u202fAM–5\u202fPM', 'wednesday': '9\u202fAM–5\u202fPM', 'thursday': '9\u202fAM–5\u202fPM', 'friday': '9\u202fAM–5\u202fPM', 'saturday': 'Closed', 'sunday': 'Closed'}
+INFO 2025-03-17 09:50:05,254 tasks 35436 10872 Processed extensions data: [{'service_options': ['Onsite services']}, {'accessibility': ['Wheelchair accessible parking lot']}, {'payments': ['Credit cards']}]
+INFO 2025-03-17 09:50:05,255 tasks 35436 10872 Filling missing address components...
+INFO 2025-03-17 09:50:05,255 tasks 35436 10872 Final address components:
+INFO 2025-03-17 09:50:05,256 tasks 35436 10872 Street: 2112 SW 34th St pmb 278, Gainesville, FL 32608
+INFO 2025-03-17 09:50:05,256 tasks 35436 10872 Postal Code: 32608
+INFO 2025-03-17 09:50:05,257 tasks 35436 10872 City: Budapest
+INFO 2025-03-17 09:50:05,257 tasks 35436 10872 Country: Bangladesh
+INFO 2025-03-17 09:50:05,260 models 35436 10872 Creating new Business: Mechanic Dad LLC
+INFO 2025-03-17 09:50:05,263 signals 35436 10872 [SIGNAL] Recalculating Task 14 due to Business 6 change.
+INFO 2025-03-17 09:50:05,270 common 35436 10872 Task 14 counts: total=2, pending=2, reviewed=0, in_production=0
+INFO 2025-03-17 09:50:05,277 signals 35436 10872 Task 14 status update: previous_status=COMPLETED, businesses=2, pending=2, reviewed=0, in_production=0, discarded=0, new_status=COMPLETED
+INFO 2025-03-17 09:50:05,278 tasks 35436 10872 New business created: Mechanic Dad LLC (ID: 6)
+INFO 2025-03-17 09:50:05,278 tasks 35436 10872 Additional data saved for business 6
+INFO 2025-03-17 09:50:05,279 tasks 35436 10872 All business data processed and saved for business 6
+INFO 2025-03-17 09:50:05,279 tasks 35436 10872 Address components saved - Street: 2112 SW 34th St pmb 278, Gainesville, Postal Code: 32608, City: Budapest
+INFO 2025-03-17 09:50:05,279 tasks 35436 10872 Processing download with image count: 6
+INFO 2025-03-17 09:50:06,315 tasks 35436 10872 Found 1 total photos, downloading 1 as per image_count: 6
+INFO 2025-03-17 09:50:08,032 tasks 35436 10872 Downloaded and processed image 0 for business 6
+INFO 2025-03-17 09:50:23,565 models 35436 10872 Updating Business 6: Mechanic Dad LLC
+INFO 2025-03-17 09:50:23,652 signals 35436 10872 [SIGNAL] Recalculating Task 14 due to Business 6 change.
+INFO 2025-03-17 09:50:23,657 common 35436 10872 Task 14 counts: total=2, pending=2, reviewed=0, in_production=0
+INFO 2025-03-17 09:50:23,663 signals 35436 10872 Task 14 status update: previous_status=COMPLETED, businesses=2, pending=2, reviewed=0, in_production=0, discarded=0, new_status=COMPLETED
+INFO 2025-03-17 09:50:23,664 tasks 35436 10872 Set main image for business 6
+INFO 2025-03-17 09:50:23,667 tasks 35436 10872 Downloaded 1 images for business 6
+INFO 2025-03-17 09:50:23,667 tasks 35436 10872 Downloading images for business 6
+INFO 2025-03-17 09:50:23,668 tasks 35436 10872 Processing download with image count: 6
+INFO 2025-03-17 09:50:26,156 tasks 35436 10872 Found 1 total photos, downloading 1 as per image_count: 6
+INFO 2025-03-17 09:50:26,162 tasks 35436 10872 Image already exists for business 6, skipping download.
+INFO 2025-03-17 09:50:26,163 models 35436 10872 Updating Business 6: Mechanic Dad LLC
+INFO 2025-03-17 09:50:26,168 signals 35436 10872 [SIGNAL] Recalculating Task 14 due to Business 6 change.
+INFO 2025-03-17 09:50:26,177 common 35436 10872 Task 14 counts: total=2, pending=2, reviewed=0, in_production=0
+INFO 2025-03-17 09:50:26,183 signals 35436 10872 Task 14 status update: previous_status=COMPLETED, businesses=2, pending=2, reviewed=0, in_production=0, discarded=0, new_status=COMPLETED
+INFO 2025-03-17 09:50:26,184 tasks 35436 10872 Set main image for business 6
+INFO 2025-03-17 09:50:26,184 tasks 35436 10872 Processed 1 results on page 1 for query 'Mechanic Dad LLC'
+INFO 2025-03-17 09:50:26,185 tasks 35436 10872 No next page token found for query 'Mechanic Dad LLC'
+INFO 2025-03-17 09:50:26,186 tasks 35436 10872 Finished processing query: Mechanic Dad LLC
+INFO 2025-03-17 09:50:26,186 tasks 35436 10872 Processing query 3/4: A Tech 24HR Mobile Mechanic (Page 1)
+INFO 2025-03-17 09:50:26,186 tasks 35436 10872 Searching for exact place with params: {'api_key': '2b24aae0d70038ce430be0b58b0037d73254d42cefaa7d142a358fc432b8de52', 'engine': 'google_maps', 'type': 'place', 'google_domain': 'google.com', 'data': '!4m5!3m4!1s0x88e8d39d0864d745:0x6dd0df4ecb51ec21!8m2!3d29.905793!4d-82.741521', 'hl': 'en', 'no_cache': 'true'}
+INFO 2025-03-17 09:50:28,997 tasks 35436 10872 Processing 1 local results for query 'A Tech 24HR Mobile Mechanic' (Page 1)
+INFO 2025-03-17 09:50:29,035 tasks 35436 10872 Saved results for query 'A Tech 24HR Mobile Mechanic' to scraping_results/14/A_Tech_24HR_Mobile_Mechanic.json
+INFO 2025-03-17 09:50:29,036 tasks 35436 10872 Saving business 1/1 for query 'A Tech 24HR Mobile Mechanic' (Page 1)
+INFO 2025-03-17 09:50:29,036 tasks 35436 10872 Saving business data for task 14
+INFO 2025-03-17 09:50:29,067 tasks 35436 10872 Parsed address components from: 487 SW Uncle Remus, Fort White, FL 32038, United States
+INFO 2025-03-17 09:50:29,067 tasks 35436 10872 Country detected: United States
+INFO 2025-03-17 09:50:29,067 tasks 35436 10872 Street: 487 SW Uncle Remus, Fort White
+INFO 2025-03-17 09:50:29,067 tasks 35436 10872 Postal Code: 32038
+INFO 2025-03-17 09:50:29,068 tasks 35436 10872 Extracted address components:
+INFO 2025-03-17 09:50:29,068 tasks 35436 10872 Full Address: 487 SW Uncle Remus, Fort White, FL 32038, United States
+INFO 2025-03-17 09:50:29,068 tasks 35436 10872 Street: 487 SW Uncle Remus, Fort White
+INFO 2025-03-17 09:50:29,068 tasks 35436 10872 Postal Code: 32038
+INFO 2025-03-17 09:50:29,068 tasks 35436 10872 Business data to be saved: {'task': <ScrapingTask: Bangladesh - Budapest - Automotive Services - Mobile Mechanics - Diagnostic Services - Budapest (ID: 14)>, 'project_id': UUID('cab3b3b9-7d62-444a-acf9-9611c6a24c50'), 'project_title': 'Bangladesh - Budapest - Automotive Services - Mobile Mechanics - Diagnostic Services', 'main_category': 'Mobile Mechanics', 'tailored_category': 'Diagnostic Services', 'search_string': 'A Tech 24HR Mobile Mechanic', 'scraped_at': datetime.datetime(2025, 3, 17, 8, 50, 29, 37224, tzinfo=datetime.timezone.utc), 'level': 0, 'country': 'Bangladesh', 'city': 'Budapest', 'state': '', 'form_country_id': 17, 'form_country_name': 'Bangladesh', 'form_destination_id': 18, 'form_destination_name': 'Budapest', 'destination_id': 18, 'address': '487 SW Uncle Remus, Fort White, FL 32038, United States', 'street': '487 SW Uncle Remus, Fort White', 'postal_code': '32038', 'title': 'A Tech 24HR Mobile Mechanic', 'place_id': 'ChIJRddkCJ3T6IgRIexRy07f0G0', 'data_id': '0x88e8d39d0864d745:0x6dd0df4ecb51ec21', 'data_cid': '7913070074801548321', 'rating': 4.3, 'reviews_count': 35, 'phone': '+1 352-681-0176', 'thumbnail': 'https://lh5.googleusercontent.com/p/AF1QipOvBEssU2kTG-eCPyW0__Pg5RVkrXE6ENM1fsSc=w114-h86-k-no'}
+INFO 2025-03-17 09:50:29,069 tasks 35436 10872 Processed business types: Mechanic, Auto electrical service, Auto radiator repair service, Car repair and maintenance service, Machine repair service, Towing service, Truck repair shop
+INFO 2025-03-17 09:50:29,070 tasks 35436 10872 Formatted hours data: {'monday': 'Open 24 hours', 'tuesday': 'Open 24 hours', 'wednesday': 'Open 24 hours', 'thursday': 'Open 24 hours', 'friday': 'Open 24 hours', 'saturday': 'Open 24 hours', 'sunday': 'Open 24 hours'}
+INFO 2025-03-17 09:50:29,070 tasks 35436 10872 Processed extensions data: [{'accessibility': ['Wheelchair-accessible car park']}, {'offerings': ['Oil change']}, {'crowd': ['LGBTQ+ friendly', 'Transgender safe space']}, {'payments': ['Debit cards']}]
+INFO 2025-03-17 09:50:29,070 tasks 35436 10872 Filling missing address components...
+INFO 2025-03-17 09:50:29,070 tasks 35436 10872 Final address components:
+INFO 2025-03-17 09:50:29,071 tasks 35436 10872 Street: 487 SW Uncle Remus, Fort White, FL 32038, United States
+INFO 2025-03-17 09:50:29,071 tasks 35436 10872 Postal Code: 32038
+INFO 2025-03-17 09:50:29,071 tasks 35436 10872 City: Budapest
+INFO 2025-03-17 09:50:29,071 tasks 35436 10872 Country: Bangladesh
+INFO 2025-03-17 09:50:29,073 models 35436 10872 Creating new Business: A Tech 24HR Mobile Mechanic
+INFO 2025-03-17 09:50:29,076 signals 35436 10872 [SIGNAL] Recalculating Task 14 due to Business 7 change.
+INFO 2025-03-17 09:50:29,082 common 35436 10872 Task 14 counts: total=3, pending=3, reviewed=0, in_production=0
+INFO 2025-03-17 09:50:29,087 signals 35436 10872 Task 14 status update: previous_status=COMPLETED, businesses=3, pending=3, reviewed=0, in_production=0, discarded=0, new_status=COMPLETED
+INFO 2025-03-17 09:50:29,088 tasks 35436 10872 New business created: A Tech 24HR Mobile Mechanic (ID: 7)
+INFO 2025-03-17 09:50:29,088 tasks 35436 10872 Additional data saved for business 7
+INFO 2025-03-17 09:50:29,089 tasks 35436 10872 All business data processed and saved for business 7
+INFO 2025-03-17 09:50:29,089 tasks 35436 10872 Address components saved - Street: 487 SW Uncle Remus, Fort White, Postal Code: 32038, City: Budapest
+INFO 2025-03-17 09:50:29,090 tasks 35436 10872 Processing download with image count: 6
+INFO 2025-03-17 09:50:30,143 tasks 35436 10872 Found 7 total photos, downloading 6 as per image_count: 6
+INFO 2025-03-17 09:50:35,849 tasks 35436 10872 Downloaded and processed image 0 for business 7
+INFO 2025-03-17 09:50:48,682 tasks 35436 10872 Downloaded and processed image 1 for business 7
+ERROR 2025-03-17 09:51:09,793 views 2240 9932 Error in RecentTasksView: 'NoneType' object has no attribute 'strftime'
+Traceback (most recent call last):
+  File "D:\proyectos\automation-master\automation\api\views.py", line 677, in get
+    'completed_at': task.completed_at.strftime('%Y-%m-%d %H:%M'),
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'NoneType' object has no attribute 'strftime'
+INFO 2025-03-17 09:51:25,534 views 2240 35608 Saving preferences for user EdisonValdez
+INFO 2025-03-17 09:51:25,534 views 2240 35608 Country: Bangladesh - BD
+INFO 2025-03-17 09:51:25,534 views 2240 35608 Destination: Budapest, Bangladesh
+INFO 2025-03-17 09:51:25,535 views 2240 35608 Level: Automotive Services
+INFO 2025-03-17 09:51:25,535 views 2240 35608 Main Category: Mobile Mechanics
+INFO 2025-03-17 09:51:25,536 views 2240 35608 Subcategory: Diagnostic Services
+INFO 2025-03-17 09:51:25,536 views 2240 35608 Image Count: 3
+INFO 2025-03-17 09:51:25,545 tasks 2240 35608 Starting Sites Gathering task 15
+INFO 2025-03-17 09:51:25,552 tasks 2240 35608 Using image count: 3
+INFO 2025-03-17 09:51:25,552 tasks 2240 35608 Using uploaded file for queries.
+INFO 2025-03-17 09:51:25,553 tasks 2240 35608 Reading queries from content
+INFO 2025-03-17 09:51:25,554 tasks 2240 35608 Processing URL: https://www.google.com/maps/place/24+Hr+Advance+Mobile+Repairs/data=!4m7!3m6!1s0x2175123c707b80b5:0x47f3db545d62ef26!8m2!3d29.8322945!4d-82.3797429!16s%2Fg%2F11l6dvqm9r!19sChIJtYB7cDwSdSERJu9iXVTb80c?authuser=0&hl=es&rclk=1
+INFO 2025-03-17 09:51:25,555 tasks 2240 35608 Extracted query data: {'query': '24 Hr Advance Mobile Repairs', 'data_id': '0x2175123c707b80b5:0x47f3db545d62ef26', 'll': '29.8322945,-82.3797429', 'original_url': 'https://www.google.com/maps/place/24+Hr+Advance+Mobile+Repairs/data=!4m7!3m6!1s0x2175123c707b80b5:0x47f3db545d62ef26!8m2!3d29.8322945!4d-82.3797429!16s%2Fg%2F11l6dvqm9r!19sChIJtYB7cDwSdSERJu9iXVTb80c?authuser=0&hl=es&rclk=1'}
+INFO 2025-03-17 09:51:25,555 tasks 2240 35608 Processing URL: https://www.google.com/maps/place/Mechanic+Dad+LLC/data=!4m7!3m6!1s0x497a8cf85b14e81d:0x486b44d3eb30f30d!8m2!3d29.6327057!4d-82.3735993!16s%2Fg%2F11s_7qjlfr!19sChIJHegUW_iMekkRDfMw69NEa0g?authuser=0&hl=es&rclk=1
+INFO 2025-03-17 09:51:25,556 tasks 2240 35608 Extracted query data: {'query': 'Mechanic Dad LLC', 'data_id': '0x497a8cf85b14e81d:0x486b44d3eb30f30d', 'll': '29.6327057,-82.3735993', 'original_url': 'https://www.google.com/maps/place/Mechanic+Dad+LLC/data=!4m7!3m6!1s0x497a8cf85b14e81d:0x486b44d3eb30f30d!8m2!3d29.6327057!4d-82.3735993!16s%2Fg%2F11s_7qjlfr!19sChIJHegUW_iMekkRDfMw69NEa0g?authuser=0&hl=es&rclk=1'}
+INFO 2025-03-17 09:51:25,557 tasks 2240 35608 Processing URL: https://www.google.com/maps/place/A+Tech+24HR+Mobile+Mechanic/data=!4m7!3m6!1s0x88e8d39d0864d745:0x6dd0df4ecb51ec21!8m2!3d29.905793!4d-82.741521!16s%2Fg%2F11j2ymmbmn!19sChIJRddkCJ3T6IgRIexRy07f0G0?authuser=0&hl=es&rclk=1
+INFO 2025-03-17 09:51:25,557 tasks 2240 35608 Extracted query data: {'query': 'A Tech 24HR Mobile Mechanic', 'data_id': '0x88e8d39d0864d745:0x6dd0df4ecb51ec21', 'll': '29.905793,-82.741521', 'original_url': 'https://www.google.com/maps/place/A+Tech+24HR+Mobile+Mechanic/data=!4m7!3m6!1s0x88e8d39d0864d745:0x6dd0df4ecb51ec21!8m2!3d29.905793!4d-82.741521!16s%2Fg%2F11j2ymmbmn!19sChIJRddkCJ3T6IgRIexRy07f0G0?authuser=0&hl=es&rclk=1'}
+INFO 2025-03-17 09:51:25,558 tasks 2240 35608 Processing URL: https://www.google.com/maps/place/Mobile+Automotive+Service+LLC/data=!4m7!3m6!1s0x88e8d9b554241d59:0xfe9b9ca041afe4e9!8m2!3d29.7712343!4d-82.8639722!16s%2Fg%2F11sw6p2fhh!19sChIJWR0kVLXZ6IgR6eSvQaCcm_4?authuser=0&hl=es&rclk=1
+INFO 2025-03-17 09:51:25,558 tasks 2240 35608 Extracted query data: {'query': 'Mobile Automotive Service LLC', 'data_id': '0x88e8d9b554241d59:0xfe9b9ca041afe4e9', 'll': '29.7712343,-82.8639722', 'original_url': 'https://www.google.com/maps/place/Mobile+Automotive+Service+LLC/data=!4m7!3m6!1s0x88e8d9b554241d59:0xfe9b9ca041afe4e9!8m2!3d29.7712343!4d-82.8639722!16s%2Fg%2F11sw6p2fhh!19sChIJWR0kVLXZ6IgR6eSvQaCcm_4?authuser=0&hl=es&rclk=1'}
+INFO 2025-03-17 09:51:25,559 tasks 2240 35608 Successfully read 4 queries
+INFO 2025-03-17 09:51:25,559 tasks 2240 35608 Total queries to process from file: 4
+INFO 2025-03-17 09:51:25,559 tasks 2240 35608 Processing query 1/4: 24 Hr Advance Mobile Repairs (Page 1)
+INFO 2025-03-17 09:51:25,560 tasks 2240 35608 Searching for exact place with params: {'api_key': '2b24aae0d70038ce430be0b58b0037d73254d42cefaa7d142a358fc432b8de52', 'engine': 'google_maps', 'type': 'place', 'google_domain': 'google.com', 'data': '!4m5!3m4!1s0x2175123c707b80b5:0x47f3db545d62ef26!8m2!3d29.8322945!4d-82.3797429', 'hl': 'en', 'no_cache': 'true'}
+INFO 2025-03-17 09:51:27,167 tasks 2240 35608 Processing 1 local results for query '24 Hr Advance Mobile Repairs' (Page 1)
+INFO 2025-03-17 09:51:27,168 tasks 2240 35608 Local result data: [{'title': '24 Hr Advance Mobile Repairs', 'place_id': 'ChIJtYB7cDwSdSERJu9iXVTb80c', 'data_id': '0x2175123c707b80b5:0x47f3db545d62ef26', 'data_cid': '5184728751424073510', 'reviews_link': 'https://serpapi.com/search.json?data_id=0x2175123c707b80b5%3A0x47f3db545d62ef26&engine=google_maps_reviews&hl=en', 'photos_link': 'https://serpapi.com/search.json?data_id=0x2175123c707b80b5%3A0x47f3db545d62ef26&engine=google_maps_photos&hl=en', 'gps_coordinates': {'latitude': 29.8322945, 'longitude': -82.3797429}, 'place_id_search': 'https://serpapi.com/search.json?engine=google_maps&google_domain=google.com&hl=en&place_id=ChIJtYB7cDwSdSERJu9iXVTb80c', 'provider_id': '/g/11l6dvqm9r', 'thumbnail': 'https://lh5.googleusercontent.com/p/AF1QipNJXpR_DdBeJGAkUNcbj-bI2oLBf_AYz9a3EkC3=w114-h86-k-no', 'rating_summary': [{'stars': 1, 'amount': 1}, {'stars': 2, 'amount': 0}, {'stars': 3, 'amount': 0}, {'stars': 4, 'amount': 0}, {'stars': 5, 'amount': 23}], 'rating': 4.8, 'reviews': 24, 'type': ['Mechanic', 'Car repair and maintenance service', 'Diesel engine repair service', 'Engine rebuilding service', 'Service establishment', 'Repair service'], 'type_ids': ['mechanic', 'car_repair', 'diesel_engine_repair_service', 'engine_rebuilding_service', 'establishment_service', 'repair_service'], 'phone': '(352) 647-7814', 'open_state': 'Open 24 hours', 'hours': [{'monday': 'Open 24 hours'}, {'tuesday': 'Open 24 hours'}, {'wednesday': 'Open 24 hours'}, {'thursday': 'Open 24 hours'}, {'friday': 'Open 24 hours'}, {'saturday': 'Open 24 hours'}, {'sunday': 'Open 24 hours'}], 'images': [{'title': 'All', 'thumbnail': 'https://lh5.googleusercontent.com/p/AF1QipNJXpR_DdBeJGAkUNcbj-bI2oLBf_AYz9a3EkC3=w397-h298-k-no'}, {'title': 'Latest', 'thumbnail': 'https://lh5.googleusercontent.com/p/AF1QipO_q17Sq_GlYUMayFeTbljNugz1mg7Kep3AOThO=w224-h298-k-no'}], 'user_reviews': {'most_relevant': [{'username': 'Alyssa Walters', 'rating': 5, 'contributor_id': '116342346181357770727', 'description': 'We just moved from Maryland to Gainesville a few months again. We knew our tires needed replaced, but we’ve been limited on funds. One of our tires finally gave out and this man didn’t hesitate to help! He ended up finding and marking a hole for us since he didn’t have any spare tire plugs. We were able to make it to Sam’s club and ask for a tire plug.', 'link': 'https://www.google.com/maps/reviews/data=!4m8!14m7!1m6!2m5!1sChdDSUhNMG9nS0VJQ0FnSUR2OE95TnhBRRAB!2m1!1s0x0:0x47f3db545d62ef26!3m1!1s2@1:CIHM0ogKEICAgIDv8OyNxAE%7CCgwIrPeCuwYQqJa2lwI%7C?hl=en-US', 'images': [{'thumbnail': 'https://lh3.googleusercontent.com/geougc-cs/AIHozJLNH0dNuFY4FLkDsg3UGJjg1_ELIO1aWl1A488BitK0lHVZ7hs1p86P8ZtqjnlZHq1dJCDrI1XirKwZVuEBfxo2P5j6wm-8RDpCj2wbUY7V7GZR4dLnH8bVM0z8TsKw13pMh10B'}, {'thumbnail': 'https://lh3.googleusercontent.com/geougc-cs/AIHozJKWVWOex1Nlr-oOVa0U7lxwagmwMXwo5jaIauMx55SIja3ccZ1Drc1u0Z_6QxnqGb2D-F95utXTMq4e9h4Me8rCHgsQtnRhHlmzpwZERSJE3jDzP3qdM-f3l7qQkjjy7GoZjQzfeQ'}], 'date': '3 months ago'}, {'username': 'Jane Doe', 'rating': 5, 'contributor_id': '103724505572303205154', 'description': 'Coming from Minnesota to Florida and the wheel bearing on my dad’s truck went and we had to get off the highway because it sounded so bad! Kyle was the only person who answered our call and stopped and grabbed all the parts needed and was to us quickly! Very good service great guy!', 'link': 'https://www.google.com/maps/reviews/data=!4m8!14m7!1m6!2m5!1sChZDSUhNMG9nS0VJQ0FnTUNRcE5faUlBEAE!2m1!1s0x0:0x47f3db545d62ef26!3m1!1s2@1:CIHM0ogKEICAgMCQpN_iIA%7CCgwI3q2PvgYQwPDlsQM%7C?hl=en-US', 'date': '2 weeks ago'}, {'username': 'Steve Gillaspie', 'rating': 5, 'contributor_id': '107472870386814066647', 'description': 'After reading reviews for emergency vehicle assistance, this young man did not disappoint!  Once on site, his attention to detail was impeccable.  We highly recommend Kyle to the rescue if broken down in his area.  Thank you sir!!', 'link': 'https://www.google.com/maps/reviews/data=!4m8!14m7!1m6!2m5!1sChdDSUhNMG9nS0VJQ0FnSURfZ3RPSDZBRRAB!2m1!1s0x0:0x47f3db545d62ef26!3m1!1s2@1:CIHM0ogKEICAgID_gtOH6AE%7CCgwIzfbEvAYQqM_U2gI%7C?hl=en-US', 'images': [{'thumbnail': 'https://lh3.googleusercontent.com/geougc-cs/AIHozJJkxnOrx3ZIbbM1OpXSAEtImtSWERcInV087YSbezyL0XyiW2-z1qPkacACb4Rwxr8A7FYoRGPMlK1eRznb6zS9uejQADXgcV3EWV5hmCiY60gygOlcuJvwv3dOSpZ1_SJVJnCp'}], 'date': 'a month ago'}, {'username': 'eugene hershman', 'rating': 5, 'contributor_id': '115308984854443244455', 'description': "Apparently Kyle could not give me a call back because where he was working he had poor phone service. Finally called and said he'd be there in an hour but never showed up. Claim that his phone broke. When he get finally call in 2 days wanted to know he still wanted to come out there and we told him NO. TOO MANY EXCUSES AND NO SHOW. He shows that he's unreliable. I'm not sure if all these other reviews are honest reviews or made up by him.", 'link': 'https://www.google.com/maps/reviews/data=!4m8!14m7!1m6!2m5!1sChZDSUhNMG9nS0VJQ0FnTUNBMjR2MVJ3EAE!2m1!1s0x0:0x47f3db545d62ef26!3m1!1s2@1:CIHM0ogKEICAgMCA24v1Rw%7CCgwIvaG5vQYQoLSztwM%7C?hl=en-US', 'date': 'a month ago'}, {'username': 'Joshua Arthur', 'rating': 5, 'contributor_id': '106414370689776227536', 'description': 'Bought a car in Florida flew out to drive it home to Dallas.  Check engine light came on on the way home. This man went above and beyond to come and get me home safe. We to three different part stores to find the part then came to me in a parking lot at 9pm to get me home safely. For sure stand up man!!', 'link': 'https://www.google.com/maps/reviews/data=!4m8!14m7!1m6!2m5!1sChdDSUhNMG9nS0VJQ0FnSUMzbDdqdXFRRRAB!2m1!1s0x0:0x47f3db545d62ef26!3m1!1s2@1:CIHM0ogKEICAgIC3l7juqQE%7CCgwI-qXAuQYQwNvGlwI%7C?hl=en-US', 'date': '4 months ago'}, {'username': 'Joshua Maio', 'rating': 5, 'contributor_id': '109947180152051657631', 'description': "Kyle showed up with a single call,ran to the parts store met us in a hotel parking lot and replaced our wheel hub on our truck at 9pm on a Saturday that's what I call service with a smile after coming from minnesota and driving 28 hours he had us back on the road to Tampa in no time shout out to you kyle thank you brother for fast speedy A1 service your awesome", 'link': 'https://www.google.com/maps/reviews/data=!4m8!14m7!1m6!2m5!1sChdDSUhNMG9nS0VJQ0FnTUNRcExfVnZBRRAB!2m1!1s0x0:0x47f3db545d62ef26!3m1!1s2@1:CIHM0ogKEICAgMCQpL_VvAE%7CCgwImK6PvgYQwPOK1QE%7C?hl=en-US', 'images': [{'thumbnail': 'https://lh3.googleusercontent.com/geougc-cs/AIHozJLcYjLtfrOm4y8ioKzfXr8_YJA5CjxTThn3x6brtR0juZ2B5zvdT0XKGwtliWNQmUevKTaOe3_1psM-FUHqFmoptfi7_NkSWiUgDUlS6Em9SLmhiweMAbjQ8koVFnyrEs4mRRY'}], 'date': '2 weeks ago'}, {'username': 'Ed Cutchins', 'rating': 5, 'contributor_id': '112318531660179781274', 'description': 'What a great person to take care of your needs. He was fast, knew what to do and on time. I would recommend his services.', 'link': 'https://www.google.com/maps/reviews/data=!4m8!14m7!1m6!2m5!1sChZDSUhNMG9nS0VJQ0FnSUNYazl6VURBEAE!2m1!1s0x0:0x47f3db545d62ef26!3m1!1s2@1:CIHM0ogKEICAgICXk9zUDA%7CCgwIhp7SuAYQwLjSjAE%7C?hl=en-US', 'images': [{'thumbnail': 'https://lh3.googleusercontent.com/geougc-cs/AIHozJLiu6C9xn6wTVXxXj0kn3stdbUu38CAVYnLA5wSXZ_chSzDegu5IGOmO0KEOFATWO9b-b22pwDOOIT3CsUGCRM0erjj7rPO0l1_hTQ2Yln6rv5FmbGwzS-6qbM5JjELFXwqctSsPw'}], 'date': '4 months ago'}, {'username': 'Solomon Bennett', 'rating': 1, 'contributor_id': '101322833261946912336', 'description': 'Well I had the same problem out this Kyle guy. His service was awful and I paid him money which was 185.00 dollars. He fixed nothing and I’m trying to post pictures. He is a big liar and I will be taking him to court. He doesn’t pick up for days and then gives you several excuses about why he didn’t show. He didn’t deserve one star because he should have never made me pay up front. It was the worst experience I ever had with a business', 'link': 'https://www.google.com/maps/reviews/data=!4m8!14m7!1m6!2m5!1sChZDSUhNMG9nS0VJQ0FnTURnOHU3WlZ3EAE!2m1!1s0x0:0x47f3db545d62ef26!3m1!1s2@1:CIHM0ogKEICAgMDg8u7ZVw%7CCgwI5KDuvQYQ6I7SygM%7C?hl=en-US', 'date': '3 weeks ago'}]}, 'web_results_link': 'https://www.google.com/search?q=local+guide+program&ibp=gwp;0,26,OiIKICIcMjQgSHIgQWR2YW5jZSBNb2JpbGUgUmVwYWlycygC&pcl=lp', 'serpapi_web_results_link': 'https://serpapi.com/search.json?device=desktop&engine=google&google_domain=google.com&ibp=gwp%3B0%2C26%2COiIKICIcMjQgSHIgQWR2YW5jZSBNb2JpbGUgUmVwYWlycygC&q=local+guide+program'}]
+INFO 2025-03-17 09:51:27,313 tasks 2240 35608 Saved results for query '24 Hr Advance Mobile Repairs' to scraping_results/15/24_Hr_Advance_Mobile_Repairs.json
+INFO 2025-03-17 09:51:27,314 tasks 2240 35608 Saving business 1/1 for query '24 Hr Advance Mobile Repairs' (Page 1)
+INFO 2025-03-17 09:51:27,315 tasks 2240 35608 Saving business data for task 15
+INFO 2025-03-17 09:51:27,317 tasks 2240 35608 Local result data: {'title': '24 Hr Advance Mobile Repairs', 'place_id': 'ChIJtYB7cDwSdSERJu9iXVTb80c', 'data_id': '0x2175123c707b80b5:0x47f3db545d62ef26', 'data_cid': '5184728751424073510', 'reviews_link': 'https://serpapi.com/search.json?data_id=0x2175123c707b80b5%3A0x47f3db545d62ef26&engine=google_maps_reviews&hl=en', 'photos_link': 'https://serpapi.com/search.json?data_id=0x2175123c707b80b5%3A0x47f3db545d62ef26&engine=google_maps_photos&hl=en', 'gps_coordinates': {'latitude': 29.8322945, 'longitude': -82.3797429}, 'place_id_search': 'https://serpapi.com/search.json?engine=google_maps&google_domain=google.com&hl=en&place_id=ChIJtYB7cDwSdSERJu9iXVTb80c', 'provider_id': '/g/11l6dvqm9r', 'thumbnail': 'https://lh5.googleusercontent.com/p/AF1QipNJXpR_DdBeJGAkUNcbj-bI2oLBf_AYz9a3EkC3=w114-h86-k-no', 'rating_summary': [{'stars': 1, 'amount': 1}, {'stars': 2, 'amount': 0}, {'stars': 3, 'amount': 0}, {'stars': 4, 'amount': 0}, {'stars': 5, 'amount': 23}], 'rating': 4.8, 'reviews': 24, 'type': ['Mechanic', 'Car repair and maintenance service', 'Diesel engine repair service', 'Engine rebuilding service', 'Service establishment', 'Repair service'], 'type_ids': ['mechanic', 'car_repair', 'diesel_engine_repair_service', 'engine_rebuilding_service', 'establishment_service', 'repair_service'], 'phone': '(352) 647-7814', 'open_state': 'Open 24 hours', 'hours': [{'monday': 'Open 24 hours'}, {'tuesday': 'Open 24 hours'}, {'wednesday': 'Open 24 hours'}, {'thursday': 'Open 24 hours'}, {'friday': 'Open 24 hours'}, {'saturday': 'Open 24 hours'}, {'sunday': 'Open 24 hours'}], 'images': [{'title': 'All', 'thumbnail': 'https://lh5.googleusercontent.com/p/AF1QipNJXpR_DdBeJGAkUNcbj-bI2oLBf_AYz9a3EkC3=w397-h298-k-no'}, {'title': 'Latest', 'thumbnail': 'https://lh5.googleusercontent.com/p/AF1QipO_q17Sq_GlYUMayFeTbljNugz1mg7Kep3AOThO=w224-h298-k-no'}], 'user_reviews': {'most_relevant': [{'username': 'Alyssa Walters', 'rating': 5, 'contributor_id': '116342346181357770727', 'description': 'We just moved from Maryland to Gainesville a few months again. We knew our tires needed replaced, but we’ve been limited on funds. One of our tires finally gave out and this man didn’t hesitate to help! He ended up finding and marking a hole for us since he didn’t have any spare tire plugs. We were able to make it to Sam’s club and ask for a tire plug.', 'link': 'https://www.google.com/maps/reviews/data=!4m8!14m7!1m6!2m5!1sChdDSUhNMG9nS0VJQ0FnSUR2OE95TnhBRRAB!2m1!1s0x0:0x47f3db545d62ef26!3m1!1s2@1:CIHM0ogKEICAgIDv8OyNxAE%7CCgwIrPeCuwYQqJa2lwI%7C?hl=en-US', 'images': [{'thumbnail': 'https://lh3.googleusercontent.com/geougc-cs/AIHozJLNH0dNuFY4FLkDsg3UGJjg1_ELIO1aWl1A488BitK0lHVZ7hs1p86P8ZtqjnlZHq1dJCDrI1XirKwZVuEBfxo2P5j6wm-8RDpCj2wbUY7V7GZR4dLnH8bVM0z8TsKw13pMh10B'}, {'thumbnail': 'https://lh3.googleusercontent.com/geougc-cs/AIHozJKWVWOex1Nlr-oOVa0U7lxwagmwMXwo5jaIauMx55SIja3ccZ1Drc1u0Z_6QxnqGb2D-F95utXTMq4e9h4Me8rCHgsQtnRhHlmzpwZERSJE3jDzP3qdM-f3l7qQkjjy7GoZjQzfeQ'}], 'date': '3 months ago'}, {'username': 'Jane Doe', 'rating': 5, 'contributor_id': '103724505572303205154', 'description': 'Coming from Minnesota to Florida and the wheel bearing on my dad’s truck went and we had to get off the highway because it sounded so bad! Kyle was the only person who answered our call and stopped and grabbed all the parts needed and was to us quickly! Very good service great guy!', 'link': 'https://www.google.com/maps/reviews/data=!4m8!14m7!1m6!2m5!1sChZDSUhNMG9nS0VJQ0FnTUNRcE5faUlBEAE!2m1!1s0x0:0x47f3db545d62ef26!3m1!1s2@1:CIHM0ogKEICAgMCQpN_iIA%7CCgwI3q2PvgYQwPDlsQM%7C?hl=en-US', 'date': '2 weeks ago'}, {'username': 'Steve Gillaspie', 'rating': 5, 'contributor_id': '107472870386814066647', 'description': 'After reading reviews for emergency vehicle assistance, this young man did not disappoint!  Once on site, his attention to detail was impeccable.  We highly recommend Kyle to the rescue if broken down in his area.  Thank you sir!!', 'link': 'https://www.google.com/maps/reviews/data=!4m8!14m7!1m6!2m5!1sChdDSUhNMG9nS0VJQ0FnSURfZ3RPSDZBRRAB!2m1!1s0x0:0x47f3db545d62ef26!3m1!1s2@1:CIHM0ogKEICAgID_gtOH6AE%7CCgwIzfbEvAYQqM_U2gI%7C?hl=en-US', 'images': [{'thumbnail': 'https://lh3.googleusercontent.com/geougc-cs/AIHozJJkxnOrx3ZIbbM1OpXSAEtImtSWERcInV087YSbezyL0XyiW2-z1qPkacACb4Rwxr8A7FYoRGPMlK1eRznb6zS9uejQADXgcV3EWV5hmCiY60gygOlcuJvwv3dOSpZ1_SJVJnCp'}], 'date': 'a month ago'}, {'username': 'eugene hershman', 'rating': 5, 'contributor_id': '115308984854443244455', 'description': "Apparently Kyle could not give me a call back because where he was working he had poor phone service. Finally called and said he'd be there in an hour but never showed up. Claim that his phone broke. When he get finally call in 2 days wanted to know he still wanted to come out there and we told him NO. TOO MANY EXCUSES AND NO SHOW. He shows that he's unreliable. I'm not sure if all these other reviews are honest reviews or made up by him.", 'link': 'https://www.google.com/maps/reviews/data=!4m8!14m7!1m6!2m5!1sChZDSUhNMG9nS0VJQ0FnTUNBMjR2MVJ3EAE!2m1!1s0x0:0x47f3db545d62ef26!3m1!1s2@1:CIHM0ogKEICAgMCA24v1Rw%7CCgwIvaG5vQYQoLSztwM%7C?hl=en-US', 'date': 'a month ago'}, {'username': 'Joshua Arthur', 'rating': 5, 'contributor_id': '106414370689776227536', 'description': 'Bought a car in Florida flew out to drive it home to Dallas.  Check engine light came on on the way home. This man went above and beyond to come and get me home safe. We to three different part stores to find the part then came to me in a parking lot at 9pm to get me home safely. For sure stand up man!!', 'link': 'https://www.google.com/maps/reviews/data=!4m8!14m7!1m6!2m5!1sChdDSUhNMG9nS0VJQ0FnSUMzbDdqdXFRRRAB!2m1!1s0x0:0x47f3db545d62ef26!3m1!1s2@1:CIHM0ogKEICAgIC3l7juqQE%7CCgwI-qXAuQYQwNvGlwI%7C?hl=en-US', 'date': '4 months ago'}, {'username': 'Joshua Maio', 'rating': 5, 'contributor_id': '109947180152051657631', 'description': "Kyle showed up with a single call,ran to the parts store met us in a hotel parking lot and replaced our wheel hub on our truck at 9pm on a Saturday that's what I call service with a smile after coming from minnesota and driving 28 hours he had us back on the road to Tampa in no time shout out to you kyle thank you brother for fast speedy A1 service your awesome", 'link': 'https://www.google.com/maps/reviews/data=!4m8!14m7!1m6!2m5!1sChdDSUhNMG9nS0VJQ0FnTUNRcExfVnZBRRAB!2m1!1s0x0:0x47f3db545d62ef26!3m1!1s2@1:CIHM0ogKEICAgMCQpL_VvAE%7CCgwImK6PvgYQwPOK1QE%7C?hl=en-US', 'images': [{'thumbnail': 'https://lh3.googleusercontent.com/geougc-cs/AIHozJLcYjLtfrOm4y8ioKzfXr8_YJA5CjxTThn3x6brtR0juZ2B5zvdT0XKGwtliWNQmUevKTaOe3_1psM-FUHqFmoptfi7_NkSWiUgDUlS6Em9SLmhiweMAbjQ8koVFnyrEs4mRRY'}], 'date': '2 weeks ago'}, {'username': 'Ed Cutchins', 'rating': 5, 'contributor_id': '112318531660179781274', 'description': 'What a great person to take care of your needs. He was fast, knew what to do and on time. I would recommend his services.', 'link': 'https://www.google.com/maps/reviews/data=!4m8!14m7!1m6!2m5!1sChZDSUhNMG9nS0VJQ0FnSUNYazl6VURBEAE!2m1!1s0x0:0x47f3db545d62ef26!3m1!1s2@1:CIHM0ogKEICAgICXk9zUDA%7CCgwIhp7SuAYQwLjSjAE%7C?hl=en-US', 'images': [{'thumbnail': 'https://lh3.googleusercontent.com/geougc-cs/AIHozJLiu6C9xn6wTVXxXj0kn3stdbUu38CAVYnLA5wSXZ_chSzDegu5IGOmO0KEOFATWO9b-b22pwDOOIT3CsUGCRM0erjj7rPO0l1_hTQ2Yln6rv5FmbGwzS-6qbM5JjELFXwqctSsPw'}], 'date': '4 months ago'}, {'username': 'Solomon Bennett', 'rating': 1, 'contributor_id': '101322833261946912336', 'description': 'Well I had the same problem out this Kyle guy. His service was awful and I paid him money which was 185.00 dollars. He fixed nothing and I’m trying to post pictures. He is a big liar and I will be taking him to court. He doesn’t pick up for days and then gives you several excuses about why he didn’t show. He didn’t deserve one star because he should have never made me pay up front. It was the worst experience I ever had with a business', 'link': 'https://www.google.com/maps/reviews/data=!4m8!14m7!1m6!2m5!1sChZDSUhNMG9nS0VJQ0FnTURnOHU3WlZ3EAE!2m1!1s0x0:0x47f3db545d62ef26!3m1!1s2@1:CIHM0ogKEICAgMDg8u7ZVw%7CCgwI5KDuvQYQ6I7SygM%7C?hl=en-US', 'date': '3 weeks ago'}]}, 'web_results_link': 'https://www.google.com/search?q=local+guide+program&ibp=gwp;0,26,OiIKICIcMjQgSHIgQWR2YW5jZSBNb2JpbGUgUmVwYWlycygC&pcl=lp', 'serpapi_web_results_link': 'https://serpapi.com/search.json?device=desktop&engine=google&google_domain=google.com&ibp=gwp%3B0%2C26%2COiIKICIcMjQgSHIgQWR2YW5jZSBNb2JpbGUgUmVwYWlycygC&q=local+guide+program'}
+INFO 2025-03-17 09:51:27,324 tasks 2240 35608 Business data to be saved: {'task': <ScrapingTask: Bangladesh - Budapest - Automotive Services - Mobile Mechanics - Diagnostic Services - Budapest (ID: 15)>, 'project_id': UUID('289e3e6b-3ac0-4671-9fd7-903c91a8334a'), 'project_title': 'Bangladesh - Budapest - Automotive Services - Mobile Mechanics - Diagnostic Services', 'main_category': 'Mobile Mechanics', 'tailored_category': 'Diagnostic Services', 'search_string': '24 Hr Advance Mobile Repairs', 'scraped_at': datetime.datetime(2025, 3, 17, 8, 51, 27, 316005, tzinfo=datetime.timezone.utc), 'level': 0, 'country': 'Bangladesh', 'city': 'Budapest', 'state': '', 'form_country_id': 17, 'form_country_name': 'Bangladesh', 'form_destination_id': 18, 'form_destination_name': 'Budapest', 'destination_id': 18, 'title': '24 Hr Advance Mobile Repairs', 'place_id': 'ChIJtYB7cDwSdSERJu9iXVTb80c', 'data_id': '0x2175123c707b80b5:0x47f3db545d62ef26', 'data_cid': '5184728751424073510', 'rating': 4.8, 'reviews_count': 24, 'phone': '(352) 647-7814', 'thumbnail': 'https://lh5.googleusercontent.com/p/AF1QipNJXpR_DdBeJGAkUNcbj-bI2oLBf_AYz9a3EkC3=w114-h86-k-no'}
+INFO 2025-03-17 09:51:27,325 tasks 2240 35608 Processed business types: Mechanic, Car repair and maintenance service, Diesel engine repair service, Engine rebuilding service, Service establishment, Repair service
+INFO 2025-03-17 09:51:27,326 tasks 2240 35608 Formatted hours data: {'monday': 'Open 24 hours', 'tuesday': 'Open 24 hours', 'wednesday': 'Open 24 hours', 'thursday': 'Open 24 hours', 'friday': 'Open 24 hours', 'saturday': 'Open 24 hours', 'sunday': 'Open 24 hours'}
+INFO 2025-03-17 09:51:27,326 tasks 2240 35608 Filling missing address components...
+INFO 2025-03-17 09:51:27,326 tasks 2240 35608 Final address components:
+INFO 2025-03-17 09:51:27,326 tasks 2240 35608 Street: 
+INFO 2025-03-17 09:51:27,327 tasks 2240 35608 Postal Code: 
+INFO 2025-03-17 09:51:27,327 tasks 2240 35608 City: Budapest
+INFO 2025-03-17 09:51:27,327 tasks 2240 35608 Country: Bangladesh
+INFO 2025-03-17 09:51:27,329 models 2240 35608 Creating new Business: 24 Hr Advance Mobile Repairs
+INFO 2025-03-17 09:51:27,332 signals 2240 35608 [SIGNAL] Recalculating Task 15 due to Business 8 change.
+INFO 2025-03-17 09:51:27,339 common 2240 35608 Task 15 counts: total=1, pending=1, reviewed=0, in_production=0
+INFO 2025-03-17 09:51:27,340 common 2240 35608 Task 15 => DONE -> COMPLETED
+INFO 2025-03-17 09:51:27,345 signals 2240 35608 Task 15 status update: previous_status=DONE, businesses=1, pending=1, reviewed=0, in_production=0, discarded=0, new_status=COMPLETED
+INFO 2025-03-17 09:51:27,347 tasks 2240 35608 New business created: 24 Hr Advance Mobile Repairs (ID: 8)
+INFO 2025-03-17 09:51:27,347 tasks 2240 35608 Additional data saved for business 8
+INFO 2025-03-17 09:51:27,347 tasks 2240 35608 All business data processed and saved for business 8
+INFO 2025-03-17 09:51:27,348 tasks 2240 35608 Address components saved - Street: , Postal Code: , City: Budapest
+INFO 2025-03-17 09:51:27,349 tasks 2240 35608 Processing download with image count: 6
+INFO 2025-03-17 09:51:28,170 tasks 2240 35608 Found 5 total photos, downloading 5 as per image_count: 6
+INFO 2025-03-17 09:51:32,150 tasks 2240 35608 Downloaded and processed image 0 for business 8
+INFO 2025-03-17 09:51:52,567 tasks 2240 35608 Downloaded and processed image 1 for business 8
+INFO 2025-03-17 09:52:11,138 tasks 2240 35608 Downloaded and processed image 2 for business 8
+INFO 2025-03-17 09:52:22,353 tasks 2240 35608 Downloaded and processed image 3 for business 8
+INFO 2025-03-17 09:52:34,151 tasks 2240 35608 Downloaded and processed image 4 for business 8
+INFO 2025-03-17 09:52:44,163 models 2240 35608 Updating Business 8: 24 Hr Advance Mobile Repairs
+INFO 2025-03-17 09:52:44,168 signals 2240 35608 [SIGNAL] Recalculating Task 15 due to Business 8 change.
+INFO 2025-03-17 09:52:44,173 common 2240 35608 Task 15 counts: total=1, pending=1, reviewed=0, in_production=0
+INFO 2025-03-17 09:52:44,179 signals 2240 35608 Task 15 status update: previous_status=DONE, businesses=1, pending=1, reviewed=0, in_production=0, discarded=0, new_status=COMPLETED
+INFO 2025-03-17 09:52:44,179 tasks 2240 35608 Set main image for business 8
+INFO 2025-03-17 09:52:44,197 tasks 2240 35608 Downloaded 5 images for business 8
+INFO 2025-03-17 09:52:44,198 tasks 2240 35608 Downloading images for business 8
+INFO 2025-03-17 09:52:44,198 tasks 2240 35608 Processing download with image count: 3
+INFO 2025-03-17 09:52:46,383 tasks 2240 35608 Found 5 total photos, downloading 3 as per image_count: 3
+INFO 2025-03-17 09:52:46,395 tasks 2240 35608 Image already exists for business 8, skipping download.
+INFO 2025-03-17 09:52:46,397 tasks 2240 35608 Image already exists for business 8, skipping download.
+INFO 2025-03-17 09:52:46,399 tasks 2240 35608 Image already exists for business 8, skipping download.
+INFO 2025-03-17 09:52:46,402 models 2240 35608 Updating Business 8: 24 Hr Advance Mobile Repairs
+INFO 2025-03-17 09:52:46,407 signals 2240 35608 [SIGNAL] Recalculating Task 15 due to Business 8 change.
+INFO 2025-03-17 09:52:46,414 common 2240 35608 Task 15 counts: total=1, pending=1, reviewed=0, in_production=0
+INFO 2025-03-17 09:52:46,420 signals 2240 35608 Task 15 status update: previous_status=COMPLETED, businesses=1, pending=1, reviewed=0, in_production=0, discarded=0, new_status=COMPLETED
+INFO 2025-03-17 09:52:46,420 tasks 2240 35608 Set main image for business 8
+INFO 2025-03-17 09:52:46,421 tasks 2240 35608 Processed 1 results on page 1 for query '24 Hr Advance Mobile Repairs'
+INFO 2025-03-17 09:52:46,422 tasks 2240 35608 No next page token found for query '24 Hr Advance Mobile Repairs'
+INFO 2025-03-17 09:52:46,422 tasks 2240 35608 Finished processing query: 24 Hr Advance Mobile Repairs
+INFO 2025-03-17 09:52:46,422 tasks 2240 35608 Processing query 2/4: Mechanic Dad LLC (Page 1)
+INFO 2025-03-17 09:52:46,423 tasks 2240 35608 Searching for exact place with params: {'api_key': '2b24aae0d70038ce430be0b58b0037d73254d42cefaa7d142a358fc432b8de52', 'engine': 'google_maps', 'type': 'place', 'google_domain': 'google.com', 'data': '!4m5!3m4!1s0x497a8cf85b14e81d:0x486b44d3eb30f30d!8m2!3d29.6327057!4d-82.3735993', 'hl': 'en', 'no_cache': 'true'}
+INFO 2025-03-17 09:52:48,819 tasks 2240 35608 Processing 1 local results for query 'Mechanic Dad LLC' (Page 1)
+INFO 2025-03-17 09:52:48,862 tasks 2240 35608 Saved results for query 'Mechanic Dad LLC' to scraping_results/15/Mechanic_Dad_LLC.json
+INFO 2025-03-17 09:52:48,863 tasks 2240 35608 Saving business 1/1 for query 'Mechanic Dad LLC' (Page 1)
+INFO 2025-03-17 09:52:48,864 tasks 2240 35608 Saving business data for task 15
+INFO 2025-03-17 09:52:48,916 tasks 2240 35608 Parsed address components from: 2112 SW 34th St pmb 278, Gainesville, FL 32608, United States
+INFO 2025-03-17 09:52:48,916 tasks 2240 35608 Country detected: United States
+INFO 2025-03-17 09:52:48,916 tasks 2240 35608 Street: 2112 SW 34th St pmb 278, Gainesville
+INFO 2025-03-17 09:52:48,916 tasks 2240 35608 Postal Code: 32608
+INFO 2025-03-17 09:52:48,917 tasks 2240 35608 Extracted address components:
+INFO 2025-03-17 09:52:48,917 tasks 2240 35608 Full Address: 2112 SW 34th St pmb 278, Gainesville, FL 32608, United States
+INFO 2025-03-17 09:52:48,918 tasks 2240 35608 Street: 2112 SW 34th St pmb 278, Gainesville
+INFO 2025-03-17 09:52:48,918 tasks 2240 35608 Postal Code: 32608
+INFO 2025-03-17 09:52:48,918 tasks 2240 35608 Business data to be saved: {'task': <ScrapingTask: Bangladesh - Budapest - Automotive Services - Mobile Mechanics - Diagnostic Services - Budapest (ID: 15)>, 'project_id': UUID('289e3e6b-3ac0-4671-9fd7-903c91a8334a'), 'project_title': 'Bangladesh - Budapest - Automotive Services - Mobile Mechanics - Diagnostic Services', 'main_category': 'Mobile Mechanics', 'tailored_category': 'Diagnostic Services', 'search_string': 'Mechanic Dad LLC', 'scraped_at': datetime.datetime(2025, 3, 17, 8, 52, 48, 866725, tzinfo=datetime.timezone.utc), 'level': 0, 'country': 'Bangladesh', 'city': 'Budapest', 'state': '', 'form_country_id': 17, 'form_country_name': 'Bangladesh', 'form_destination_id': 18, 'form_destination_name': 'Budapest', 'destination_id': 18, 'address': '2112 SW 34th St pmb 278, Gainesville, FL 32608, United States', 'street': '2112 SW 34th St pmb 278, Gainesville', 'postal_code': '32608', 'title': 'Mechanic Dad LLC', 'place_id': 'ChIJHegUW_iMekkRDfMw69NEa0g', 'data_id': '0x497a8cf85b14e81d:0x486b44d3eb30f30d', 'data_cid': '5218340270213493517', 'rating': 5, 'reviews_count': 16, 'phone': '+1 352-870-1250', 'website': 'http://www.mechanicdad.com/', 'thumbnail': 'https://streetviewpixels-pa.googleapis.com/v1/thumbnail?panoid=qHD3PFhKzW2Ql9jclGfosg&cb_client=search.gws-prod.gps&w=86&h=86&yaw=210.88538&pitch=0&thumbfov=100'}
+INFO 2025-03-17 09:52:48,919 tasks 2240 35608 Processed business types: Car repair and maintenance service, Auto repair shop
+INFO 2025-03-17 09:52:48,919 tasks 2240 35608 Formatted hours data: {'monday': '9\u202fAM–5\u202fPM', 'tuesday': '9\u202fAM–5\u202fPM', 'wednesday': '9\u202fAM–5\u202fPM', 'thursday': '9\u202fAM–5\u202fPM', 'friday': '9\u202fAM–5\u202fPM', 'saturday': 'Closed', 'sunday': 'Closed'}
+INFO 2025-03-17 09:52:48,920 tasks 2240 35608 Processed extensions data: [{'service_options': ['On-site services']}, {'accessibility': ['Wheelchair-accessible car park']}, {'payments': ['Credit cards']}]
+INFO 2025-03-17 09:52:48,920 tasks 2240 35608 Filling missing address components...
+INFO 2025-03-17 09:52:48,920 tasks 2240 35608 Final address components:
+INFO 2025-03-17 09:52:48,920 tasks 2240 35608 Street: 2112 SW 34th St pmb 278, Gainesville, FL 32608, United States
+INFO 2025-03-17 09:52:48,921 tasks 2240 35608 Postal Code: 32608
+INFO 2025-03-17 09:52:48,921 tasks 2240 35608 City: Budapest
+INFO 2025-03-17 09:52:48,921 tasks 2240 35608 Country: Bangladesh
+INFO 2025-03-17 09:52:48,924 models 2240 35608 Creating new Business: Mechanic Dad LLC
+INFO 2025-03-17 09:52:48,926 signals 2240 35608 [SIGNAL] Recalculating Task 15 due to Business 9 change.
+INFO 2025-03-17 09:52:48,933 common 2240 35608 Task 15 counts: total=2, pending=2, reviewed=0, in_production=0
+INFO 2025-03-17 09:52:48,937 signals 2240 35608 Task 15 status update: previous_status=COMPLETED, businesses=2, pending=2, reviewed=0, in_production=0, discarded=0, new_status=COMPLETED
+INFO 2025-03-17 09:52:48,938 tasks 2240 35608 New business created: Mechanic Dad LLC (ID: 9)
+INFO 2025-03-17 09:52:48,938 tasks 2240 35608 Additional data saved for business 9
+INFO 2025-03-17 09:52:48,938 tasks 2240 35608 All business data processed and saved for business 9
+INFO 2025-03-17 09:52:48,939 tasks 2240 35608 Address components saved - Street: 2112 SW 34th St pmb 278, Gainesville, Postal Code: 32608, City: Budapest
+INFO 2025-03-17 09:52:48,939 tasks 2240 35608 Processing download with image count: 6
+INFO 2025-03-17 09:52:49,720 tasks 2240 35608 Found 1 total photos, downloading 1 as per image_count: 6
+INFO 2025-03-17 09:52:51,365 tasks 2240 35608 Downloaded and processed image 0 for business 9
+INFO 2025-03-17 09:52:55,004 models 2240 35608 Updating Business 9: Mechanic Dad LLC
+INFO 2025-03-17 09:52:55,008 signals 2240 35608 [SIGNAL] Recalculating Task 15 due to Business 9 change.
+INFO 2025-03-17 09:52:55,013 common 2240 35608 Task 15 counts: total=2, pending=2, reviewed=0, in_production=0
+INFO 2025-03-17 09:52:55,019 signals 2240 35608 Task 15 status update: previous_status=COMPLETED, businesses=2, pending=2, reviewed=0, in_production=0, discarded=0, new_status=COMPLETED
+INFO 2025-03-17 09:52:55,020 tasks 2240 35608 Set main image for business 9
+INFO 2025-03-17 09:52:55,023 tasks 2240 35608 Downloaded 1 images for business 9
+INFO 2025-03-17 09:52:55,023 tasks 2240 35608 Downloading images for business 9
+INFO 2025-03-17 09:52:55,024 tasks 2240 35608 Processing download with image count: 3
+INFO 2025-03-17 09:52:56,131 tasks 2240 35608 Found 1 total photos, downloading 1 as per image_count: 3
+INFO 2025-03-17 09:52:56,136 tasks 2240 35608 Image already exists for business 9, skipping download.
+INFO 2025-03-17 09:52:56,139 models 2240 35608 Updating Business 9: Mechanic Dad LLC
+INFO 2025-03-17 09:52:56,145 signals 2240 35608 [SIGNAL] Recalculating Task 15 due to Business 9 change.
+INFO 2025-03-17 09:52:56,150 common 2240 35608 Task 15 counts: total=2, pending=2, reviewed=0, in_production=0
+INFO 2025-03-17 09:52:56,157 signals 2240 35608 Task 15 status update: previous_status=COMPLETED, businesses=2, pending=2, reviewed=0, in_production=0, discarded=0, new_status=COMPLETED
+INFO 2025-03-17 09:52:56,158 tasks 2240 35608 Set main image for business 9
+INFO 2025-03-17 09:52:56,159 tasks 2240 35608 Processed 1 results on page 1 for query 'Mechanic Dad LLC'
+INFO 2025-03-17 09:52:56,159 tasks 2240 35608 No next page token found for query 'Mechanic Dad LLC'
+INFO 2025-03-17 09:52:56,160 tasks 2240 35608 Finished processing query: Mechanic Dad LLC
+INFO 2025-03-17 09:52:56,160 tasks 2240 35608 Processing query 3/4: A Tech 24HR Mobile Mechanic (Page 1)
+INFO 2025-03-17 09:52:56,161 tasks 2240 35608 Searching for exact place with params: {'api_key': '2b24aae0d70038ce430be0b58b0037d73254d42cefaa7d142a358fc432b8de52', 'engine': 'google_maps', 'type': 'place', 'google_domain': 'google.com', 'data': '!4m5!3m4!1s0x88e8d39d0864d745:0x6dd0df4ecb51ec21!8m2!3d29.905793!4d-82.741521', 'hl': 'en', 'no_cache': 'true'}
+INFO 2025-03-17 09:52:57,329 tasks 2240 35608 Processing 1 local results for query 'A Tech 24HR Mobile Mechanic' (Page 1)
+INFO 2025-03-17 09:52:57,372 tasks 2240 35608 Saved results for query 'A Tech 24HR Mobile Mechanic' to scraping_results/15/A_Tech_24HR_Mobile_Mechanic.json
+INFO 2025-03-17 09:52:57,373 tasks 2240 35608 Saving business 1/1 for query 'A Tech 24HR Mobile Mechanic' (Page 1)
+INFO 2025-03-17 09:52:57,373 tasks 2240 35608 Saving business data for task 15
+INFO 2025-03-17 09:52:57,419 tasks 2240 35608 Parsed address components from: 487 SW Uncle Remus, Fort White, FL 32038
+INFO 2025-03-17 09:52:57,419 tasks 2240 35608 Country detected: FL 32038
+INFO 2025-03-17 09:52:57,420 tasks 2240 35608 Street: 487 SW Uncle Remus, Fort White
+INFO 2025-03-17 09:52:57,420 tasks 2240 35608 Postal Code: 32038
+INFO 2025-03-17 09:52:57,420 tasks 2240 35608 Extracted address components:
+INFO 2025-03-17 09:52:57,421 tasks 2240 35608 Full Address: 487 SW Uncle Remus, Fort White, FL 32038
+INFO 2025-03-17 09:52:57,421 tasks 2240 35608 Street: 487 SW Uncle Remus, Fort White
+INFO 2025-03-17 09:52:57,421 tasks 2240 35608 Postal Code: 32038
+INFO 2025-03-17 09:52:57,421 tasks 2240 35608 Business data to be saved: {'task': <ScrapingTask: Bangladesh - Budapest - Automotive Services - Mobile Mechanics - Diagnostic Services - Budapest (ID: 15)>, 'project_id': UUID('289e3e6b-3ac0-4671-9fd7-903c91a8334a'), 'project_title': 'Bangladesh - Budapest - Automotive Services - Mobile Mechanics - Diagnostic Services', 'main_category': 'Mobile Mechanics', 'tailored_category': 'Diagnostic Services', 'search_string': 'A Tech 24HR Mobile Mechanic', 'scraped_at': datetime.datetime(2025, 3, 17, 8, 52, 57, 375958, tzinfo=datetime.timezone.utc), 'level': 0, 'country': 'Bangladesh', 'city': 'Budapest', 'state': '', 'form_country_id': 17, 'form_country_name': 'Bangladesh', 'form_destination_id': 18, 'form_destination_name': 'Budapest', 'destination_id': 18, 'address': '487 SW Uncle Remus, Fort White, FL 32038', 'street': '487 SW Uncle Remus, Fort White', 'postal_code': '32038', 'title': 'A Tech 24HR Mobile Mechanic', 'place_id': 'ChIJRddkCJ3T6IgRIexRy07f0G0', 'data_id': '0x88e8d39d0864d745:0x6dd0df4ecb51ec21', 'data_cid': '7913070074801548321', 'rating': 4.3, 'reviews_count': 35, 'phone': '(352) 681-0176', 'thumbnail': 'https://lh5.googleusercontent.com/p/AF1QipOvBEssU2kTG-eCPyW0__Pg5RVkrXE6ENM1fsSc=w114-h86-k-no'}
+INFO 2025-03-17 09:52:57,422 tasks 2240 35608 Processed business types: Mechanic, Auto electrical service, Auto radiator repair service, Car repair and maintenance service, Machine repair service, Towing service, Truck repair shop
+INFO 2025-03-17 09:52:57,423 tasks 2240 35608 Formatted hours data: {'monday': 'Open 24 hours', 'tuesday': 'Open 24 hours', 'wednesday': 'Open 24 hours', 'thursday': 'Open 24 hours', 'friday': 'Open 24 hours', 'saturday': 'Open 24 hours', 'sunday': 'Open 24 hours'}
+INFO 2025-03-17 09:52:57,423 tasks 2240 35608 Processed extensions data: [{'accessibility': ['Wheelchair accessible parking lot']}, {'offerings': ['Oil change']}, {'crowd': ['LGBTQ+ friendly', 'Transgender safespace']}, {'payments': ['Debit cards']}]
+INFO 2025-03-17 09:52:57,424 tasks 2240 35608 Filling missing address components...
+INFO 2025-03-17 09:52:57,424 tasks 2240 35608 Final address components:
+INFO 2025-03-17 09:52:57,424 tasks 2240 35608 Street: 487 SW Uncle Remus, Fort White, FL 32038
+INFO 2025-03-17 09:52:57,424 tasks 2240 35608 Postal Code: 32038
+INFO 2025-03-17 09:52:57,425 tasks 2240 35608 City: Budapest
+INFO 2025-03-17 09:52:57,425 tasks 2240 35608 Country: Bangladesh
+INFO 2025-03-17 09:52:57,428 models 2240 35608 Creating new Business: A Tech 24HR Mobile Mechanic
+INFO 2025-03-17 09:52:57,431 signals 2240 35608 [SIGNAL] Recalculating Task 15 due to Business 10 change.
+INFO 2025-03-17 09:52:57,438 common 2240 35608 Task 15 counts: total=3, pending=3, reviewed=0, in_production=0
+INFO 2025-03-17 09:52:57,448 signals 2240 35608 Task 15 status update: previous_status=COMPLETED, businesses=3, pending=3, reviewed=0, in_production=0, discarded=0, new_status=COMPLETED
+INFO 2025-03-17 09:52:57,449 tasks 2240 35608 New business created: A Tech 24HR Mobile Mechanic (ID: 10)
+INFO 2025-03-17 09:52:57,450 tasks 2240 35608 Additional data saved for business 10
+INFO 2025-03-17 09:52:57,450 tasks 2240 35608 All business data processed and saved for business 10
+INFO 2025-03-17 09:52:57,450 tasks 2240 35608 Address components saved - Street: 487 SW Uncle Remus, Fort White, Postal Code: 32038, City: Budapest
+INFO 2025-03-17 09:52:57,451 tasks 2240 35608 Processing download with image count: 6
+INFO 2025-03-17 09:52:59,080 tasks 2240 35608 Found 7 total photos, downloading 6 as per image_count: 6
+INFO 2025-03-17 09:53:04,148 tasks 2240 35608 Downloaded and processed image 0 for business 10
+INFO 2025-03-17 09:53:12,999 tasks 2240 35608 Downloaded and processed image 1 for business 10
+INFO 2025-03-17 09:53:30,244 tasks 2240 35608 Downloaded and processed image 2 for business 10
+INFO 2025-03-17 09:53:41,816 tasks 2240 35608 Downloaded and processed image 3 for business 10
+INFO 2025-03-17 09:53:51,927 tasks 2240 35608 Downloaded and processed image 4 for business 10
+INFO 2025-03-17 09:54:14,030 tasks 2240 35608 Downloaded and processed image 5 for business 10
+INFO 2025-03-17 09:54:32,032 models 2240 35608 Updating Business 10: A Tech 24HR Mobile Mechanic
+INFO 2025-03-17 09:54:32,037 signals 2240 35608 [SIGNAL] Recalculating Task 15 due to Business 10 change.
+INFO 2025-03-17 09:54:32,043 common 2240 35608 Task 15 counts: total=3, pending=3, reviewed=0, in_production=0
+INFO 2025-03-17 09:54:32,048 signals 2240 35608 Task 15 status update: previous_status=COMPLETED, businesses=3, pending=3, reviewed=0, in_production=0, discarded=0, new_status=COMPLETED
+INFO 2025-03-17 09:54:32,049 tasks 2240 35608 Set main image for business 10
+INFO 2025-03-17 09:54:32,058 tasks 2240 35608 Downloaded 6 images for business 10
+INFO 2025-03-17 09:54:32,059 tasks 2240 35608 Downloading images for business 10
+INFO 2025-03-17 09:54:32,060 tasks 2240 35608 Processing download with image count: 3
+INFO 2025-03-17 09:54:33,685 tasks 2240 35608 Found 7 total photos, downloading 3 as per image_count: 3
+INFO 2025-03-17 09:54:33,692 tasks 2240 35608 Image already exists for business 10, skipping download.
+INFO 2025-03-17 09:54:33,694 tasks 2240 35608 Image already exists for business 10, skipping download.
+INFO 2025-03-17 09:54:33,695 tasks 2240 35608 Image already exists for business 10, skipping download.
+INFO 2025-03-17 09:54:33,697 models 2240 35608 Updating Business 10: A Tech 24HR Mobile Mechanic
+INFO 2025-03-17 09:54:33,703 signals 2240 35608 [SIGNAL] Recalculating Task 15 due to Business 10 change.
+INFO 2025-03-17 09:54:33,711 common 2240 35608 Task 15 counts: total=3, pending=3, reviewed=0, in_production=0
+INFO 2025-03-17 09:54:33,718 signals 2240 35608 Task 15 status update: previous_status=COMPLETED, businesses=3, pending=3, reviewed=0, in_production=0, discarded=0, new_status=COMPLETED
+INFO 2025-03-17 09:54:33,718 tasks 2240 35608 Set main image for business 10
+INFO 2025-03-17 09:54:33,720 tasks 2240 35608 Processed 1 results on page 1 for query 'A Tech 24HR Mobile Mechanic'
+INFO 2025-03-17 09:54:33,720 tasks 2240 35608 No next page token found for query 'A Tech 24HR Mobile Mechanic'
+INFO 2025-03-17 09:54:33,720 tasks 2240 35608 Finished processing query: A Tech 24HR Mobile Mechanic
+INFO 2025-03-17 09:54:33,721 tasks 2240 35608 Processing query 4/4: Mobile Automotive Service LLC (Page 1)
+INFO 2025-03-17 09:54:33,722 tasks 2240 35608 Searching for exact place with params: {'api_key': '2b24aae0d70038ce430be0b58b0037d73254d42cefaa7d142a358fc432b8de52', 'engine': 'google_maps', 'type': 'place', 'google_domain': 'google.com', 'data': '!4m5!3m4!1s0x88e8d9b554241d59:0xfe9b9ca041afe4e9!8m2!3d29.7712343!4d-82.8639722', 'hl': 'en', 'no_cache': 'true'}
+INFO 2025-03-17 09:54:35,229 tasks 2240 35608 Processing 1 local results for query 'Mobile Automotive Service LLC' (Page 1)
+INFO 2025-03-17 09:54:35,592 tasks 2240 35608 Saved results for query 'Mobile Automotive Service LLC' to scraping_results/15/Mobile_Automotive_Service_LLC.json
+INFO 2025-03-17 09:54:35,593 tasks 2240 35608 Saving business 1/1 for query 'Mobile Automotive Service LLC' (Page 1)
+INFO 2025-03-17 09:54:35,594 tasks 2240 35608 Saving business data for task 15
+INFO 2025-03-17 09:54:35,624 tasks 2240 35608 Parsed address components from: 2260 US-129, Bell, FL 32619
+INFO 2025-03-17 09:54:35,625 tasks 2240 35608 Country detected: FL 32619
+INFO 2025-03-17 09:54:35,625 tasks 2240 35608 Street: 2260 US-129, Bell
+INFO 2025-03-17 09:54:35,625 tasks 2240 35608 Postal Code: 32619
+INFO 2025-03-17 09:54:35,626 tasks 2240 35608 Extracted address components:
+INFO 2025-03-17 09:54:35,626 tasks 2240 35608 Full Address: 2260 US-129, Bell, FL 32619
+INFO 2025-03-17 09:54:35,626 tasks 2240 35608 Street: 2260 US-129, Bell
+INFO 2025-03-17 09:54:35,626 tasks 2240 35608 Postal Code: 32619
+INFO 2025-03-17 09:54:35,627 tasks 2240 35608 Business data to be saved: {'task': <ScrapingTask: Bangladesh - Budapest - Automotive Services - Mobile Mechanics - Diagnostic Services - Budapest (ID: 15)>, 'project_id': UUID('289e3e6b-3ac0-4671-9fd7-903c91a8334a'), 'project_title': 'Bangladesh - Budapest - Automotive Services - Mobile Mechanics - Diagnostic Services', 'main_category': 'Mobile Mechanics', 'tailored_category': 'Diagnostic Services', 'search_string': 'Mobile Automotive Service LLC', 'scraped_at': datetime.datetime(2025, 3, 17, 8, 54, 35, 595727, tzinfo=datetime.timezone.utc), 'level': 0, 'country': 'Bangladesh', 'city': 'Budapest', 'state': '', 'form_country_id': 17, 'form_country_name': 'Bangladesh', 'form_destination_id': 18, 'form_destination_name': 'Budapest', 'destination_id': 18, 'address': '2260 US-129, Bell, FL 32619', 'street': '2260 US-129, Bell', 'postal_code': '32619', 'title': 'Mobile Automotive Service LLC', 'place_id': 'ChIJWR0kVLXZ6IgR6eSvQaCcm_4', 'data_id': '0x88e8d9b554241d59:0xfe9b9ca041afe4e9', 'data_cid': '18346429719134594281', 'rating': 5, 'reviews_count': 3, 'phone': '(917) 891-0854', 'website': 'https://www.facebook.com/profile.php?id=61558084130427&mibextid=LQQJ4d', 'thumbnail': 'https://lh5.googleusercontent.com/p/AF1QipMVs4rdjljdBI4l7MKcBbKHKGfv77HTC9pHSGM4=w114-h86-k-no'}
+INFO 2025-03-17 09:54:35,628 tasks 2240 35608 Processed business types: Car repair and maintenance service, Auto repair shop
+INFO 2025-03-17 09:54:35,629 tasks 2240 35608 Formatted hours data: {'monday': '7\u202fAM–7\u202fPM', 'tuesday': '7\u202fAM–7\u202fPM', 'wednesday': '7\u202fAM–7\u202fPM', 'thursday': '7\u202fAM–7\u202fPM', 'friday': '7\u202fAM–7\u202fPM', 'saturday': 'Closed', 'sunday': 'Closed'}
+INFO 2025-03-17 09:54:35,629 tasks 2240 35608 Processed extensions data: [{'accessibility': ['Wheelchair accessible entrance']}, {'offerings': ['Oil change']}]
+INFO 2025-03-17 09:54:35,629 tasks 2240 35608 Filling missing address components...
+INFO 2025-03-17 09:54:35,630 tasks 2240 35608 Final address components:
+INFO 2025-03-17 09:54:35,630 tasks 2240 35608 Street: 2260 US-129, Bell, FL 32619
+INFO 2025-03-17 09:54:35,630 tasks 2240 35608 Postal Code: 32619
+INFO 2025-03-17 09:54:35,631 tasks 2240 35608 City: Budapest
+INFO 2025-03-17 09:54:35,631 tasks 2240 35608 Country: Bangladesh
+INFO 2025-03-17 09:54:35,633 models 2240 35608 Creating new Business: Mobile Automotive Service LLC
+INFO 2025-03-17 09:54:35,636 signals 2240 35608 [SIGNAL] Recalculating Task 15 due to Business 11 change.
+INFO 2025-03-17 09:54:35,642 common 2240 35608 Task 15 counts: total=4, pending=4, reviewed=0, in_production=0
+INFO 2025-03-17 09:54:35,647 signals 2240 35608 Task 15 status update: previous_status=COMPLETED, businesses=4, pending=4, reviewed=0, in_production=0, discarded=0, new_status=COMPLETED
+INFO 2025-03-17 09:54:35,648 tasks 2240 35608 New business created: Mobile Automotive Service LLC (ID: 11)
+INFO 2025-03-17 09:54:35,649 tasks 2240 35608 Additional data saved for business 11
+INFO 2025-03-17 09:54:35,649 tasks 2240 35608 All business data processed and saved for business 11
+INFO 2025-03-17 09:54:35,650 tasks 2240 35608 Address components saved - Street: 2260 US-129, Bell, Postal Code: 32619, City: Budapest
+INFO 2025-03-17 09:54:35,650 tasks 2240 35608 Processing download with image count: 6
+INFO 2025-03-17 09:54:36,964 tasks 2240 35608 Found 1 total photos, downloading 1 as per image_count: 6
+INFO 2025-03-17 09:54:39,475 tasks 2240 35608 Downloaded and processed image 0 for business 11
+INFO 2025-03-17 09:54:59,228 models 2240 35608 Updating Business 11: Mobile Automotive Service LLC
+INFO 2025-03-17 09:54:59,238 signals 2240 35608 [SIGNAL] Recalculating Task 15 due to Business 11 change.
+INFO 2025-03-17 09:54:59,254 common 2240 35608 Task 15 counts: total=4, pending=4, reviewed=0, in_production=0
+INFO 2025-03-17 09:54:59,264 signals 2240 35608 Task 15 status update: previous_status=COMPLETED, businesses=4, pending=4, reviewed=0, in_production=0, discarded=0, new_status=COMPLETED
+INFO 2025-03-17 09:54:59,265 tasks 2240 35608 Set main image for business 11
+INFO 2025-03-17 09:54:59,269 tasks 2240 35608 Downloaded 1 images for business 11
+INFO 2025-03-17 09:54:59,270 tasks 2240 35608 Downloading images for business 11
+INFO 2025-03-17 09:54:59,270 tasks 2240 35608 Processing download with image count: 3
+INFO 2025-03-17 09:55:00,349 tasks 2240 35608 Found 1 total photos, downloading 1 as per image_count: 3
+INFO 2025-03-17 09:55:00,357 tasks 2240 35608 Image already exists for business 11, skipping download.
+INFO 2025-03-17 09:55:00,359 models 2240 35608 Updating Business 11: Mobile Automotive Service LLC
+INFO 2025-03-17 09:55:00,365 signals 2240 35608 [SIGNAL] Recalculating Task 15 due to Business 11 change.
+INFO 2025-03-17 09:55:00,370 common 2240 35608 Task 15 counts: total=4, pending=4, reviewed=0, in_production=0
+INFO 2025-03-17 09:55:00,376 signals 2240 35608 Task 15 status update: previous_status=COMPLETED, businesses=4, pending=4, reviewed=0, in_production=0, discarded=0, new_status=COMPLETED
+INFO 2025-03-17 09:55:00,377 tasks 2240 35608 Set main image for business 11
+INFO 2025-03-17 09:55:00,378 tasks 2240 35608 Processed 1 results on page 1 for query 'Mobile Automotive Service LLC'
+INFO 2025-03-17 09:55:00,378 tasks 2240 35608 No next page token found for query 'Mobile Automotive Service LLC'
+INFO 2025-03-17 09:55:00,379 tasks 2240 35608 Finished processing query: Mobile Automotive Service LLC
+INFO 2025-03-17 09:55:00,379 tasks 2240 35608 Total results processed across all queries: 4
+INFO 2025-03-17 09:55:00,380 tasks 2240 35608 Sites Gathering task 15 completed successfully
+INFO 2025-03-17 09:55:00,382 views 2240 35608 Sites Gathering task 15 created and queued, project ID: 289e3e6b-3ac0-4671-9fd7-903c91a8334a
+ERROR 2025-03-17 09:55:03,954 views 2240 12040 Error in RecentTasksView: 'NoneType' object has no attribute 'strftime'
+Traceback (most recent call last):
+  File "D:\proyectos\automation-master\automation\api\views.py", line 677, in get
+    'completed_at': task.completed_at.strftime('%Y-%m-%d %H:%M'),
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'NoneType' object has no attribute 'strftime'
+ERROR 2025-03-17 09:55:33,536 views 2240 19312 Error in RecentTasksView: 'NoneType' object has no attribute 'strftime'
+Traceback (most recent call last):
+  File "D:\proyectos\automation-master\automation\api\views.py", line 677, in get
+    'completed_at': task.completed_at.strftime('%Y-%m-%d %H:%M'),
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'NoneType' object has no attribute 'strftime'
+ERROR 2025-03-17 09:56:03,934 views 2240 19312 Error in RecentTasksView: 'NoneType' object has no attribute 'strftime'
+Traceback (most recent call last):
+  File "D:\proyectos\automation-master\automation\api\views.py", line 677, in get
+    'completed_at': task.completed_at.strftime('%Y-%m-%d %H:%M'),
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'NoneType' object has no attribute 'strftime'
+ERROR 2025-03-17 09:56:33,933 views 2240 11532 Error in RecentTasksView: 'NoneType' object has no attribute 'strftime'
+Traceback (most recent call last):
+  File "D:\proyectos\automation-master\automation\api\views.py", line 677, in get
+    'completed_at': task.completed_at.strftime('%Y-%m-%d %H:%M'),
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'NoneType' object has no attribute 'strftime'
+ERROR 2025-03-17 09:57:03,934 views 2240 11532 Error in RecentTasksView: 'NoneType' object has no attribute 'strftime'
+Traceback (most recent call last):
+  File "D:\proyectos\automation-master\automation\api\views.py", line 677, in get
+    'completed_at': task.completed_at.strftime('%Y-%m-%d %H:%M'),
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'NoneType' object has no attribute 'strftime'
+ERROR 2025-03-17 09:57:33,933 views 2240 11532 Error in RecentTasksView: 'NoneType' object has no attribute 'strftime'
+Traceback (most recent call last):
+  File "D:\proyectos\automation-master\automation\api\views.py", line 677, in get
+    'completed_at': task.completed_at.strftime('%Y-%m-%d %H:%M'),
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'NoneType' object has no attribute 'strftime'
+ERROR 2025-03-17 09:58:04,622 views 2240 11532 Error in RecentTasksView: 'NoneType' object has no attribute 'strftime'
+Traceback (most recent call last):
+  File "D:\proyectos\automation-master\automation\api\views.py", line 677, in get
+    'completed_at': task.completed_at.strftime('%Y-%m-%d %H:%M'),
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'NoneType' object has no attribute 'strftime'
+ERROR 2025-03-17 09:58:34,713 views 2240 11532 Error in RecentTasksView: 'NoneType' object has no attribute 'strftime'
+Traceback (most recent call last):
+  File "D:\proyectos\automation-master\automation\api\views.py", line 677, in get
+    'completed_at': task.completed_at.strftime('%Y-%m-%d %H:%M'),
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'NoneType' object has no attribute 'strftime'
+ERROR 2025-03-17 09:59:35,646 views 2240 11532 Error in RecentTasksView: 'NoneType' object has no attribute 'strftime'
+Traceback (most recent call last):
+  File "D:\proyectos\automation-master\automation\api\views.py", line 677, in get
+    'completed_at': task.completed_at.strftime('%Y-%m-%d %H:%M'),
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'NoneType' object has no attribute 'strftime'
+ERROR 2025-03-17 10:00:35,631 views 2240 11532 Error in RecentTasksView: 'NoneType' object has no attribute 'strftime'
+Traceback (most recent call last):
+  File "D:\proyectos\automation-master\automation\api\views.py", line 677, in get
+    'completed_at': task.completed_at.strftime('%Y-%m-%d %H:%M'),
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'NoneType' object has no attribute 'strftime'
+ERROR 2025-03-17 10:01:00,408 views 25276 17620 Error in RecentTasksView: 'NoneType' object has no attribute 'strftime'
+Traceback (most recent call last):
+  File "D:\proyectos\automation-master\automation\api\views.py", line 677, in get
+    'completed_at': task.completed_at.strftime('%Y-%m-%d %H:%M'),
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'NoneType' object has no attribute 'strftime'
+ERROR 2025-03-17 10:01:00,486 views 25276 9420 Error in TaskTimelineView: 'datetime.date' object has no attribute 'date'
+Traceback (most recent call last):
+  File "D:\proyectos\automation-master\automation\api\views.py", line 916, in get
+    item['date'].date(): {
+    ^^^^^^^^^^^^^^^^^
+AttributeError: 'datetime.date' object has no attribute 'date'
+ERROR 2025-03-17 10:01:30,778 views 25276 9420 Error in RecentTasksView: 'NoneType' object has no attribute 'strftime'
+Traceback (most recent call last):
+  File "D:\proyectos\automation-master\automation\api\views.py", line 677, in get
+    'completed_at': task.completed_at.strftime('%Y-%m-%d %H:%M'),
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'NoneType' object has no attribute 'strftime'
+ERROR 2025-03-17 10:02:01,620 views 25276 9420 Error in RecentTasksView: 'NoneType' object has no attribute 'strftime'
+Traceback (most recent call last):
+  File "D:\proyectos\automation-master\automation\api\views.py", line 677, in get
+    'completed_at': task.completed_at.strftime('%Y-%m-%d %H:%M'),
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'NoneType' object has no attribute 'strftime'
+ERROR 2025-03-17 10:02:31,613 views 25276 9420 Error in RecentTasksView: 'NoneType' object has no attribute 'strftime'
+Traceback (most recent call last):
+  File "D:\proyectos\automation-master\automation\api\views.py", line 677, in get
+    'completed_at': task.completed_at.strftime('%Y-%m-%d %H:%M'),
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'NoneType' object has no attribute 'strftime'
+ERROR 2025-03-17 10:03:01,625 views 25276 9420 Error in RecentTasksView: 'NoneType' object has no attribute 'strftime'
+Traceback (most recent call last):
+  File "D:\proyectos\automation-master\automation\api\views.py", line 677, in get
+    'completed_at': task.completed_at.strftime('%Y-%m-%d %H:%M'),
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'NoneType' object has no attribute 'strftime'
+ERROR 2025-03-17 10:03:18,472 views 39584 39076 Error in RecentTasksView: 'NoneType' object has no attribute 'strftime'
+Traceback (most recent call last):
+  File "D:\proyectos\automation-master\automation\api\views.py", line 677, in get
+    'completed_at': task.completed_at.strftime('%Y-%m-%d %H:%M'),
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'NoneType' object has no attribute 'strftime'
+ERROR 2025-03-17 10:03:48,660 views 39584 36596 Error in RecentTasksView: 'NoneType' object has no attribute 'strftime'
+Traceback (most recent call last):
+  File "D:\proyectos\automation-master\automation\api\views.py", line 677, in get
+    'completed_at': task.completed_at.strftime('%Y-%m-%d %H:%M'),
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'NoneType' object has no attribute 'strftime'
+ERROR 2025-03-17 10:04:19,613 views 39584 36596 Error in RecentTasksView: 'NoneType' object has no attribute 'strftime'
+Traceback (most recent call last):
+  File "D:\proyectos\automation-master\automation\api\views.py", line 677, in get
+    'completed_at': task.completed_at.strftime('%Y-%m-%d %H:%M'),
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'NoneType' object has no attribute 'strftime'
+ERROR 2025-03-17 10:04:49,623 views 39584 36596 Error in RecentTasksView: 'NoneType' object has no attribute 'strftime'
+Traceback (most recent call last):
+  File "D:\proyectos\automation-master\automation\api\views.py", line 677, in get
+    'completed_at': task.completed_at.strftime('%Y-%m-%d %H:%M'),
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'NoneType' object has no attribute 'strftime'
+ERROR 2025-03-17 10:05:18,670 views 39584 36596 Error in RecentTasksView: 'NoneType' object has no attribute 'strftime'
+Traceback (most recent call last):
+  File "D:\proyectos\automation-master\automation\api\views.py", line 677, in get
+    'completed_at': task.completed_at.strftime('%Y-%m-%d %H:%M'),
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'NoneType' object has no attribute 'strftime'
+ERROR 2025-03-17 10:05:49,610 views 39584 36596 Error in RecentTasksView: 'NoneType' object has no attribute 'strftime'
+Traceback (most recent call last):
+  File "D:\proyectos\automation-master\automation\api\views.py", line 677, in get
+    'completed_at': task.completed_at.strftime('%Y-%m-%d %H:%M'),
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'NoneType' object has no attribute 'strftime'
+ERROR 2025-03-17 10:06:19,619 views 39584 36596 Error in RecentTasksView: 'NoneType' object has no attribute 'strftime'
+Traceback (most recent call last):
+  File "D:\proyectos\automation-master\automation\api\views.py", line 677, in get
+    'completed_at': task.completed_at.strftime('%Y-%m-%d %H:%M'),
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'NoneType' object has no attribute 'strftime'
+ERROR 2025-03-17 10:07:35,745 views 39584 36596 Error in RecentTasksView: 'NoneType' object has no attribute 'strftime'
+Traceback (most recent call last):
+  File "D:\proyectos\automation-master\automation\api\views.py", line 677, in get
+    'completed_at': task.completed_at.strftime('%Y-%m-%d %H:%M'),
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'NoneType' object has no attribute 'strftime'
+ERROR 2025-03-17 10:08:02,932 views 41204 40004 Error in TaskTimelineView: Cannot resolve keyword 'created_at' into field. Choices are: additional_info, address, business_images, businesscategory, category_name, city, country, country_code, data_cid, data_id, description, description_eng, description_esp, description_fr, destination, destination_id, feedbacks, form_country_id, form_country_name, form_destination_id, form_destination_name, id, images, is_advertisement, is_deleted, latitude, level, longitude, main_category, neighborhood, opening_hours, operating_hours, phone, place_id, popular_times, postal_code, price, project_id, project_title, rank, rating, reviews, reviews_count, scraped_at, search_page_url, search_string, service_options, site_types, state, status, street, tailored_category, task, task_id, thumbnail, title, title_eng, title_esp, title_fr, translated_description, translated_level, translated_main_category, translated_tailored_category, translated_title, translationmetrics, types, types_eng, types_esp, types_fr, types_uk, url, website
+Traceback (most recent call last):
+  File "D:\proyectos\automation-master\automation\api\views.py", line 906, in get
+    businesses_by_date = Business.objects.filter(
+                         ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\proyectos\automation-master\env\Lib\site-packages\django\db\models\manager.py", line 87, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\proyectos\automation-master\env\Lib\site-packages\django\db\models\query.py", line 1476, in filter
+    return self._filter_or_exclude(False, args, kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\proyectos\automation-master\env\Lib\site-packages\django\db\models\query.py", line 1494, in _filter_or_exclude
+    clone._filter_or_exclude_inplace(negate, args, kwargs)
+  File "D:\proyectos\automation-master\env\Lib\site-packages\django\db\models\query.py", line 1501, in _filter_or_exclude_inplace
+    self._query.add_q(Q(*args, **kwargs))
+  File "D:\proyectos\automation-master\env\Lib\site-packages\django\db\models\sql\query.py", line 1609, in add_q
+    clause, _ = self._add_q(q_object, self.used_aliases)
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\proyectos\automation-master\env\Lib\site-packages\django\db\models\sql\query.py", line 1641, in _add_q
+    child_clause, needed_inner = self.build_filter(
+                                 ^^^^^^^^^^^^^^^^^^
+  File "D:\proyectos\automation-master\env\Lib\site-packages\django\db\models\sql\query.py", line 1491, in build_filter
+    lookups, parts, reffed_expression = self.solve_lookup_type(arg, summarize)
+                                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\proyectos\automation-master\env\Lib\site-packages\django\db\models\sql\query.py", line 1303, in solve_lookup_type
+    _, field, _, lookup_parts = self.names_to_path(lookup_splitted, self.get_meta())
+                                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\proyectos\automation-master\env\Lib\site-packages\django\db\models\sql\query.py", line 1768, in names_to_path
+    raise FieldError(
+django.core.exceptions.FieldError: Cannot resolve keyword 'created_at' into field. Choices are: additional_info, address, business_images, businesscategory, category_name, city, country, country_code, data_cid, data_id, description, description_eng, description_esp, description_fr, destination, destination_id, feedbacks, form_country_id, form_country_name, form_destination_id, form_destination_name, id, images, is_advertisement, is_deleted, latitude, level, longitude, main_category, neighborhood, opening_hours, operating_hours, phone, place_id, popular_times, postal_code, price, project_id, project_title, rank, rating, reviews, reviews_count, scraped_at, search_page_url, search_string, service_options, site_types, state, status, street, tailored_category, task, task_id, thumbnail, title, title_eng, title_esp, title_fr, translated_description, translated_level, translated_main_category, translated_tailored_category, translated_title, translationmetrics, types, types_eng, types_esp, types_fr, types_uk, url, website
+ERROR 2025-03-17 10:08:02,948 views 41204 31948 Error in RecentTasksView: 'NoneType' object has no attribute 'strftime'
+Traceback (most recent call last):
+  File "D:\proyectos\automation-master\automation\api\views.py", line 677, in get
+    'completed_at': task.completed_at.strftime('%Y-%m-%d %H:%M'),
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'NoneType' object has no attribute 'strftime'
+ERROR 2025-03-17 10:08:33,348 views 41204 3156 Error in RecentTasksView: 'NoneType' object has no attribute 'strftime'
+Traceback (most recent call last):
+  File "D:\proyectos\automation-master\automation\api\views.py", line 677, in get
+    'completed_at': task.completed_at.strftime('%Y-%m-%d %H:%M'),
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'NoneType' object has no attribute 'strftime'
+ERROR 2025-03-17 10:09:03,345 views 41204 3156 Error in RecentTasksView: 'NoneType' object has no attribute 'strftime'
+Traceback (most recent call last):
+  File "D:\proyectos\automation-master\automation\api\views.py", line 677, in get
+    'completed_at': task.completed_at.strftime('%Y-%m-%d %H:%M'),
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'NoneType' object has no attribute 'strftime'
+ERROR 2025-03-17 10:09:33,331 views 41204 3156 Error in RecentTasksView: 'NoneType' object has no attribute 'strftime'
+Traceback (most recent call last):
+  File "D:\proyectos\automation-master\automation\api\views.py", line 677, in get
+    'completed_at': task.completed_at.strftime('%Y-%m-%d %H:%M'),
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'NoneType' object has no attribute 'strftime'
+ERROR 2025-03-17 10:10:03,335 views 41204 3156 Error in RecentTasksView: 'NoneType' object has no attribute 'strftime'
+Traceback (most recent call last):
+  File "D:\proyectos\automation-master\automation\api\views.py", line 677, in get
+    'completed_at': task.completed_at.strftime('%Y-%m-%d %H:%M'),
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'NoneType' object has no attribute 'strftime'
+ERROR 2025-03-17 10:10:33,345 views 41204 3156 Error in RecentTasksView: 'NoneType' object has no attribute 'strftime'
+Traceback (most recent call last):
+  File "D:\proyectos\automation-master\automation\api\views.py", line 677, in get
+    'completed_at': task.completed_at.strftime('%Y-%m-%d %H:%M'),
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'NoneType' object has no attribute 'strftime'
+ERROR 2025-03-17 10:11:03,343 views 41204 3156 Error in RecentTasksView: 'NoneType' object has no attribute 'strftime'
+Traceback (most recent call last):
+  File "D:\proyectos\automation-master\automation\api\views.py", line 677, in get
+    'completed_at': task.completed_at.strftime('%Y-%m-%d %H:%M'),
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'NoneType' object has no attribute 'strftime'
+ERROR 2025-03-17 10:11:30,416 views 20268 34404 Error in TaskTimelineView: Cannot resolve keyword 'scraped_at' into field. Choices are: businesses, completed_at, country, country_id, country_name, created_at, description, destination, destination_id, destination_name, file, id, is_deleted, level, level_id, main_category, main_category_id, project_id, project_title, report_url, status, subcategory, subcategory_id, tailored_category, translation_status, user, user_id
+Traceback (most recent call last):
+  File "D:\proyectos\automation-master\automation\api\views.py", line 898, in get
+    tasks_by_date = ScrapingTask.objects.filter(
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\proyectos\automation-master\env\Lib\site-packages\django\db\models\manager.py", line 87, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\proyectos\automation-master\env\Lib\site-packages\django\db\models\query.py", line 1476, in filter
+    return self._filter_or_exclude(False, args, kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\proyectos\automation-master\env\Lib\site-packages\django\db\models\query.py", line 1494, in _filter_or_exclude
+    clone._filter_or_exclude_inplace(negate, args, kwargs)
+  File "D:\proyectos\automation-master\env\Lib\site-packages\django\db\models\query.py", line 1501, in _filter_or_exclude_inplace
+    self._query.add_q(Q(*args, **kwargs))
+  File "D:\proyectos\automation-master\env\Lib\site-packages\django\db\models\sql\query.py", line 1609, in add_q
+    clause, _ = self._add_q(q_object, self.used_aliases)
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\proyectos\automation-master\env\Lib\site-packages\django\db\models\sql\query.py", line 1641, in _add_q
+    child_clause, needed_inner = self.build_filter(
+                                 ^^^^^^^^^^^^^^^^^^
+  File "D:\proyectos\automation-master\env\Lib\site-packages\django\db\models\sql\query.py", line 1491, in build_filter
+    lookups, parts, reffed_expression = self.solve_lookup_type(arg, summarize)
+                                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\proyectos\automation-master\env\Lib\site-packages\django\db\models\sql\query.py", line 1303, in solve_lookup_type
+    _, field, _, lookup_parts = self.names_to_path(lookup_splitted, self.get_meta())
+                                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\proyectos\automation-master\env\Lib\site-packages\django\db\models\sql\query.py", line 1768, in names_to_path
+    raise FieldError(
+django.core.exceptions.FieldError: Cannot resolve keyword 'scraped_at' into field. Choices are: businesses, completed_at, country, country_id, country_name, created_at, description, destination, destination_id, destination_name, file, id, is_deleted, level, level_id, main_category, main_category_id, project_id, project_title, report_url, status, subcategory, subcategory_id, tailored_category, translation_status, user, user_id
+ERROR 2025-03-17 10:11:30,431 views 20268 37584 Error in RecentTasksView: 'NoneType' object has no attribute 'strftime'
+Traceback (most recent call last):
+  File "D:\proyectos\automation-master\automation\api\views.py", line 677, in get
+    'completed_at': task.completed_at.strftime('%Y-%m-%d %H:%M'),
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'NoneType' object has no attribute 'strftime'
+ERROR 2025-03-17 10:11:56,088 views 2516 26468 Error in TaskTimelineView: Cannot resolve keyword 'created_at' into field. Choices are: additional_info, address, business_images, businesscategory, category_name, city, country, country_code, data_cid, data_id, description, description_eng, description_esp, description_fr, destination, destination_id, feedbacks, form_country_id, form_country_name, form_destination_id, form_destination_name, id, images, is_advertisement, is_deleted, latitude, level, longitude, main_category, neighborhood, opening_hours, operating_hours, phone, place_id, popular_times, postal_code, price, project_id, project_title, rank, rating, reviews, reviews_count, scraped_at, search_page_url, search_string, service_options, site_types, state, status, street, tailored_category, task, task_id, thumbnail, title, title_eng, title_esp, title_fr, translated_description, translated_level, translated_main_category, translated_tailored_category, translated_title, translationmetrics, types, types_eng, types_esp, types_fr, types_uk, url, website
+Traceback (most recent call last):
+  File "D:\proyectos\automation-master\automation\api\views.py", line 906, in get
+    businesses_by_date = Business.objects.filter(
+                         ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\proyectos\automation-master\env\Lib\site-packages\django\db\models\manager.py", line 87, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\proyectos\automation-master\env\Lib\site-packages\django\db\models\query.py", line 1476, in filter
+    return self._filter_or_exclude(False, args, kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\proyectos\automation-master\env\Lib\site-packages\django\db\models\query.py", line 1494, in _filter_or_exclude
+    clone._filter_or_exclude_inplace(negate, args, kwargs)
+  File "D:\proyectos\automation-master\env\Lib\site-packages\django\db\models\query.py", line 1501, in _filter_or_exclude_inplace
+    self._query.add_q(Q(*args, **kwargs))
+  File "D:\proyectos\automation-master\env\Lib\site-packages\django\db\models\sql\query.py", line 1609, in add_q
+    clause, _ = self._add_q(q_object, self.used_aliases)
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\proyectos\automation-master\env\Lib\site-packages\django\db\models\sql\query.py", line 1641, in _add_q
+    child_clause, needed_inner = self.build_filter(
+                                 ^^^^^^^^^^^^^^^^^^
+  File "D:\proyectos\automation-master\env\Lib\site-packages\django\db\models\sql\query.py", line 1491, in build_filter
+    lookups, parts, reffed_expression = self.solve_lookup_type(arg, summarize)
+                                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\proyectos\automation-master\env\Lib\site-packages\django\db\models\sql\query.py", line 1303, in solve_lookup_type
+    _, field, _, lookup_parts = self.names_to_path(lookup_splitted, self.get_meta())
+                                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\proyectos\automation-master\env\Lib\site-packages\django\db\models\sql\query.py", line 1768, in names_to_path
+    raise FieldError(
+django.core.exceptions.FieldError: Cannot resolve keyword 'created_at' into field. Choices are: additional_info, address, business_images, businesscategory, category_name, city, country, country_code, data_cid, data_id, description, description_eng, description_esp, description_fr, destination, destination_id, feedbacks, form_country_id, form_country_name, form_destination_id, form_destination_name, id, images, is_advertisement, is_deleted, latitude, level, longitude, main_category, neighborhood, opening_hours, operating_hours, phone, place_id, popular_times, postal_code, price, project_id, project_title, rank, rating, reviews, reviews_count, scraped_at, search_page_url, search_string, service_options, site_types, state, status, street, tailored_category, task, task_id, thumbnail, title, title_eng, title_esp, title_fr, translated_description, translated_level, translated_main_category, translated_tailored_category, translated_title, translationmetrics, types, types_eng, types_esp, types_fr, types_uk, url, website
+ERROR 2025-03-17 10:11:56,200 views 2516 4172 Error in RecentTasksView: 'NoneType' object has no attribute 'strftime'
+Traceback (most recent call last):
+  File "D:\proyectos\automation-master\automation\api\views.py", line 677, in get
+    'completed_at': task.completed_at.strftime('%Y-%m-%d %H:%M'),
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'NoneType' object has no attribute 'strftime'
+ERROR 2025-03-17 10:12:26,585 views 2516 4172 Error in RecentTasksView: 'NoneType' object has no attribute 'strftime'
+Traceback (most recent call last):
+  File "D:\proyectos\automation-master\automation\api\views.py", line 677, in get
+    'completed_at': task.completed_at.strftime('%Y-%m-%d %H:%M'),
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'NoneType' object has no attribute 'strftime'
+ERROR 2025-03-17 10:12:56,620 views 2516 4172 Error in RecentTasksView: 'NoneType' object has no attribute 'strftime'
+Traceback (most recent call last):
+  File "D:\proyectos\automation-master\automation\api\views.py", line 677, in get
+    'completed_at': task.completed_at.strftime('%Y-%m-%d %H:%M'),
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'NoneType' object has no attribute 'strftime'
+ERROR 2025-03-17 10:13:26,627 views 2516 4172 Error in RecentTasksView: 'NoneType' object has no attribute 'strftime'
+Traceback (most recent call last):
+  File "D:\proyectos\automation-master\automation\api\views.py", line 677, in get
+    'completed_at': task.completed_at.strftime('%Y-%m-%d %H:%M'),
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'NoneType' object has no attribute 'strftime'
+ERROR 2025-03-17 10:13:46,847 views 33544 34152 Error in RecentTasksView: 'NoneType' object has no attribute 'strftime'
+Traceback (most recent call last):
+  File "D:\proyectos\automation-master\automation\api\views.py", line 677, in get
+    'completed_at': task.completed_at.strftime('%Y-%m-%d %H:%M'),
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'NoneType' object has no attribute 'strftime'
+ERROR 2025-03-17 10:13:46,848 views 33544 21080 Error in TaskTimelineView: Cannot resolve keyword 'business' into field. Choices are: businesses, completed_at, country, country_id, country_name, created_at, date, description, destination, destination_id, destination_name, file, id, is_deleted, level, level_id, main_category, main_category_id, project_id, project_title, report_url, status, subcategory, subcategory_id, tailored_category, tasks_count, translation_status, user, user_id
+Traceback (most recent call last):
+  File "D:\proyectos\automation-master\automation\api\views.py", line 902, in get
+    ).values('date').annotate(
+                     ^^^^^^^^^
+  File "D:\proyectos\automation-master\env\Lib\site-packages\django\db\models\query.py", line 1630, in annotate
+    return self._annotate(args, kwargs, select=True)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\proyectos\automation-master\env\Lib\site-packages\django\db\models\query.py", line 1680, in _annotate
+    clone.query.add_annotation(
+  File "D:\proyectos\automation-master\env\Lib\site-packages\django\db\models\sql\query.py", line 1194, in add_annotation
+    annotation = annotation.resolve_expression(self, allow_joins=True, reuse=None)
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\proyectos\automation-master\env\Lib\site-packages\django\db\models\aggregates.py", line 63, in resolve_expression
+    c = super().resolve_expression(query, allow_joins, reuse, summarize)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\proyectos\automation-master\env\Lib\site-packages\django\db\models\expressions.py", line 1073, in resolve_expression
+    c.source_expressions[pos] = arg.resolve_expression(
+                                ^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\proyectos\automation-master\env\Lib\site-packages\django\db\models\expressions.py", line 895, in resolve_expression
+    return query.resolve_ref(self.name, allow_joins, reuse, summarize)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\proyectos\automation-master\env\Lib\site-packages\django\db\models\sql\query.py", line 2010, in resolve_ref
+    join_info = self.setup_joins(
+                ^^^^^^^^^^^^^^^^^
+  File "D:\proyectos\automation-master\env\Lib\site-packages\django\db\models\sql\query.py", line 1863, in setup_joins
+    path, final_field, targets, rest = self.names_to_path(
+                                       ^^^^^^^^^^^^^^^^^^^
+  File "D:\proyectos\automation-master\env\Lib\site-packages\django\db\models\sql\query.py", line 1768, in names_to_path
+    raise FieldError(
+django.core.exceptions.FieldError: Cannot resolve keyword 'business' into field. Choices are: businesses, completed_at, country, country_id, country_name, created_at, date, description, destination, destination_id, destination_name, file, id, is_deleted, level, level_id, main_category, main_category_id, project_id, project_title, report_url, status, subcategory, subcategory_id, tailored_category, tasks_count, translation_status, user, user_id
+ERROR 2025-03-17 10:14:02,352 views 29060 19368 Error in RecentTasksView: 'NoneType' object has no attribute 'strftime'
+Traceback (most recent call last):
+  File "D:\proyectos\automation-master\automation\api\views.py", line 677, in get
+    'completed_at': task.completed_at.strftime('%Y-%m-%d %H:%M'),
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'NoneType' object has no attribute 'strftime'
+ERROR 2025-03-17 10:14:33,609 views 29060 19368 Error in RecentTasksView: 'NoneType' object has no attribute 'strftime'
+Traceback (most recent call last):
+  File "D:\proyectos\automation-master\automation\api\views.py", line 677, in get
+    'completed_at': task.completed_at.strftime('%Y-%m-%d %H:%M'),
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'NoneType' object has no attribute 'strftime'
+ERROR 2025-03-17 10:15:03,613 views 29060 19368 Error in RecentTasksView: 'NoneType' object has no attribute 'strftime'
+Traceback (most recent call last):
+  File "D:\proyectos\automation-master\automation\api\views.py", line 677, in get
+    'completed_at': task.completed_at.strftime('%Y-%m-%d %H:%M'),
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'NoneType' object has no attribute 'strftime'

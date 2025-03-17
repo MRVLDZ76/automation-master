@@ -36,5 +36,6 @@ class Command(BaseCommand):
 
         except Exception as e:
             self.stdout.write(self.style.ERROR(f'Error creating user: {str(e)}'))
-#python manage.py create_user_with_roles "+1234567890" "carmen" "carmen@localsecrets.travel" "12345678" AMBASSADOR
-#python manage.py create_user_with_roles "+1234567890" "EdisonValdez" "edisonvaldez@localsecrets.travel" "12345678" ADMIN
+#python manage.py create_user_with_roles "+1234567890" "ElenaTorres" "elenatorresmedina@gmail.com" "Thiagovaldez15" ADMIN
+#python manage.py create_user_with_roles "+1234567890" "IanValdez" "ianvaldeztorres7@gmail.com" "I@nvldz7" ADMIN
+#python manage.py create_user_with_roles "+1234567890" "DanielRipolles" "danielripolles123@gmail.com" "D@nielR$" ADMIN

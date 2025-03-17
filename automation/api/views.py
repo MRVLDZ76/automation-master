@@ -874,10 +874,11 @@ class TaskFilterView(APIView):
 
         # Sort by
         return queryset.order_by(filters['sort_by'])
-   
+
+
 class TaskTimelineView(APIView):
     def get(self, request):
-        try: 
+        try:
             end_date = request.query_params.get('end_date')
             start_date = request.query_params.get('start_date')
 
@@ -891,37 +892,86 @@ class TaskTimelineView(APIView):
             else:
                 start_date = timezone.datetime.strptime(start_date, '%Y-%m-%d').date()
 
-            # Query tasks with date aggregation
-            tasks_data = ScrapingTask.objects.filter(
-                created_at__date__range=[start_date, end_date]
+            # Add time boundaries for accurate filtering
+            start_datetime = datetime.combine(start_date, datetime.min.time())
+            end_datetime = datetime.combine(end_date, datetime.max.time())
+
+            # Separate queries for daily tasks and businesses counts
+            daily_tasks = ScrapingTask.objects.filter(
+                created_at__range=[start_datetime, end_datetime]
             ).annotate(
                 date=TruncDate('created_at')
             ).values('date').annotate(
-                tasks_count=Count('id'),
+                tasks_count=Count('id')
+            ).order_by('date')
+
+            daily_businesses = ScrapingTask.objects.filter(
+                created_at__range=[start_datetime, end_datetime]
+            ).annotate(
+                date=TruncDate('created_at')
+            ).values('date').annotate(
                 businesses_count=Count('businesses', distinct=True)
             ).order_by('date')
 
-            # Convert queryset to list and format dates
-            formatted_data = [{
-                'date': item['date'].strftime('%Y-%m-%d'),
-                'tasks_count': item['tasks_count'],
-                'businesses_count': item['businesses_count']
-            } for item in tasks_data]
+            # Create lookup dictionaries
+            tasks_dict = {item['date']: item['tasks_count'] for item in daily_tasks}
+            businesses_dict = {item['date']: item['businesses_count'] for item in daily_businesses}
 
-            # Calculate totals
-            total_tasks = sum(item['tasks_count'] for item in formatted_data)
-            total_businesses = sum(item['businesses_count'] for item in formatted_data)
+            # Generate complete date range with zero counts for missing dates
+            date_range = []
+            current_date = start_date
+            while current_date <= end_date:
+                date_range.append(current_date)
+                current_date += timedelta(days=1)
+
+            # Format data with complete date range
+            formatted_data = []
+            for date in date_range:
+                date_str = date.strftime('%Y-%m-%d')
+                formatted_data.append({
+                    'date': date_str,
+                    'tasks_count': tasks_dict.get(date, 0),
+                    'businesses_count': businesses_dict.get(date, 0)
+                })
+
+            # Calculate accurate totals from the original queryset
+            total_tasks = ScrapingTask.objects.filter(
+                created_at__range=[start_datetime, end_datetime]
+            ).count()
+
+            total_businesses = ScrapingTask.objects.filter(
+                created_at__range=[start_datetime, end_datetime]
+            ).aggregate(
+                total_businesses=Count('businesses', distinct=True)
+            )['total_businesses']
+
+            # Calculate today's counts
+            today = timezone.now().date()
+            today_start = datetime.combine(today, datetime.min.time())
+            today_end = datetime.combine(today, datetime.max.time())
+
+            tasks_today = ScrapingTask.objects.filter(
+                created_at__range=[today_start, today_end]
+            ).count()
+
+            businesses_today = ScrapingTask.objects.filter(
+                created_at__range=[today_start, today_end]
+            ).aggregate(
+                businesses_today=Count('businesses', distinct=True)
+            )['businesses_today']
 
             response_data = {
                 'status': 'success',
                 'data': formatted_data,
                 'totals': {
                     'total_tasks': total_tasks,
-                    'total_businesses': total_businesses
+                    'total_businesses': total_businesses,
+                    'tasks_today': tasks_today,
+                    'businesses_today': businesses_today
                 }
             }
 
-            logger.debug(f"Timeline data response: {response_data}")  # Debug log
+            logger.debug(f"Timeline data response: {response_data}")
             return Response(response_data)
 
         except Exception as e:
@@ -930,7 +980,7 @@ class TaskTimelineView(APIView):
                 'status': 'error',
                 'message': str(e)
             }, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
-        
+
 #Tasks#Tasks#Tasks#Tasks#Tasks
 
 class DashboardStatsView(APIView):
