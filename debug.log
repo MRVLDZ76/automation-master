@@ -1144,3 +1144,33 @@ Traceback (most recent call last):
     'completed_at': task.completed_at.strftime('%Y-%m-%d %H:%M'),
                     ^^^^^^^^^^^^^^^^^^^^^^^^^^
 AttributeError: 'NoneType' object has no attribute 'strftime'
+ERROR 2025-03-17 10:15:55,609 views 4108 14192 Error in RecentTasksView: 'NoneType' object has no attribute 'strftime'
+Traceback (most recent call last):
+  File "D:\proyectos\automation-master\automation\api\views.py", line 677, in get
+    'completed_at': task.completed_at.strftime('%Y-%m-%d %H:%M'),
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'NoneType' object has no attribute 'strftime'
+ERROR 2025-03-17 10:16:25,613 views 4108 14192 Error in RecentTasksView: 'NoneType' object has no attribute 'strftime'
+Traceback (most recent call last):
+  File "D:\proyectos\automation-master\automation\api\views.py", line 677, in get
+    'completed_at': task.completed_at.strftime('%Y-%m-%d %H:%M'),
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'NoneType' object has no attribute 'strftime'
+ERROR 2025-03-17 10:16:55,626 views 4108 14192 Error in RecentTasksView: 'NoneType' object has no attribute 'strftime'
+Traceback (most recent call last):
+  File "D:\proyectos\automation-master\automation\api\views.py", line 677, in get
+    'completed_at': task.completed_at.strftime('%Y-%m-%d %H:%M'),
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'NoneType' object has no attribute 'strftime'
+ERROR 2025-03-17 10:17:25,605 views 4108 14192 Error in RecentTasksView: 'NoneType' object has no attribute 'strftime'
+Traceback (most recent call last):
+  File "D:\proyectos\automation-master\automation\api\views.py", line 677, in get
+    'completed_at': task.completed_at.strftime('%Y-%m-%d %H:%M'),
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'NoneType' object has no attribute 'strftime'
+ERROR 2025-03-17 10:18:35,641 views 4108 14192 Error in RecentTasksView: 'NoneType' object has no attribute 'strftime'
+Traceback (most recent call last):
+  File "D:\proyectos\automation-master\automation\api\views.py", line 677, in get
+    'completed_at': task.completed_at.strftime('%Y-%m-%d %H:%M'),
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'NoneType' object has no attribute 'strftime'
