@@ -198,4 +198,43 @@ def process_scraped_types(scraped_types, main_category=None):
      
     unique_types = list(dict.fromkeys(types_list))
     return ', '.join(unique_types)
+ 
+class DatabaseLogHandler(logging.Handler):
+    def __init__(self, task_id):
+        super().__init__()
+        self.task_id = task_id
 
+    def emit(self, record):
+        from automation.models import TaskLog, ScrapingTask  
+        
+        try:
+            # Convert record to dict for metadata
+            metadata = {
+                'funcName': record.funcName,
+                'pathname': record.pathname,
+                'lineno': record.lineno,
+                'exc_info': self.format_exc_info(record.exc_info) if record.exc_info else None
+            }
+
+            # Create log entry
+            TaskLog.objects.create(
+                task_id=self.task_id,
+                level=record.levelname,
+                message=self.format(record),
+                metadata=metadata
+            )
+        except Exception as e:
+            print(f"Failed to write log to database: {str(e)}")
+
+    def format_exc_info(self, exc_info):
+        if not exc_info:
+            return None
+        return {
+            'type': str(exc_info[0].__name__),
+            'message': str(exc_info[1]),
+            'traceback': self.format_traceback(exc_info[2])
+        }
+
+    def format_traceback(self, tb):
+        import traceback
+        return traceback.format_tb(tb)

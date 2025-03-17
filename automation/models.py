@@ -12,6 +12,7 @@ from django.conf import settings
 from django.contrib.auth import get_user_model
 from django.utils.translation import gettext_lazy as _
 from django.core.exceptions import ValidationError
+from datetime import timedelta
 
 logger = logging.getLogger(__name__)
 SITE_TYPES_CHOICES = [
@@ -220,7 +221,10 @@ class ScrapingTask(models.Model):
         ('PARTIALLY_TRANSLATED', 'Partially Translated'),
         ('TRANSLATION_FAILED', 'Translation Failed'),
     ]
-
+    total_queries = models.IntegerField(default=0)
+    processed_queries = models.IntegerField(default=0)
+    current_query = models.TextField(null=True, blank=True)
+    serp_results = models.JSONField(null=True, blank=True, default=dict)
     status = models.CharField(max_length=20, choices=STATUS_CHOICES, default='PENDING')
     translation_status = models.CharField(max_length=20, choices=TRANSLATION_STATUS_CHOICES, default='PENDING_TRANSLATION')
     file = models.FileField(upload_to='scraping_files/', null=True, blank=True)
@@ -243,6 +247,46 @@ class ScrapingTask(models.Model):
         destination = self.destination_name or 'No Destination'
         return f"{project} - {destination} (ID: {self.id})"
 
+    def update_progress(self, current_query, index):
+        """
+        Update task progress
+        """
+        if self.total_queries:
+            self.processed_queries = index + 1
+            self.current_query = current_query
+            self.save(update_fields=['processed_queries', 'current_query'])
+
+    @property
+    def progress_percentage(self):
+        """
+        Calculate progress as a percentage
+        """
+        if self.total_queries:
+            return (self.processed_queries / self.total_queries) * 100
+        return 0
+    
+    def save_serp_results(self, results, query_key):
+        """
+        Store SERP results in the database
+        """
+        try:
+            # Initialize serp_results if None
+            if self.serp_results is None:
+                self.serp_results = {}
+
+            # Store the complete results object under the query key
+            self.serp_results[query_key] = results
+            
+            # Important: Save the model instance to persist changes
+            self.save(update_fields=['serp_results'])
+            
+            logger.info(f"Successfully saved SERP results for {query_key}")
+            
+        except Exception as e:
+            logger.error(f"Error saving SERP results for {query_key}: {str(e)}", exc_info=True)
+            raise
+
+ 
     def get_translatable_businesses(self):
         """Get businesses that can be translated"""
         return self.businesses.filter(
@@ -260,11 +304,25 @@ class ScrapingTask(models.Model):
         self.save()
         # Soft delete related businesses
         self.businesses.update(is_deleted=True)
-
+ 
     def restore(self):
         self.is_deleted = False
         self.save()
         self.businesses.update(is_deleted=False)
+
+        def get_logs(self, level=None, limit=None):
+            logs = self.logs.all()
+            if level:
+                logs = logs.filter(level=level.upper())
+            if limit:
+                logs = logs[:limit]
+            return logs
+
+    def get_error_logs(self):
+        return self.get_logs(level='ERROR')
+
+    def get_latest_logs(self, limit=50):
+        return self.get_logs(limit=limit)
 
     def save(self, *args, **kwargs):
         is_new_instance = (self.pk is None)
@@ -284,6 +342,29 @@ class ScrapingTask(models.Model):
                 self.translation_status = 'TRANSLATION_FAILED'
 
             super().save(update_fields=['status', 'completed_at'])       
+
+class TaskLog(models.Model):
+    task = models.ForeignKey('ScrapingTask', on_delete=models.CASCADE, related_name='logs')
+    timestamp = models.DateTimeField(auto_now_add=True, db_index=True)  # Added index for better query performance
+    level = models.CharField(max_length=10)  # INFO, ERROR, WARNING
+    message = models.TextField()
+    metadata = models.JSONField(null=True, blank=True)  # For additional context
+
+    class Meta:
+        ordering = ['-timestamp']
+        indexes = [
+            models.Index(fields=['timestamp']),  # Add index for timestamp
+            models.Index(fields=['task', 'timestamp']),  # Composite index for related queries
+        ]
+
+    @classmethod
+    def cleanup_old_logs(cls, hours=72):
+        """
+        Delete logs older than specified hours
+        """
+        cutoff_date = timezone.now() - timedelta(hours=hours)
+        return cls.objects.filter(timestamp__lt=cutoff_date).delete()
+
 
 class ActiveBusinessManager(models.Manager):
     def get_queryset(self):
@@ -686,7 +767,7 @@ class UserPreference(models.Model):
                                          on_delete=models.SET_NULL, related_name='main_category_prefs')
     last_subcategory = models.ForeignKey('Category', null=True, blank=True, 
                                         on_delete=models.SET_NULL, related_name='subcategory_prefs')
-    last_image_count = models.IntegerField(default=5)
+    last_image_count = models.IntegerField(default=4)
     updated_at = models.DateTimeField(auto_now=True)
 
     def __str__(self):

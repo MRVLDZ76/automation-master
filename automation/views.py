@@ -192,6 +192,50 @@ def get_cities(request):
 
 #LSBACKEND API
 
+@login_required
+def get_task_progress(request, task_id):
+    try:
+        task = ScrapingTask.objects.get(id=task_id)
+        return JsonResponse({
+            'status': task.status,
+            'total_queries': task.total_queries,
+            'processed_queries': task.processed_queries,
+            'current_query': task.current_query,
+            'progress': (task.processed_queries / task.total_queries * 100) if task.total_queries > 0 else 0
+        })
+    except ScrapingTask.DoesNotExist:
+        return JsonResponse({'error': 'Task not found'}, status=404)
+ 
+@login_required
+def task_results(request, task_id):
+    try:
+        task = ScrapingTask.objects.get(id=task_id)
+        
+        response_data = {
+            "status": task.status,
+            "total_queries": task.total_queries,
+            "processed_queries": task.processed_queries,
+            "current_query": task.current_query,
+            "progress": task.progress_percentage
+        }
+
+        if task.serp_results:
+            response_data["serp_results"] = task.serp_results
+            
+        return JsonResponse(response_data)
+        
+    except ScrapingTask.DoesNotExist:
+        return JsonResponse({
+            "error": "Task not found",
+            "status": "ERROR"
+        }, status=404)
+    except Exception as e:
+        logger.error(f"Error getting task results: {str(e)}", exc_info=True)
+        return JsonResponse({
+            "error": "Internal server error",
+            "status": "ERROR"
+        }, status=500)
+
 @method_decorator(login_required, name='dispatch')
 #@method_decorator(user_passes_test(is_admin), name='dispatch')
 class UploadFileView(View):
@@ -237,7 +281,7 @@ class UploadFileView(View):
             'form': form,
             'last_image_count': user_pref.last_image_count,
             'user_preferences': user_pref,
-            'default_image_count': 6
+            'default_image_count': 3
         }
         return render(request, self.template_name, context)
 
@@ -308,6 +352,7 @@ class UploadFileView(View):
                 messages.error(request, f"Error creating task: {str(e)}")
         
         return render(request, self.template_name, {'form': form})
+
 
 @method_decorator(login_required, name='dispatch')
 class TaskDetailView(View):

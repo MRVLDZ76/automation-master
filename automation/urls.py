@@ -104,6 +104,9 @@ urlpatterns = [
 
     path('tasks/<int:task_id>/generate-descriptions/', views.generate_task_descriptions, name="generate_tasks_descriptions"),
  
+    path('tasks/<int:task_id>/progress/', views.get_task_progress, name='task_progress'),
+    path('tasks/<int:task_id>/results/', views.task_results, name='task_results'),
+
     # LS Backend API endpoints
     path('api/countries/', views.get_countries, name='get_countries'),
     path('api/cities/', views.get_cities, name='get_cities'),

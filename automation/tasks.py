@@ -12,7 +12,9 @@ from django.utils import timezone
 from ratelimit import RateLimitException
 import urllib
 from concurrent.futures import ThreadPoolExecutor, as_completed
-from automation.consumers import get_log_file_path 
+from automation.consumers import get_log_file_path
+from automation.utils import process_scraped_types, DatabaseLogHandler
+ 
 from .models import BusinessImage, Country, Destination, HourlyBusyness, PopularTimes, Review, ScrapingTask, Business, Category, OpeningHours, AdditionalInfo, Image
 from django.conf import settings 
 from serpapi import GoogleSearch
@@ -69,7 +71,6 @@ import backoff
 import time
 from requests.exceptions import RequestException
 from django.utils.text import slugify
-from .utils import process_scraped_types
 import csv
 from django.contrib import messages
 logger = logging.getLogger(__name__)
@@ -437,6 +438,11 @@ def extract_query_from_url(url):
 
 @shared_task(bind=True)
 def process_scraping_task(self, task_id, form_data=None):
+    db_handler = DatabaseLogHandler(task_id)
+    formatter = logging.Formatter('%(asctime)s - %(name)s - %(levelname)s - %(message)s')
+    db_handler.setFormatter(formatter)
+    logger.addHandler(db_handler)
+    
     try:
         logger.info(f"Starting Sites Gathering task {task_id}")
         task = ScrapingTask.objects.get(id=task_id)
@@ -444,7 +450,7 @@ def process_scraping_task(self, task_id, form_data=None):
         task.save()
 
         # Get image_count early and ensure it's an integer
-        image_count = int(form_data.get('image_count', 6)) if form_data else 6
+        image_count = int(form_data.get('image_count', 3)) if form_data else 3
         logger.info(f"Using image count: {image_count}")
 
         queries = []
@@ -453,7 +459,6 @@ def process_scraping_task(self, task_id, form_data=None):
         # First try to process URLs from description
         if description:
             logger.info(f"Processing description content: {description}")
-            # Use the same processing logic as file content
             urls = [line.strip() for line in description.split('\n') if line.strip()]
             
             if any(url.startswith(('http://', 'https://')) for url in urls):
@@ -490,10 +495,16 @@ def process_scraping_task(self, task_id, form_data=None):
             task.save()
             return
 
-        total_results = 0 
+        # Update total queries count
+        task.total_queries = len(queries)
+        task.save()
+
+        total_results = 0
 
         for index, query_data in enumerate(queries, start=1):
             query = query_data['query']
+            # Update progress
+            task.update_progress(query, index - 1)
             page_num = 1
             next_page_token = None
 
@@ -511,6 +522,14 @@ def process_scraping_task(self, task_id, form_data=None):
                 if results is None:
                     break
 
+                try:
+                    # Save the raw SerpAPI response with a safe key
+                    safe_query = str(query).replace('/', '_').replace('\\', '_')[:255]  # Ensure safe key
+                    query_key = f"{safe_query}_page_{page_num}"
+                    task.save_serp_results(results, query_key)
+                except Exception as e:
+                    logger.error(f"Error saving SERP results: {str(e)}", exc_info=True)
+                    
                 local_results = results.get('local_results', [])
                 if not local_results:
                     logger.info(f"No results found for query '{query}' (Page {page_num})")
@@ -518,8 +537,6 @@ def process_scraping_task(self, task_id, form_data=None):
 
                 logger.info(f"Processing {len(local_results)} local results for query '{query}' (Page {page_num})")
                 logger.info(f"Local result data: {local_results}")
-
-                save_results(task, results, query)
 
                 # Process individual results
                 for result_index, local_result in enumerate(local_results, start=1):
@@ -564,6 +581,8 @@ def process_scraping_task(self, task_id, form_data=None):
         logger.error(f"Error in Sites Gathering task {task_id}: {str(e)}", exc_info=True)
         task.status = 'FAILED'
         task.save()
+    finally:
+        logger.removeHandler(db_handler)
 
 def update_image_url(business, local_path, new_path):
     try:
@@ -610,7 +629,7 @@ def get_s3_client():
         aws_secret_access_key=settings.AWS_SECRET_ACCESS_KEY
     )
 
-def download_images(business, local_result, image_count=6):
+def download_images(business, local_result, image_count=3):
     photos_link = local_result.get('photos_link')
     if not photos_link:
         logger.info(f"No photos link found for business {business.id}")
@@ -621,8 +640,8 @@ def download_images(business, local_result, image_count=6):
         image_count = max(1, int(image_count))
         logger.info(f"Processing download with image count: {image_count}")
     except (TypeError, ValueError) as e:
-        logger.warning(f"Invalid image count provided ({image_count}), using default: 6. Error: {str(e)}")
-        image_count = 6
+        logger.warning(f"Invalid image count provided ({image_count}), using default: 3. Error: {str(e)}")
+        image_count = 3
 
     image_paths = []
     try:
@@ -725,6 +744,7 @@ def download_images(business, local_result, image_count=6):
 
     return image_paths
 
+"""
 def save_results(task, results, query):
     try:
         file_name = f"{query.replace(' ', '_')}.json"
@@ -735,7 +755,7 @@ def save_results(task, results, query):
     except Exception as e:
         logger.error(f"Error saving results for query '{query}': {str(e)}", exc_info=True)
 
-
+"""
 #####################DESCRIPTION TRANSLATE##################################
 
 
