@@ -802,3 +802,21 @@ INFO 2025-03-20 20:01:14,699 common 26680 8696 Task 45 counts: total=1, pending=
 INFO 2025-03-20 20:01:14,701 common 26680 8696 Task 45 => PENDING -> COMPLETED
 INFO 2025-03-20 20:01:14,707 signals 26680 8696 Task 45 status update: previous_status=PENDING, businesses=1, pending=1, reviewed=0, in_production=0, discarded=0, new_status=COMPLETED
 INFO 2025-03-20 20:01:27,000 views 26680 29064 Accessing TaskDetailView for task 45
+INFO 2025-03-20 20:10:18,613 models 13200 32632 Creating new Business: Tobias Financial Advisors
+INFO 2025-03-20 20:10:18,615 signals 13200 32632 [SIGNAL] Recalculating Task 46 due to Business 34 change.
+INFO 2025-03-20 20:10:18,622 common 13200 32632 Task 46 counts: total=1, pending=1, reviewed=0, in_production=0
+INFO 2025-03-20 20:10:18,624 common 13200 32632 Task 46 => PENDING -> COMPLETED
+INFO 2025-03-20 20:10:18,631 signals 13200 32632 Task 46 status update: previous_status=PENDING, businesses=1, pending=1, reviewed=0, in_production=0, discarded=0, new_status=COMPLETED
+INFO 2025-03-20 20:10:27,489 views 13200 35804 Accessing TaskDetailView for task 46
+ERROR 2025-03-20 20:21:32,746 views 13200 9212 Error in RecentTasksView: 'NoneType' object has no attribute 'strftime'
+Traceback (most recent call last):
+  File "D:\proyectos\automation-master\automation\api\views.py", line 683, in get
+    'completed_at': task.completed_at.strftime('%Y-%m-%d %H:%M'),
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'NoneType' object has no attribute 'strftime'
+ERROR 2025-03-20 20:30:34,219 views 14084 32400 Error in RecentTasksView: 'NoneType' object has no attribute 'strftime'
+Traceback (most recent call last):
+  File "D:\proyectos\automation-master\automation\api\views.py", line 683, in get
+    'completed_at': task.completed_at.strftime('%Y-%m-%d %H:%M'),
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'NoneType' object has no attribute 'strftime'

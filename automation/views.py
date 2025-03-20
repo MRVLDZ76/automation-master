@@ -11,7 +11,6 @@ from django.core.exceptions import ValidationError
 import json
 from rest_framework.viewsets import ViewSet 
 from rest_framework.decorators import api_view, action
-from rest_framework.views import APIView
 from rest_framework.response import Response
 from django.views.generic import TemplateView
 import requests 
@@ -40,8 +39,7 @@ from django.contrib.auth.views import PasswordChangeView, PasswordChangeDoneView
 from django.views.decorators.csrf import csrf_exempt
 from django.template.loader import render_to_string
 
-from automation.api.serializers import BusinessSerializer, CategorySerializer, DestinationSerializer, TimelineDataSerializer
-from automation.api.views import StandardResultsSetPagination
+from automation.api.serializers import BusinessSerializer, TimelineDataSerializer
 from automation.services.ls_backend import LSBackendClient
 from automation.services.dashboard_service import DashboardService
  
@@ -1704,41 +1702,6 @@ class DashboardViewSet(ViewSet):
                 'error': 'Failed to fetch timeline data'
             }, status=400)
 
-
-class DestinationAPIView(APIView):
-    """
-    API endpoint for retrieving destinations filtered by country.
-    """
-    pagination_class = StandardResultsSetPagination
-    
-    def get(self, request):
-        country_id = request.query_params.get('country')
-        if not country_id:
-            return Response([])
-        
-        destinations = Destination.objects.filter(country_id=country_id)
-        serializer = DestinationSerializer(destinations, many=True)
-        paginator = self.pagination_class()
-        paginated_destinations = paginator.paginate_queryset(destinations, request)
-        serializer = DestinationSerializer(paginated_destinations, many=True)
-        return paginator.get_paginated_response(serializer.data)
-
-
-class CategoryAPIView(APIView):
-    """
-    API endpoint for retrieving categories filtered by level and parent status.
-    """
-    def get(self, request):
-        level_id = request.query_params.get('level')
-        parent_isnull = request.query_params.get('parent__isnull') == 'true'
-        
-        if not level_id:
-            return Response([])
-        
-        categories = Category.objects.filter(level_id=level_id, parent__isnull=parent_isnull)
-        serializer = CategorySerializer(categories, many=True)
-        return Response(serializer.data)
-    
 #########USER###################USER###################USER###################USER##########
   
 @login_required
@@ -3722,21 +3685,20 @@ def parse_address(address):
  
 
 @transaction.atomic
-def save_business_from_json(task, business_data, query='', country=None, destination=None):
+def save_business_from_json(task, business_data, query=''):
     try:
-        # Check if we're dealing with a place_results or local_results
+        # Check if we're dealing with a place_results (single business) or local_results (multiple businesses)
         if isinstance(business_data, dict) and 'place_results' in business_data:
             # Handle place_results format (single business)
             place_data = business_data['place_results']
             query = business_data.get('search_parameters', {}).get('q', '')
-            return save_single_business(task, place_data, query, country=country, destination=destination)
+            return save_single_business(task, place_data, query)
         else:
             # Handle original format (business from local_results array)
-            return save_single_business(task, business_data, query, country=country, destination=destination)
+            return save_single_business(task, business_data, query)
     except Exception as e:
         logger.error(f"Error saving business data from JSON for task {task.id}: {str(e)}", exc_info=True)
         raise
-
 
 def save_single_business(task, business_data, search_query, country=None, destination=None):
     """
@@ -3770,7 +3732,7 @@ def save_single_business(task, business_data, search_query, country=None, destin
             defaults={
                 'title': business_data.get('title', ''),  # Use 'title' here
                 'task': task,
-                'project_id': task.project_id, 
+                'project_id': task.project_id,
                 'project_title': task.project_title,
                 'main_category': task.main_category,
                 'tailored_category': task.tailored_category,
@@ -3792,7 +3754,6 @@ def save_single_business(task, business_data, search_query, country=None, destin
         if not created:
             business.website = website if website else business.website
             business.phone = phone if phone else business.phone
-            business.addresss = address if address else business.address
             business.country = country if country else business.country
             business.destination = destination if destination else business.destination
             business.scraping_task = task
@@ -3835,21 +3796,16 @@ def save_single_business(task, business_data, search_query, country=None, destin
         logger.exception(f"Error saving business from JSON: {str(e)}")
         raise
 
-
 @method_decorator(login_required, name='dispatch')
 @method_decorator(user_passes_test(lambda u: u.is_superuser or u.roles.filter(role='ADMIN').exists()), name='dispatch')
 class UploadScrapingResultsView(View):
     def get(self, request):
         tasks = ScrapingTask.objects.all()
-        levels = Level.objects.all().order_by('name')
-        categories = Category.objects.all().order_by('name')
         countries = Country.objects.all().order_by('name')
         destinations = Destination.objects.all().order_by('name')
         
         return render(request, 'automation/upload_scraping_results.html', {
             'tasks': tasks,
-            'levels': levels,
-            'categories': categories,
             'countries': countries,
             'destinations': destinations
         })
@@ -3859,7 +3815,6 @@ class UploadScrapingResultsView(View):
         task_option = request.POST.get('task_option')
         country_id = request.POST.get('submitted_country')
         destination_id = request.POST.get('submitted_city')
-        level_id = request.POST.get('level_id') 
         
         # Validate country and destination
         if not country_id or not destination_id:
@@ -3869,12 +3824,9 @@ class UploadScrapingResultsView(View):
         try:
             country = Country.objects.get(id=country_id)
             destination = Destination.objects.get(id=destination_id)
-            level = Level.objects.get(id=level_id) if level_id else None
         except (Country.DoesNotExist, Destination.DoesNotExist):
             messages.error(request, 'Invalid country or destination selected.')
             return redirect('upload_scraping_results')
-        except Level.DoesNotExist:
-            level = None
 
         # Task setup
         if task_option == 'existing':
@@ -3883,30 +3835,14 @@ class UploadScrapingResultsView(View):
                 messages.error(request, 'Please select an existing task.')
                 return redirect('upload_scraping_results')
             task = get_object_or_404(ScrapingTask, id=task_id)
-            
-            # Update task with the selected values
-            task.country = country
-            task.country_name = country.name
-            task.destination = destination
-            task.destination_name = destination.name
-            task.level = level.name if level else ''
-            task.save()
-            
         elif task_option == 'new':
             new_task_title = request.POST.get('new_task_title')
             if not new_task_title:
                 messages.error(request, 'Please enter a title for the new task.')
                 return redirect('upload_scraping_results')
-            
             task = ScrapingTask.objects.create(
                 project_title=new_task_title,
-                status='MANUAL_UPLOAD',
-                user=request.user,
-                country=country,
-                country_name=country.name,
-                destination=destination,
-                destination_name=destination.name,
-                level=level.name if level else ''
+                status='MANUAL_UPLOAD'
             )
         else:
             messages.error(request, 'Invalid task option selected.')
@@ -3937,24 +3873,15 @@ class UploadScrapingResultsView(View):
             failed_businesses = []
             search_query = data.get('search_parameters', {}).get('q', '')
             
-            # Create form_data dict to pass to save functions
-            form_data = {
-                'country_id': country.id,
-                'country_name': country.name,
-                'destination_id': destination.id,
-                'destination_name': destination.name,
-                'level': level.name if level else '',
-            }
-            
             for business_data in data['local_results']:
                 try:
                     # Check for business duplicates by title and address
                     if business_data.get('title') and business_data.get('address'):
                         existing_business = Business.objects.filter(
-                            title=business_data.get('title'),
+                            name=business_data.get('title'),
                             address=business_data.get('address'),
-                            form_country_id=country.id,
-                            form_destination_id=destination.id
+                            country=country,
+                            destination=destination
                         ).first()
                         
                         if existing_business:
@@ -3962,13 +3889,13 @@ class UploadScrapingResultsView(View):
                             continue
                     
                     # Process the business with country and destination context
-                    business = save_business(
+                    business = save_single_business(
                         task, 
                         business_data, 
                         search_query,
-                        form_data=form_data
+                        country=country,
+                        destination=destination
                     )
-                    
                     if business:
                         businesses_count += 1
                 except Exception as e:
@@ -4003,20 +3930,12 @@ class UploadScrapingResultsView(View):
 
         return redirect('upload_scraping_results')
 
-
 @method_decorator(login_required, name='dispatch')
 @method_decorator(user_passes_test(lambda u: u.is_superuser or u.roles.filter(role='ADMIN').exists()), name='dispatch')
 class UploadIndividualBusinessView(View):
     def get(self, request):
         tasks = ScrapingTask.objects.all()
-        countries = Country.objects.all().order_by('name')
-        main_categories = Category.objects.filter(parent__isnull=True)
-        
-        return render(request, 'automation/upload_individual_business.html', {
-            'tasks': tasks,
-            'countries': countries,
-            'main_categories': main_categories
-        })
+        return render(request, 'automation/upload_individual_business.html', {'tasks': tasks})
 
     @transaction.atomic
     def post(self, request):
@@ -4155,7 +4074,8 @@ def transform_place_to_local_format(place_data):
     
     return business_data
 
- 
+
+
 def task_status(request, task_id):
     task = ScrapingTask.objects.get(id=task_id)
     return render(request, 'automation/task_status.html', {'task': task})

@@ -15,7 +15,7 @@ import logging
 from automation.api.permissions import IsAdminOrAmbassador, IsAdminUser
 from automation.models import (Category, Country, CustomUser,Destination, ScrapingTask, Business, Image)
 from automation.tasks import User
-from .serializers import (AdminStatsSerializer, CategorySerializer, DestinationSerializer, ProjectSerializer, TaskSerializer, BusinessSerializer,ImageSerializer)
+from .serializers import (AdminStatsSerializer, ProjectSerializer, TaskSerializer, BusinessSerializer,ImageSerializer)
 from .permissions import ( IsAdminUser, IsAmbassadorUser, IsAdminOrAmbassador, HasDestinationPermission, IsAuthenticatedOrReadOnly)
 from rest_framework.views import APIView
 from rest_framework.response import Response
@@ -27,15 +27,9 @@ from django.core.serializers.json import DjangoJSONEncoder
 import json
 from django.contrib.auth import get_user_model
 import logging
-from rest_framework.pagination import PageNumberPagination
 
 logger = logging.getLogger(__name__)
 User = get_user_model()
-
-class StandardResultsSetPagination(PageNumberPagination):
-    page_size = 100
-    page_size_query_param = 'page_size'
-    max_page_size = 1000
 
 #Businesses#Businesses#Businesses
 class BusinessViewSet(viewsets.ModelViewSet):
@@ -1383,6 +1377,17 @@ class DestinationListAPI(APIView):
         except:
             return Response([], status=200)
 
+class DestinationAPIView(APIView):
+    def get(self, request):
+        country_id = request.query_params.get('country')
+        if not country_id:
+            return Response([])
+        
+        destinations = Destination.objects.filter(country_id=country_id)
+        data = [{'id': d.id, 'name': d.name} for d in destinations]
+        return Response(data)
+
+class CategoryAPIView(APIView):
     def get(self, request):
         level_id = request.query_params.get('level')
         parent_isnull = request.query_params.get('parent__isnull', 'false') == 'true'
@@ -1393,19 +1398,3 @@ class DestinationListAPI(APIView):
         categories = Category.objects.filter(level_id=level_id, parent__isnull=parent_isnull)
         data = [{'id': c.id, 'title': c.title} for c in categories]
         return Response(data)
- 
-
-class CategoryAPIView(APIView):
-    """
-    API endpoint for retrieving categories filtered by level and parent status.
-    """
-    def get(self, request):
-        level_id = request.query_params.get('level')
-        parent_isnull = request.query_params.get('parent__isnull') == 'true'
-        
-        if not level_id:
-            return Response([])
-        
-        categories = Category.objects.filter(level_id=level_id, parent__isnull=parent_isnull)
-        serializer = CategorySerializer(categories, many=True)
-        return Response(serializer.data)
