@@ -103,3 +103,702 @@ INFO 2025-03-20 16:47:11,986 views 32940 23344 Level: Business Support
 INFO 2025-03-20 16:47:11,986 views 32940 23344 Main Category: Business Technology
 INFO 2025-03-20 16:47:11,986 views 32940 23344 Subcategory: None
 INFO 2025-03-20 16:47:11,987 views 32940 23344 Image Count: 3
+ERROR 2025-03-20 16:49:02,381 views 32940 23344 Failed to start the Sites Gathering task for task_id 36: Error 10061 connecting to localhost:6379. No se puede establecer una conexión ya que el equipo de destino denegó expresamente dicha conexión.
+Traceback (most recent call last):
+  File "D:\proyectos\automation-master\env\Lib\site-packages\redis\connection.py", line 277, in connect
+    sock = self.retry.call_with_retry(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\proyectos\automation-master\env\Lib\site-packages\redis\retry.py", line 62, in call_with_retry
+    return do()
+           ^^^^
+  File "D:\proyectos\automation-master\env\Lib\site-packages\redis\connection.py", line 278, in <lambda>
+    lambda: self._connect(), lambda error: self.disconnect(error)
+            ^^^^^^^^^^^^^^^
+  File "D:\proyectos\automation-master\env\Lib\site-packages\redis\connection.py", line 639, in _connect
+    raise err
+  File "D:\proyectos\automation-master\env\Lib\site-packages\redis\connection.py", line 627, in _connect
+    sock.connect(socket_address)
+ConnectionRefusedError: [WinError 10061] No se puede establecer una conexión ya que el equipo de destino denegó expresamente dicha conexión
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "D:\proyectos\automation-master\env\Lib\site-packages\celery\backends\redis.py", line 127, in reconnect_on_error
+    yield
+  File "D:\proyectos\automation-master\env\Lib\site-packages\celery\backends\redis.py", line 177, in _consume_from
+    self._pubsub.subscribe(key)
+  File "D:\proyectos\automation-master\env\Lib\site-packages\redis\client.py", line 932, in subscribe
+    ret_val = self.execute_command("SUBSCRIBE", *new_channels.keys())
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\proyectos\automation-master\env\Lib\site-packages\redis\client.py", line 761, in execute_command
+    self.connection = self.connection_pool.get_connection(
+                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\proyectos\automation-master\env\Lib\site-packages\redis\connection.py", line 1074, in get_connection
+    connection.connect()
+  File "D:\proyectos\automation-master\env\Lib\site-packages\redis\connection.py", line 283, in connect
+    raise ConnectionError(self._error_message(e))
+redis.exceptions.ConnectionError: Error 10061 connecting to localhost:6379. No se puede establecer una conexión ya que el equipo de destino denegó expresamente dicha conexión.
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "D:\proyectos\automation-master\env\Lib\site-packages\redis\connection.py", line 277, in connect
+    sock = self.retry.call_with_retry(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\proyectos\automation-master\env\Lib\site-packages\redis\retry.py", line 62, in call_with_retry
+    return do()
+           ^^^^
+  File "D:\proyectos\automation-master\env\Lib\site-packages\redis\connection.py", line 278, in <lambda>
+    lambda: self._connect(), lambda error: self.disconnect(error)
+            ^^^^^^^^^^^^^^^
+  File "D:\proyectos\automation-master\env\Lib\site-packages\redis\connection.py", line 639, in _connect
+    raise err
+  File "D:\proyectos\automation-master\env\Lib\site-packages\redis\connection.py", line 627, in _connect
+    sock.connect(socket_address)
+ConnectionRefusedError: [WinError 10061] No se puede establecer una conexión ya que el equipo de destino denegó expresamente dicha conexión
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "D:\proyectos\automation-master\env\Lib\site-packages\kombu\connection.py", line 472, in _reraise_as_library_errors
+    yield
+  File "D:\proyectos\automation-master\env\Lib\site-packages\celery\app\base.py", line 800, in send_task
+    self.backend.on_task_call(P, task_id)
+  File "D:\proyectos\automation-master\env\Lib\site-packages\celery\backends\redis.py", line 373, in on_task_call
+    self.result_consumer.consume_from(task_id)
+  File "D:\proyectos\automation-master\env\Lib\site-packages\celery\backends\redis.py", line 169, in consume_from
+    return self.start(task_id)
+           ^^^^^^^^^^^^^^^^^^^
+  File "D:\proyectos\automation-master\env\Lib\site-packages\celery\backends\redis.py", line 147, in start
+    self._consume_from(initial_task_id)
+  File "D:\proyectos\automation-master\env\Lib\site-packages\celery\backends\redis.py", line 176, in _consume_from
+    with self.reconnect_on_error():
+  File "C:\Python312\Lib\contextlib.py", line 158, in __exit__
+    self.gen.throw(value)
+  File "D:\proyectos\automation-master\env\Lib\site-packages\celery\backends\redis.py", line 130, in reconnect_on_error
+    self._ensure(self._reconnect_pubsub, ())
+  File "D:\proyectos\automation-master\env\Lib\site-packages\celery\backends\redis.py", line 384, in ensure
+    return retry_over_time(
+           ^^^^^^^^^^^^^^^^
+  File "D:\proyectos\automation-master\env\Lib\site-packages\kombu\utils\functional.py", line 318, in retry_over_time
+    return fun(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^
+  File "D:\proyectos\automation-master\env\Lib\site-packages\celery\backends\redis.py", line 106, in _reconnect_pubsub
+    metas = self.backend.client.mget(self.subscribed_to)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\proyectos\automation-master\env\Lib\site-packages\redis\commands\core.py", line 2007, in mget
+    return self.execute_command("MGET", *args, **options)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\proyectos\automation-master\env\Lib\site-packages\redis\client.py", line 545, in execute_command
+    conn = self.connection or pool.get_connection(command_name, **options)
+                              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\proyectos\automation-master\env\Lib\site-packages\redis\connection.py", line 1074, in get_connection
+    connection.connect()
+  File "D:\proyectos\automation-master\env\Lib\site-packages\redis\connection.py", line 283, in connect
+    raise ConnectionError(self._error_message(e))
+redis.exceptions.ConnectionError: Error 10061 connecting to localhost:6379. No se puede establecer una conexión ya que el equipo de destino denegó expresamente dicha conexión.
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "D:\proyectos\automation-master\automation\views.py", line 379, in post
+    task_result = process_scraping_task.delay(task_id=task.id, form_data=form_data)
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\proyectos\automation-master\env\Lib\site-packages\celery\app\task.py", line 444, in delay
+    return self.apply_async(args, kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\proyectos\automation-master\env\Lib\site-packages\celery\app\task.py", line 594, in apply_async
+    return app.send_task(
+           ^^^^^^^^^^^^^^
+  File "D:\proyectos\automation-master\env\Lib\site-packages\celery\app\base.py", line 798, in send_task
+    with P.connection._reraise_as_library_errors():
+  File "C:\Python312\Lib\contextlib.py", line 158, in __exit__
+    self.gen.throw(value)
+  File "D:\proyectos\automation-master\env\Lib\site-packages\kombu\connection.py", line 476, in _reraise_as_library_errors
+    raise ConnectionError(str(exc)) from exc
+kombu.exceptions.OperationalError: Error 10061 connecting to localhost:6379. No se puede establecer una conexión ya que el equipo de destino denegó expresamente dicha conexión.
+ERROR 2025-03-20 16:49:02,775 views 32940 23344 Error processing task: Error 10061 connecting to localhost:6379. No se puede establecer una conexión ya que el equipo de destino denegó expresamente dicha conexión.
+Traceback (most recent call last):
+  File "D:\proyectos\automation-master\env\Lib\site-packages\redis\connection.py", line 277, in connect
+    sock = self.retry.call_with_retry(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\proyectos\automation-master\env\Lib\site-packages\redis\retry.py", line 62, in call_with_retry
+    return do()
+           ^^^^
+  File "D:\proyectos\automation-master\env\Lib\site-packages\redis\connection.py", line 278, in <lambda>
+    lambda: self._connect(), lambda error: self.disconnect(error)
+            ^^^^^^^^^^^^^^^
+  File "D:\proyectos\automation-master\env\Lib\site-packages\redis\connection.py", line 639, in _connect
+    raise err
+  File "D:\proyectos\automation-master\env\Lib\site-packages\redis\connection.py", line 627, in _connect
+    sock.connect(socket_address)
+ConnectionRefusedError: [WinError 10061] No se puede establecer una conexión ya que el equipo de destino denegó expresamente dicha conexión
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "D:\proyectos\automation-master\env\Lib\site-packages\celery\backends\redis.py", line 127, in reconnect_on_error
+    yield
+  File "D:\proyectos\automation-master\env\Lib\site-packages\celery\backends\redis.py", line 177, in _consume_from
+    self._pubsub.subscribe(key)
+  File "D:\proyectos\automation-master\env\Lib\site-packages\redis\client.py", line 932, in subscribe
+    ret_val = self.execute_command("SUBSCRIBE", *new_channels.keys())
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\proyectos\automation-master\env\Lib\site-packages\redis\client.py", line 761, in execute_command
+    self.connection = self.connection_pool.get_connection(
+                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\proyectos\automation-master\env\Lib\site-packages\redis\connection.py", line 1074, in get_connection
+    connection.connect()
+  File "D:\proyectos\automation-master\env\Lib\site-packages\redis\connection.py", line 283, in connect
+    raise ConnectionError(self._error_message(e))
+redis.exceptions.ConnectionError: Error 10061 connecting to localhost:6379. No se puede establecer una conexión ya que el equipo de destino denegó expresamente dicha conexión.
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "D:\proyectos\automation-master\env\Lib\site-packages\redis\connection.py", line 277, in connect
+    sock = self.retry.call_with_retry(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\proyectos\automation-master\env\Lib\site-packages\redis\retry.py", line 62, in call_with_retry
+    return do()
+           ^^^^
+  File "D:\proyectos\automation-master\env\Lib\site-packages\redis\connection.py", line 278, in <lambda>
+    lambda: self._connect(), lambda error: self.disconnect(error)
+            ^^^^^^^^^^^^^^^
+  File "D:\proyectos\automation-master\env\Lib\site-packages\redis\connection.py", line 639, in _connect
+    raise err
+  File "D:\proyectos\automation-master\env\Lib\site-packages\redis\connection.py", line 627, in _connect
+    sock.connect(socket_address)
+ConnectionRefusedError: [WinError 10061] No se puede establecer una conexión ya que el equipo de destino denegó expresamente dicha conexión
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "D:\proyectos\automation-master\env\Lib\site-packages\kombu\connection.py", line 472, in _reraise_as_library_errors
+    yield
+  File "D:\proyectos\automation-master\env\Lib\site-packages\celery\app\base.py", line 800, in send_task
+    self.backend.on_task_call(P, task_id)
+  File "D:\proyectos\automation-master\env\Lib\site-packages\celery\backends\redis.py", line 373, in on_task_call
+    self.result_consumer.consume_from(task_id)
+  File "D:\proyectos\automation-master\env\Lib\site-packages\celery\backends\redis.py", line 169, in consume_from
+    return self.start(task_id)
+           ^^^^^^^^^^^^^^^^^^^
+  File "D:\proyectos\automation-master\env\Lib\site-packages\celery\backends\redis.py", line 147, in start
+    self._consume_from(initial_task_id)
+  File "D:\proyectos\automation-master\env\Lib\site-packages\celery\backends\redis.py", line 176, in _consume_from
+    with self.reconnect_on_error():
+  File "C:\Python312\Lib\contextlib.py", line 158, in __exit__
+    self.gen.throw(value)
+  File "D:\proyectos\automation-master\env\Lib\site-packages\celery\backends\redis.py", line 130, in reconnect_on_error
+    self._ensure(self._reconnect_pubsub, ())
+  File "D:\proyectos\automation-master\env\Lib\site-packages\celery\backends\redis.py", line 384, in ensure
+    return retry_over_time(
+           ^^^^^^^^^^^^^^^^
+  File "D:\proyectos\automation-master\env\Lib\site-packages\kombu\utils\functional.py", line 318, in retry_over_time
+    return fun(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^
+  File "D:\proyectos\automation-master\env\Lib\site-packages\celery\backends\redis.py", line 106, in _reconnect_pubsub
+    metas = self.backend.client.mget(self.subscribed_to)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\proyectos\automation-master\env\Lib\site-packages\redis\commands\core.py", line 2007, in mget
+    return self.execute_command("MGET", *args, **options)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\proyectos\automation-master\env\Lib\site-packages\redis\client.py", line 545, in execute_command
+    conn = self.connection or pool.get_connection(command_name, **options)
+                              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\proyectos\automation-master\env\Lib\site-packages\redis\connection.py", line 1074, in get_connection
+    connection.connect()
+  File "D:\proyectos\automation-master\env\Lib\site-packages\redis\connection.py", line 283, in connect
+    raise ConnectionError(self._error_message(e))
+redis.exceptions.ConnectionError: Error 10061 connecting to localhost:6379. No se puede establecer una conexión ya que el equipo de destino denegó expresamente dicha conexión.
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "D:\proyectos\automation-master\automation\views.py", line 379, in post
+    task_result = process_scraping_task.delay(task_id=task.id, form_data=form_data)
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\proyectos\automation-master\env\Lib\site-packages\celery\app\task.py", line 444, in delay
+    return self.apply_async(args, kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\proyectos\automation-master\env\Lib\site-packages\celery\app\task.py", line 594, in apply_async
+    return app.send_task(
+           ^^^^^^^^^^^^^^
+  File "D:\proyectos\automation-master\env\Lib\site-packages\celery\app\base.py", line 798, in send_task
+    with P.connection._reraise_as_library_errors():
+  File "C:\Python312\Lib\contextlib.py", line 158, in __exit__
+    self.gen.throw(value)
+  File "D:\proyectos\automation-master\env\Lib\site-packages\kombu\connection.py", line 476, in _reraise_as_library_errors
+    raise ConnectionError(str(exc)) from exc
+kombu.exceptions.OperationalError: Error 10061 connecting to localhost:6379. No se puede establecer una conexión ya que el equipo de destino denegó expresamente dicha conexión.
+INFO 2025-03-20 17:35:38,102 models 35120 2440 Updating Business 26: Integrity Wealth Planning, Inc. - Financial Advisor
+INFO 2025-03-20 17:35:38,119 signals 35120 2440 [SIGNAL] Recalculating Task 34 due to Business 26 change.
+INFO 2025-03-20 17:35:38,127 common 35120 2440 Task 34 counts: total=1, pending=1, reviewed=0, in_production=0
+INFO 2025-03-20 17:35:38,141 common 35120 2440 Task 34 => DONE -> COMPLETED
+INFO 2025-03-20 17:35:38,146 signals 35120 2440 Task 34 status update: previous_status=DONE, businesses=1, pending=1, reviewed=0, in_production=0, discarded=0, new_status=COMPLETED
+INFO 2025-03-20 17:35:54,966 views 35120 2440 Accessing TaskDetailView for task 35
+INFO 2025-03-20 17:36:54,665 models 35120 2440 Creating new Business: Miami Plumbing Company
+ERROR 2025-03-20 17:36:54,777 views 35120 2440 Error saving business from JSON: 'Category' object has no attribute 'split'
+Traceback (most recent call last):
+  File "D:\proyectos\automation-master\env\Lib\site-packages\django\db\models\query.py", line 948, in get_or_create
+    return self.get(**kwargs), False
+           ^^^^^^^^^^^^^^^^^^
+  File "D:\proyectos\automation-master\env\Lib\site-packages\django\db\models\query.py", line 649, in get
+    raise self.model.DoesNotExist(
+automation.models.Business.DoesNotExist: Business matching query does not exist.
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "D:\proyectos\automation-master\automation\views.py", line 3767, in save_single_business
+    business, created = Business.objects.get_or_create(
+                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\proyectos\automation-master\env\Lib\site-packages\django\db\models\manager.py", line 87, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\proyectos\automation-master\env\Lib\site-packages\django\db\models\query.py", line 955, in get_or_create
+    return self.create(**params), True
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "D:\proyectos\automation-master\env\Lib\site-packages\django\db\models\query.py", line 679, in create
+    obj.save(force_insert=True, using=self.db)
+  File "D:\proyectos\automation-master\automation\models.py", line 528, in save
+    super().save(*args, **kwargs)
+  File "D:\proyectos\automation-master\env\Lib\site-packages\django\db\models\base.py", line 891, in save
+    self.save_base(
+  File "D:\proyectos\automation-master\env\Lib\site-packages\django\db\models\base.py", line 1012, in save_base
+    post_save.send(
+  File "D:\proyectos\automation-master\env\Lib\site-packages\django\dispatch\dispatcher.py", line 189, in send
+    response = receiver(signal=self, sender=sender, **named)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\proyectos\automation-master\automation\signals.py", line 90, in after_business_save
+    cat.strip() for cat in current_main.split(',') if cat.strip()
+                           ^^^^^^^^^^^^^^^^^^
+AttributeError: 'Category' object has no attribute 'split'
+ERROR 2025-03-20 17:36:54,876 views 35120 2440 Error saving business data from JSON for task 28: 'Category' object has no attribute 'split'
+Traceback (most recent call last):
+  File "D:\proyectos\automation-master\env\Lib\site-packages\django\db\models\query.py", line 948, in get_or_create
+    return self.get(**kwargs), False
+           ^^^^^^^^^^^^^^^^^^
+  File "D:\proyectos\automation-master\env\Lib\site-packages\django\db\models\query.py", line 649, in get
+    raise self.model.DoesNotExist(
+automation.models.Business.DoesNotExist: Business matching query does not exist.
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "D:\proyectos\automation-master\automation\views.py", line 3735, in save_business_from_json
+    return save_single_business(task, business_data, query)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\proyectos\automation-master\automation\views.py", line 3767, in save_single_business
+    business, created = Business.objects.get_or_create(
+                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\proyectos\automation-master\env\Lib\site-packages\django\db\models\manager.py", line 87, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\proyectos\automation-master\env\Lib\site-packages\django\db\models\query.py", line 955, in get_or_create
+    return self.create(**params), True
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "D:\proyectos\automation-master\env\Lib\site-packages\django\db\models\query.py", line 679, in create
+    obj.save(force_insert=True, using=self.db)
+  File "D:\proyectos\automation-master\automation\models.py", line 528, in save
+    super().save(*args, **kwargs)
+  File "D:\proyectos\automation-master\env\Lib\site-packages\django\db\models\base.py", line 891, in save
+    self.save_base(
+  File "D:\proyectos\automation-master\env\Lib\site-packages\django\db\models\base.py", line 1012, in save_base
+    post_save.send(
+  File "D:\proyectos\automation-master\env\Lib\site-packages\django\dispatch\dispatcher.py", line 189, in send
+    response = receiver(signal=self, sender=sender, **named)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\proyectos\automation-master\automation\signals.py", line 90, in after_business_save
+    cat.strip() for cat in current_main.split(',') if cat.strip()
+                           ^^^^^^^^^^^^^^^^^^
+AttributeError: 'Category' object has no attribute 'split'
+INFO 2025-03-20 18:45:38,992 models 34064 30256 Creating new Business: Miami Plumbing Company
+INFO 2025-03-20 18:45:39,024 signals 34064 30256 [SIGNAL] Recalculating Task 37 due to Business 28 change.
+INFO 2025-03-20 18:45:39,032 common 34064 30256 Task 37 counts: total=1, pending=1, reviewed=0, in_production=0
+INFO 2025-03-20 18:45:39,034 common 34064 30256 Task 37 => PENDING -> COMPLETED
+INFO 2025-03-20 18:45:39,040 signals 34064 30256 Task 37 status update: previous_status=PENDING, businesses=1, pending=1, reviewed=0, in_production=0, discarded=0, new_status=COMPLETED
+ERROR 2025-03-20 18:47:23,564 views 34064 16668 Cannot update business Santo Domingo: description is blank or None
+INFO 2025-03-20 18:47:41,527 models 34064 34912 Updating Business 28: Miami Plumbing Company
+INFO 2025-03-20 18:47:41,534 signals 34064 34912 [SIGNAL] Recalculating Task 37 due to Business 28 change.
+INFO 2025-03-20 18:47:41,541 common 34064 34912 Task 37 counts: total=1, pending=1, reviewed=0, in_production=0
+INFO 2025-03-20 18:47:41,542 common 34064 34912 Task 37 => PENDING -> COMPLETED
+INFO 2025-03-20 18:47:41,549 signals 34064 34912 Task 37 status update: previous_status=PENDING, businesses=1, pending=1, reviewed=0, in_production=0, discarded=0, new_status=COMPLETED
+INFO 2025-03-20 18:47:41,551 views 34064 34912 Business Santo Domingo updated successfully
+INFO 2025-03-20 18:48:01,985 models 34064 10544 Updating Business 28: Miami Plumbing Company
+INFO 2025-03-20 18:48:01,992 signals 34064 10544 [SIGNAL] Recalculating Task 37 due to Business 28 change.
+INFO 2025-03-20 18:48:01,998 common 34064 10544 Task 37 counts: total=1, pending=1, reviewed=0, in_production=0
+INFO 2025-03-20 18:48:02,003 signals 34064 10544 Task 37 status update: previous_status=COMPLETED, businesses=1, pending=1, reviewed=0, in_production=0, discarded=0, new_status=COMPLETED
+INFO 2025-03-20 18:48:02,004 views 34064 10544 Business Santo Domingo updated successfully
+INFO 2025-03-20 18:49:07,761 models 34064 28812 Updating Business 28: Miami Plumbing Company
+INFO 2025-03-20 18:49:07,766 signals 34064 28812 [SIGNAL] Recalculating Task 37 due to Business 28 change.
+INFO 2025-03-20 18:49:07,771 common 34064 28812 Task 37 counts: total=1, pending=1, reviewed=0, in_production=0
+INFO 2025-03-20 18:49:07,777 signals 34064 28812 Task 37 status update: previous_status=COMPLETED, businesses=1, pending=1, reviewed=0, in_production=0, discarded=0, new_status=COMPLETED
+INFO 2025-03-20 18:50:03,203 views 34064 11396 Accessing TaskDetailView for task 37
+INFO 2025-03-20 19:22:34,026 models 9884 5232 Creating new Business: Miami Plumbing Company
+ERROR 2025-03-20 19:22:34,032 views 9884 5232 Error saving business from JSON: null value in column "city" of relation "automation_business" violates not-null constraint
+DETAIL:  Failing row contains (29, PENDING, PLACE, 42682d4c-2263-45ed-837f-e3385ed81957, Oporto-restaurants, null, null, null, null, null, null, , 1, null, f, Miami Plumbing Company, null, , null, , ['Plumber', 'Drainage service', 'Well drilling contractor'], 100 SW 10th St Unit 511, Miami, FL 33130, null, , null, , , null, null, null, null, null, null, (305) 781-7871, 25.7641888, -80.19619329999999, ChIJIdKKJMe32YgRs9lTiHSgvG4, 0x88d9b7c7248ad221:0x6ebca0748853d9b3, 7979429062157523379, 15, 3.9, 2025-03-20 18:22:34.026696+00, null, , https://lh5.googleusercontent.com/p/AF1QipP2L1zpv52wk020DjohkVmU..., Plumber, Drainage service, Well drilling contractor, {"friday": "Open 24 hours", "monday": "Open 24 hours", "sunday":..., {"onsite_services": true, "online_estimates": true}, null, null, null, null, null, null, null, null, null, null, f, null, 38).
+Traceback (most recent call last):
+  File "D:\proyectos\automation-master\env\Lib\site-packages\django\db\backends\utils.py", line 105, in _execute
+    return self.cursor.execute(sql, params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+psycopg2.errors.NotNullViolation: null value in column "city" of relation "automation_business" violates not-null constraint
+DETAIL:  Failing row contains (29, PENDING, PLACE, 42682d4c-2263-45ed-837f-e3385ed81957, Oporto-restaurants, null, null, null, null, null, null, , 1, null, f, Miami Plumbing Company, null, , null, , ['Plumber', 'Drainage service', 'Well drilling contractor'], 100 SW 10th St Unit 511, Miami, FL 33130, null, , null, , , null, null, null, null, null, null, (305) 781-7871, 25.7641888, -80.19619329999999, ChIJIdKKJMe32YgRs9lTiHSgvG4, 0x88d9b7c7248ad221:0x6ebca0748853d9b3, 7979429062157523379, 15, 3.9, 2025-03-20 18:22:34.026696+00, null, , https://lh5.googleusercontent.com/p/AF1QipP2L1zpv52wk020DjohkVmU..., Plumber, Drainage service, Well drilling contractor, {"friday": "Open 24 hours", "monday": "Open 24 hours", "sunday":..., {"onsite_services": true, "online_estimates": true}, null, null, null, null, null, null, null, null, null, null, f, null, 38).
+
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "D:\proyectos\automation-master\automation\views.py", line 3852, in save_single_business
+    business.save()
+  File "D:\proyectos\automation-master\automation\models.py", line 528, in save
+    super().save(*args, **kwargs)
+  File "D:\proyectos\automation-master\env\Lib\site-packages\django\db\models\base.py", line 891, in save
+    self.save_base(
+  File "D:\proyectos\automation-master\env\Lib\site-packages\django\db\models\base.py", line 997, in save_base
+    updated = self._save_table(
+              ^^^^^^^^^^^^^^^^^
+  File "D:\proyectos\automation-master\env\Lib\site-packages\django\db\models\base.py", line 1160, in _save_table
+    results = self._do_insert(
+              ^^^^^^^^^^^^^^^^
+  File "D:\proyectos\automation-master\env\Lib\site-packages\django\db\models\base.py", line 1201, in _do_insert
+    return manager._insert(
+           ^^^^^^^^^^^^^^^^
+  File "D:\proyectos\automation-master\env\Lib\site-packages\django\db\models\manager.py", line 87, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\proyectos\automation-master\env\Lib\site-packages\django\db\models\query.py", line 1847, in _insert
+    return query.get_compiler(using=using).execute_sql(returning_fields)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\proyectos\automation-master\env\Lib\site-packages\django\db\models\sql\compiler.py", line 1836, in execute_sql
+    cursor.execute(sql, params)
+  File "D:\proyectos\automation-master\env\Lib\site-packages\django\db\backends\utils.py", line 122, in execute
+    return super().execute(sql, params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\proyectos\automation-master\env\Lib\site-packages\django\db\backends\utils.py", line 79, in execute
+    return self._execute_with_wrappers(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\proyectos\automation-master\env\Lib\site-packages\django\db\backends\utils.py", line 92, in _execute_with_wrappers
+    return executor(sql, params, many, context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\proyectos\automation-master\env\Lib\site-packages\django\db\backends\utils.py", line 100, in _execute
+    with self.db.wrap_database_errors:
+  File "D:\proyectos\automation-master\env\Lib\site-packages\django\db\utils.py", line 91, in __exit__
+    raise dj_exc_value.with_traceback(traceback) from exc_value
+  File "D:\proyectos\automation-master\env\Lib\site-packages\django\db\backends\utils.py", line 105, in _execute
+    return self.cursor.execute(sql, params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+django.db.utils.IntegrityError: null value in column "city" of relation "automation_business" violates not-null constraint
+DETAIL:  Failing row contains (29, PENDING, PLACE, 42682d4c-2263-45ed-837f-e3385ed81957, Oporto-restaurants, null, null, null, null, null, null, , 1, null, f, Miami Plumbing Company, null, , null, , ['Plumber', 'Drainage service', 'Well drilling contractor'], 100 SW 10th St Unit 511, Miami, FL 33130, null, , null, , , null, null, null, null, null, null, (305) 781-7871, 25.7641888, -80.19619329999999, ChIJIdKKJMe32YgRs9lTiHSgvG4, 0x88d9b7c7248ad221:0x6ebca0748853d9b3, 7979429062157523379, 15, 3.9, 2025-03-20 18:22:34.026696+00, null, , https://lh5.googleusercontent.com/p/AF1QipP2L1zpv52wk020DjohkVmU..., Plumber, Drainage service, Well drilling contractor, {"friday": "Open 24 hours", "monday": "Open 24 hours", "sunday":..., {"onsite_services": true, "online_estimates": true}, null, null, null, null, null, null, null, null, null, null, f, null, 38).
+
+ERROR 2025-03-20 19:22:34,237 views 9884 5232 Error saving business data from JSON for task 38: null value in column "city" of relation "automation_business" violates not-null constraint
+DETAIL:  Failing row contains (29, PENDING, PLACE, 42682d4c-2263-45ed-837f-e3385ed81957, Oporto-restaurants, null, null, null, null, null, null, , 1, null, f, Miami Plumbing Company, null, , null, , ['Plumber', 'Drainage service', 'Well drilling contractor'], 100 SW 10th St Unit 511, Miami, FL 33130, null, , null, , , null, null, null, null, null, null, (305) 781-7871, 25.7641888, -80.19619329999999, ChIJIdKKJMe32YgRs9lTiHSgvG4, 0x88d9b7c7248ad221:0x6ebca0748853d9b3, 7979429062157523379, 15, 3.9, 2025-03-20 18:22:34.026696+00, null, , https://lh5.googleusercontent.com/p/AF1QipP2L1zpv52wk020DjohkVmU..., Plumber, Drainage service, Well drilling contractor, {"friday": "Open 24 hours", "monday": "Open 24 hours", "sunday":..., {"onsite_services": true, "online_estimates": true}, null, null, null, null, null, null, null, null, null, null, f, null, 38).
+Traceback (most recent call last):
+  File "D:\proyectos\automation-master\env\Lib\site-packages\django\db\backends\utils.py", line 105, in _execute
+    return self.cursor.execute(sql, params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+psycopg2.errors.NotNullViolation: null value in column "city" of relation "automation_business" violates not-null constraint
+DETAIL:  Failing row contains (29, PENDING, PLACE, 42682d4c-2263-45ed-837f-e3385ed81957, Oporto-restaurants, null, null, null, null, null, null, , 1, null, f, Miami Plumbing Company, null, , null, , ['Plumber', 'Drainage service', 'Well drilling contractor'], 100 SW 10th St Unit 511, Miami, FL 33130, null, , null, , , null, null, null, null, null, null, (305) 781-7871, 25.7641888, -80.19619329999999, ChIJIdKKJMe32YgRs9lTiHSgvG4, 0x88d9b7c7248ad221:0x6ebca0748853d9b3, 7979429062157523379, 15, 3.9, 2025-03-20 18:22:34.026696+00, null, , https://lh5.googleusercontent.com/p/AF1QipP2L1zpv52wk020DjohkVmU..., Plumber, Drainage service, Well drilling contractor, {"friday": "Open 24 hours", "monday": "Open 24 hours", "sunday":..., {"onsite_services": true, "online_estimates": true}, null, null, null, null, null, null, null, null, null, null, f, null, 38).
+
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "D:\proyectos\automation-master\automation\views.py", line 3777, in save_business_from_json
+    return save_single_business(task, business_data, query)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\proyectos\automation-master\automation\views.py", line 3852, in save_single_business
+    business.save()
+  File "D:\proyectos\automation-master\automation\models.py", line 528, in save
+    super().save(*args, **kwargs)
+  File "D:\proyectos\automation-master\env\Lib\site-packages\django\db\models\base.py", line 891, in save
+    self.save_base(
+  File "D:\proyectos\automation-master\env\Lib\site-packages\django\db\models\base.py", line 997, in save_base
+    updated = self._save_table(
+              ^^^^^^^^^^^^^^^^^
+  File "D:\proyectos\automation-master\env\Lib\site-packages\django\db\models\base.py", line 1160, in _save_table
+    results = self._do_insert(
+              ^^^^^^^^^^^^^^^^
+  File "D:\proyectos\automation-master\env\Lib\site-packages\django\db\models\base.py", line 1201, in _do_insert
+    return manager._insert(
+           ^^^^^^^^^^^^^^^^
+  File "D:\proyectos\automation-master\env\Lib\site-packages\django\db\models\manager.py", line 87, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\proyectos\automation-master\env\Lib\site-packages\django\db\models\query.py", line 1847, in _insert
+    return query.get_compiler(using=using).execute_sql(returning_fields)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\proyectos\automation-master\env\Lib\site-packages\django\db\models\sql\compiler.py", line 1836, in execute_sql
+    cursor.execute(sql, params)
+  File "D:\proyectos\automation-master\env\Lib\site-packages\django\db\backends\utils.py", line 122, in execute
+    return super().execute(sql, params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\proyectos\automation-master\env\Lib\site-packages\django\db\backends\utils.py", line 79, in execute
+    return self._execute_with_wrappers(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\proyectos\automation-master\env\Lib\site-packages\django\db\backends\utils.py", line 92, in _execute_with_wrappers
+    return executor(sql, params, many, context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\proyectos\automation-master\env\Lib\site-packages\django\db\backends\utils.py", line 100, in _execute
+    with self.db.wrap_database_errors:
+  File "D:\proyectos\automation-master\env\Lib\site-packages\django\db\utils.py", line 91, in __exit__
+    raise dj_exc_value.with_traceback(traceback) from exc_value
+  File "D:\proyectos\automation-master\env\Lib\site-packages\django\db\backends\utils.py", line 105, in _execute
+    return self.cursor.execute(sql, params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+django.db.utils.IntegrityError: null value in column "city" of relation "automation_business" violates not-null constraint
+DETAIL:  Failing row contains (29, PENDING, PLACE, 42682d4c-2263-45ed-837f-e3385ed81957, Oporto-restaurants, null, null, null, null, null, null, , 1, null, f, Miami Plumbing Company, null, , null, , ['Plumber', 'Drainage service', 'Well drilling contractor'], 100 SW 10th St Unit 511, Miami, FL 33130, null, , null, , , null, null, null, null, null, null, (305) 781-7871, 25.7641888, -80.19619329999999, ChIJIdKKJMe32YgRs9lTiHSgvG4, 0x88d9b7c7248ad221:0x6ebca0748853d9b3, 7979429062157523379, 15, 3.9, 2025-03-20 18:22:34.026696+00, null, , https://lh5.googleusercontent.com/p/AF1QipP2L1zpv52wk020DjohkVmU..., Plumber, Drainage service, Well drilling contractor, {"friday": "Open 24 hours", "monday": "Open 24 hours", "sunday":..., {"onsite_services": true, "online_estimates": true}, null, null, null, null, null, null, null, null, null, null, f, null, 38).
+
+INFO 2025-03-20 19:23:14,196 models 9884 5232 Creating new Business: Miami Plumbing Company
+ERROR 2025-03-20 19:23:14,199 views 9884 5232 Error saving business from JSON: null value in column "city" of relation "automation_business" violates not-null constraint
+DETAIL:  Failing row contains (30, PENDING, PLACE, e91169c8-42c2-4caa-85cd-ec4d44f22fad, Oporto-restaurants, null, null, null, null, null, null, , 1, null, f, Miami Plumbing Company, null, , null, , ['Plumber', 'Drainage service', 'Well drilling contractor'], 100 SW 10th St Unit 511, Miami, FL 33130, null, , null, , , null, null, null, null, null, null, (305) 781-7871, 25.7641888, -80.19619329999999, ChIJIdKKJMe32YgRs9lTiHSgvG4, 0x88d9b7c7248ad221:0x6ebca0748853d9b3, 7979429062157523379, 15, 3.9, 2025-03-20 18:23:14.196048+00, null, , https://lh5.googleusercontent.com/p/AF1QipP2L1zpv52wk020DjohkVmU..., Plumber, Drainage service, Well drilling contractor, {"friday": "Open 24 hours", "monday": "Open 24 hours", "sunday":..., {"onsite_services": true, "online_estimates": true}, null, null, null, null, null, null, null, null, null, null, f, null, 39).
+Traceback (most recent call last):
+  File "D:\proyectos\automation-master\env\Lib\site-packages\django\db\backends\utils.py", line 105, in _execute
+    return self.cursor.execute(sql, params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+psycopg2.errors.NotNullViolation: null value in column "city" of relation "automation_business" violates not-null constraint
+DETAIL:  Failing row contains (30, PENDING, PLACE, e91169c8-42c2-4caa-85cd-ec4d44f22fad, Oporto-restaurants, null, null, null, null, null, null, , 1, null, f, Miami Plumbing Company, null, , null, , ['Plumber', 'Drainage service', 'Well drilling contractor'], 100 SW 10th St Unit 511, Miami, FL 33130, null, , null, , , null, null, null, null, null, null, (305) 781-7871, 25.7641888, -80.19619329999999, ChIJIdKKJMe32YgRs9lTiHSgvG4, 0x88d9b7c7248ad221:0x6ebca0748853d9b3, 7979429062157523379, 15, 3.9, 2025-03-20 18:23:14.196048+00, null, , https://lh5.googleusercontent.com/p/AF1QipP2L1zpv52wk020DjohkVmU..., Plumber, Drainage service, Well drilling contractor, {"friday": "Open 24 hours", "monday": "Open 24 hours", "sunday":..., {"onsite_services": true, "online_estimates": true}, null, null, null, null, null, null, null, null, null, null, f, null, 39).
+
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "D:\proyectos\automation-master\automation\views.py", line 3852, in save_single_business
+    business.save()
+  File "D:\proyectos\automation-master\automation\models.py", line 528, in save
+    super().save(*args, **kwargs)
+  File "D:\proyectos\automation-master\env\Lib\site-packages\django\db\models\base.py", line 891, in save
+    self.save_base(
+  File "D:\proyectos\automation-master\env\Lib\site-packages\django\db\models\base.py", line 997, in save_base
+    updated = self._save_table(
+              ^^^^^^^^^^^^^^^^^
+  File "D:\proyectos\automation-master\env\Lib\site-packages\django\db\models\base.py", line 1160, in _save_table
+    results = self._do_insert(
+              ^^^^^^^^^^^^^^^^
+  File "D:\proyectos\automation-master\env\Lib\site-packages\django\db\models\base.py", line 1201, in _do_insert
+    return manager._insert(
+           ^^^^^^^^^^^^^^^^
+  File "D:\proyectos\automation-master\env\Lib\site-packages\django\db\models\manager.py", line 87, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\proyectos\automation-master\env\Lib\site-packages\django\db\models\query.py", line 1847, in _insert
+    return query.get_compiler(using=using).execute_sql(returning_fields)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\proyectos\automation-master\env\Lib\site-packages\django\db\models\sql\compiler.py", line 1836, in execute_sql
+    cursor.execute(sql, params)
+  File "D:\proyectos\automation-master\env\Lib\site-packages\django\db\backends\utils.py", line 122, in execute
+    return super().execute(sql, params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\proyectos\automation-master\env\Lib\site-packages\django\db\backends\utils.py", line 79, in execute
+    return self._execute_with_wrappers(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\proyectos\automation-master\env\Lib\site-packages\django\db\backends\utils.py", line 92, in _execute_with_wrappers
+    return executor(sql, params, many, context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\proyectos\automation-master\env\Lib\site-packages\django\db\backends\utils.py", line 100, in _execute
+    with self.db.wrap_database_errors:
+  File "D:\proyectos\automation-master\env\Lib\site-packages\django\db\utils.py", line 91, in __exit__
+    raise dj_exc_value.with_traceback(traceback) from exc_value
+  File "D:\proyectos\automation-master\env\Lib\site-packages\django\db\backends\utils.py", line 105, in _execute
+    return self.cursor.execute(sql, params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+django.db.utils.IntegrityError: null value in column "city" of relation "automation_business" violates not-null constraint
+DETAIL:  Failing row contains (30, PENDING, PLACE, e91169c8-42c2-4caa-85cd-ec4d44f22fad, Oporto-restaurants, null, null, null, null, null, null, , 1, null, f, Miami Plumbing Company, null, , null, , ['Plumber', 'Drainage service', 'Well drilling contractor'], 100 SW 10th St Unit 511, Miami, FL 33130, null, , null, , , null, null, null, null, null, null, (305) 781-7871, 25.7641888, -80.19619329999999, ChIJIdKKJMe32YgRs9lTiHSgvG4, 0x88d9b7c7248ad221:0x6ebca0748853d9b3, 7979429062157523379, 15, 3.9, 2025-03-20 18:23:14.196048+00, null, , https://lh5.googleusercontent.com/p/AF1QipP2L1zpv52wk020DjohkVmU..., Plumber, Drainage service, Well drilling contractor, {"friday": "Open 24 hours", "monday": "Open 24 hours", "sunday":..., {"onsite_services": true, "online_estimates": true}, null, null, null, null, null, null, null, null, null, null, f, null, 39).
+
+ERROR 2025-03-20 19:23:14,207 views 9884 5232 Error saving business data from JSON for task 39: null value in column "city" of relation "automation_business" violates not-null constraint
+DETAIL:  Failing row contains (30, PENDING, PLACE, e91169c8-42c2-4caa-85cd-ec4d44f22fad, Oporto-restaurants, null, null, null, null, null, null, , 1, null, f, Miami Plumbing Company, null, , null, , ['Plumber', 'Drainage service', 'Well drilling contractor'], 100 SW 10th St Unit 511, Miami, FL 33130, null, , null, , , null, null, null, null, null, null, (305) 781-7871, 25.7641888, -80.19619329999999, ChIJIdKKJMe32YgRs9lTiHSgvG4, 0x88d9b7c7248ad221:0x6ebca0748853d9b3, 7979429062157523379, 15, 3.9, 2025-03-20 18:23:14.196048+00, null, , https://lh5.googleusercontent.com/p/AF1QipP2L1zpv52wk020DjohkVmU..., Plumber, Drainage service, Well drilling contractor, {"friday": "Open 24 hours", "monday": "Open 24 hours", "sunday":..., {"onsite_services": true, "online_estimates": true}, null, null, null, null, null, null, null, null, null, null, f, null, 39).
+Traceback (most recent call last):
+  File "D:\proyectos\automation-master\env\Lib\site-packages\django\db\backends\utils.py", line 105, in _execute
+    return self.cursor.execute(sql, params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+psycopg2.errors.NotNullViolation: null value in column "city" of relation "automation_business" violates not-null constraint
+DETAIL:  Failing row contains (30, PENDING, PLACE, e91169c8-42c2-4caa-85cd-ec4d44f22fad, Oporto-restaurants, null, null, null, null, null, null, , 1, null, f, Miami Plumbing Company, null, , null, , ['Plumber', 'Drainage service', 'Well drilling contractor'], 100 SW 10th St Unit 511, Miami, FL 33130, null, , null, , , null, null, null, null, null, null, (305) 781-7871, 25.7641888, -80.19619329999999, ChIJIdKKJMe32YgRs9lTiHSgvG4, 0x88d9b7c7248ad221:0x6ebca0748853d9b3, 7979429062157523379, 15, 3.9, 2025-03-20 18:23:14.196048+00, null, , https://lh5.googleusercontent.com/p/AF1QipP2L1zpv52wk020DjohkVmU..., Plumber, Drainage service, Well drilling contractor, {"friday": "Open 24 hours", "monday": "Open 24 hours", "sunday":..., {"onsite_services": true, "online_estimates": true}, null, null, null, null, null, null, null, null, null, null, f, null, 39).
+
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "D:\proyectos\automation-master\automation\views.py", line 3777, in save_business_from_json
+    return save_single_business(task, business_data, query)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\proyectos\automation-master\automation\views.py", line 3852, in save_single_business
+    business.save()
+  File "D:\proyectos\automation-master\automation\models.py", line 528, in save
+    super().save(*args, **kwargs)
+  File "D:\proyectos\automation-master\env\Lib\site-packages\django\db\models\base.py", line 891, in save
+    self.save_base(
+  File "D:\proyectos\automation-master\env\Lib\site-packages\django\db\models\base.py", line 997, in save_base
+    updated = self._save_table(
+              ^^^^^^^^^^^^^^^^^
+  File "D:\proyectos\automation-master\env\Lib\site-packages\django\db\models\base.py", line 1160, in _save_table
+    results = self._do_insert(
+              ^^^^^^^^^^^^^^^^
+  File "D:\proyectos\automation-master\env\Lib\site-packages\django\db\models\base.py", line 1201, in _do_insert
+    return manager._insert(
+           ^^^^^^^^^^^^^^^^
+  File "D:\proyectos\automation-master\env\Lib\site-packages\django\db\models\manager.py", line 87, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\proyectos\automation-master\env\Lib\site-packages\django\db\models\query.py", line 1847, in _insert
+    return query.get_compiler(using=using).execute_sql(returning_fields)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\proyectos\automation-master\env\Lib\site-packages\django\db\models\sql\compiler.py", line 1836, in execute_sql
+    cursor.execute(sql, params)
+  File "D:\proyectos\automation-master\env\Lib\site-packages\django\db\backends\utils.py", line 122, in execute
+    return super().execute(sql, params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\proyectos\automation-master\env\Lib\site-packages\django\db\backends\utils.py", line 79, in execute
+    return self._execute_with_wrappers(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\proyectos\automation-master\env\Lib\site-packages\django\db\backends\utils.py", line 92, in _execute_with_wrappers
+    return executor(sql, params, many, context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\proyectos\automation-master\env\Lib\site-packages\django\db\backends\utils.py", line 100, in _execute
+    with self.db.wrap_database_errors:
+  File "D:\proyectos\automation-master\env\Lib\site-packages\django\db\utils.py", line 91, in __exit__
+    raise dj_exc_value.with_traceback(traceback) from exc_value
+  File "D:\proyectos\automation-master\env\Lib\site-packages\django\db\backends\utils.py", line 105, in _execute
+    return self.cursor.execute(sql, params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+django.db.utils.IntegrityError: null value in column "city" of relation "automation_business" violates not-null constraint
+DETAIL:  Failing row contains (30, PENDING, PLACE, e91169c8-42c2-4caa-85cd-ec4d44f22fad, Oporto-restaurants, null, null, null, null, null, null, , 1, null, f, Miami Plumbing Company, null, , null, , ['Plumber', 'Drainage service', 'Well drilling contractor'], 100 SW 10th St Unit 511, Miami, FL 33130, null, , null, , , null, null, null, null, null, null, (305) 781-7871, 25.7641888, -80.19619329999999, ChIJIdKKJMe32YgRs9lTiHSgvG4, 0x88d9b7c7248ad221:0x6ebca0748853d9b3, 7979429062157523379, 15, 3.9, 2025-03-20 18:23:14.196048+00, null, , https://lh5.googleusercontent.com/p/AF1QipP2L1zpv52wk020DjohkVmU..., Plumber, Drainage service, Well drilling contractor, {"friday": "Open 24 hours", "monday": "Open 24 hours", "sunday":..., {"onsite_services": true, "online_estimates": true}, null, null, null, null, null, null, null, null, null, null, f, null, 39).
+
+INFO 2025-03-20 19:30:41,935 models 35448 33836 Creating new Business: 
+ERROR 2025-03-20 19:30:42,192 views 35448 33836 Error saving business from JSON: null value in column "country" of relation "automation_business" violates not-null constraint
+DETAIL:  Failing row contains (31, PENDING, PLACE, 00000000-0000-0000-0000-000000000028, Portugal-Lisboa, null, null, null, null, null, null, , 1, null, f, , null, , null, , ['Plumber', 'Drainage service', 'Well drilling contractor'], 100 SW 10th St Unit 511, Miami, FL 33130, null, , Miami, , , null, null, null, null, null, null, (305) 781-7871, 25.7641888, -80.19619329999999, ChIJIdKKJMe32YgRs9lTiHSgvG4, 0x88d9b7c7248ad221:0x6ebca0748853d9b3, 7979429062157523379, 15, 3.9, 2025-03-20 18:30:41.934539+00, null, , https://lh5.googleusercontent.com/p/AF1QipP2L1zpv52wk020DjohkVmU..., ['Plumber', 'Drainage service', 'Well drilling contractor'], {"friday": "Open 24 hours", "monday": "Open 24 hours", "sunday":..., {"onsite_services": true, "online_estimates": true}, null, null, null, null, null, null, null, null, null, null, f, null, 40).
+Traceback (most recent call last):
+  File "D:\proyectos\automation-master\env\Lib\site-packages\django\db\backends\utils.py", line 105, in _execute
+    return self.cursor.execute(sql, params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+psycopg2.errors.NotNullViolation: null value in column "country" of relation "automation_business" violates not-null constraint
+DETAIL:  Failing row contains (31, PENDING, PLACE, 00000000-0000-0000-0000-000000000028, Portugal-Lisboa, null, null, null, null, null, null, , 1, null, f, , null, , null, , ['Plumber', 'Drainage service', 'Well drilling contractor'], 100 SW 10th St Unit 511, Miami, FL 33130, null, , Miami, , , null, null, null, null, null, null, (305) 781-7871, 25.7641888, -80.19619329999999, ChIJIdKKJMe32YgRs9lTiHSgvG4, 0x88d9b7c7248ad221:0x6ebca0748853d9b3, 7979429062157523379, 15, 3.9, 2025-03-20 18:30:41.934539+00, null, , https://lh5.googleusercontent.com/p/AF1QipP2L1zpv52wk020DjohkVmU..., ['Plumber', 'Drainage service', 'Well drilling contractor'], {"friday": "Open 24 hours", "monday": "Open 24 hours", "sunday":..., {"onsite_services": true, "online_estimates": true}, null, null, null, null, null, null, null, null, null, null, f, null, 40).
+
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "D:\proyectos\automation-master\automation\views.py", line 3831, in save_single_business
+    business_obj.save()
+  File "D:\proyectos\automation-master\automation\models.py", line 528, in save
+    super().save(*args, **kwargs)
+  File "D:\proyectos\automation-master\env\Lib\site-packages\django\db\models\base.py", line 891, in save
+    self.save_base(
+  File "D:\proyectos\automation-master\env\Lib\site-packages\django\db\models\base.py", line 997, in save_base
+    updated = self._save_table(
+              ^^^^^^^^^^^^^^^^^
+  File "D:\proyectos\automation-master\env\Lib\site-packages\django\db\models\base.py", line 1160, in _save_table
+    results = self._do_insert(
+              ^^^^^^^^^^^^^^^^
+  File "D:\proyectos\automation-master\env\Lib\site-packages\django\db\models\base.py", line 1201, in _do_insert
+    return manager._insert(
+           ^^^^^^^^^^^^^^^^
+  File "D:\proyectos\automation-master\env\Lib\site-packages\django\db\models\manager.py", line 87, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\proyectos\automation-master\env\Lib\site-packages\django\db\models\query.py", line 1847, in _insert
+    return query.get_compiler(using=using).execute_sql(returning_fields)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\proyectos\automation-master\env\Lib\site-packages\django\db\models\sql\compiler.py", line 1836, in execute_sql
+    cursor.execute(sql, params)
+  File "D:\proyectos\automation-master\env\Lib\site-packages\django\db\backends\utils.py", line 122, in execute
+    return super().execute(sql, params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\proyectos\automation-master\env\Lib\site-packages\django\db\backends\utils.py", line 79, in execute
+    return self._execute_with_wrappers(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\proyectos\automation-master\env\Lib\site-packages\django\db\backends\utils.py", line 92, in _execute_with_wrappers
+    return executor(sql, params, many, context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\proyectos\automation-master\env\Lib\site-packages\django\db\backends\utils.py", line 100, in _execute
+    with self.db.wrap_database_errors:
+  File "D:\proyectos\automation-master\env\Lib\site-packages\django\db\utils.py", line 91, in __exit__
+    raise dj_exc_value.with_traceback(traceback) from exc_value
+  File "D:\proyectos\automation-master\env\Lib\site-packages\django\db\backends\utils.py", line 105, in _execute
+    return self.cursor.execute(sql, params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+django.db.utils.IntegrityError: null value in column "country" of relation "automation_business" violates not-null constraint
+DETAIL:  Failing row contains (31, PENDING, PLACE, 00000000-0000-0000-0000-000000000028, Portugal-Lisboa, null, null, null, null, null, null, , 1, null, f, , null, , null, , ['Plumber', 'Drainage service', 'Well drilling contractor'], 100 SW 10th St Unit 511, Miami, FL 33130, null, , Miami, , , null, null, null, null, null, null, (305) 781-7871, 25.7641888, -80.19619329999999, ChIJIdKKJMe32YgRs9lTiHSgvG4, 0x88d9b7c7248ad221:0x6ebca0748853d9b3, 7979429062157523379, 15, 3.9, 2025-03-20 18:30:41.934539+00, null, , https://lh5.googleusercontent.com/p/AF1QipP2L1zpv52wk020DjohkVmU..., ['Plumber', 'Drainage service', 'Well drilling contractor'], {"friday": "Open 24 hours", "monday": "Open 24 hours", "sunday":..., {"onsite_services": true, "online_estimates": true}, null, null, null, null, null, null, null, null, null, null, f, null, 40).
+
+ERROR 2025-03-20 19:30:42,669 views 35448 33836 Error saving business data from JSON for task 40: null value in column "country" of relation "automation_business" violates not-null constraint
+DETAIL:  Failing row contains (31, PENDING, PLACE, 00000000-0000-0000-0000-000000000028, Portugal-Lisboa, null, null, null, null, null, null, , 1, null, f, , null, , null, , ['Plumber', 'Drainage service', 'Well drilling contractor'], 100 SW 10th St Unit 511, Miami, FL 33130, null, , Miami, , , null, null, null, null, null, null, (305) 781-7871, 25.7641888, -80.19619329999999, ChIJIdKKJMe32YgRs9lTiHSgvG4, 0x88d9b7c7248ad221:0x6ebca0748853d9b3, 7979429062157523379, 15, 3.9, 2025-03-20 18:30:41.934539+00, null, , https://lh5.googleusercontent.com/p/AF1QipP2L1zpv52wk020DjohkVmU..., ['Plumber', 'Drainage service', 'Well drilling contractor'], {"friday": "Open 24 hours", "monday": "Open 24 hours", "sunday":..., {"onsite_services": true, "online_estimates": true}, null, null, null, null, null, null, null, null, null, null, f, null, 40).
+Traceback (most recent call last):
+  File "D:\proyectos\automation-master\env\Lib\site-packages\django\db\backends\utils.py", line 105, in _execute
+    return self.cursor.execute(sql, params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+psycopg2.errors.NotNullViolation: null value in column "country" of relation "automation_business" violates not-null constraint
+DETAIL:  Failing row contains (31, PENDING, PLACE, 00000000-0000-0000-0000-000000000028, Portugal-Lisboa, null, null, null, null, null, null, , 1, null, f, , null, , null, , ['Plumber', 'Drainage service', 'Well drilling contractor'], 100 SW 10th St Unit 511, Miami, FL 33130, null, , Miami, , , null, null, null, null, null, null, (305) 781-7871, 25.7641888, -80.19619329999999, ChIJIdKKJMe32YgRs9lTiHSgvG4, 0x88d9b7c7248ad221:0x6ebca0748853d9b3, 7979429062157523379, 15, 3.9, 2025-03-20 18:30:41.934539+00, null, , https://lh5.googleusercontent.com/p/AF1QipP2L1zpv52wk020DjohkVmU..., ['Plumber', 'Drainage service', 'Well drilling contractor'], {"friday": "Open 24 hours", "monday": "Open 24 hours", "sunday":..., {"onsite_services": true, "online_estimates": true}, null, null, null, null, null, null, null, null, null, null, f, null, 40).
+
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "D:\proyectos\automation-master\automation\views.py", line 3735, in save_business_from_json
+    return save_single_business(task, business_data, query)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\proyectos\automation-master\automation\views.py", line 3831, in save_single_business
+    business_obj.save()
+  File "D:\proyectos\automation-master\automation\models.py", line 528, in save
+    super().save(*args, **kwargs)
+  File "D:\proyectos\automation-master\env\Lib\site-packages\django\db\models\base.py", line 891, in save
+    self.save_base(
+  File "D:\proyectos\automation-master\env\Lib\site-packages\django\db\models\base.py", line 997, in save_base
+    updated = self._save_table(
+              ^^^^^^^^^^^^^^^^^
+  File "D:\proyectos\automation-master\env\Lib\site-packages\django\db\models\base.py", line 1160, in _save_table
+    results = self._do_insert(
+              ^^^^^^^^^^^^^^^^
+  File "D:\proyectos\automation-master\env\Lib\site-packages\django\db\models\base.py", line 1201, in _do_insert
+    return manager._insert(
+           ^^^^^^^^^^^^^^^^
+  File "D:\proyectos\automation-master\env\Lib\site-packages\django\db\models\manager.py", line 87, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\proyectos\automation-master\env\Lib\site-packages\django\db\models\query.py", line 1847, in _insert
+    return query.get_compiler(using=using).execute_sql(returning_fields)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\proyectos\automation-master\env\Lib\site-packages\django\db\models\sql\compiler.py", line 1836, in execute_sql
+    cursor.execute(sql, params)
+  File "D:\proyectos\automation-master\env\Lib\site-packages\django\db\backends\utils.py", line 122, in execute
+    return super().execute(sql, params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\proyectos\automation-master\env\Lib\site-packages\django\db\backends\utils.py", line 79, in execute
+    return self._execute_with_wrappers(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\proyectos\automation-master\env\Lib\site-packages\django\db\backends\utils.py", line 92, in _execute_with_wrappers
+    return executor(sql, params, many, context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\proyectos\automation-master\env\Lib\site-packages\django\db\backends\utils.py", line 100, in _execute
+    with self.db.wrap_database_errors:
+  File "D:\proyectos\automation-master\env\Lib\site-packages\django\db\utils.py", line 91, in __exit__
+    raise dj_exc_value.with_traceback(traceback) from exc_value
+  File "D:\proyectos\automation-master\env\Lib\site-packages\django\db\backends\utils.py", line 105, in _execute
+    return self.cursor.execute(sql, params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+django.db.utils.IntegrityError: null value in column "country" of relation "automation_business" violates not-null constraint
+DETAIL:  Failing row contains (31, PENDING, PLACE, 00000000-0000-0000-0000-000000000028, Portugal-Lisboa, null, null, null, null, null, null, , 1, null, f, , null, , null, , ['Plumber', 'Drainage service', 'Well drilling contractor'], 100 SW 10th St Unit 511, Miami, FL 33130, null, , Miami, , , null, null, null, null, null, null, (305) 781-7871, 25.7641888, -80.19619329999999, ChIJIdKKJMe32YgRs9lTiHSgvG4, 0x88d9b7c7248ad221:0x6ebca0748853d9b3, 7979429062157523379, 15, 3.9, 2025-03-20 18:30:41.934539+00, null, , https://lh5.googleusercontent.com/p/AF1QipP2L1zpv52wk020DjohkVmU..., ['Plumber', 'Drainage service', 'Well drilling contractor'], {"friday": "Open 24 hours", "monday": "Open 24 hours", "sunday":..., {"onsite_services": true, "online_estimates": true}, null, null, null, null, null, null, null, null, null, null, f, null, 40).
+
+INFO 2025-03-20 19:39:03,984 models 34372 34364 Updating Business 28: Miami Plumbing Company
+INFO 2025-03-20 19:39:03,991 signals 34372 34364 [SIGNAL] Recalculating Task 37 due to Business 28 change.
+INFO 2025-03-20 19:39:03,998 common 34372 34364 Task 37 counts: total=1, pending=1, reviewed=0, in_production=0
+INFO 2025-03-20 19:39:04,006 signals 34372 34364 Task 37 status update: previous_status=COMPLETED, businesses=1, pending=1, reviewed=0, in_production=0, discarded=0, new_status=COMPLETED
+INFO 2025-03-20 19:47:58,828 models 24108 6732 Updating Business 26: Integrity Wealth Planning, Inc. - Financial Advisor
+INFO 2025-03-20 19:47:58,835 signals 24108 6732 [SIGNAL] Recalculating Task 34 due to Business 26 change.
+INFO 2025-03-20 19:47:58,842 common 24108 6732 Task 34 counts: total=1, pending=1, reviewed=0, in_production=0
+INFO 2025-03-20 19:47:58,848 signals 24108 6732 Task 34 status update: previous_status=COMPLETED, businesses=1, pending=1, reviewed=0, in_production=0, discarded=0, new_status=COMPLETED
+INFO 2025-03-20 19:48:09,516 views 24108 35148 Accessing TaskDetailView for task 42
+INFO 2025-03-20 19:48:44,972 models 24108 6732 Updating Business 28: Miami Plumbing Company
+INFO 2025-03-20 19:48:44,978 signals 24108 6732 [SIGNAL] Recalculating Task 37 due to Business 28 change.
+INFO 2025-03-20 19:48:44,984 common 24108 6732 Task 37 counts: total=1, pending=1, reviewed=0, in_production=0
+INFO 2025-03-20 19:48:44,989 signals 24108 6732 Task 37 status update: previous_status=COMPLETED, businesses=1, pending=1, reviewed=0, in_production=0, discarded=0, new_status=COMPLETED
+INFO 2025-03-20 19:49:51,273 models 24108 32264 Creating new Business: MD Financial Solutions
+INFO 2025-03-20 19:49:51,275 signals 24108 32264 [SIGNAL] Recalculating Task 44 due to Business 32 change.
+INFO 2025-03-20 19:49:51,282 common 24108 32264 Task 44 counts: total=1, pending=1, reviewed=0, in_production=0
+INFO 2025-03-20 19:49:51,284 common 24108 32264 Task 44 => PENDING -> COMPLETED
+INFO 2025-03-20 19:49:51,289 signals 24108 32264 Task 44 status update: previous_status=PENDING, businesses=1, pending=1, reviewed=0, in_production=0, discarded=0, new_status=COMPLETED
+INFO 2025-03-20 19:50:09,878 views 24108 35148 Accessing TaskDetailView for task 44
+INFO 2025-03-20 20:01:14,690 models 26680 8696 Creating new Business: Holistic Health Care Miami
+INFO 2025-03-20 20:01:14,693 signals 26680 8696 [SIGNAL] Recalculating Task 45 due to Business 33 change.
+INFO 2025-03-20 20:01:14,699 common 26680 8696 Task 45 counts: total=1, pending=1, reviewed=0, in_production=0
+INFO 2025-03-20 20:01:14,701 common 26680 8696 Task 45 => PENDING -> COMPLETED
+INFO 2025-03-20 20:01:14,707 signals 26680 8696 Task 45 status update: previous_status=PENDING, businesses=1, pending=1, reviewed=0, in_production=0, discarded=0, new_status=COMPLETED
+INFO 2025-03-20 20:01:27,000 views 26680 29064 Accessing TaskDetailView for task 45

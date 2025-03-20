@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from automation.models import ScrapingTask, Business, Image, Destination, CustomUser
+from automation.models import Category, ScrapingTask, Business, Image, Destination, CustomUser
 
 class DestinationSerializer(serializers.ModelSerializer):
     class Meta:
@@ -74,11 +74,6 @@ class DashboardDataSerializer(serializers.Serializer):
     business_status_data = BusinessStatusSerializer()
     additional_stats = serializers.DictField(required=False)
  
-class DestinationSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = Destination
-        fields = ['id', 'name', 'country']
-
 class ProjectSerializer(serializers.ModelSerializer):
     user = UserSerializer(read_only=True)
     destination = DestinationSerializer(read_only=True)
@@ -127,3 +122,12 @@ class AmbassadorDataSerializer(serializers.Serializer):
     class Meta:
         fields = ['destinations', 'task_summary', 'business_stats', 
                  'recent_activity', 'performance_metrics']
+ 
+class CategorySerializer(serializers.ModelSerializer):
+    """
+    Serializer for Category objects with minimal fields for dropdown display.
+    """
+    class Meta:
+        model = Category
+        fields = ['id', 'title']
+

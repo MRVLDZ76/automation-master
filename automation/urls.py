@@ -5,7 +5,7 @@ from django.conf import settings
 from django.conf.urls.static import static
 from rest_framework.routers import DefaultRouter
 
-from automation.api.views import DestinationListAPI, TaskFilterOptionsView, TaskFilterView, TaskListAPI, TaskTimelineView
+from automation.api.views import CategoryAPIView, DestinationListAPI, TaskFilterOptionsView, TaskFilterView, TaskListAPI, TaskTimelineView
  
 from . import views
 
@@ -116,7 +116,11 @@ urlpatterns = [
     path('api/subcategories/', views.get_subcategories, name='get_subcategories'),
     path('api/load-categories/', views.load_categories, name='load_categories'),
     path('api/levels/', views.get_levels, name='get_levels'), 
+ 
     path('api/destination-categories/', views.DestinationCategoriesView.as_view(), name='destination_categories'),
+ 
+    path('api/categories/', CategoryAPIView.as_view(), name='api_categories'),
+
  
     path('api/dashboard/business-stats/',  views.get_business_stats, name='business_stats'),
     path('api/dashboard/tasks-timeline/',  views.get_tasks_timeline, name='tasks_timeline'),   
@@ -139,6 +143,7 @@ urlpatterns = [
     path('subcategories/', views.get_subcategories, name='get_subcategories'), 
     path('get-countries/', views.get_countries, name='get_countries'),
     path('get-destinations/', views.get_destinations_by_country, name='get_destinations_by_country'),
+    
     path('events/search/', views.search_events, name='search_events'),
     path('events/save_selected/', views.save_selected_events, name='save_selected_events'),
  

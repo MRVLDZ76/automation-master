@@ -92,106 +92,106 @@
                     </div> 
                     <script>
                         document.addEventListener('DOMContentLoaded', function() {
-        // Cache form elements
-        const countrySelect = document.getElementById('id_country');
-        const destinationSelect = document.getElementById('id_destination');
-        const levelSelect = document.getElementById('id_level');
-        const mainCategorySelect = document.getElementById('id_main_category');
-        const subcategorySelect = document.getElementById('id_subcategory');
-        const googleMapsUrlInput = document.getElementById('google_maps_url');
-        
-        // URL generation and update function
-        function updateGoogleMapsUrl() {
-            // Get selected values (text, not value)
-            const country = countrySelect.options[countrySelect.selectedIndex]?.text || '';
-            const destination = destinationSelect.options[destinationSelect.selectedIndex]?.text || '';
-            const level = levelSelect.options[levelSelect.selectedIndex]?.text || '';
-            const mainCategory = mainCategorySelect.options[mainCategorySelect.selectedIndex]?.text || '';
-            const subcategory = subcategorySelect.options[subcategorySelect.selectedIndex]?.text || '';
-            
-            // Only proceed if we have country and destination
-            if (country === '' || country === 'Select a country' || 
-                destination === '' || destination === 'Select a destination') {
-                return;
-            }
-            
-            // Build search query string - including all required elements
-            let searchComponents = [];
-            
-            // Add level if selected and valid
-            if (level && level !== 'Select a level') {
-                searchComponents.push(level);
-            }
-            
-            // Add main category if selected and valid
-            if (mainCategory && mainCategory !== 'Select a category') {
-                searchComponents.push(mainCategory);
-            }
-            
-            // Add subcategory if selected and valid
-            if (subcategory && subcategory !== 'Select a subcategory (optional)') {
-                searchComponents.push(subcategory);
-            }
-            
-            // Always add destination and country
-            searchComponents.push(destination);
-            searchComponents.push(country);
-            
-            // Create the search query by joining all components
-            const searchQuery = searchComponents.join(' ');
-            
-            // Create URL
-            if (searchQuery) {
-                // Encode for URL usage
-                const encodedQuery = encodeURIComponent(searchQuery);
-                const googleMapsUrl = `https://www.google.com/maps/search/${encodedQuery}`;
-                googleMapsUrlInput.value = googleMapsUrl;
+                // Cache form elements
+                const countrySelect = document.getElementById('id_country');
+                const destinationSelect = document.getElementById('id_destination');
+                const levelSelect = document.getElementById('id_level');
+                const mainCategorySelect = document.getElementById('id_main_category');
+                const subcategorySelect = document.getElementById('id_subcategory');
+                const googleMapsUrlInput = document.getElementById('google_maps_url');
                 
-                // Add visual feedback
-                googleMapsUrlInput.classList.add('is-valid');
-                setTimeout(() => googleMapsUrlInput.classList.remove('is-valid'), 2000);
-            }
-        }
-        
-        // Add event listeners to form fields
-        [countrySelect, destinationSelect, levelSelect, mainCategorySelect, subcategorySelect].forEach(element => {
-            if (element) {
-                element.addEventListener('change', updateGoogleMapsUrl);
-            }
-        });
-        
-        // Initialize copy button functionality
-        const copyButton = document.getElementById('copy-url-btn');
-        if (copyButton) {
-            copyButton.addEventListener('click', function() {
-                googleMapsUrlInput.select();
-                document.execCommand('copy');
+                // URL generation and update function
+                function updateGoogleMapsUrl() {
+                    // Get selected values (text, not value)
+                    const country = countrySelect.options[countrySelect.selectedIndex]?.text || '';
+                    const destination = destinationSelect.options[destinationSelect.selectedIndex]?.text || '';
+                    const level = levelSelect.options[levelSelect.selectedIndex]?.text || '';
+                    const mainCategory = mainCategorySelect.options[mainCategorySelect.selectedIndex]?.text || '';
+                    const subcategory = subcategorySelect.options[subcategorySelect.selectedIndex]?.text || '';
+                    
+                    // Only proceed if we have country and destination
+                    if (country === '' || country === 'Select a country' || 
+                        destination === '' || destination === 'Select a destination') {
+                        return;
+                    }
+                    
+                    // Build search query string - including all required elements
+                    let searchComponents = [];
+                    
+                    // Add level if selected and valid
+                    if (level && level !== 'Select a level') {
+                        searchComponents.push(level);
+                    }
+                    
+                    // Add main category if selected and valid
+                    if (mainCategory && mainCategory !== 'Select a category') {
+                        searchComponents.push(mainCategory);
+                    }
+                    
+                    // Add subcategory if selected and valid
+                    if (subcategory && subcategory !== 'Select a subcategory (optional)') {
+                        searchComponents.push(subcategory);
+                    }
+                    
+                    // Always add destination and country
+                    searchComponents.push(destination);
+                    searchComponents.push(country);
+                    
+                    // Create the search query by joining all components
+                    const searchQuery = searchComponents.join(' ');
+                    
+                    // Create URL
+                    if (searchQuery) {
+                        // Encode for URL usage
+                        const encodedQuery = encodeURIComponent(searchQuery);
+                        const googleMapsUrl = `https://www.google.com/maps/search/${encodedQuery}`;
+                        googleMapsUrlInput.value = googleMapsUrl;
+                        
+                        // Add visual feedback
+                        googleMapsUrlInput.classList.add('is-valid');
+                        setTimeout(() => googleMapsUrlInput.classList.remove('is-valid'), 2000);
+                    }
+                }
                 
-                // Show feedback
-                this.innerHTML = '<i class="fas fa-check"></i>';
-                setTimeout(() => this.innerHTML = '<i class="fas fa-copy"></i>', 2000);
-            });
-        }
-        
-        // Initialize open link button functionality
-        const openButton = document.getElementById('open-url-btn');
-        if (openButton) {
-            openButton.addEventListener('click', function() {
-                const url = googleMapsUrlInput.value.trim();
-                if (url) {
-                    window.open(url, '_blank');
+                // Add event listeners to form fields
+                [countrySelect, destinationSelect, levelSelect, mainCategorySelect, subcategorySelect].forEach(element => {
+                    if (element) {
+                        element.addEventListener('change', updateGoogleMapsUrl);
+                    }
+                });
+                
+                // Initialize copy button functionality
+                const copyButton = document.getElementById('copy-url-btn');
+                if (copyButton) {
+                    copyButton.addEventListener('click', function() {
+                        googleMapsUrlInput.select();
+                        document.execCommand('copy');
+                        
+                        // Show feedback
+                        this.innerHTML = '<i class="fas fa-check"></i>';
+                        setTimeout(() => this.innerHTML = '<i class="fas fa-copy"></i>', 2000);
+                    });
+                }
+                
+                // Initialize open link button functionality
+                const openButton = document.getElementById('open-url-btn');
+                if (openButton) {
+                    openButton.addEventListener('click', function() {
+                        const url = googleMapsUrlInput.value.trim();
+                        if (url) {
+                            window.open(url, '_blank');
+                        }
+                    });
+                }
+                
+                // Initialize with the proper URL if form has pre-selected values
+                if (countrySelect?.selectedIndex > 0 && destinationSelect?.selectedIndex > 0) {
+                    updateGoogleMapsUrl();
                 }
             });
-        }
-        
-        // Initialize with the proper URL if form has pre-selected values
-        if (countrySelect?.selectedIndex > 0 && destinationSelect?.selectedIndex > 0) {
-            updateGoogleMapsUrl();
-        }
-    });
 
                     </script>
-                    </script>
+                   
                     </div>
                 </div>
                 <div class="row">

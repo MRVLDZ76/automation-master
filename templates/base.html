@@ -123,6 +123,13 @@ Local Secrets - Content Curation Management Admin Dashboard
         
  
         {% if user.is_admin %}
+            <li>
+                <a href="{% url 'upload_individual_business' %}">
+                    <i class="fas fa-spinner"></i>
+                    <span>Upload JSON </span>
+                </a>
+            </li>
+    
             <!-- Events Section 
             <li class="sidebar-submenu active">
                 <a href="#" class="sidebar-menu-dropdown">
