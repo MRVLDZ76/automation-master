@@ -1,0 +1,92 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+<div class="container mt-4">
+    <h2>Upload Individual Business Data</h2>
+    
+    {% if messages %}
+    <div class="messages">
+        {% for message in messages %}
+        <div class="alert {% if message.tags == 'error' %}alert-danger{% else %}alert-{{ message.tags }}{% endif %}">
+            {{ message }}
+        </div>
+        {% endfor %}
+    </div>
+    {% endif %}
+    
+    <div class="card">
+        <div class="card-body">
+            <form method="post" enctype="multipart/form-data">
+                {% csrf_token %}
+                
+                <div class="form-group">
+                    <label>Task Selection:</label>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="task_option" id="existing_task_option" value="existing" checked>
+                        <label class="form-check-label" for="existing_task_option">
+                            Use Existing Task
+                        </label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="task_option" id="new_task_option" value="new">
+                        <label class="form-check-label" for="new_task_option">
+                            Create New Task
+                        </label>
+                    </div>
+                </div>
+                
+                <div id="existing_task_div">
+                    <div class="form-group">
+                        <label for="existing_task">Select Existing Task:</label>
+                        <select class="form-control" id="existing_task" name="existing_task">
+                            <option value="">Select a task...</option>
+                            {% for task in tasks %}
+                            <option value="{{ task.id }}">{{ task.project_title }}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                </div>
+                
+                <div id="new_task_div" style="display: none;">
+                    <div class="form-group">
+                        <label for="new_task_title">New Task Title:</label>
+                        <input type="text" class="form-control" id="new_task_title" name="new_task_title">
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <label for="results_file">Upload Business JSON File:</label>
+                    <input type="file" class="form-control-file" id="results_file" name="results_file">
+                    <small class="form-text text-muted">Upload a JSON file containing place_results or local_results data.</small>
+                </div>
+                
+                <button type="submit" class="btn btn-primary">Upload and Process</button>
+            </form>
+        </div>
+    </div>
+</div>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const existingTaskOption = document.getElementById('existing_task_option');
+    const newTaskOption = document.getElementById('new_task_option');
+    const existingTaskDiv = document.getElementById('existing_task_div');
+    const newTaskDiv = document.getElementById('new_task_div');
+    
+    existingTaskOption.addEventListener('change', function() {
+        if (this.checked) {
+            existingTaskDiv.style.display = 'block';
+            newTaskDiv.style.display = 'none';
+        }
+    });
+    
+    newTaskOption.addEventListener('change', function() {
+        if (this.checked) {
+            existingTaskDiv.style.display = 'none';
+            newTaskDiv.style.display = 'block';
+        }
+    });
+});
+</script>
+{% endblock %}

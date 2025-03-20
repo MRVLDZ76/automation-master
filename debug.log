@@ -1,0 +1,105 @@
+ERROR 2025-03-20 15:42:08,929 views 8268 23504 Error saving business from JSON: Cannot resolve keyword 'name' into field. Choices are: additional_info, address, business_images, businesscategory, category_name, city, country, country_code, data_cid, data_id, description, description_eng, description_esp, description_fr, destination, destination_id, feedbacks, form_country_id, form_country_name, form_destination_id, form_destination_name, id, images, is_advertisement, is_deleted, latitude, level, longitude, main_category, neighborhood, opening_hours, operating_hours, phone, place_id, popular_times, postal_code, price, project_id, project_title, rank, rating, reviews, reviews_count, scraped_at, search_page_url, search_string, service_options, site_types, state, status, street, tailored_category, task, task_id, thumbnail, title, title_eng, title_esp, title_fr, translated_description, translated_level, translated_main_category, translated_tailored_category, translated_title, translationmetrics, types, types_eng, types_esp, types_fr, types_uk, url, website
+Traceback (most recent call last):
+  File "D:\proyectos\automation-master\automation\views.py", line 3718, in save_single_business
+    business, created = Business.objects.get_or_create(
+                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\proyectos\automation-master\env\Lib\site-packages\django\db\models\manager.py", line 87, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\proyectos\automation-master\env\Lib\site-packages\django\db\models\query.py", line 948, in get_or_create
+    return self.get(**kwargs), False
+           ^^^^^^^^^^^^^^^^^^
+  File "D:\proyectos\automation-master\env\Lib\site-packages\django\db\models\query.py", line 635, in get
+    clone = self._chain() if self.query.combinator else self.filter(*args, **kwargs)
+                                                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\proyectos\automation-master\env\Lib\site-packages\django\db\models\query.py", line 1476, in filter
+    return self._filter_or_exclude(False, args, kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\proyectos\automation-master\env\Lib\site-packages\django\db\models\query.py", line 1494, in _filter_or_exclude
+    clone._filter_or_exclude_inplace(negate, args, kwargs)
+  File "D:\proyectos\automation-master\env\Lib\site-packages\django\db\models\query.py", line 1501, in _filter_or_exclude_inplace
+    self._query.add_q(Q(*args, **kwargs))
+  File "D:\proyectos\automation-master\env\Lib\site-packages\django\db\models\sql\query.py", line 1609, in add_q
+    clause, _ = self._add_q(q_object, self.used_aliases)
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\proyectos\automation-master\env\Lib\site-packages\django\db\models\sql\query.py", line 1641, in _add_q
+    child_clause, needed_inner = self.build_filter(
+                                 ^^^^^^^^^^^^^^^^^^
+  File "D:\proyectos\automation-master\env\Lib\site-packages\django\db\models\sql\query.py", line 1491, in build_filter
+    lookups, parts, reffed_expression = self.solve_lookup_type(arg, summarize)
+                                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\proyectos\automation-master\env\Lib\site-packages\django\db\models\sql\query.py", line 1303, in solve_lookup_type
+    _, field, _, lookup_parts = self.names_to_path(lookup_splitted, self.get_meta())
+                                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\proyectos\automation-master\env\Lib\site-packages\django\db\models\sql\query.py", line 1768, in names_to_path
+    raise FieldError(
+django.core.exceptions.FieldError: Cannot resolve keyword 'name' into field. Choices are: additional_info, address, business_images, businesscategory, category_name, city, country, country_code, data_cid, data_id, description, description_eng, description_esp, description_fr, destination, destination_id, feedbacks, form_country_id, form_country_name, form_destination_id, form_destination_name, id, images, is_advertisement, is_deleted, latitude, level, longitude, main_category, neighborhood, opening_hours, operating_hours, phone, place_id, popular_times, postal_code, price, project_id, project_title, rank, rating, reviews, reviews_count, scraped_at, search_page_url, search_string, service_options, site_types, state, status, street, tailored_category, task, task_id, thumbnail, title, title_eng, title_esp, title_fr, translated_description, translated_level, translated_main_category, translated_tailored_category, translated_title, translationmetrics, types, types_eng, types_esp, types_fr, types_uk, url, website
+INFO 2025-03-20 15:42:34,953 views 8268 23504 Accessing TaskDetailView for task 34
+INFO 2025-03-20 15:43:22,325 views 8268 23504 Accessing TaskDetailView for task 34
+ERROR 2025-03-20 15:44:18,635 views 17816 7420 Error saving business from JSON: Cannot resolve keyword 'name' into field. Choices are: additional_info, address, business_images, businesscategory, category_name, city, country, country_code, data_cid, data_id, description, description_eng, description_esp, description_fr, destination, destination_id, feedbacks, form_country_id, form_country_name, form_destination_id, form_destination_name, id, images, is_advertisement, is_deleted, latitude, level, longitude, main_category, neighborhood, opening_hours, operating_hours, phone, place_id, popular_times, postal_code, price, project_id, project_title, rank, rating, reviews, reviews_count, scraped_at, search_page_url, search_string, service_options, site_types, state, status, street, tailored_category, task, task_id, thumbnail, title, title_eng, title_esp, title_fr, translated_description, translated_level, translated_main_category, translated_tailored_category, translated_title, translationmetrics, types, types_eng, types_esp, types_fr, types_uk, url, website
+Traceback (most recent call last):
+  File "D:\proyectos\automation-master\automation\views.py", line 3718, in save_single_business
+    business, created = Business.objects.get_or_create(
+                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\proyectos\automation-master\env\Lib\site-packages\django\db\models\manager.py", line 87, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\proyectos\automation-master\env\Lib\site-packages\django\db\models\query.py", line 948, in get_or_create
+    return self.get(**kwargs), False
+           ^^^^^^^^^^^^^^^^^^
+  File "D:\proyectos\automation-master\env\Lib\site-packages\django\db\models\query.py", line 635, in get
+    clone = self._chain() if self.query.combinator else self.filter(*args, **kwargs)
+                                                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\proyectos\automation-master\env\Lib\site-packages\django\db\models\query.py", line 1476, in filter
+    return self._filter_or_exclude(False, args, kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\proyectos\automation-master\env\Lib\site-packages\django\db\models\query.py", line 1494, in _filter_or_exclude
+    clone._filter_or_exclude_inplace(negate, args, kwargs)
+  File "D:\proyectos\automation-master\env\Lib\site-packages\django\db\models\query.py", line 1501, in _filter_or_exclude_inplace
+    self._query.add_q(Q(*args, **kwargs))
+  File "D:\proyectos\automation-master\env\Lib\site-packages\django\db\models\sql\query.py", line 1609, in add_q
+    clause, _ = self._add_q(q_object, self.used_aliases)
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\proyectos\automation-master\env\Lib\site-packages\django\db\models\sql\query.py", line 1641, in _add_q
+    child_clause, needed_inner = self.build_filter(
+                                 ^^^^^^^^^^^^^^^^^^
+  File "D:\proyectos\automation-master\env\Lib\site-packages\django\db\models\sql\query.py", line 1491, in build_filter
+    lookups, parts, reffed_expression = self.solve_lookup_type(arg, summarize)
+                                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\proyectos\automation-master\env\Lib\site-packages\django\db\models\sql\query.py", line 1303, in solve_lookup_type
+    _, field, _, lookup_parts = self.names_to_path(lookup_splitted, self.get_meta())
+                                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\proyectos\automation-master\env\Lib\site-packages\django\db\models\sql\query.py", line 1768, in names_to_path
+    raise FieldError(
+django.core.exceptions.FieldError: Cannot resolve keyword 'name' into field. Choices are: additional_info, address, business_images, businesscategory, category_name, city, country, country_code, data_cid, data_id, description, description_eng, description_esp, description_fr, destination, destination_id, feedbacks, form_country_id, form_country_name, form_destination_id, form_destination_name, id, images, is_advertisement, is_deleted, latitude, level, longitude, main_category, neighborhood, opening_hours, operating_hours, phone, place_id, popular_times, postal_code, price, project_id, project_title, rank, rating, reviews, reviews_count, scraped_at, search_page_url, search_string, service_options, site_types, state, status, street, tailored_category, task, task_id, thumbnail, title, title_eng, title_esp, title_fr, translated_description, translated_level, translated_main_category, translated_tailored_category, translated_title, translationmetrics, types, types_eng, types_esp, types_fr, types_uk, url, website
+INFO 2025-03-20 15:50:41,802 models 13320 19704 Creating new Business: Integrity Wealth Planning, Inc. - Financial Advisor
+INFO 2025-03-20 15:50:41,809 signals 13320 19704 [SIGNAL] Recalculating Task 34 due to Business 26 change.
+INFO 2025-03-20 15:50:41,816 common 13320 19704 Task 34 counts: total=1, pending=1, reviewed=0, in_production=0
+INFO 2025-03-20 15:50:41,818 common 13320 19704 Task 34 => DONE -> COMPLETED
+INFO 2025-03-20 15:50:41,824 signals 13320 19704 Task 34 status update: previous_status=DONE, businesses=1, pending=1, reviewed=0, in_production=0, discarded=0, new_status=COMPLETED
+INFO 2025-03-20 15:50:51,294 views 13320 19704 Accessing TaskDetailView for task 34
+INFO 2025-03-20 16:16:59,790 views 13320 21696 Accessing TaskDetailView for task 34
+INFO 2025-03-20 16:17:39,363 views 13320 21696 Accessing TaskDetailView for task 32
+INFO 2025-03-20 16:32:27,429 models 30840 30320 Updating Business 24: Majosháza
+INFO 2025-03-20 16:32:27,436 signals 30840 30320 [SIGNAL] Recalculating Task 32 due to Business 24 change.
+INFO 2025-03-20 16:32:27,444 common 30840 30320 Task 32 counts: total=1, pending=1, reviewed=0, in_production=0
+INFO 2025-03-20 16:32:27,449 signals 30840 30320 Task 32 status update: previous_status=COMPLETED, businesses=1, pending=1, reviewed=0, in_production=0, discarded=0, new_status=COMPLETED
+INFO 2025-03-20 16:32:27,553 views 30840 30320 Business Bangladesh - Budapest - Business Support - Business Technology updated successfully
+INFO 2025-03-20 16:32:57,615 models 30840 32956 Updating Business 24: Majosháza
+INFO 2025-03-20 16:32:57,620 signals 30840 32956 [SIGNAL] Recalculating Task 32 due to Business 24 change.
+INFO 2025-03-20 16:32:57,627 common 30840 32956 Task 32 counts: total=1, pending=1, reviewed=0, in_production=0
+INFO 2025-03-20 16:32:57,632 signals 30840 32956 Task 32 status update: previous_status=COMPLETED, businesses=1, pending=1, reviewed=0, in_production=0, discarded=0, new_status=COMPLETED
+INFO 2025-03-20 16:32:57,633 views 30840 32956 Business Bangladesh - Budapest - Business Support - Business Technology updated successfully
+ERROR 2025-03-20 16:46:04,933 views 15500 32804 Error processing task: 'ScrapingTaskForm' object has no attribute 'generate_project_title'
+Traceback (most recent call last):
+  File "D:\proyectos\automation-master\automation\views.py", line 327, in post
+    project_title = form.generate_project_title()
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'ScrapingTaskForm' object has no attribute 'generate_project_title'
+INFO 2025-03-20 16:47:11,985 views 32940 23344 Saving preferences for user EdisonValdez
+INFO 2025-03-20 16:47:11,985 views 32940 23344 Country: Bangladesh - BD
+INFO 2025-03-20 16:47:11,986 views 32940 23344 Destination: Budapest, Bangladesh
+INFO 2025-03-20 16:47:11,986 views 32940 23344 Level: Business Support
+INFO 2025-03-20 16:47:11,986 views 32940 23344 Main Category: Business Technology
+INFO 2025-03-20 16:47:11,986 views 32940 23344 Subcategory: None
+INFO 2025-03-20 16:47:11,987 views 32940 23344 Image Count: 3

@@ -100,6 +100,8 @@ urlpatterns = [
     path('ambassadors/<int:ambassador_id>/', views.ambassador_profile, name='ambassador_profile'),
     path('upload-scraping-results/', views.UploadScrapingResultsView.as_view(), name='upload_scraping_results'),
 
+    path('upload-individual-business/', views.UploadIndividualBusinessView.as_view(), name='upload_individual_business'),
+
     path('enhance_translate_business/<int:business_id>/', views.enhance_translate_business, name='enhance_translate_business'),
 
     path('tasks/<int:task_id>/generate-descriptions/', views.generate_task_descriptions, name="generate_tasks_descriptions"),

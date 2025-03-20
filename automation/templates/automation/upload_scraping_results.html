@@ -21,6 +21,35 @@
             <div class="col-12">
                 <div class="box">
                     <div class="box-body">
+                        <!-- Add progress indicator and preview section -->
+                            <div class="form-group mt-3">
+                                <div id="upload-progress" class="progress" style="display: none;">
+                                    <div class="progress-bar" role="progressbar" style="width: 0%"></div>
+                                </div>
+                            </div>
+
+                            <div id="json-preview" class="mt-3" style="display: none;">
+                                <h4>File Preview</h4>
+                                <div class="alert alert-info">
+                                    <div id="preview-content">
+                                        <p>Total businesses found: <span id="business-count">0</span></p>
+                                        <p>Valid structure: <span id="structure-valid">Unknown</span></p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Add this after the form to display failures -->
+                            {% if request.session.failed_businesses %}
+                            <div class="alert alert-warning mt-4">
+                                <h4>Some businesses could not be processed:</h4>
+                                <ul>
+                                    {% for failure in request.session.failed_businesses %}
+                                    <li><strong>{{ failure.name }}</strong>: {{ failure.error }}</li>
+                                    {% endfor %}
+                                </ul>
+                            </div>
+                            {% endif %}
+
                         <form method="post" enctype="multipart/form-data">
                             {% csrf_token %}
                             <div class="form-group">
@@ -87,24 +116,72 @@
 </div>
 
 <script>
-document.getElementById('task_option').addEventListener('change', function() {
-    var existingTaskDiv = document.getElementById('existing_task_div');
-    var newTaskDiv = document.getElementById('new_task_div');
-    var existingTaskSelect = document.getElementById('existing_task');
-    var newTaskInput = document.getElementById('new_task_title');
+// Add this to your existing script
+document.getElementById('results_file').addEventListener('change', function(e) {
+    var file = e.target.files[0];
+    if (!file) return;
+    
+    // Show progress indicator
+    var progressBar = document.getElementById('upload-progress');
+    progressBar.style.display = 'block';
+    
+    // Preview JSON file
+    var reader = new FileReader();
+    reader.onload = function(e) {
+        try {
+            var jsonData = JSON.parse(e.target.result);
+            var previewDiv = document.getElementById('json-preview');
+            var businessCount = document.getElementById('business-count');
+            var structureValid = document.getElementById('structure-valid');
+            
+            previewDiv.style.display = 'block';
+            
+            // Check structure
+            if (jsonData.local_results && Array.isArray(jsonData.local_results)) {
+                businessCount.textContent = jsonData.local_results.length;
+                structureValid.textContent = 'Valid';
+                structureValid.style.color = 'green';
+            } else {
+                businessCount.textContent = '0';
+                structureValid.textContent = 'Invalid - missing local_results array';
+                structureValid.style.color = 'red';
+            }
+        } catch (error) {
+            document.getElementById('json-preview').style.display = 'block';
+            document.getElementById('preview-content').innerHTML = 
+                '<div class="alert alert-danger">Invalid JSON format: ' + error.message + '</div>';
+        }
+        
+        // Hide progress after preview
+        progressBar.style.display = 'none';
+    };
+    
+    reader.readAsText(file);
+});
 
-    if (this.value === 'existing') {
-        existingTaskDiv.style.display = 'block';
-        newTaskDiv.style.display = 'none';
-        existingTaskSelect.required = true;
-        newTaskInput.required = false;
-    } else {
-        existingTaskDiv.style.display = 'none';
-        newTaskDiv.style.display = 'block';
-        existingTaskSelect.required = false;
-        newTaskInput.required = true;
+// Country-destination chaining (add if needed)
+document.getElementById('submitted_country').addEventListener('change', function() {
+    var countryId = this.value;
+    var destinationSelect = document.getElementById('submitted_city');
+    
+    // Clear current options
+    destinationSelect.innerHTML = '<option value="">Select a destination</option>';
+    
+    if (countryId) {
+        // Fetch destinations for selected country via AJAX
+        fetch('/api/destinations/?country=' + countryId)
+            .then(response => response.json())
+            .then(data => {
+                data.forEach(destination => {
+                    var option = document.createElement('option');
+                    option.value = destination.id;
+                    option.textContent = destination.name;
+                    destinationSelect.appendChild(option);
+                });
+            });
     }
 });
+
 </script>
 
 {% endblock %}

@@ -160,10 +160,11 @@ class ScrapingTaskForm(forms.ModelForm):
         required=False,
         help_text="Upload a file containing search queries (one per line)",
         widget=forms.FileInput(attrs={
-            'class': 'btn text-primary border-primary d-flex align-items-center mr-5'
+            'class': 'btn text-primary border-primary d-flex align-items-center mr-5',
+            'accept': '.txt' 
         })
     )
-
+ 
     level = forms.ModelChoiceField(
         queryset=Level.objects.all(),
         widget=forms.Select(attrs={'class': 'form-control'}),

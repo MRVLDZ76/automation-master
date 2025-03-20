@@ -318,27 +318,75 @@ LS_BACKEND_SETTINGS = {
 OAUTH_CLIENT_ID = os.environ.get('OAUTH_CLIENT_ID')
 OAUTH_CLIENT_SECRET = os.environ.get('OAUTH_CLIENT_SECRET')
  
-
 # Celery Configuration
 CELERY_BROKER_URL = os.getenv('REDIS_URL', 'redis://localhost:6379/0')
 CELERY_RESULT_BACKEND = os.getenv('REDIS_URL', 'redis://localhost:6379/0')
+
+# Content settings
 CELERY_ACCEPT_CONTENT = ['json']
 CELERY_TASK_SERIALIZER = 'json'
 CELERY_RESULT_SERIALIZER = 'json'
 CELERY_TIMEZONE = 'UTC'
-CELERY_TASK_TRACK_STARTED = True
 
-# Task-specific settings
+# Task tracking settings
+CELERY_TASK_TRACK_STARTED = True
+CELERY_TASK_SEND_SENT_EVENT = True
+CELERY_SEND_EVENTS = True
+CELERY_SEND_TASK_SENT_EVENT = True
+
+# Task-specific routes
 CELERY_TASK_ROUTES = {
     'automation.tasks.process_scraping_task': {'queue': 'scraping'},
-    #'automation.tasks.bulk_business_translation': {'queue': 'translation'},
-    #'automation.tasks.download_images': {'queue': 'images'},
+    'automation.tasks.download_images': {'queue': 'images'},
 }
 
-# Task time limits
+# Time limits
 CELERY_TASK_TIME_LIMIT = 1800  # 30 minutes
-CELERY_WORKER_PREFETCH_MULTIPLIER = 1
-CELERY_WORKER_MAX_TASKS_PER_CHILD = 50
 CELERY_TASK_SOFT_TIME_LIMIT = 1500  # 25 minutes
 
- 
+# Worker settings
+CELERY_WORKER_PREFETCH_MULTIPLIER = 1
+CELERY_WORKER_MAX_TASKS_PER_CHILD = 50
+CELERY_ACKS_LATE = True  # Ensure tasks aren't lost during worker failures
+
+# Rate limiting
+CELERY_TASK_RATE_LIMIT = '100/m'  # Limit to 100 tasks per minute
+
+# Error handling
+CELERY_TASK_REJECT_ON_WORKER_LOST = True
+CELERY_TASK_ACKS_ON_FAILURE_OR_TIMEOUT = False
+
+# Result settings
+CELERY_RESULT_EXPIRES = 86400  # 1 day
+CELERY_IGNORE_RESULT = False  # We want to track results
+
+# Redis visibility settings (using Redis as broker)
+CELERY_VISIBILITY_TIMEOUT = 43200  # 12 hours
+
+# Logging
+CELERY_WORKER_HIJACK_ROOT_LOGGER = False  # Don't hijack root logger
+CELERY_WORKER_LOG_FORMAT = '%(asctime)s - %(name)s - %(levelname)s - %(message)s'
+CELERY_WORKER_TASK_LOG_FORMAT = '%(asctime)s - %(name)s - %(levelname)s - %(task_name)s[%(task_id)s] - %(message)s'
+
+# Task result backend settings
+CELERY_RESULT_EXTENDED = True  # Include more details in results
+
+
+""" setup
+
+gunicorn --workers=$(($(nproc) * 2 + 1)) \
+  --threads=4 \
+  --worker-class=gthread \
+  --worker-tmp-dir=/dev/shm \
+  --timeout=60 \
+  --keep-alive=15 \
+  --max-requests=2000 \
+  --max-requests-jitter=200 \
+  --backlog=2048 \
+  --bind=0.0.0.0:8000 \
+  --access-logfile=- \
+  --error-logfile=- \
+  --log-level=info \
+  automation.wsgi:application
+
+  """

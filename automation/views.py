@@ -256,6 +256,15 @@ class UploadFileView(View):
             'subcategory': user_pref.last_subcategory.id if user_pref.last_subcategory else None,
         }
 
+    @method_decorator(login_required)
+    def dispatch(self, request, *args, **kwargs):
+        # Rate limiting - prevent form submission spam
+        key = f"upload_form_{request.user.id}"
+        if request.method == 'POST' and cache.get(key):
+            messages.warning(request, "Please wait before submitting another task.")
+            return redirect('task_list')
+        return super().dispatch(request, *args, **kwargs)
+    
     def get(self, request):
         user_pref = self.get_user_preferences(request.user)
         initial_data = self.get_initial_data(user_pref)
@@ -277,15 +286,38 @@ class UploadFileView(View):
                 parent=user_pref.last_main_category
             )
 
+        # Calculate user's active tasks
+        active_tasks_count = ScrapingTask.objects.filter(
+            user=request.user,
+            status__in=['PENDING', 'QUEUED', 'IN_PROGRESS']
+        ).count()
+
         context = {
             'form': form,
             'last_image_count': user_pref.last_image_count,
             'user_preferences': user_pref,
-            'default_image_count': 3
+            'default_image_count': 3,
+            'active_tasks_count': active_tasks_count,
+            'max_concurrent_tasks': getattr(settings, 'MAX_CONCURRENT_TASKS_PER_USER', 5)
         }
         return render(request, self.template_name, context)
 
     def post(self, request):
+        # Check for concurrent tasks limit
+        active_tasks_count = ScrapingTask.objects.filter(
+            user=request.user,
+            status__in=['PENDING', 'QUEUED', 'IN_PROGRESS']
+        ).count()
+        
+        max_tasks = getattr(settings, 'MAX_CONCURRENT_TASKS_PER_USER', 5)
+        if active_tasks_count >= max_tasks:
+            messages.error(
+                request, 
+                f"You've reached the maximum limit of {max_tasks} concurrent tasks. "
+                "Please wait for some tasks to complete."
+            )
+            return redirect('task_list')
+        
         form = ScrapingTaskForm(request.POST, request.FILES)
         
         if form.is_valid():
@@ -296,7 +328,7 @@ class UploadFileView(View):
                     if form.cleaned_data['subcategory']:
                         project_title += f" - {form.cleaned_data['subcategory'].title}"
 
-                    # Create task ONCE
+                    # Create task
                     task = form.save(commit=False)
                     task.user = request.user
                     task.status = 'QUEUED'
@@ -335,11 +367,20 @@ class UploadFileView(View):
                         'main_category': task.main_category.title if task.main_category else '',
                         'subcategory': task.subcategory.title if task.subcategory else '',
                         'image_count': int(user_pref.last_image_count),
+                        'description': task.description
                     }
 
+                    # Set rate limiting key
+                    key = f"upload_form_{request.user.id}"
+                    cache.set(key, True, 30)  # 30 seconds cooldown
+
+                    # Queue task using Celery
                     try:
-                        process_scraping_task(task_id=task.id, form_data=form_data)
-                        logger.info(f"Sites Gathering task {task.id} created and queued, project ID: {task.project_id}")
+                        task_result = process_scraping_task.delay(task_id=task.id, form_data=form_data)
+                        task.celery_task_id = task_result.id
+                        task.save(update_fields=['celery_task_id'])
+                        
+                        logger.info(f"Sites Gathering task {task.id} created and queued, Celery task ID: {task_result.id}")
                         messages.success(request, 'Task created successfully!')
                         return redirect('task_list')
                     except Exception as e:
@@ -348,8 +389,12 @@ class UploadFileView(View):
                         raise
 
             except Exception as e:
-                logger.error(f"Error saving preferences: {str(e)}")
+                logger.error(f"Error processing task: {str(e)}", exc_info=True)
                 messages.error(request, f"Error creating task: {str(e)}")
+        else:
+            for field, errors in form.errors.items():
+                for error in errors:
+                    messages.error(request, f"{field}: {error}")
         
         return render(request, self.template_name, {'form': form})
 
@@ -577,8 +622,7 @@ class TranslateBusinessesView(View):
         messages.success(request, message)
 
         return results
-
-
+ 
     def generate_description(self, business):
         """Generate description for a business"""
         try:
@@ -618,7 +662,7 @@ class TranslateBusinessesView(View):
             return False
                 
         except Exception as e:
-            logger.error(f"Error generating description for business {business.id}: {str(e)}")
+            logger.error(f"Error generating description for business ******** {business.id}: {str(e)}")
             return False
         
     def translate_business(self, business):
@@ -1525,6 +1569,7 @@ class GetTimelineDataView(View):
             return JsonResponse({
                 'error': 'Failed to fetch timeline data'
             }, status=400)
+
 from rest_framework.pagination import PageNumberPagination
 class CustomPagination(PageNumberPagination):
     page_size = 50  # Default page size
@@ -1873,7 +1918,6 @@ class BusinessViewSet(viewsets.ModelViewSet):
             return Business.objects.filter(city=user.destination)
         return Business.objects.none()
 
- 
 class BusinessAnalyticsView(LoginRequiredMixin, TemplateView):
     template_name = 'automation/business_analytics.html'
     login_url = '/login/'  
@@ -1882,7 +1926,6 @@ class BusinessAnalyticsView(LoginRequiredMixin, TemplateView):
         context = super().get_context_data(**kwargs)
         context['title'] = 'Business Analytics'
         return context
-
 
 @require_GET
 def business_details(request, business_id):
@@ -2208,9 +2251,6 @@ def update_business_status(request, business_id):
             logger.error(f"Traceback Error: {debugger}")
         return JsonResponse({'status': 'error', 'message': str(e)}, status=500)
 
-
-
-
 @csrf_exempt
 def update_business_statuses(request):
     if request.method == 'POST':
@@ -2441,35 +2481,38 @@ def business_list(request):
         'page_obj': page_obj,
         'search_query': search_query,
     })
- 
+
 @login_required
 def business_detail(request, business_id):
     business = get_object_or_404(Business, id=business_id)
-
+    
+    # Get all levels for dropdown selection
+    levels = Level.objects.all()
+    
     # Determine the status filter from the request (default to ALL)
     status_filter = request.GET.get('status', 'ALL')
-
+    
     # Retrieve all businesses related to this business's task
     task_businesses = list(business.task.businesses.all()) if business.task else []
-
+    
     # Get valid statuses from the task businesses
     valid_statuses = {b.status for b in task_businesses}
-
+    
     # Check if the status is valid
     if status_filter != 'ALL' and status_filter not in valid_statuses:
         messages.error(request, "The business ID and status are not correct. Redirecting to view all businesses.")
         # Redirect to the same business detail with status set to ALL
         return redirect('business_detail', business_id=business_id)
-
+    
     # Proceed with filtering based on the valid status
     if status_filter != 'ALL':
         task_businesses = [b for b in task_businesses if b.status == status_filter]
-
+    
     # If filtering leads to no businesses, redirect to ALL
     if not task_businesses and status_filter != 'ALL':
         messages.error(request, "The business ID and status are not correct. Redirecting to view all businesses.")
         return redirect('business_detail', business_id=business_id)
-
+    
     # Proceed with the rest of the logic (e.g., pre-select first matching business if necessary)
     if status_filter != 'ALL' and business.status != status_filter:
         # Select the first valid business if the current business's status does not match the filter
@@ -2477,31 +2520,31 @@ def business_detail(request, business_id):
         if not task_businesses:
             messages.error(request, "The business ID and status are not correct. Redirecting to view all businesses.")
             return redirect('business_detail', business_id=business_id)
-
+        
         business = task_businesses[0]
-
+    
     # Other view logic remains unchanged
     current_index = task_businesses.index(business)
     feedback_formset = FeedbackFormSet(instance=business)
     prev_business = task_businesses[current_index - 1] if current_index > 0 else None
     next_business = task_businesses[current_index + 1] if current_index < len(task_businesses) - 1 else None
-
+    
     # Generate URLs for navigation
     prev_url = reverse('business_detail', args=[prev_business.id]) + f"?status={status_filter}" if prev_business else None
     next_url = reverse('business_detail', args=[next_business.id]) + f"?status={status_filter}" if next_business else None
-
+    
     available_statuses = Business.STATUS_CHOICES 
     available_statuses_dict = {status[0]: status[1] for status in available_statuses}
-
+    
     business_count = len(task_businesses)
-
+    
     status_availability = {status_key: any(b.status == status_key for b in task_businesses) for status_key in available_statuses_dict.keys()}
-
+    
     is_admin = request.user.is_superuser or request.user.roles.filter(role='ADMIN').exists()
-
+    
     main_categories = Category.objects.filter(parent__isnull=True)
     subcategories = Category.objects.filter(parent__isnull=False)
-
+    
     if request.method == 'POST':
         post_data = request.POST.copy()
         description = post_data.get('description', '').strip()
@@ -2511,11 +2554,17 @@ def business_detail(request, business_id):
                 'success': False,
                 'errors': {'description': 'Description cannot be blank or None'}
             })
+        
+        # Log website information if it's being updated
+        if 'website' in post_data and post_data.get('website') != business.website:
+            logger.info("[website] Website for %s being updated from '%s' to '%s'", 
+                       business.project_title, business.website, post_data.get('website'))
+        
         existing_main = set(cat.strip() for cat in (business.main_category or '').split(',') if cat.strip())
         existing_tailored = set(cat.strip() for cat in (business.tailored_category or '').split(',') if cat.strip())
         new_main = set(cat.strip() for cat in post_data.getlist('main_category') if cat.strip())
         new_tailored = set(cat.strip() for cat in post_data.getlist('tailored_category') if cat.strip())
-
+        
         removed_main = existing_main - new_main
         removed_tailored = existing_tailored - new_tailored
         if (removed_main or removed_tailored) and not post_data.get('confirm_removal'):
@@ -2527,21 +2576,21 @@ def business_detail(request, business_id):
                     'tailored': list(removed_tailored)
                 }
             })
-
+        
         final_main = new_main if post_data.get('confirm_removal') else (existing_main | new_main)
         final_tailored = new_tailored if post_data.get('confirm_removal') else (existing_tailored | new_tailored)
-
+        
         post_data['main_category'] = ', '.join(final_main)
         post_data['tailored_category'] = ', '.join(final_tailored)
-
+        
         logger.debug("Previous main categories: %s", existing_main)
         logger.debug("New main categories: %s", final_main)
         logger.debug("Previous tailored categories: %s", existing_tailored)
         logger.debug("New tailored categories: %s", final_tailored)
-
+        
         form = BusinessForm(post_data, instance=business)
         feedback_formset = FeedbackFormSet(post_data, instance=business)
-
+        
         if form.is_valid():
             form.save()
             feedback_formset.save()
@@ -2550,7 +2599,7 @@ def business_detail(request, business_id):
             logger.info("Business %s updated successfully", business.project_title)
             logger.info("Main categories updated from %s to %s", existing_main, final_main)
             logger.info("Tailored categories updated from %s to %s", existing_tailored, final_tailored)
-
+            
             messages.success(request, "Saved!")
             return redirect('business_detail', business_id=business.id)
         else:
@@ -2558,7 +2607,7 @@ def business_detail(request, business_id):
             messages.error(request, "An error occurred while saving the business.")
     else:
         form = BusinessForm(instance=business)
-
+    
     context = {
         'form': form,
         'business': business,
@@ -2572,11 +2621,12 @@ def business_detail(request, business_id):
         'existing_main_categories': business.main_category.split(',') if business.main_category else [],
         'existing_tailored_categories': business.tailored_category.split(',') if business.tailored_category else [],
         'status_filter': status_filter, 
-        'business_count':  business_count,
+        'business_count': business_count,
         'available_statuses': available_statuses_dict,
-        'status_availability': status_availability,  
+        'status_availability': status_availability,
+        'levels': levels, 
     }
-
+    
     return render(request, 'automation/business_detail.html', context)
 
 @csrf_protect
@@ -2715,38 +2765,29 @@ class BusinessDescriptionGenerator:
 
     def generate_description(self, business):
         """
-        Generate a dynamic description with extensive templating and value propositions
+        Generate a dynamic description using various templates without business type mapping
         """
         try:
+            # Validate inputs
             if not business.title:
                 raise ValueError("Business title is required")
-
+            
+            # Generate description
             parts = []
-            business_types = business.types.split(',') if business.types else []
-            business_types = [t.strip() for t in business_types if t.strip()]
 
-            # Expanded introduction templates
-            intro_templates = {
-                'general': [
-                    f"Welcome to {business.title}",
-                    f"Discover {business.title}",
-                    f"Experience excellence at {business.title}",
-                    f"Meet {business.title}",
-                    f"Introducing {business.title}"
-                ],
-                'typed': [
-                    f"As a distinguished {0}",
-                    f"Being a recognized leader in {0}",
-                    f"{business.title} stands as a respected {0}",
-                    f"Renowned as a premium {0}",
-                    f"Setting industry standards as a {0}",
-                    f"Pioneering excellence as a {0}",
-                    f"With years of expertise as a {0}",
-                    f"Recognized for excellence as a {0}",
-                    f"Breaking new ground as an innovative {0}",
-                    f"Leading the way as a premier {0}"
-                ]
-            }
+            # Introduction templates
+            intro_templates = [
+                f"Welcome to {business.title}",
+                f"Discover {business.title}",
+                f"Experience excellence at {business.title}",
+                f"Meet {business.title}",
+                f"Introducing {business.title}",
+                f"{business.title} is a premier provider",
+                f"{business.title} proudly offers exceptional services",
+                f"{business.title} stands as a leading establishment",
+                f"Renowned for excellence, {business.title}",
+                f"{business.title} is dedicated to quality service"
+            ]
 
             # Location templates
             location_templates = [
@@ -2754,172 +2795,43 @@ class BusinessDescriptionGenerator:
                 f"based in the heart of {business.city}, {business.country}",
                 f"proudly operating in {business.city}, {business.country}",
                 f"bringing excellence to {business.city}, {business.country}",
-                f"establishing our presence in {business.city}, {business.country}",
                 f"with a prime location in {business.city}, {business.country}",
                 f"strategically located in {business.city}, {business.country}",
                 f"making our mark in {business.city}, {business.country}",
                 f"contributing to the community of {business.city}, {business.country}",
-                f"serving the vibrant market of {business.city}, {business.country}"
+                f"serving the vibrant market of {business.city}, {business.country}",
+                f"established in {business.city}, {business.country}"
             ]
-
-            # Define value propositions based on business level IDs
-            value_props = {
-                1: [  # Automotive Services
-                    "specializing in comprehensive automotive care and maintenance",
-                    "delivering expert vehicle services with state-of-the-art diagnostics",
-                    "providing reliable automotive solutions with certified technicians",
-                    "offering professional auto repair and maintenance services",
-                    "ensuring your vehicle's optimal performance and safety",
-                    "combining technical expertise with exceptional customer service in automotive care"
-                ],
-                
-                2: [  # Business Support
-                    "empowering businesses with comprehensive support solutions",
-                    "streamlining operations with professional business services",
-                    "providing strategic support to enhance business efficiency",
-                    "delivering customized business solutions for sustainable growth",
-                    "offering expert consultation and support for business success",
-                    "helping businesses thrive with professional support services"
-                ],
-                
-                3: [  # Construction & Remodeling
-                    "transforming spaces with expert construction and remodeling services",
-                    "bringing construction projects to life with precision and quality",
-                    "delivering excellence in construction and renovation solutions",
-                    "creating lasting value through quality construction services",
-                    "combining craftsmanship with innovative construction solutions",
-                    "building dreams into reality with professional expertise"
-                ],
-                
-                4: [  # Design & Creative
-                    "bringing creative visions to life with innovative design solutions",
-                    "crafting unique designs that capture your brand essence",
-                    "delivering creative excellence with a strategic approach",
-                    "transforming ideas into compelling visual experiences",
-                    "creating impactful designs that drive engagement",
-                    "offering creative solutions that make you stand out"
-                ],
-                
-                5: [  # Educational Services
-                    "fostering learning excellence with personalized educational programs",
-                    "providing quality education solutions for lifelong learning",
-                    "empowering growth through innovative educational services",
-                    "delivering comprehensive learning solutions for all ages",
-                    "creating engaging educational experiences that inspire",
-                    "supporting educational achievement with expert guidance"
-                ],
-                
-                6: [  # Events & Entertainment
-                    "creating memorable events with professional planning and execution",
-                    "delivering exceptional entertainment experiences",
-                    "transforming occasions into unforgettable celebrations",
-                    "offering comprehensive event management solutions",
-                    "bringing creativity and expertise to every event",
-                    "making special moments extraordinary"
-                ],
-                
-                7: [  # Home Services
-                    "providing professional solutions for all your home needs",
-                    "delivering quality home services with attention to detail",
-                    "ensuring your home maintenance and improvement needs are met",
-                    "offering comprehensive home care solutions",
-                    "maintaining and enhancing your living space",
-                    "bringing expertise to every aspect of home service"
-                ],
-                
-                8: [  # Moving & Storage
-                    "ensuring safe and efficient moving and storage solutions",
-                    "providing reliable relocation services with care",
-                    "offering secure storage and professional moving expertise",
-                    "delivering peace of mind with comprehensive moving services",
-                    "making your transition smooth and stress-free",
-                    "protecting your belongings with professional care"
-                ],
-                
-                9: [  # Outdoor & Landscaping
-                    "transforming outdoor spaces with expert landscaping services",
-                    "creating beautiful and sustainable landscape designs",
-                    "maintaining and enhancing your outdoor environment",
-                    "delivering professional outdoor solutions year-round",
-                    "bringing nature and design together beautifully",
-                    "offering comprehensive landscape management services"
-                ],
-                
-                10: [  # Personal Services
-                    "providing personalized services tailored to your needs",
-                    "delivering professional care with a personal touch",
-                    "offering customized solutions for individual requirements",
-                    "ensuring satisfaction with dedicated personal service",
-                    "bringing expertise to personal care and assistance",
-                    "creating positive experiences through professional service"
-                ],
-                
-                11: [  # Pet Services
-                    "providing loving care for your furry family members",
-                    "offering professional pet services with genuine compassion",
-                    "ensuring your pets receive the best possible care",
-                    "delivering expert pet care services with dedication",
-                    "treating every pet with professional attention and love",
-                    "creating happy, healthy experiences for pets"
-                ],
-                
-                12: [  # Professional Services
-                    "delivering expert solutions with professional excellence",
-                    "providing comprehensive professional expertise",
-                    "offering specialized services with proven results",
-                    "ensuring success through professional guidance",
-                    "bringing industry expertise to every project",
-                    "maintaining high standards in professional service delivery"
-                ],
-                
-                13: [  # Home Services & Repairs
-                    "solving home repair needs with professional expertise",
-                    "providing reliable home maintenance and repair solutions",
-                    "offering comprehensive home repair services",
-                    "ensuring quality repairs for your home",
-                    "delivering professional fixes for home issues",
-                    "maintaining your home's integrity with expert repairs"
-                ],
-                
-                14: [  # Security & Safety
-                    "protecting what matters most with professional security solutions",
-                    "ensuring peace of mind through comprehensive safety services",
-                    "delivering reliable security measures and monitoring",
-                    "providing advanced security solutions for your protection",
-                    "safeguarding your interests with expert security services",
-                    "offering state-of-the-art security and safety solutions"
-                ],
-                
-                15: [  # Wedding Services
-                    "making wedding dreams come true with professional planning",
-                    "creating unforgettable wedding experiences",
-                    "delivering exceptional wedding services with attention to detail",
-                    "ensuring your special day is perfectly executed",
-                    "bringing wedding visions to life with expertise",
-                    "offering comprehensive wedding planning solutions"
-                ],
-                
-                16: [  # Wellness & Health
-                    "promoting wellness through professional health services",
-                    "providing comprehensive health and wellness solutions",
-                    "supporting your journey to optimal health",
-                    "delivering expert guidance for wellness goals",
-                    "ensuring your well-being with professional care",
-                    "offering holistic approaches to health and wellness"
-                ],
-                
-                'default': [  # Fallback options for undefined categories
-                    "delivering professional excellence in all our services",
-                    "providing quality solutions with customer satisfaction in mind",
-                    "offering expert services tailored to your needs",
-                    "ensuring exceptional results through professional expertise",
-                    "maintaining high standards in service delivery",
-                    "bringing dedication and expertise to every project",
-                    "committed to excellence in everything we do",
-                    "providing reliable solutions with professional care"
-                ]
-            }
- 
+            
+            # Address templates
+            address_templates = [
+                f"You can find us at {business.address}",
+                f"Visit our location at {business.address}",
+                f"Conveniently located at {business.address}",
+                f"Our address is {business.address}",
+                f"Stop by our location at {business.address}",
+                f"Our facilities are at {business.address}",
+                f"We're accessible at {business.address}"
+            ]
+            
+            # Value proposition templates
+            value_prop_templates = [
+                "delivering professional excellence in all our services",
+                "providing quality solutions with customer satisfaction in mind",
+                "offering expert services tailored to your needs",
+                "ensuring exceptional results through professional expertise",
+                "maintaining high standards in service delivery",
+                "bringing dedication and expertise to every project",
+                "committed to excellence in everything we do",
+                "providing reliable solutions with professional care",
+                "focusing on customer satisfaction and quality results",
+                "combining expertise with personalized attention",
+                "distinguished by our commitment to excellence",
+                "known for our attention to detail and quality service",
+                "dedicated to exceeding expectations in everything we do",
+                "offering innovative solutions with proven results",
+                "recognized for our professional approach and reliability"
+            ]
 
             # Contact information templates
             contact_templates = [
@@ -2928,7 +2840,11 @@ class BusinessDescriptionGenerator:
                 f"Get in touch at {business.phone}",
                 f"Contact our experts at {business.phone}",
                 f"Available for inquiries at {business.phone}",
-                f"Let's discuss your needs at {business.phone}"
+                f"Let's discuss your needs at {business.phone}",
+                f"Call us today at {business.phone}",
+                f"For more information, call {business.phone}",
+                f"Questions? Reach us at {business.phone}",
+                f"Our team is available at {business.phone}"
             ]
 
             # Website call-to-action templates
@@ -2940,56 +2856,48 @@ class BusinessDescriptionGenerator:
                 f"See how we can help you at {business.website}",
                 f"Learn about our success stories at {business.website}",
                 f"Browse our portfolio at {business.website}",
-                f"Get detailed information at {business.website}"
+                f"Get detailed information at {business.website}",
+                f"Follow our latest updates at {business.website}",
+                f"Check out our special offers at {business.website}"
             ]
 
             # Generate description using templates
-            if business_types:
-                primary_type = business_types[0].lower()
-                parts.append(random.choice(intro_templates['typed']).format(primary_type))
-            else:
-                parts.append(random.choice(intro_templates['general']))
+            # Add introduction
+            parts.append(random.choice(intro_templates))
 
-            if business.city and business.country:
+            # Add location if available
+            if hasattr(business, 'city') and hasattr(business, 'country') and business.city and business.country:
                 parts.append(random.choice(location_templates))
 
-            # Add value propositions based on business types
-            added_props = set()
-            for business_type in business_types:
-                for key, props in value_props.items():
-                    if key in business_type.lower() and key not in added_props:
-                        parts.append(random.choice(props))
-                        added_props.add(key)
-                        break
-
+            # Add value proposition
+            parts.append(random.choice(value_prop_templates))
+            
+            # Add address if available
+            if hasattr(business, 'address') and business.address:
+                parts.append(random.choice(address_templates))
+                
             # Add contact information
-            if business.phone:
+            if hasattr(business, 'phone') and business.phone:
                 parts.append(random.choice(contact_templates))
 
-            if business.website:
+            # Add website information
+            if hasattr(business, 'website') and business.website:
                 parts.append(random.choice(website_templates))
-
-            # Add value proposition based on business level ID
-            level_id = int(business.level) if business.level else None
-            if level_id and level_id in value_props:
-                parts.append(random.choice(value_props[level_id]))
-            else:
-                parts.append(random.choice(value_props['default']))
 
             # Join all parts with proper punctuation and flow
             description = '. '.join(part.strip() for part in parts if part.strip())
             description = description.replace('..', '.') + '.'
 
+            # Validate final description
             if len(description.strip()) < 20:
                 raise ValueError("Generated description is too short")
 
             return description.strip()
 
         except Exception as e:
-            logger.error(f"Error generating description for business {business.id}: {e}")
-            self.errors.append(f"Business {business.id}: {str(e)}")
+            logger.error(f"Error generating description for business: {getattr(business, 'id', 'unknown')}: {e}")
+            self.errors.append(f"Business {getattr(business, 'id', 'unknown')}: {str(e)}")
             return None
-
 
     def process_businesses(self):
         """
@@ -3044,6 +2952,7 @@ class BusinessDescriptionGenerator:
             'errors': self.errors
         }
  
+# This generates a single business 
 @csrf_exempt
 def generate_description(request):
     logger.debug("generate_description view called.")
@@ -3774,139 +3683,117 @@ def parse_address(address):
     
     return parsed
  
+
 @transaction.atomic
-def save_business_from_json(task, business_data, query, form_data=None):
-    logger.info(f"Saving business data from JSON for task {task.id}")
-
+def save_business_from_json(task, business_data, query=''):
     try:
-        # If form data is passed, use it to override some of the fields (city and country from form inputs)
-        if form_data:
-            submitted_country = form_data.get('submitted_country')  # Country from form input
-            submitted_city = form_data.get('submitted_city')  # City from form input
-            destination_id = form_data.get('destination_id')  # Destination ID from form input
+        # Check if we're dealing with a place_results (single business) or local_results (multiple businesses)
+        if isinstance(business_data, dict) and 'place_results' in business_data:
+            # Handle place_results format (single business)
+            place_data = business_data['place_results']
+            query = business_data.get('search_parameters', {}).get('q', '')
+            return save_single_business(task, place_data, query)
         else:
-            submitted_country = None
-            submitted_city = None
-            destination_id = None
-
-        # Business object construction based on both JSON and form data
-        business_obj = {
-            'task': task,
-            'project_id': task.project_id,
-            'project_title': task.project_title,
-            'main_category': task.main_category,  # Assume this is a Category instance
-            'tailored_category': task.tailored_category,
-            'search_string': query,
-            'scraped_at': timezone.now(),
-        }
-
-        # Field mapping from JSON to Business model
-        field_mapping = {
-            'position': 'rank',
-            'title': 'title',
-            'place_id': 'place_id',
-            'data_id': 'data_id',
-            'data_cid': 'data_cid',
-            'rating': 'rating',
-            'reviews': 'reviews_count',
-            'price': 'price',
-            'type': 'category_name',
-            'address': 'address',
-            'phone': 'phone',
-            'website': 'website',
-            'description': 'description',
-            'thumbnail': 'thumbnail',
-        }
-
-        # Populate business_obj with values from the business_data JSON
-        for api_field, model_field in field_mapping.items():
-            if api_field in business_data:
-                business_obj[model_field] = business_data[api_field]
-
-        # Handle GPS coordinates
-        if 'gps_coordinates' in business_data:
-            business_obj['latitude'] = business_data['gps_coordinates'].get('latitude')
-            business_obj['longitude'] = business_data['gps_coordinates'].get('longitude')
-
-        # Handle types and operating hours
-        if 'types' in business_data:
-            business_obj['types'] = ', '.join(business_data['types'])
-
-        if 'operating_hours' in business_data:
-            business_obj['operating_hours'] = business_data['operating_hours']
-
-        if 'service_options' in business_data:
-            business_obj['service_options'] = business_data['service_options']
-
-        # Parse address from JSON or use form input
-        address = business_data.get('address', '')
-        address_components = parse_address(address)
-
-        # Use JSON values for city/country or fall back to form data (submitted_city, submitted_country)
-        business_obj['street'] = address_components.get('street', '')
-        business_obj['city'] = address_components.get('city', submitted_city)
-        business_obj['state'] = address_components.get('state', '')
-        business_obj['postal_code'] = address_components.get('postal_code', '')
-        business_obj['country'] = address_components.get('country', submitted_country)
-
-        # Handle destination: either from the form data (destination_id) or by country/state from the address
-        if destination_id:
-            try:
-                destination = Destination.objects.get(id=destination_id)
-            except Destination.DoesNotExist:
-                logger.error(f"Destination with ID {destination_id} does not exist")
-                raise ValueError(f"Invalid destination ID: {destination_id}")
-        else:
-            # Fallback: create or get destination by country and state
-            destination_name = f"{business_obj['country']}, {business_obj['state']}" if business_obj['state'] else business_obj['country']
-            destination, created = Destination.objects.get_or_create(name=destination_name)
-
-        business_obj['destination'] = destination
-
-        # Create or update the Business object
-        business, created = Business.objects.update_or_create(
-            place_id=business_obj['place_id'],
-            defaults=business_obj
-        )
-
-        if created:
-            logger.info(f"New business created from JSON: {business.title} (ID: {business.id})")
-        else:
-            logger.info(f"Existing business updated from JSON: {business.title} (ID: {business.id})")
-
-        # Save categories from business_data['categories'] (assumed to be category IDs)
-        categories = business_data.get('categories', [])
-        for category_id in categories:
-            try:
-                category = Category.objects.get(id=category_id)
-                business.main_category.add(category)  # Assuming the relationship supports multiple categories
-            except Category.DoesNotExist:
-                logger.warning(f"Category ID {category_id} does not exist.")
-
-        # Save additional info
-        additional_info = [
-            AdditionalInfo(
-                business=business,
-                key=key,
-                value=value
-            )
-            for key, value in business_data.get('additionalInfo', {}).items()
-        ]
-        AdditionalInfo.objects.bulk_create(additional_info, ignore_conflicts=True)
-        logger.info(f"Additional data saved for business {business.id}")
-
-        # Handle service options
-        service_options = business_data.get('serviceOptions', {})
-        if service_options:
-            business.service_options = service_options
-            business.save()
-
-        logger.info(f"All business data processed and saved for business {business.id}")
-
-        return business
-
+            # Handle original format (business from local_results array)
+            return save_single_business(task, business_data, query)
     except Exception as e:
         logger.error(f"Error saving business data from JSON for task {task.id}: {str(e)}", exc_info=True)
+        raise
+
+def save_single_business(task, business_data, search_query, country=None, destination=None):
+    """
+    Process a single business from JSON data and save it to the database.
+    
+    Args:
+        task: The ScrapingTask instance
+        business_data: Dictionary containing business data from JSON
+        search_query: The search query string used
+        country: Country object (optional)
+        destination: Destination object (optional)
+        
+    Returns:
+        The created/updated Business object or None if failed
+    """
+    try:
+        # Extract data with better error handling
+        title = business_data.get('title', '').strip()
+        if not title:
+            logger.warning("Business missing title, skipping")
+            return None
+            
+        # Extract other fields
+        address = business_data.get('address', '').strip()
+        website = business_data.get('website', '')
+        phone = business_data.get('phone', '')
+        
+        # Get or create business record
+        business, created = Business.objects.get_or_create(
+            place_id=business_data.get('place_id', ''),
+            defaults={
+                'title': business_data.get('title', ''),  # Use 'title' here
+                'task': task,
+                'project_id': task.project_id,
+                'project_title': task.project_title,
+                'main_category': task.main_category,
+                'tailored_category': task.tailored_category,
+                'search_string': business_data.get('query', ''),
+                'scraped_at': timezone.now(),
+                # Add all other fields you want to set
+                'address': business_data.get('address', ''),
+                'phone': business_data.get('phone', ''),
+                'website': business_data.get('website', ''),
+                'description': business_data.get('description', ''),
+                'rating': business_data.get('rating'),
+                'reviews_count': business_data.get('reviews', 0),
+                'thumbnail': business_data.get('thumbnail', ''),
+                'latitude': business_data.get('latitude'),
+                'longitude': business_data.get('longitude')
+            }
+        )        
+        # If the business already existed, update non-key fields
+        if not created:
+            business.website = website if website else business.website
+            business.phone = phone if phone else business.phone
+            business.country = country if country else business.country
+            business.destination = destination if destination else business.destination
+            business.scraping_task = task
+            business.save()
+            
+        # Process categories if available
+        if 'categories' in business_data and business_data['categories']:
+            for category_name in business_data['categories']:
+                category, _ = Category.objects.get_or_create(name=category_name)
+                business.categories.add(category)
+                
+        # Process hours if available
+        if 'hours' in business_data and business_data['hours']:
+            hours_text = business_data['hours']
+            # Store hours as text for now
+            business.hours = hours_text
+            business.save()
+                
+        # Process images if available
+        if 'images' in business_data and business_data['images']:
+            # Process up to 5 images
+            for i, image_url in enumerate(business_data['images'][:5]):
+                try:
+                    # Download image and create BusinessImage
+                    response = requests.get(image_url, timeout=10)
+                    if response.status_code == 200:
+                        img_temp = NamedTemporaryFile(delete=True)
+                        img_temp.write(response.content)
+                        img_temp.flush()
+                        
+                        image = BusinessImage(business=business)
+                        image.image.save(f"{slugify(title)}_{i}.jpg", File(img_temp))
+                        image.save()
+                except Exception as e:
+                    logger.warning(f"Failed to download image {image_url}: {str(e)}")
+                    
+        return business, created
+            
+    except Exception as e:
+        logger.exception(f"Error saving business from JSON: {str(e)}")
         raise
 
 @method_decorator(login_required, name='dispatch')
@@ -3914,12 +3801,34 @@ def save_business_from_json(task, business_data, query, form_data=None):
 class UploadScrapingResultsView(View):
     def get(self, request):
         tasks = ScrapingTask.objects.all()
-        return render(request, 'automation/upload_scraping_results.html', {'tasks': tasks})
+        countries = Country.objects.all().order_by('name')
+        destinations = Destination.objects.all().order_by('name')
+        
+        return render(request, 'automation/upload_scraping_results.html', {
+            'tasks': tasks,
+            'countries': countries,
+            'destinations': destinations
+        })
 
     @transaction.atomic
     def post(self, request):
         task_option = request.POST.get('task_option')
+        country_id = request.POST.get('submitted_country')
+        destination_id = request.POST.get('submitted_city')
         
+        # Validate country and destination
+        if not country_id or not destination_id:
+            messages.error(request, 'Please select both country and destination.')
+            return redirect('upload_scraping_results')
+            
+        try:
+            country = Country.objects.get(id=country_id)
+            destination = Destination.objects.get(id=destination_id)
+        except (Country.DoesNotExist, Destination.DoesNotExist):
+            messages.error(request, 'Invalid country or destination selected.')
+            return redirect('upload_scraping_results')
+
+        # Task setup
         if task_option == 'existing':
             task_id = request.POST.get('existing_task')
             if not task_id:
@@ -3931,11 +3840,15 @@ class UploadScrapingResultsView(View):
             if not new_task_title:
                 messages.error(request, 'Please enter a title for the new task.')
                 return redirect('upload_scraping_results')
-            task = ScrapingTask.objects.create(project_title=new_task_title)
+            task = ScrapingTask.objects.create(
+                project_title=new_task_title,
+                status='MANUAL_UPLOAD'
+            )
         else:
             messages.error(request, 'Invalid task option selected.')
             return redirect('upload_scraping_results')
 
+        # File validation
         if 'results_file' not in request.FILES:
             messages.error(request, 'No file was uploaded.')
             return redirect('upload_scraping_results')
@@ -3947,34 +3860,222 @@ class UploadScrapingResultsView(View):
             return redirect('upload_scraping_results')
 
         try:
-            # Read JSON data from the uploaded file directly
+            # Read JSON data
             data = json.load(results_file)
-
-            if 'local_results' in data:
-                for business_data in data['local_results']:
-                    save_business_from_json(task, business_data, data.get('search_parameters', {}).get('q', ''))
-            else:
-                raise ValueError("Invalid JSON structure")
-
-            # Reset the file pointer to the beginning before saving
+            
+            # Validate JSON structure
+            if 'local_results' not in data:
+                messages.error(request, 'Invalid JSON structure. The file must contain a "local_results" key.')
+                return redirect('upload_scraping_results')
+                
+            # Extract and process business data
+            businesses_count = 0
+            failed_businesses = []
+            search_query = data.get('search_parameters', {}).get('q', '')
+            
+            for business_data in data['local_results']:
+                try:
+                    # Check for business duplicates by title and address
+                    if business_data.get('title') and business_data.get('address'):
+                        existing_business = Business.objects.filter(
+                            name=business_data.get('title'),
+                            address=business_data.get('address'),
+                            country=country,
+                            destination=destination
+                        ).first()
+                        
+                        if existing_business:
+                            # Skip this business as it already exists
+                            continue
+                    
+                    # Process the business with country and destination context
+                    business = save_single_business(
+                        task, 
+                        business_data, 
+                        search_query,
+                        country=country,
+                        destination=destination
+                    )
+                    if business:
+                        businesses_count += 1
+                except Exception as e:
+                    failed_businesses.append({
+                        'name': business_data.get('title', 'Unknown'),
+                        'error': str(e)
+                    })
+            
+            # Reset file pointer and save file to task
             results_file.seek(0)
+            task.file.save(f"recovery_{timezone.now().strftime('%Y%m%d_%H%M%S')}.json", ContentFile(results_file.read()))
+            task.save()
+            
+            # Success message with details
+            success_message = f'Successfully processed {businesses_count} businesses from the JSON file.'
+            if failed_businesses:
+                success_message += f' Failed to process {len(failed_businesses)} businesses.'
+            
+            messages.success(request, success_message)
+            
+            # If there were failures, provide detailed feedback
+            if failed_businesses:
+                request.session['failed_businesses'] = failed_businesses[:10]  # Store first 10 failures for display
+            
+            return redirect('upload_scraping_results')
 
-            # Save the uploaded file to the task's file field
+        except json.JSONDecodeError:
+            messages.error(request, 'Invalid JSON file. Please ensure the file contains valid JSON data.')
+        except Exception as e:
+            messages.error(request, f'An error occurred: {str(e)}')
+            logger.exception("Error processing uploaded JSON file")
+
+        return redirect('upload_scraping_results')
+
+@method_decorator(login_required, name='dispatch')
+@method_decorator(user_passes_test(lambda u: u.is_superuser or u.roles.filter(role='ADMIN').exists()), name='dispatch')
+class UploadIndividualBusinessView(View):
+    def get(self, request):
+        tasks = ScrapingTask.objects.all()
+        return render(request, 'automation/upload_individual_business.html', {'tasks': tasks})
+
+    @transaction.atomic
+    def post(self, request):
+        task_option = request.POST.get('task_option')
+        
+        if task_option == 'existing':
+            task_id = request.POST.get('existing_task')
+            if not task_id:
+                messages.error(request, 'Please select an existing task.')
+                return redirect('upload_individual_business')
+            task = get_object_or_404(ScrapingTask, id=task_id)
+        elif task_option == 'new':
+            new_task_title = request.POST.get('new_task_title')
+            if not new_task_title:
+                messages.error(request, 'Please enter a title for the new task.')
+                return redirect('upload_individual_business')
+            task = ScrapingTask.objects.create(project_title=new_task_title)
+        else:
+            messages.error(request, 'Invalid task option selected.')
+            return redirect('upload_individual_business')
+
+        if 'results_file' not in request.FILES:
+            messages.error(request, 'No file was uploaded.')
+            return redirect('upload_individual_business')
+
+        results_file = request.FILES['results_file']
+        
+        if not results_file.name.endswith('.json'):
+            messages.error(request, 'Invalid file type. Please upload a JSON file.')
+            return redirect('upload_individual_business')
+
+        try:
+            # Read JSON data from the uploaded file
+            data = json.load(results_file)
+            
+            # Transform the data structure if needed
+            transformed_data = transform_json_format(data)
+            
+            # Extract the search query or use a default
+            search_query = ''
+            if 'search_parameters' in data and 'q' in data['search_parameters']:
+                search_query = data['search_parameters']['q']
+            
+            # Process single business if place_results exists
+            if 'place_results' in data:
+                business_data = transform_place_to_local_format(data['place_results'])
+                save_business_from_json(task, business_data, search_query)
+                messages.success(request, 'Business data imported successfully.')
+            # Process multiple businesses if local_results exists
+            elif transformed_data and 'local_results' in transformed_data:
+                for business_data in transformed_data['local_results']:
+                    save_business_from_json(task, business_data, search_query)
+                messages.success(request, f'Successfully imported {len(transformed_data["local_results"])} businesses.')
+            else:
+                messages.error(request, 'No valid business data found in the file.')
+            
+            # Reset file pointer and save the uploaded file
+            results_file.seek(0)
             task.file.save(results_file.name, ContentFile(results_file.read()))
             task.save()
-
-            messages.success(request, 'File uploaded and processed successfully.')
-            return redirect('upload_scraping_results')
+            
+            return redirect('upload_individual_business')
 
         except json.JSONDecodeError:
             messages.error(request, 'Invalid JSON file. Please upload a valid JSON file.')
         except Exception as e:
             messages.error(request, f'An error occurred: {str(e)}')
-            # Optionally log the exception for debugging
             traceback.print_exc()
 
-        return redirect('upload_scraping_results')
+        return redirect('upload_individual_business')
+
+def transform_json_format(data):
+    """Transform the JSON format if needed to ensure it contains a local_results array"""
+    # If local_results already exists, return data unchanged
+    if 'local_results' in data:
+        return data
     
+    # If place_results exists, transform it to a local_results array
+    if 'place_results' in data:
+        place_data = data['place_results']
+        transformed_data = {
+            'search_metadata': data.get('search_metadata', {}),
+            'search_parameters': data.get('search_parameters', {}),
+            'local_results': [transform_place_to_local_format(place_data)]
+        }
+        return transformed_data
+    
+    return None
+
+def transform_place_to_local_format(place_data):
+    """Convert place_results format to local_results format"""
+    business_data = {
+        'position': 1,
+        'title': place_data.get('title', ''),
+        'place_id': place_data.get('place_id', ''),
+        'data_id': place_data.get('data_id', ''),
+        'data_cid': place_data.get('data_cid', ''),
+        'rating': place_data.get('rating', None),
+        'reviews': place_data.get('reviews', 0),
+        'price': place_data.get('price', ''),
+        'type': place_data.get('type', []),
+        'types': place_data.get('type', []),  # Support both formats
+        'address': place_data.get('address', ''),
+        'phone': place_data.get('phone', ''),
+        'website': place_data.get('website', ''),
+        'description': place_data.get('description', ''),
+        'thumbnail': place_data.get('thumbnail', '')
+    }
+    
+    # Handle GPS coordinates
+    if 'gps_coordinates' in place_data:
+        business_data['gps_coordinates'] = place_data['gps_coordinates']
+    
+    # Handle hours/operating hours
+    if 'hours' in place_data:
+        hours_data = place_data['hours']
+        if isinstance(hours_data, list):
+            # Transform the list to a dictionary format if needed
+            formatted_hours = {}
+            for day_entry in hours_data:
+                if isinstance(day_entry, dict):
+                    for day, hours in day_entry.items():
+                        formatted_hours[day.lower()] = hours
+            business_data['operating_hours'] = formatted_hours
+        else:
+            business_data['operating_hours'] = hours_data
+    
+    # Handle service options or extensions
+    if 'service_options' in place_data:
+        business_data['service_options'] = place_data['service_options']
+    elif 'extensions' in place_data:
+        business_data['service_options'] = []
+        for extension in place_data.get('extensions', []):
+            if isinstance(extension, dict):
+                business_data['service_options'].append(extension)
+    
+    return business_data
+
+
+
 def task_status(request, task_id):
     task = ScrapingTask.objects.get(id=task_id)
     return render(request, 'automation/task_status.html', {'task': task})
