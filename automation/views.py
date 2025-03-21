@@ -377,8 +377,8 @@ class UploadFileView(View):
                     # Queue task using Celery
                     try:
                         task_result = process_scraping_task.delay(task_id=task.id, form_data=form_data)
-                        task.celery_task_id = task_result.id
-                        task.save(update_fields=['celery_task_id'])
+                        #task.celery_task_id = task_result.id
+                        task.save()
                         
                         logger.info(f"Sites Gathering task {task.id} created and queued, Celery task ID: {task_result.id}")
                         messages.success(request, 'Task created successfully!')
