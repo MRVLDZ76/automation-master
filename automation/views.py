@@ -236,6 +236,7 @@ def task_results(request, task_id):
             "status": "ERROR"
         }, status=500)
 
+
 @method_decorator(login_required, name='dispatch')
 #@method_decorator(user_passes_test(is_admin), name='dispatch')
 class UploadFileView(View):
@@ -256,15 +257,6 @@ class UploadFileView(View):
             'subcategory': user_pref.last_subcategory.id if user_pref.last_subcategory else None,
         }
 
-    @method_decorator(login_required)
-    def dispatch(self, request, *args, **kwargs):
-        # Rate limiting - prevent form submission spam
-        key = f"upload_form_{request.user.id}"
-        if request.method == 'POST' and cache.get(key):
-            messages.warning(request, "Please wait before submitting another task.")
-            return redirect('task_list')
-        return super().dispatch(request, *args, **kwargs)
-    
     def get(self, request):
         user_pref = self.get_user_preferences(request.user)
         initial_data = self.get_initial_data(user_pref)
@@ -286,38 +278,15 @@ class UploadFileView(View):
                 parent=user_pref.last_main_category
             )
 
-        # Calculate user's active tasks
-        active_tasks_count = ScrapingTask.objects.filter(
-            user=request.user,
-            status__in=['PENDING', 'QUEUED', 'IN_PROGRESS']
-        ).count()
-
         context = {
             'form': form,
             'last_image_count': user_pref.last_image_count,
             'user_preferences': user_pref,
-            'default_image_count': 3,
-            'active_tasks_count': active_tasks_count,
-            'max_concurrent_tasks': getattr(settings, 'MAX_CONCURRENT_TASKS_PER_USER', 5)
+            'default_image_count': 3
         }
         return render(request, self.template_name, context)
 
     def post(self, request):
-        # Check for concurrent tasks limit
-        active_tasks_count = ScrapingTask.objects.filter(
-            user=request.user,
-            status__in=['PENDING', 'QUEUED', 'IN_PROGRESS']
-        ).count()
-        
-        max_tasks = getattr(settings, 'MAX_CONCURRENT_TASKS_PER_USER', 5)
-        if active_tasks_count >= max_tasks:
-            messages.error(
-                request, 
-                f"You've reached the maximum limit of {max_tasks} concurrent tasks. "
-                "Please wait for some tasks to complete."
-            )
-            return redirect('task_list')
-        
         form = ScrapingTaskForm(request.POST, request.FILES)
         
         if form.is_valid():
@@ -328,7 +297,7 @@ class UploadFileView(View):
                     if form.cleaned_data['subcategory']:
                         project_title += f" - {form.cleaned_data['subcategory'].title}"
 
-                    # Create task
+                    # Create task ONCE
                     task = form.save(commit=False)
                     task.user = request.user
                     task.status = 'QUEUED'
@@ -367,20 +336,11 @@ class UploadFileView(View):
                         'main_category': task.main_category.title if task.main_category else '',
                         'subcategory': task.subcategory.title if task.subcategory else '',
                         'image_count': int(user_pref.last_image_count),
-                        'description': task.description
                     }
 
-                    # Set rate limiting key
-                    key = f"upload_form_{request.user.id}"
-                    cache.set(key, True, 30)  # 30 seconds cooldown
-
-                    # Queue task using Celery
                     try:
-                        task_result = process_scraping_task.delay(task_id=task.id, form_data=form_data)
-                        #task.celery_task_id = task_result.id
-                        task.save()
-                        
-                        logger.info(f"Sites Gathering task {task.id} created and queued, Celery task ID: {task_result.id}")
+                        process_scraping_task(task_id=task.id, form_data=form_data)
+                        logger.info(f"Sites Gathering task {task.id} created and queued, project ID: {task.project_id}")
                         messages.success(request, 'Task created successfully!')
                         return redirect('task_list')
                     except Exception as e:
@@ -389,16 +349,89 @@ class UploadFileView(View):
                         raise
 
             except Exception as e:
-                logger.error(f"Error processing task: {str(e)}", exc_info=True)
+                logger.error(f"Error saving preferences: {str(e)}")
                 messages.error(request, f"Error creating task: {str(e)}")
-        else:
-            for field, errors in form.errors.items():
-                for error in errors:
-                    messages.error(request, f"{field}: {error}")
         
         return render(request, self.template_name, {'form': form})
 
 
+@method_decorator(login_required, name='dispatch')
+class TaskDetailView(View):
+    def get(self, request, id):
+        logger.info(f"Accessing TaskDetailView for task {id}")
+        
+        try:
+            user = request.user
+            
+            # Check basic permissions
+            if not (user.is_superuser or 
+                   user.roles.filter(role__in=['ADMIN', 'AMBASSADOR']).exists()):
+                return render(
+                    request,
+                    'automation/error.html',
+                    {'error': 'You do not have permission to access this task.'},
+                    status=403
+                )
+
+            api_url = f"{request.scheme}://{request.get_host()}/api/tasks/{id}/detailed_view/"
+            response = requests.get(
+                api_url,
+                cookies=request.COOKIES,
+                headers={
+                    'X-CSRFToken': request.COOKIES.get('csrftoken'),
+                    'Accept': 'application/json'
+                }
+            )
+
+            if response.status_code != 200:
+                logger.error(f"API request failed with status {response.status_code}")
+                return render(
+                    request,
+                    'automation/error.html',
+                    {'error': 'Task not found or error occurred.'},
+                    status=404
+                )
+
+            api_data = response.json()
+            
+            # Calculate empty descriptions from API data
+            empty_descriptions = sum(
+                1 for business in api_data['businesses'] 
+                if not business.get('description')
+            )
+            
+            # Prepare context with all necessary permissions
+            context = {
+                'task': api_data['task'],
+                'businesses': api_data['businesses'],
+                'status_counts': api_data['status_counts'],
+                'total_businesses': api_data['total_businesses'],
+                'empty_descriptions': empty_descriptions,
+                'previous_task': api_data['navigation']['previous_task'],
+                'next_task': api_data['navigation']['next_task'],
+                'status_choices': api_data['status_choices'],
+                'MEDIA_URL': settings.MEDIA_URL,
+                'DEFAULT_IMAGE_URL': settings.DEFAULT_IMAGE_URL,
+                'is_admin': api_data['user_permissions']['is_admin'],
+                'is_ambassador': api_data['user_permissions']['is_ambassador'],
+                'can_edit': api_data['user_permissions']['can_edit'],
+                'can_delete': api_data['user_permissions']['can_delete'],
+                'can_move_to_production': api_data['user_permissions']['can_move_to_production'],
+                'user': request.user,
+            }
+
+            return render(request, 'automation/task_detail.html', context)
+
+        except Exception as e:
+            logger.error(f"Error in TaskDetailView for task {id}: {str(e)}", exc_info=True)
+            return render(
+                request,
+                'automation/error.html',
+                {'error': 'An unexpected error occurred.'},
+                status=500
+            )
+
+ 
 @method_decorator(login_required, name='dispatch')
 class TaskDetailView(View):
     def get(self, request, id):

@@ -436,59 +436,23 @@ def extract_query_from_url(url):
         logger.error(f"Error parsing URL: {str(e)}")
         return None
 
-@shared_task(
-    bind=True,
-    name='automation.tasks.process_scraping_task',
-    max_retries=3,
-    autoretry_for=(Exception,),
-    retry_backoff=True,
-    retry_backoff_max=600,
-    retry_jitter=True,
-    time_limit=1800,  # 30 minutes, matching CELERY_TASK_TIME_LIMIT
-    soft_time_limit=1500,  # 25 minutes, matching CELERY_TASK_SOFT_TIME_LIMIT
-)
+@shared_task(bind=True)
 def process_scraping_task(self, task_id, form_data=None):
-    """
-    Process scraping task with enhanced logging and error handling
-    
-    Args:
-        task_id (int): The ID of the scraping task
-        form_data (dict, optional): Form data for the scraping task
-    """
-    # Setting up database logging handler
     db_handler = DatabaseLogHandler(task_id)
     formatter = logging.Formatter('%(asctime)s - %(name)s - %(levelname)s - %(message)s')
     db_handler.setFormatter(formatter)
     logger.addHandler(db_handler)
-    
-    # Task state tracking
-    task_state = {
-        'current': 0,
-        'total': 0,
-        'status': 'STARTING'
-    }
     
     try:
         logger.info(f"Starting Sites Gathering task {task_id}")
         task = ScrapingTask.objects.get(id=task_id)
         task.status = 'IN_PROGRESS'
         task.save()
-        
+
         # Get image_count early and ensure it's an integer
         image_count = int(form_data.get('image_count', 3)) if form_data else 3
         logger.info(f"Using image count: {image_count}")
-        
-        # Update task state for progress reporting
-        self.update_state(
-            state='PROGRESS',
-            meta={
-                'current': 0,
-                'total': 0,
-                'status': 'PROCESSING_INPUTS',
-                'task_id': task_id
-            }
-        )
-        
+
         queries = []
         description = task.description if task.description else ''
         
@@ -500,14 +464,14 @@ def process_scraping_task(self, task_id, form_data=None):
             if any(url.startswith(('http://', 'https://')) for url in urls):
                 queries = read_queries_from_content(description)
                 logger.info(f"Extracted {len(queries)} queries from description URLs")
-        
+
         # Process file if no URLs were found and file exists
         if not queries and task.file:
             logger.info("Using uploaded file for queries.")
             file_content = default_storage.open(task.file.name).read().decode('utf-8')
             queries = read_queries_from_content(file_content)
             logger.info(f"Total queries to process from file: {len(queries)}")
-        
+
         # Process form data if no URLs or file
         elif not queries and form_data:
             logger.info("Using form data to create queries.")
@@ -524,89 +488,40 @@ def process_scraping_task(self, task_id, form_data=None):
             if query:
                 queries.append({'query': query})
                 logger.info(f"Form-based query: {query}")
-        
+
         if not queries:
             logger.error("No valid queries to process.")
             task.status = 'FAILED'
             task.save()
-            self.update_state(state='FAILURE', meta={
-                'exc_type': 'ValidationError',
-                'exc_message': 'No valid queries to process',
-                'task_id': task_id
-            })
             return
-        
+
         # Update total queries count
         task.total_queries = len(queries)
         task.save()
-        
+
         total_results = 0
-        
-        # Update total for progress tracking
-        task_state['total'] = len(queries)
-        self.update_state(
-            state='PROGRESS', 
-            meta={
-                'current': 0,
-                'total': len(queries),
-                'status': 'PROCESSING_QUERIES',
-                'task_id': task_id
-            }
-        )
-        
+
         for index, query_data in enumerate(queries, start=1):
             query = query_data['query']
             # Update progress
             task.update_progress(query, index - 1)
-            task_state['current'] = index
-            task_state['status'] = f"Processing query {index}/{len(queries)}"
-            
-            self.update_state(
-                state='PROGRESS', 
-                meta={
-                    'current': index,
-                    'total': len(queries),
-                    'status': f"Processing query: {query}",
-                    'task_id': task_id
-                }
-            )
-            
             page_num = 1
             next_page_token = None
-            
+
             while True:
                 logger.info(f"Processing query {index}/{len(queries)}: {query} (Page {page_num})")
-                
-                # Exponential backoff for rate-limiting
-                retry_count = 0
-                max_retries = 3
-                base_delay = 2
-                
+
                 # Handle pagination
                 if next_page_token:
                     query_data['start'] = next_page_token
                 else:
                     query_data.pop('start', None)
-                
-                # Process query with retry logic
-                while retry_count < max_retries:
-                    try:
-                        results = process_query(query_data)
-                        break
-                    except Exception as e:
-                        retry_count += 1
-                        if retry_count >= max_retries:
-                            logger.error(f"Failed to process query after {max_retries} attempts: {str(e)}")
-                            results = None
-                            break
-                        
-                        delay = base_delay * (2 ** (retry_count - 1))
-                        logger.warning(f"Retrying query in {delay} seconds (attempt {retry_count}/{max_retries})")
-                        time.sleep(delay)
-                
+
+                # Process query and get results
+                results = process_query(query_data)
                 if results is None:
                     break
-                
+
                 try:
                     # Save the raw SerpAPI response with a safe key
                     safe_query = str(query).replace('/', '_').replace('\\', '_')[:255]  # Ensure safe key
@@ -619,10 +534,10 @@ def process_scraping_task(self, task_id, form_data=None):
                 if not local_results:
                     logger.info(f"No results found for query '{query}' (Page {page_num})")
                     break
-                
+
                 logger.info(f"Processing {len(local_results)} local results for query '{query}' (Page {page_num})")
                 logger.info(f"Local result data: {local_results}")
-                
+
                 # Process individual results
                 for result_index, local_result in enumerate(local_results, start=1):
                     try:
@@ -638,10 +553,10 @@ def process_scraping_task(self, task_id, form_data=None):
                     except Exception as e:
                         logger.error(f"Error processing business result {result_index} for query '{query}': {str(e)}", exc_info=True)
                         continue
-                
+
                 total_results += len(local_results)
                 logger.info(f"Processed {len(local_results)} results on page {page_num} for query '{query}'")
-                
+
                 next_page_token = get_next_page_token(results)
                 if next_page_token:
                     logger.info(f"Next page token found: {next_page_token}")
@@ -650,61 +565,31 @@ def process_scraping_task(self, task_id, form_data=None):
                 else:
                     logger.info(f"No next page token found for query '{query}'")
                     break
-            
+
             logger.info(f"Finished processing query: {query}")
-        
+
         logger.info(f"Total results processed across all queries: {total_results}")
         logger.info(f"Sites Gathering task {task_id} completed successfully")
         
         task.status = 'COMPLETED'
         task.completed_at = timezone.now()
         task.save()
-        
-        return {
-            'status': 'SUCCESS',
-            'task_id': task_id,
-            'total_results': total_results,
-            'total_queries': len(queries)
-        }
-    
+
     except ScrapingTask.DoesNotExist:
         logger.error(f"Sites Gathering task with id {task_id} not found")
-        self.update_state(state='FAILURE', meta={
-            'exc_type': 'ObjectNotFound',
-            'exc_message': f'Task {task_id} not found',
-            'task_id': task_id
-        })
-        raise
     except Exception as e:
         logger.error(f"Error in Sites Gathering task {task_id}: {str(e)}", exc_info=True)
-        task = ScrapingTask.objects.get(id=task_id)
         task.status = 'FAILED'
         task.save()
-        self.update_state(state='FAILURE', meta={
-            'exc_type': type(e).__name__,
-            'exc_message': str(e),
-            'task_id': task_id
-        })
-        raise
     finally:
         logger.removeHandler(db_handler)
 
-# Keep the helper functions with improved error handling
 def update_image_url(business, local_path, new_path):
-    """
-    Update image URL for a business
-    
-    Args:
-        business: Business object
-        local_path: Original local path
-        new_path: New path to update to
-    """
     try:
         images = Image.objects.filter(business=business, local_path=local_path)
         if not images.exists():
             logger.warning(f"No Image found for business {business.id} with local path {local_path}")
             return
-        
         for image in images:
             try:
                 media_url = default_storage.url(new_path)
@@ -716,21 +601,11 @@ def update_image_url(business, local_path, new_path):
                 logger.error(f"Error updating image for business {business.id}: {str(e)}")
     except Exception as e:
         logger.error(f"Error fetching images for update: {str(e)}")
-
+ 
 def crop_image_to_aspect_ratio(img, aspect_ratio):
-    """
-    Crop image to specified aspect ratio
-    
-    Args:
-        img: PIL Image object
-        aspect_ratio: Target aspect ratio (width/height)
-    
-    Returns:
-        Cropped PIL Image
-    """
     img_width, img_height = img.size
     img_aspect_ratio = img_width / img_height
-    
+
     if img_aspect_ratio > aspect_ratio:
         new_width = int(img_height * aspect_ratio)
         left = (img_width - new_width) / 2
@@ -743,16 +618,9 @@ def crop_image_to_aspect_ratio(img, aspect_ratio):
         top = (img_height - new_height) / 2
         right = img_width
         bottom = top + new_height
-    
     return img.crop((left, top, right, bottom))
-
+ 
 def get_s3_client():
-    """
-    Get an initialized S3 client
-    
-    Returns:
-        Boto3 S3 client
-    """
     return boto3.client(
         's3',
         region_name=settings.AWS_S3_REGION_NAME,
@@ -761,31 +629,12 @@ def get_s3_client():
         aws_secret_access_key=settings.AWS_SECRET_ACCESS_KEY
     )
 
-@shared_task(
-    bind=True,
-    name='automation.tasks.download_images',
-    max_retries=3,
-    autoretry_for=(requests.RequestException, IOError),
-    retry_backoff=True,
-    retry_jitter=True
-)
 def download_images(business, local_result, image_count=3):
-    """
-    Download images for a business from Google Maps
-    
-    Args:
-        business: Business object
-        local_result: Result data from SerpAPI
-        image_count: Number of images to download (default: 3)
-    
-    Returns:
-        List of downloaded image paths
-    """
     photos_link = local_result.get('photos_link')
     if not photos_link:
         logger.info(f"No photos link found for business {business.id}")
         return []
-    
+
     # Ensure image_count is a positive integer
     try:
         image_count = max(1, int(image_count))
@@ -793,7 +642,7 @@ def download_images(business, local_result, image_count=3):
     except (TypeError, ValueError) as e:
         logger.warning(f"Invalid image count provided ({image_count}), using default: 3. Error: {str(e)}")
         image_count = 3
-    
+
     image_paths = []
     try:
         photos_search = GoogleSearch({
@@ -803,43 +652,27 @@ def download_images(business, local_result, image_count=3):
             "hl": "en",
             "no_cache": "true"
         })
-        
-        # Implement retry logic for API calls
-        max_retries = 3
-        retry_count = 0
-        while retry_count < max_retries:
-            try:
-                photos_results = photos_search.get_dict()
-                break
-            except Exception as e:
-                retry_count += 1
-                if retry_count >= max_retries:
-                    logger.error(f"Failed to fetch photos after {max_retries} attempts: {str(e)}")
-                    return image_paths
-                
-                delay = 2 * (2 ** (retry_count - 1))
-                logger.warning(f"Retrying photo fetch in {delay} seconds (attempt {retry_count}/{max_retries})")
-                time.sleep(delay)
-        
+        photos_results = photos_search.get_dict()
+
         if 'error' in photos_results:
             logger.error(f"API Error fetching photos for business '{business.title}': {photos_results['error']}")
             return image_paths
-        
+
         all_photos = photos_results.get('photos', [])
         photos = all_photos[:image_count]
         
         logger.info(f"Found {len(all_photos)} total photos, downloading {len(photos)} as per image_count: {image_count}")
-        
+ 
         if not photos:
             logger.info(f"No photos found for business {business.id} in fetched results")
             return image_paths
-        
+
         # Create a slug of the business name
         business_slug = slugify(business.title)
-        
+
         # Initialize the S3 client
         s3_client = get_s3_client()
-        
+
         for i, photo in enumerate(photos):
             image_url = photo.get('image')
             
@@ -847,74 +680,37 @@ def download_images(business, local_result, image_count=3):
             if Image.objects.filter(business=business, image_url=image_url).exists():
                 logger.info(f"Image already exists for business {business.id}, skipping download.")
                 continue  # Skip if image already exists
-            
+
             if image_url:
                 try:
-                    # Implement retry logic for image downloads
-                    download_retries = 3
-                    download_count = 0
-                    
-                    while download_count < download_retries:
-                        try:
-                            response = requests.get(image_url, timeout=10)
-                            if response.status_code == 200:
-                                break
-                            
-                            download_count += 1
-                            if download_count >= download_retries:
-                                logger.error(f"Failed to download image after {download_retries} attempts: HTTP {response.status_code}")
-                                break
-                            
-                            time.sleep(2 * download_count)
-                            
-                        except requests.RequestException as e:
-                            download_count += 1
-                            if download_count >= download_retries:
-                                logger.error(f"Failed to download image after {download_retries} attempts: {str(e)}")
-                                break
-                            
-                            time.sleep(2 * download_count)
-                    
+                    response = requests.get(image_url, timeout=10)
                     if response.status_code == 200:
                         img = PILImage.open(BytesIO(response.content))
-                        
+
                         # Calculate and crop to the 3:2 aspect ratio
                         aspect_ratio = 3 / 2
                         img_cropped = crop_image_to_aspect_ratio(img, aspect_ratio)
-                        
+
                         # Ensure file name is unique
                         file_name = f"{business_slug}_{i}.jpg"
                         file_path = f'business_images/{business.id}/{file_name}'
-                        
+
                         # Save the image to a temporary buffer
                         buffer = BytesIO()
                         img_cropped.save(buffer, 'JPEG', quality=85)
                         buffer.seek(0)  # Reset buffer position
-                        
-                        # Upload the image using boto3 client with retry logic
-                        upload_retries = 3
-                        upload_count = 0
-                        
-                        while upload_count < upload_retries:
-                            try:
-                                s3_client.upload_fileobj(
-                                    buffer,
-                                    settings.AWS_STORAGE_BUCKET_NAME,
-                                    file_path,
-                                    ExtraArgs={
-                                        'ACL': 'public-read',
-                                        'ContentType': 'image/jpeg'
-                                    }
-                                )
-                                break
-                            except Exception as e:
-                                upload_count += 1
-                                if upload_count >= upload_retries:
-                                    logger.error(f"Failed to upload image after {upload_retries} attempts: {str(e)}")
-                                    break
-                                
-                                time.sleep(2 * upload_count)
-                        
+
+                        # Upload the image using boto3 client
+                        s3_client.upload_fileobj(
+                            buffer,
+                            settings.AWS_STORAGE_BUCKET_NAME,
+                            file_path,
+                            ExtraArgs={
+                                'ACL': 'public-read',
+                                'ContentType': 'image/jpeg'
+                            }
+                        )
+
                         # Create an image object in the database only if it doesn't exist
                         if not Image.objects.filter(business=business, local_path=file_path).exists():
                             Image.objects.create(
@@ -925,28 +721,29 @@ def download_images(business, local_result, image_count=3):
                             )
                             image_paths.append(file_path)
                             logger.info(f"Downloaded and processed image {i} for business {business.id}")
+
                         else:
                             logger.info(f"Image with local path {file_path} already exists for business {business.id}, skipping.")
+
                     else:
                         logger.error(f"Failed to download image {i} for business {business.id}: HTTP {response.status_code}")
-                
                 except Exception as e:
                     logger.error(f"Error downloading image {i} for business {business.id}: {str(e)}", exc_info=True)
-            
-            # Implement adaptive delay based on rate limiting
-            random_delay(min_delay=2, max_delay=20)
-        
+
+            random_delay(min_delay=2, max_delay=20)  
+
         # Set the first image as the main image if it exists
         first_image = Image.objects.filter(business=business).order_by('order').first()
         if first_image:
             business.main_image = first_image.image_url  # Use the URL instead of local path
             business.save()
             logger.info(f"Set main image for business {business.id}")
-    
+
     except Exception as e:
         logger.error(f"Error in download_images for business {business.id}: {str(e)}", exc_info=True)
-    
+
     return image_paths
+
 
 """
 def save_results(task, results, query):
