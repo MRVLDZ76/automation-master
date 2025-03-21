@@ -820,3 +820,154 @@ Traceback (most recent call last):
     'completed_at': task.completed_at.strftime('%Y-%m-%d %H:%M'),
                     ^^^^^^^^^^^^^^^^^^^^^^^^^^
 AttributeError: 'NoneType' object has no attribute 'strftime'
+ERROR 2025-03-21 08:40:56,582 views 26112 19392 Error in RecentTasksView: 'NoneType' object has no attribute 'strftime'
+Traceback (most recent call last):
+  File "D:\proyectos\automation-master\automation\api\views.py", line 677, in get
+    'completed_at': task.completed_at.strftime('%Y-%m-%d %H:%M'),
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'NoneType' object has no attribute 'strftime'
+ERROR 2025-03-21 08:41:27,730 views 26112 19336 Error in RecentTasksView: 'NoneType' object has no attribute 'strftime'
+Traceback (most recent call last):
+  File "D:\proyectos\automation-master\automation\api\views.py", line 677, in get
+    'completed_at': task.completed_at.strftime('%Y-%m-%d %H:%M'),
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'NoneType' object has no attribute 'strftime'
+ERROR 2025-03-21 08:41:57,727 views 26112 19336 Error in RecentTasksView: 'NoneType' object has no attribute 'strftime'
+Traceback (most recent call last):
+  File "D:\proyectos\automation-master\automation\api\views.py", line 677, in get
+    'completed_at': task.completed_at.strftime('%Y-%m-%d %H:%M'),
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'NoneType' object has no attribute 'strftime'
+INFO 2025-03-21 08:42:27,541 recalculate_tasks 13252 21796 Starting status recalculation for 43 tasks
+INFO 2025-03-21 08:42:27,549 common 13252 21796 Task 3 has no businesses at all => FAILED
+INFO 2025-03-21 08:42:27,552 common 13252 21796 Task 4 has no businesses at all => FAILED
+INFO 2025-03-21 08:42:27,559 common 13252 21796 Task 1 counts: total=1, pending=1, reviewed=0, in_production=0
+INFO 2025-03-21 08:42:27,562 common 13252 21796 Task 6 has no businesses at all => FAILED
+INFO 2025-03-21 08:42:27,565 common 13252 21796 Task 9 has no businesses at all => FAILED
+INFO 2025-03-21 08:42:27,570 common 13252 21796 Task 2 counts: total=3, pending=3, reviewed=0, in_production=0
+INFO 2025-03-21 08:42:27,576 common 13252 21796 Task 45 counts: total=1, pending=1, reviewed=0, in_production=0
+INFO 2025-03-21 08:42:27,578 common 13252 21796 Task 45 => PENDING -> COMPLETED
+INFO 2025-03-21 08:42:27,579 recalculate_tasks 13252 21796 Task 45: PENDING -> COMPLETED
+INFO 2025-03-21 08:42:27,581 common 13252 21796 Task 5 has no businesses at all => FAILED
+INFO 2025-03-21 08:42:27,582 common 13252 21796 Task 5 => DONE -> FAILED
+INFO 2025-03-21 08:42:27,583 recalculate_tasks 13252 21796 Task 5: DONE -> FAILED
+INFO 2025-03-21 08:42:27,585 common 13252 21796 Task 38 has no businesses at all => FAILED
+INFO 2025-03-21 08:42:27,587 common 13252 21796 Task 38 => PENDING -> FAILED
+INFO 2025-03-21 08:42:27,587 recalculate_tasks 13252 21796 Task 38: PENDING -> FAILED
+INFO 2025-03-21 08:42:27,589 common 13252 21796 Task 7 has no businesses at all => FAILED
+INFO 2025-03-21 08:42:27,592 common 13252 21796 Task 8 has no businesses at all => FAILED
+INFO 2025-03-21 08:42:27,595 common 13252 21796 Task 28 has no businesses at all => FAILED
+INFO 2025-03-21 08:42:27,596 common 13252 21796 Task 28 => COMPLETED -> FAILED
+INFO 2025-03-21 08:42:27,596 recalculate_tasks 13252 21796 Task 28: COMPLETED -> FAILED
+INFO 2025-03-21 08:42:27,602 common 13252 21796 Task 46 counts: total=1, pending=1, reviewed=0, in_production=0
+INFO 2025-03-21 08:42:27,603 common 13252 21796 Task 46 => PENDING -> COMPLETED
+INFO 2025-03-21 08:42:27,603 recalculate_tasks 13252 21796 Task 46: PENDING -> COMPLETED
+INFO 2025-03-21 08:42:27,606 common 13252 21796 Task 39 has no businesses at all => FAILED
+INFO 2025-03-21 08:42:27,607 common 13252 21796 Task 39 => PENDING -> FAILED
+INFO 2025-03-21 08:42:27,672 recalculate_tasks 13252 21796 Task 39: PENDING -> FAILED
+INFO 2025-03-21 08:42:27,678 common 13252 21796 Task 15 counts: total=4, pending=4, reviewed=0, in_production=0
+INFO 2025-03-21 08:42:27,681 common 13252 21796 Task 10 has no businesses at all => FAILED
+INFO 2025-03-21 08:42:27,685 common 13252 21796 Task 11 has no businesses at all => FAILED
+INFO 2025-03-21 08:42:27,688 common 13252 21796 Task 12 has no businesses at all => FAILED
+INFO 2025-03-21 08:42:27,691 common 13252 21796 Task 13 has no businesses at all => FAILED
+INFO 2025-03-21 08:42:27,694 common 13252 21796 Task 40 has no businesses at all => FAILED
+INFO 2025-03-21 08:42:27,695 common 13252 21796 Task 40 => PENDING -> FAILED
+INFO 2025-03-21 08:42:27,696 recalculate_tasks 13252 21796 Task 40: PENDING -> FAILED
+INFO 2025-03-21 08:42:27,702 common 13252 21796 Task 17 counts: total=1, pending=1, reviewed=0, in_production=0
+INFO 2025-03-21 08:42:27,708 common 13252 21796 Task 18 counts: total=2, pending=2, reviewed=0, in_production=0
+INFO 2025-03-21 08:42:27,715 common 13252 21796 Task 33 counts: total=1, pending=1, reviewed=0, in_production=0
+INFO 2025-03-21 08:42:27,721 common 13252 21796 Task 29 counts: total=1, pending=1, reviewed=0, in_production=0
+INFO 2025-03-21 08:42:27,727 common 13252 21796 Task 19 counts: total=1, pending=1, reviewed=0, in_production=0
+INFO 2025-03-21 08:42:27,730 common 13252 21796 Task 20 has no businesses at all => FAILED
+INFO 2025-03-21 08:42:27,731 common 13252 21796 Task 20 => DONE -> FAILED
+INFO 2025-03-21 08:42:27,732 recalculate_tasks 13252 21796 Task 20: DONE -> FAILED
+ERROR 2025-03-21 08:42:27,733 views 26112 19336 Error in RecentTasksView: 'NoneType' object has no attribute 'strftime'
+Traceback (most recent call last):
+  File "D:\proyectos\automation-master\automation\api\views.py", line 677, in get
+    'completed_at': task.completed_at.strftime('%Y-%m-%d %H:%M'),
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'NoneType' object has no attribute 'strftime'
+INFO 2025-03-21 08:42:27,734 common 13252 21796 Task 41 has no businesses at all => FAILED
+INFO 2025-03-21 08:42:27,735 common 13252 21796 Task 41 => DONE -> FAILED
+INFO 2025-03-21 08:42:27,736 recalculate_tasks 13252 21796 Task 41: DONE -> FAILED
+INFO 2025-03-21 08:42:27,740 common 13252 21796 Task 21 has no businesses at all => FAILED
+INFO 2025-03-21 08:42:27,742 common 13252 21796 Task 21 => DONE -> FAILED
+INFO 2025-03-21 08:42:27,742 recalculate_tasks 13252 21796 Task 21: DONE -> FAILED
+INFO 2025-03-21 08:42:27,745 common 13252 21796 Task 22 has no businesses at all => FAILED
+INFO 2025-03-21 08:42:27,746 common 13252 21796 Task 22 => DONE -> FAILED
+INFO 2025-03-21 08:42:27,747 recalculate_tasks 13252 21796 Task 22: DONE -> FAILED
+INFO 2025-03-21 08:42:27,749 common 13252 21796 Task 23 has no businesses at all => FAILED
+INFO 2025-03-21 08:42:27,750 common 13252 21796 Task 23 => DONE -> FAILED
+INFO 2025-03-21 08:42:27,751 recalculate_tasks 13252 21796 Task 23: DONE -> FAILED
+INFO 2025-03-21 08:42:27,757 common 13252 21796 Task 34 counts: total=1, pending=1, reviewed=0, in_production=0
+INFO 2025-03-21 08:42:27,759 common 13252 21796 Task 42 has no businesses at all => FAILED
+INFO 2025-03-21 08:42:27,761 common 13252 21796 Task 42 => DONE -> FAILED
+INFO 2025-03-21 08:42:27,761 recalculate_tasks 13252 21796 Task 42: DONE -> FAILED
+INFO 2025-03-21 08:42:27,767 common 13252 21796 Task 24 counts: total=1, pending=1, reviewed=0, in_production=0
+INFO 2025-03-21 08:42:27,769 common 13252 21796 Task 35 has no businesses at all => FAILED
+INFO 2025-03-21 08:42:27,770 common 13252 21796 Task 35 => DONE -> FAILED
+INFO 2025-03-21 08:42:27,771 recalculate_tasks 13252 21796 Task 35: DONE -> FAILED
+INFO 2025-03-21 08:42:27,773 common 13252 21796 Task 43 has no businesses at all => FAILED
+INFO 2025-03-21 08:42:27,775 common 13252 21796 Task 43 => DONE -> FAILED
+INFO 2025-03-21 08:42:27,775 recalculate_tasks 13252 21796 Task 43: DONE -> FAILED
+INFO 2025-03-21 08:42:27,781 common 13252 21796 Task 30 counts: total=3, pending=3, reviewed=0, in_production=0
+INFO 2025-03-21 08:42:27,786 common 13252 21796 Task 25 counts: total=1, pending=1, reviewed=0, in_production=0
+INFO 2025-03-21 08:42:27,792 common 13252 21796 Task 44 counts: total=1, pending=1, reviewed=0, in_production=0
+INFO 2025-03-21 08:42:27,793 common 13252 21796 Task 44 => PENDING -> COMPLETED
+INFO 2025-03-21 08:42:27,794 recalculate_tasks 13252 21796 Task 44: PENDING -> COMPLETED
+INFO 2025-03-21 08:42:27,796 common 13252 21796 Task 31 has no businesses at all => FAILED
+INFO 2025-03-21 08:42:27,797 common 13252 21796 Task 31 => DONE -> FAILED
+INFO 2025-03-21 08:42:27,798 recalculate_tasks 13252 21796 Task 31: DONE -> FAILED
+INFO 2025-03-21 08:42:27,803 common 13252 21796 Task 26 counts: total=1, pending=1, reviewed=0, in_production=0
+INFO 2025-03-21 08:42:27,805 common 13252 21796 Task 27 has no businesses at all => FAILED
+INFO 2025-03-21 08:42:27,806 common 13252 21796 Task 27 => COMPLETED -> FAILED
+INFO 2025-03-21 08:42:27,807 recalculate_tasks 13252 21796 Task 27: COMPLETED -> FAILED
+INFO 2025-03-21 08:42:27,812 common 13252 21796 Task 37 counts: total=1, pending=1, reviewed=0, in_production=0
+INFO 2025-03-21 08:42:27,818 common 13252 21796 Task 32 counts: total=1, pending=1, reviewed=0, in_production=0
+INFO 2025-03-21 08:42:27,819 recalculate_tasks 13252 21796 
+Detailed Business Counts for Active Tasks:
+INFO 2025-03-21 08:42:27,823 recalculate_tasks 13252 21796 Task 1 counts: total=1, pending=1, reviewed=0, in_production=0
+INFO 2025-03-21 08:42:27,827 recalculate_tasks 13252 21796 Task 2 counts: total=3, pending=3, reviewed=0, in_production=0
+INFO 2025-03-21 08:42:27,831 recalculate_tasks 13252 21796 Task 45 counts: total=1, pending=1, reviewed=0, in_production=0
+INFO 2025-03-21 08:42:27,837 recalculate_tasks 13252 21796 Task 46 counts: total=1, pending=1, reviewed=0, in_production=0
+INFO 2025-03-21 08:42:27,842 recalculate_tasks 13252 21796 Task 15 counts: total=4, pending=4, reviewed=0, in_production=0
+INFO 2025-03-21 08:42:27,847 recalculate_tasks 13252 21796 Task 17 counts: total=1, pending=1, reviewed=0, in_production=0
+INFO 2025-03-21 08:42:27,851 recalculate_tasks 13252 21796 Task 18 counts: total=2, pending=2, reviewed=0, in_production=0
+INFO 2025-03-21 08:42:27,854 recalculate_tasks 13252 21796 Task 33 counts: total=1, pending=1, reviewed=0, in_production=0
+INFO 2025-03-21 08:42:27,858 recalculate_tasks 13252 21796 Task 29 counts: total=1, pending=1, reviewed=0, in_production=0
+INFO 2025-03-21 08:42:27,863 recalculate_tasks 13252 21796 Task 19 counts: total=1, pending=1, reviewed=0, in_production=0
+INFO 2025-03-21 08:42:27,871 recalculate_tasks 13252 21796 Task 34 counts: total=1, pending=1, reviewed=0, in_production=0
+INFO 2025-03-21 08:42:27,876 recalculate_tasks 13252 21796 Task 24 counts: total=1, pending=1, reviewed=0, in_production=0
+INFO 2025-03-21 08:42:27,882 recalculate_tasks 13252 21796 Task 30 counts: total=3, pending=3, reviewed=0, in_production=0
+INFO 2025-03-21 08:42:27,885 recalculate_tasks 13252 21796 Task 25 counts: total=1, pending=1, reviewed=0, in_production=0
+INFO 2025-03-21 08:42:27,889 recalculate_tasks 13252 21796 Task 44 counts: total=1, pending=1, reviewed=0, in_production=0
+INFO 2025-03-21 08:42:27,894 recalculate_tasks 13252 21796 Task 26 counts: total=1, pending=1, reviewed=0, in_production=0
+INFO 2025-03-21 08:42:27,899 recalculate_tasks 13252 21796 Task 37 counts: total=1, pending=1, reviewed=0, in_production=0
+INFO 2025-03-21 08:42:27,903 recalculate_tasks 13252 21796 Task 32 counts: total=1, pending=1, reviewed=0, in_production=0
+INFO 2025-03-21 08:42:27,906 recalculate_tasks 13252 21796 
+Recalculation completed:
+- Total tasks processed: 43
+- Tasks updated: 18
+- Tasks marked as FAILED: 15
+- Actually FAILED in database: 25
+Final Status Counts:
+- TASK_DONE: 0 tasks
+- COMPLETED: 18 tasks
+- DONE: 0 tasks
+- FAILED: 25 tasks
+- IN_PROGRESS: 0 tasks
+
+Total Tasks by Business Status:
+- Tasks with all businesses in IN_PRODUCTION: 0
+- Tasks with all businesses in PENDING: 18
+- Tasks with reviewed businesses (no pending): 0
+- Tasks with no businesses: 25
+- Tasks in progress: 0
+INFO 2025-03-21 08:42:27,908 recalculate_tasks 13252 21796 
+Verification Details:
+INFO 2025-03-21 08:42:27,909 recalculate_tasks 13252 21796 Database status counts:
+INFO 2025-03-21 08:42:27,910 recalculate_tasks 13252 21796 - TASK_DONE: 0 (tracked: 0)
+INFO 2025-03-21 08:42:27,911 recalculate_tasks 13252 21796 - COMPLETED: 18 (tracked: 18)
+INFO 2025-03-21 08:42:27,912 recalculate_tasks 13252 21796 - DONE: 0 (tracked: 0)
+INFO 2025-03-21 08:42:27,913 recalculate_tasks 13252 21796 - FAILED: 25 (tracked: 25)
+INFO 2025-03-21 08:42:27,914 recalculate_tasks 13252 21796 - IN_PROGRESS: 0 (tracked: 0)

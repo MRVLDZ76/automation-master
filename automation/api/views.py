@@ -6,6 +6,7 @@ from django.shortcuts import get_object_or_404
 from rest_framework import viewsets, status
 from rest_framework.decorators import action
 from rest_framework.response import Response
+from rest_framework.pagination import PageNumberPagination
 from rest_framework.permissions import IsAuthenticated
 from django.db.models import Count, Q, Prefetch
 from django.utils import timezone  
@@ -31,11 +32,17 @@ import logging
 logger = logging.getLogger(__name__)
 User = get_user_model()
 
+class StandardResultsSetPagination(PageNumberPagination):
+    page_size = 20
+    page_size_query_param = 'page_size'
+    max_page_size = 100
+ 
+
 #Businesses#Businesses#Businesses
 class BusinessViewSet(viewsets.ModelViewSet):
     serializer_class = BusinessSerializer
-    #permission_classes = [IsAuthenticated]
     permission_classes = [IsAuthenticatedOrReadOnly]
+    pagination_class = StandardResultsSetPagination
 
     def get_queryset(self):
         """
@@ -54,6 +61,20 @@ class BusinessViewSet(viewsets.ModelViewSet):
             )
         else:
             return Business.objects.none()
+
+    def list(self, request, *args, **kwargs):
+        queryset = self.filter_queryset(self.get_queryset())
+        
+        # Get pagination parameters
+        page = self.paginate_queryset(queryset)
+        if page is not None:
+            serializer = self.get_serializer(page, many=True)
+            return self.get_paginated_response(serializer.data)
+
+        # If pagination is disabled through query params
+        serializer = self.get_serializer(queryset, many=True)
+        return Response(serializer.data)
+
 
     @action(detail=False, methods=['GET'])
     def advanced_filter(self, request):
@@ -514,6 +535,7 @@ class TaskViewSet(viewsets.ModelViewSet):
     queryset = ScrapingTask.objects.all()
     serializer_class = TaskSerializer
     permission_classes = [IsAuthenticated]
+    pagination_class = StandardResultsSetPagination
 
     def get_queryset(self):
         user = self.request.user

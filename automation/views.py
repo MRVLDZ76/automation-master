@@ -3374,7 +3374,7 @@ def get_destinations_tasks(request):
     # Filter by country name to retrieve the matching destinations
     try:
         country = get_object_or_404(Country, name=country_name)
-        destinations = Destination.objects.filter(country=country).values('id', 'name')
+        destinations = Destination.objects.filter(country=country).values('id', 'name').order_by('name')
         destinations_data = list(destinations)
         
         return JsonResponse({'destinations': destinations_data})
@@ -3632,7 +3632,7 @@ def get_categories(request):
         return JsonResponse({'error': 'Level ID is required'}, status=400)
 
     # Fetch categories that belong to the selected level and have no parent (top-level categories)
-    categories = Category.objects.filter(level_id=level_id, parent__isnull=True).values('id', 'title')
+    categories = Category.objects.filter(level_id=level_id, parent__isnull=True).values('id', 'title').order_by('title')
 
     if not categories:
         return JsonResponse({'error': 'No categories found for this level'}, status=404)
@@ -3649,18 +3649,18 @@ def get_subcategories(request):
         return JsonResponse({'error': 'Category ID is required'}, status=400)
 
     # Fetch subcategories where the parent is the selected category
-    subcategories = Category.objects.filter(parent_id=category_id).values('id', 'title')
+    subcategories = Category.objects.filter(parent_id=category_id).values('id', 'title').order_by('title')
 
     return JsonResponse(list(subcategories), safe=False)
 
 def get_countries(request):
-    countries = Country.objects.all().values('id', 'name')   
+    countries = Country.objects.all().values('id', 'name').order_by('name')   
     return JsonResponse(list(countries), safe=False)
 
 def get_destinations_by_country(request):
     country_id = request.GET.get('country_id')
     if country_id:
-        destinations = Destination.objects.filter(country_id=country_id).values('id', 'name')
+        destinations = Destination.objects.filter(country_id=country_id).values('id', 'name').order_by('name')
         return JsonResponse(list(destinations), safe=False)
     else:
         return JsonResponse({'error': 'No country_id provided'}, status=400)
@@ -4438,7 +4438,8 @@ def get_recent_tasks(request):
                 'user_email': task.user.email if task.user else 'No email',
                 'business_count': task.businesses.count(),
                 'destination': task.destination.name if hasattr(task, 'destination') else 'N/A',
-                'translation_status': task.translation_status
+                'translation_status': task.translation_status,
+                'file': task.file
             })
             
         return JsonResponse(tasks_data, safe=False)

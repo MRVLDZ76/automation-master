@@ -99,7 +99,7 @@ class TaskSerializer(serializers.ModelSerializer):
         model = ScrapingTask
         fields = [
             'id', 'project_title', 'status', 'created_at', 'completed_at',
-            'user', 'destination', 'status_display'
+            'user', 'destination', 'file', 'status_display'
         ]
 
 class AdminStatsSerializer(serializers.Serializer):
