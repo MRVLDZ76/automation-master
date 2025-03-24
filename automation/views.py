@@ -3698,6 +3698,362 @@ def get_destinations_by_country(request):
     else:
         return JsonResponse({'error': 'No country_id provided'}, status=400)
  
+@transaction.atomic
+def save_business_from_json(task, business_data, query=None, form_data=None):
+    """Save business data provided as JSON."""
+    try:
+        logger.info(f"Saving business data from JSON for task {task.id if hasattr(task, 'id') else task}")
+        
+        # Check if business_data is a string and try to parse it as JSON
+        if isinstance(business_data, str):
+            try:
+                business_data = json.loads(business_data)
+            except json.JSONDecodeError:
+                raise ValueError("Invalid JSON data provided for business")
+        
+        return save_single_business(task, business_data, query, form_data)
+    except Exception as e:
+        logger.error(f"Error saving business data from JSON for task {task.id if hasattr(task, 'id') else task}: {str(e)}")
+        raise
+
+def save_single_business(task, business_data, query=None, form_data=None):
+    # Ensure business_data is a dictionary
+    if not isinstance(business_data, dict):
+        raise TypeError("business_data must be a dictionary")
+        
+    logger.info(f"Processing single business: {business_data.get('title', 'Unknown')}")
+    
+    # Get the task object if a task ID was passed
+    if isinstance(task, (int, str)):
+        task_id = task
+        task = ScrapingTask.objects.get(id=task_id)
+    
+    # Use the provided query or get it from business_data
+    if query is None:
+        query = business_data.get('query', '')
+    
+    try:
+        # Initialize form_data as an empty dict if None
+        if form_data is None:
+            form_data = {}
+            
+        # Get form data values or fallback to task defaults
+        submitted_country = form_data.get('submitted_country')
+        submitted_city = form_data.get('submitted_city')
+        destination_id = form_data.get('destination_id')
+
+        # Business object construction based on both JSON and form data
+        business_obj = {
+            'task': task,
+            'project_id': task.project_id,
+            'project_title': task.project_title,
+            'main_category': form_data.get('main_category', task.main_category),
+            'tailored_category': form_data.get('tailored_category', task.tailored_category),
+            'search_string': query[:100] if query else '',  # Truncate to 100 chars
+            'scraped_at': timezone.now(),
+        }
+
+        # CORRECTED Field mapping from JSON to Business model
+        field_mapping = {
+            'title': 'title',  # Using 'title' as requested
+            'address': 'address',
+            'phone': 'phone',
+            'website': 'website',
+            'email': 'email',
+            'place_id': 'place_id',
+            'google_place_id': 'place_id',  # Alternative field name
+            'google_maps_url': 'google_maps_url',
+            'hours': 'hours',
+            'operating_hours': 'operating_hours',
+            'description': 'description',
+            'main_category': 'main_category',
+            'latitude': 'latitude',
+            'longitude': 'longitude',
+            'rating': 'rating',
+            'reviews': 'reviews_count',
+            'reviews_link': 'reviews_link',
+            'photos_link': 'photos_link',
+            'price_level': 'price_level',
+            'types': 'types',  # Type field mapping
+        }
+        
+        # Truncate string fields to their max database length
+        max_lengths = {
+            'title': 100,
+            'address': 255,
+            'phone': 50,
+            'website': 255,
+            'email': 100,
+            'place_id': 100,
+            'google_maps_url': 255,
+            'description': 1000,
+            'main_category': 255,
+            'reviews_link': 255,
+            'photos_link': 255,
+            'types': 500,  # Max length for types
+        }
+
+        # FIX FOR TITLE: Ensure title is properly extracted and never blank
+        # Move this special case before general field processing
+        if 'title' in business_data and business_data['title']:
+            title_value = business_data['title']
+            # Handle various formats, strip quotes
+            if isinstance(title_value, str):
+                # Remove any surrounding quotes
+                title_value = title_value.strip('"\'')
+                business_obj['title'] = title_value[:max_lengths['title']]
+            elif isinstance(title_value, (list, dict)):
+                # Convert complex type to string
+                title_str = str(title_value)
+                business_obj['title'] = title_str[:max_lengths['title']]
+        elif not business_obj.get('title'):
+            # Fallback title if none provided
+            business_obj['title'] = f"Business from {query}"[:max_lengths['title']]
+
+        # Process each field from the JSON data
+        for json_field, model_field in field_mapping.items():
+            # Skip title since we handled it separately
+            if json_field == 'title':
+                continue
+                
+            if json_field in business_data and business_data[json_field] is not None:
+                value = business_data[json_field]
+                
+                # Handle special field cases
+                if json_field == 'hours':
+                    if isinstance(value, dict):
+                        business_obj[model_field] = json.dumps(value)
+                    elif isinstance(value, str):
+                        # Already a string, possibly a JSON string
+                        business_obj[model_field] = value
+                        
+                elif json_field == 'types':
+                    # FIX FOR TYPES: Clean up the types data
+                    if isinstance(value, list):
+                        # Clean each item in the list - remove quotes and brackets
+                        cleaned_types = []
+                        for type_item in value:
+                            if isinstance(type_item, str):
+                                # Remove quotes, brackets, etc.
+                                cleaned_type = type_item.strip('"\'[]{}').strip()
+                                if cleaned_type:
+                                    cleaned_types.append(cleaned_type)
+                            else:
+                                # Non-string item, convert to string
+                                cleaned_types.append(str(type_item))
+                        business_obj[model_field] = json.dumps(cleaned_types)
+                    elif isinstance(value, dict):
+                        business_obj[model_field] = json.dumps(list(value.values()))
+                    elif isinstance(value, str):
+                        # Try to parse as JSON first
+                        try:
+                            parsed_value = json.loads(value)
+                            if isinstance(parsed_value, list):
+                                # Clean the list
+                                cleaned_types = [t.strip('"\'[]{}').strip() for t in parsed_value if isinstance(t, str)]
+                                business_obj[model_field] = json.dumps(cleaned_types)
+                            else:
+                                # Not a list, convert to a list with one item
+                                business_obj[model_field] = json.dumps([str(parsed_value)])
+                        except json.JSONDecodeError:
+                            # Not JSON, clean the string
+                            # Handle format like "['type1', 'type2']"
+                            cleaned_str = value.strip('"\'')
+                            if cleaned_str.startswith('[') and cleaned_str.endswith(']'):
+                                # Strip outer brackets
+                                cleaned_str = cleaned_str[1:-1]
+                                # Split by commas, but respect quotes
+                                types_list = []
+                                for item in re.findall(r'\'[^\']*\'|"[^"]*"|\S+', cleaned_str):
+                                    types_list.append(item.strip('\'"'))
+                                business_obj[model_field] = json.dumps(types_list)
+                            else:
+                                # Simple string, store as a list with one item
+                                business_obj[model_field] = json.dumps([cleaned_str])
+                elif json_field == 'main_category':
+                    # FIX FOR MAIN_CATEGORY: Properly extract and clean
+                    if isinstance(value, list) and value:
+                        # Get first item from list
+                        main_cat = value[0]
+                        if isinstance(main_cat, str):
+                            business_obj[model_field] = main_cat.strip('"\'[]{}').strip()[:max_lengths['main_category']]
+                        else:
+                            business_obj[model_field] = str(main_cat)[:max_lengths['main_category']]
+                    elif isinstance(value, str):
+                        # Clean string
+                        main_cat = value.strip('"\'[]{}').strip()
+                        if ',' in main_cat:
+                            # Take first item if comma-separated
+                            business_obj[model_field] = main_cat.split(',')[0].strip()[:max_lengths['main_category']]
+                        else:
+                            business_obj[model_field] = main_cat[:max_lengths['main_category']]
+                    elif isinstance(value, dict):
+                        # Take first value from dict
+                        business_obj[model_field] = str(next(iter(value.values()), "Unknown"))[:max_lengths['main_category']]
+                    else:
+                        # Other types, convert to string
+                        business_obj[model_field] = str(value)[:max_lengths['main_category']]
+                elif isinstance(value, str) and model_field in max_lengths:
+                    # Truncate string fields to their maximum allowed length
+                    # Also strip any quotes from string fields
+                    business_obj[model_field] = value.strip('"\'').strip()[:max_lengths[model_field]]
+                else:
+                    business_obj[model_field] = value
+
+        # Ensure main_category is set if still not set
+        if 'main_category' not in business_obj or not business_obj['main_category']:
+            # Try to extract from types
+            types = None
+            
+            if 'types' in business_obj and business_obj['types']:
+                types = business_obj['types']
+                
+            if types:
+                try:
+                    if isinstance(types, str):
+                        # Types is now stored as comma-separated string, not JSON
+                        types_list = [t.strip() for t in types.split(",")]
+                        if types_list:
+                            # Get first item from types list
+                            main_cat = types_list[0]
+                            business_obj['main_category'] = main_cat.strip('"\'')[:max_lengths['main_category']]
+                except (IndexError, AttributeError):
+                    # Fallback if types processing fails
+                    if task.main_category:
+                        business_obj['main_category'] = task.main_category[:max_lengths['main_category']]
+                    else:
+                        business_obj['main_category'] = "General"
+
+        # Ensure main_category is always a string
+        if 'main_category' in business_obj and not isinstance(business_obj['main_category'], str):
+            business_obj['main_category'] = str(business_obj['main_category'])
+            
+        # Parse address from JSON or use form input
+        address = business_data.get('address', '')
+        address_components = parse_address(address)
+
+        # Use JSON values for city/country or fall back to form data
+        # Ensure all string fields are properly truncated
+        street = address_components.get('street', '')
+        business_obj['street'] = street[:255] if street else ''
+        
+        city = address_components.get('city', submitted_city)
+        business_obj['city'] = city[:100] if city else ''
+        
+        state = address_components.get('state', '')
+        business_obj['state'] = state[:100] if state else ''
+        
+        postal_code = address_components.get('postal_code', '')
+        business_obj['postal_code'] = postal_code[:20] if postal_code else ''
+        
+        country = address_components.get('country', submitted_country)
+        business_obj['country'] = country[:100] if country else ''
+
+        # Handle destination logic
+        if destination_id:
+            try:
+                destination = Destination.objects.get(id=destination_id)
+            except Destination.DoesNotExist:
+                # Fall back to country-based destination creation
+                country_name = business_obj['country']
+                state_name = business_obj['state']
+                
+                # Default country if missing
+                if not country_name:
+                    country_name = "United States"
+                    business_obj['country'] = country_name
+                    
+                country, _ = Country.objects.get_or_create(name=country_name[:100])
+                
+                destination_name = f"{country_name}, {state_name}" if state_name else country_name
+                destination_name = destination_name[:100]
+                
+                destination, _ = Destination.objects.get_or_create(
+                    name=destination_name,
+                    defaults={
+                        'country': country,
+                        'province': state_name[:100] if state_name else "Missing province",
+                        'description': "Missing description"
+                    }
+                )
+        else:
+            # Create destination from country/state info
+            country_name = business_obj['country']
+            state_name = business_obj['state']
+            
+            # Default country if missing
+            if not country_name:
+                country_name = "United States"
+                business_obj['country'] = country_name
+                
+            # Find or create the Country object
+            country, _ = Country.objects.get_or_create(name=country_name[:100])
+            
+            # Create the destination name and find or create the Destination
+            destination_name = f"{country_name}, {state_name}" if state_name else country_name
+            destination_name = destination_name[:100]  # Truncate to prevent errors
+            
+            # Create destination with the required country reference
+            destination, created = Destination.objects.get_or_create(
+                name=destination_name,
+                defaults={
+                    'country': country,
+                    'province': state_name[:100] if state_name else "Missing province",
+                    'description': "Missing description"
+                }
+            )
+
+        business_obj['destination'] = destination
+
+        # Create or update the Business object, check if place_id exists first
+        if 'place_id' not in business_obj or not business_obj['place_id']:
+            # Generate a unique place_id if missing
+            business_obj['place_id'] = f"auto-{uuid.uuid4()}"[:100]
+        
+        # Safety check - log business details before save
+        logger.info(f"About to save business: Title={business_obj.get('title', 'No Title')}, "
+                   f"Place ID={business_obj.get('place_id', 'No Place ID')}")
+        
+        # Create or update the Business object
+        business, created = Business.objects.update_or_create(
+            place_id=business_obj['place_id'],
+            defaults=business_obj
+        )
+
+        logger.info(f"{'New business created' if created else 'Business updated'} from JSON: {business.title} (ID: {business.id})")
+        
+        # Log data about important fields
+        types_str = getattr(business, 'types', 'Not set')
+        try:
+            # Try to parse types JSON to check its format
+            if isinstance(types_str, str):
+                parsed_types = json.loads(types_str)
+                logger.info(f"Parsed types: {parsed_types}")
+        except json.JSONDecodeError:
+            logger.warning(f"Types is not valid JSON: {types_str}")
+            
+        logger.info(f"Business data - Types: {types_str}, Hours: {getattr(business, 'hours', 'Not set')}")
+        logger.info(f"Main Category: {business.main_category}, Tailored Category: {business.tailored_category}")
+        
+        # Add additional data processing if needed
+        logger.info(f"Additional data saved for business {business.id}")
+        logger.info(f"All business data processed and saved for business {business.id}")
+        
+        # Log the address components
+        address_components_msg = f"Address components saved - Street: {business.street}, Postal Code: {business.postal_code}, City: {business.city}"
+        logger.info(address_components_msg)
+        
+        try:
+            image_paths = download_images(business, business_data)
+            logger.info(f"Downloaded {len(image_paths)} images for business {business.id}")
+        except Exception as e:
+            logger.error(f"Error downloading images for business {business.id}: {str(e)}", exc_info=True)
+
+        return business
+        
+    except Exception as e:
+        logger.error(f"Error processing business data: {str(e)}", exc_info=True)
+        raise  # Re-raise the exception to trigger transaction rollback if necessary
 def parse_address(address): 
     components = address.split(',')
     parsed = {
@@ -3715,226 +4071,53 @@ def parse_address(address):
             break
     
     return parsed
- 
-@transaction.atomic
-def save_business_from_json(task, business_data, query='', form_data=None):
+
+def process_images(business, photos_data):
     """
-    Process business data from JSON and save it to the database.
-    Handles both place_results (single business) and local_results (multiple businesses) formats.
+    Process and save image data for a business
+    """
+    if not photos_data:
+        return
+        
+    # Clear existing images if needed
+    # Image.objects.filter(business=business).delete()
     
-    Args:
-        task: The ScrapingTask instance
-        business_data: Dictionary containing business data from JSON
-        query: The search query string used
-        form_data: Optional form data for additional context
-        
-    Returns:
-        The created/updated Business object or None if failed
-    """
-    try:
-        # Check if we're dealing with a place_results (single business) or local_results (multiple businesses)
-        if isinstance(business_data, dict) and 'place_results' in business_data:
-            # Handle place_results format (single business)
-            place_data = business_data['place_results']
-            query = business_data.get('search_parameters', {}).get('q', '') or query
-            return save_single_business(task, place_data, query, form_data=form_data)
-        else:
-            # Handle original format (business from local_results array)
-            return save_single_business(task, business_data, query, form_data=form_data)
-    except Exception as e:
-        logger.error(f"Error saving business data from JSON for task {task.id}: {str(e)}", exc_info=True)
-        raise
-
-
-def save_single_business(task, business_data, search_query, form_data=None):
-    """
-    Process a single business from JSON data and save it to the database.
+    # Track number of images processed
+    image_count = 0
     
-    Args:
-        task: The ScrapingTask instance
-        business_data: Dictionary containing business data from JSON
-        search_query: The search query string used
-        form_data: Optional form data for additional context
-        
-    Returns:
-        The created/updated Business object or None if failed
-    """
-    try:
-        # Prepare the business data object with task and project info
-        business_obj = {
-            'task': task,
-            'project_id': task.project_id,
-            'project_title': task.project_title,
-            'main_category': form_data.get('main_category', task.main_category),
-            'tailored_category': form_data.get('subcategory', task.tailored_category),
-            'search_string': search_query,
-            'scraped_at': timezone.now(),
-            'level': form_data.get('level', task.level) if form_data else task.level,
-            'country': form_data.get('country_name', '') if form_data else '',
-            'city': form_data.get('destination_name', '') if form_data else '',
-            'state': '',  # Initialize state key
-            'form_country_id': form_data.get('country_id') if form_data else None,
-            'form_country_name': form_data.get('country_name', '') if form_data else '',
-            'form_destination_id': form_data.get('destination_id') if form_data else None,
-            'form_destination_name': form_data.get('destination_name', '') if form_data else '',
-            'destination_id': form_data.get('destination_id') if form_data else None,
-        }
-
-        # Standard field mapping to ensure consistency
-        field_mapping = {
-            'title': 'title',
-            'place_id': 'place_id',
-            'data_id': 'data_id',
-            'data_cid': 'data_cid',
-            'rating': 'rating',
-            'reviews': 'reviews_count',  # Correct field name alignment
-            'price': 'price',
-            'type': 'tailored_category',
-            'address': 'address',
-            'phone': 'phone',
-            'website': 'website',
-            'description': 'description',
-            'thumbnail': 'thumbnail',
-            'position': 'rank',
-        }
-
-        # Map fields from business_data to business_obj
-        for source_field, target_field in field_mapping.items():
-            if source_field in business_data and business_data[source_field] is not None:
-                business_obj[target_field] = business_data[source_field]
-
-        # Handle GPS coordinates consistently
-        if 'gps_coordinates' in business_data:
-            business_obj['latitude'] = business_data['gps_coordinates'].get('latitude')
-            business_obj['longitude'] = business_data['gps_coordinates'].get('longitude')
-
-        # Handle types field - ensure consistent format
-        if 'type' in business_data and isinstance(business_data['type'], list):
-            business_obj['types'] = ', '.join(business_data['type'])
-        elif 'types' in business_data and isinstance(business_data['types'], list):
-            business_obj['types'] = ', '.join(business_data['types'])
-
-        # Handle operating hours with consistent day order
-        ordered_days = ['monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday', 'sunday']
-        
-        if 'hours' in business_data:
-            hours_data = business_data['hours']
-            formatted_hours = {}
-            
-            if isinstance(hours_data, dict):
-                # If hours is already a dict, ensure days are properly formatted
-                formatted_hours = {
-                    day: hours_data.get(day, None) 
-                    for day in ordered_days
-                }
-            elif isinstance(hours_data, list):
-                # Handle list format (from some API responses)
-                for day in ordered_days:
-                    day_schedule = next(
-                        (schedule for schedule in hours_data 
-                        if isinstance(schedule, str) and day in schedule.lower()),
-                        None
-                    )
-                    formatted_hours[day] = day_schedule
-            
-            business_obj['operating_hours'] = formatted_hours
-        elif 'operating_hours' in business_data:
-            hours_data = business_data['operating_hours']
-            formatted_hours = {}
-            
-            if isinstance(hours_data, dict):
-                formatted_hours = {
-                    day: hours_data.get(day, None) 
-                    for day in ordered_days
-                }
-            elif isinstance(hours_data, list):
-                for day in ordered_days:
-                    day_schedule = next(
-                        (schedule for schedule in hours_data 
-                        if isinstance(schedule, str) and day in schedule.lower()),
-                        None
-                    )
-                    formatted_hours[day] = day_schedule
-            
-            business_obj['operating_hours'] = formatted_hours
-
-        # Handle service options consistently
-        if 'service_options' in business_data:
-            service_opts = business_data['service_options']
-            if isinstance(service_opts, dict):
-                formatted_options = [{
-                    'general': [
-                        f"{key}: {'Yes' if value else 'No'}"
-                        for key, value in service_opts.items()
-                    ]
-                }]
-                business_obj['service_options'] = formatted_options
+    for idx, photo_data in enumerate(photos_data):
+        try:
+            if isinstance(photo_data, str):
+                image_url = photo_data
+                image_title = f"{business.title} Image {idx+1}"
+            elif isinstance(photo_data, dict):
+                image_url = photo_data.get('image', photo_data.get('url', ''))
+                image_title = photo_data.get('title', f"{business.title} Image {idx+1}")
             else:
-                business_obj['service_options'] = service_opts
-        elif 'extensions' in business_data:
-            extensions = business_data['extensions']
-            if isinstance(extensions, list):
-                cleaned_extensions = []
-                for category_dict in extensions:
-                    if isinstance(category_dict, dict):
-                        for category, values in category_dict.items():
-                            if values:  
-                                cleaned_extensions.append({category: values})
-                business_obj['service_options'] = cleaned_extensions
-                logger.info(f"Processed extensions data: {cleaned_extensions}")
-
-        # Fill in missing address components with consistent approach
-        fill_missing_address_components(business_obj, task, search_query, form_data=form_data)
-
-        # Ensure place_id is present for business identification
-        if 'place_id' not in business_obj:
-            logger.warning(f"Skipping business entry for task {task.id} due to missing 'place_id'")
-            return None   
+                continue
+                
+            if not image_url:
+                continue
+                
+            # Create image record
+            Image.objects.create(
+                business=business,
+                title=image_title,
+                url=image_url,
+                ordering=idx + 1
+            )
+            
+            image_count += 1
+            
+        except Exception as e:
+            logger.warning(f"Error processing image {idx}: {str(e)}")
     
-        # Create or update the business record
-        business, created = Business.objects.update_or_create(
-            place_id=business_obj['place_id'],
-            defaults=business_obj
-        )
-
-        if created:
-            logger.info(f"New business created: {business.title} (ID: {business.id})")
-        else:
-            logger.info(f"Existing business updated: {business.title} (ID: {business.id})")
-
-        # Process categories with consistent approach to match existing code
-        categories = business_data.get('categories', [])
-        for category_id in categories:
-            try:
-                category = Category.objects.get(id=category_id)
-                business.main_category.add(category)  # Using main_category, not categories
-            except Category.DoesNotExist:
-                logger.warning(f"Category ID {category_id} does not exist.")
-
-        # Process opening hours from the hours data
-        if 'operating_hours' in business_obj:
-            OpeningHours.objects.filter(business=business).delete()
-            for day, hours in business_obj['operating_hours'].items():
-                if hours:  # Only create if hours are not empty
-                    OpeningHours.objects.create(business=business, day=day, hours=hours)
-
-        # Process additional information if available
-        if 'about' in business_data:
-            AdditionalInfo.objects.filter(business=business, category='About').delete()
-            for key, value in business_data['about'].items():
-                AdditionalInfo.objects.create(business=business, category='About', key=key, value=value)
-
-        # Download and save images if available
-        if 'images' in business_data and business_data['images']:
-            process_business_images(business, business_data['images'])
-
-        return business
-
-    except Exception as e:
-        logger.error(f"Error processing business data: {str(e)}", exc_info=True)
-        return None
-
-
+    # Update business image count
+    if image_count > 0:
+        business.images_count = image_count
+        business.save(update_fields=['images_count'])
+        logger.info(f"Saved {image_count} images for business {business.id}")
+ 
 def process_business_images(business, images):
     """
     Process and save images for a business.
@@ -3969,71 +4152,7 @@ def process_business_images(business, images):
                 continue
     except Exception as e:
         logger.error(f"Error processing images for business {business.id}: {str(e)}")
-
-
-def fill_missing_address_components(business_data, task, query, form_data=None):
-    """
-    Fills in any missing address components using existing data from the same task or by extracting from the query.
-    Prioritizes form data if provided.
-    """
-    # Use form data if available
-    if form_data:
-        business_data['country'] = form_data.get('country_name', business_data.get('country', ''))
-        business_data['city'] = form_data.get('destination_name', business_data.get('city', ''))
-        business_data['level'] = form_data.get('level', business_data.get('level', ''))
-        business_data['main_category'] = form_data.get('main_category', business_data.get('main_category', ''))
-        business_data['tailored_category'] = form_data.get('subcategory', business_data.get('tailored_category', ''))
-
-    # Get address components from other businesses in the same task
-    task_businesses = Business.objects.filter(task=task)
-    address_components = defaultdict(set)
-    
-    for b in task_businesses:
-        if b.country and b.country.strip():
-            address_components['country'].add(b.country)
-        if b.city and b.city.strip():
-            address_components['city'].add(b.city)
-        if b.state and b.state.strip():
-            address_components['state'].add(b.state)
-
-    # Fill in missing components from collected data
-    if not business_data.get('country') and address_components['country']:
-        business_data['country'] = next(iter(address_components['country']), '')
-        
-    if not business_data.get('city') and address_components['city']:
-        business_data['city'] = next(iter(address_components['city']), '')
-        
-    if not business_data.get('state') and address_components['state']:
-        business_data['state'] = next(iter(address_components['state']), '')
-
-    # If still missing, try to extract from address or query
-    address = business_data.get('address', '')
-    if address:
-        # Try to extract city, state, country from address
-        # This would use the same logic as in the original code
-        address_parts = [part.strip() for part in address.split(',')]
-        if len(address_parts) >= 3 and not business_data.get('country'):
-            business_data['country'] = address_parts[-1]
-        if len(address_parts) >= 2 and not business_data.get('city'):
-            business_data['city'] = address_parts[0]
-            
-    # Extract from query as last resort
-    if query and not (business_data.get('country') or business_data.get('city')):
-        query_parts = [part.strip() for part in query.split(',')]
-        if len(query_parts) >= 2:
-            # Last part might be country
-            if not business_data.get('country'):
-                business_data['country'] = query_parts[-1]
-            # First part might be city
-            if not business_data.get('city'):
-                business_data['city'] = query_parts[0]
-
-    # Add level information if missing
-    if not business_data.get('level') and task.level:
-        business_data['level'] = task.level
-
-    return business_data
-
+ 
 @method_decorator(login_required, name='dispatch')
 @method_decorator(user_passes_test(lambda u: u.is_superuser or u.roles.filter(role='ADMIN').exists()), name='dispatch')
 class UploadScrapingResultsView(View):
@@ -4217,19 +4336,22 @@ class UploadIndividualBusinessView(View):
             if 'search_parameters' in data and 'q' in data['search_parameters']:
                 search_query = data['search_parameters']['q']
             
+            # Create an empty form_data dict instead of None
+            form_data = {}
+            
             # Process single business if place_results exists
             if 'place_results' in data:
                 business_data = transform_place_to_local_format(data['place_results'])
-                save_business_from_json(task, business_data, search_query)
+                save_business(task, business_data, search_query, form_data=form_data)
                 messages.success(request, 'Business data imported successfully.')
             # Process multiple businesses if local_results exists
             elif transformed_data and 'local_results' in transformed_data:
                 for business_data in transformed_data['local_results']:
-                    save_business_from_json(task, business_data, search_query)
+                    save_business(task, business_data, search_query, form_data=form_data)
                 messages.success(request, f'Successfully imported {len(transformed_data["local_results"])} businesses.')
             else:
                 messages.error(request, 'No valid business data found in the file.')
-            
+
             # Reset file pointer and save the uploaded file
             results_file.seek(0)
             task.file.save(results_file.name, ContentFile(results_file.read()))
@@ -4311,9 +4433,7 @@ def transform_place_to_local_format(place_data):
                 business_data['service_options'].append(extension)
     
     return business_data
-
-
-
+ 
 def task_status(request, task_id):
     task = ScrapingTask.objects.get(id=task_id)
     return render(request, 'automation/task_status.html', {'task': task})
