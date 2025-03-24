@@ -1770,7 +1770,7 @@ def save_business(task, local_result, query, form_data=None):
             'rating': 'rating',
             'reviews': 'reviews_count',
             'price': 'price',
-            'types': 'type',
+            #'types': 'type',
             'address': 'address',
             'postal_code': 'postal_code',
             'city': 'city',
