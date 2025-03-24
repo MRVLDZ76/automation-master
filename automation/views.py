@@ -3698,9 +3698,9 @@ def get_destinations_by_country(request):
     else:
         return JsonResponse({'error': 'No country_id provided'}, status=400)
  
-@transaction.atomic
+"""@transaction.atomic
 def save_business_from_json(task, business_data, query=None, form_data=None):
-    """Save business data provided as JSON."""
+ 
     try:
         logger.info(f"Saving business data from JSON for task {task.id if hasattr(task, 'id') else task}")
         
@@ -3715,6 +3715,7 @@ def save_business_from_json(task, business_data, query=None, form_data=None):
     except Exception as e:
         logger.error(f"Error saving business data from JSON for task {task.id if hasattr(task, 'id') else task}: {str(e)}")
         raise
+"""
 
 def save_single_business(task, business_data, query=None, form_data=None):
     # Ensure business_data is a dictionary
@@ -4054,6 +4055,229 @@ def save_single_business(task, business_data, query=None, form_data=None):
     except Exception as e:
         logger.error(f"Error processing business data: {str(e)}", exc_info=True)
         raise  # Re-raise the exception to trigger transaction rollback if necessary
+
+@transaction.atomic
+def save_business(task, local_result, query, form_data=None):
+    logger.info(f"Saving business data for task {task.id}")
+    try: 
+        business_data = {
+            'task': task,
+            'project_id': task.project_id,
+            'project_title': task.project_title,
+            'main_category': form_data.get('main_category', task.main_category),
+            'tailored_category': form_data.get('subcategory', task.tailored_category),
+            'search_string': query,
+            'scraped_at': timezone.now(),
+            'level': form_data.get('level', task.level),
+            'country': form_data.get('country_name', ''),
+            'city': form_data.get('destination_name', ''),
+            'state': '',   
+            'form_country_id': form_data.get('country_id'),
+            'form_country_name': form_data.get('country_name', ''),
+            'form_destination_id': form_data.get('destination_id'),
+            'form_destination_name': form_data.get('destination_name', ''),
+            'destination_id': form_data.get('destination_id'),
+        }
+
+        logger.info(f"Local result data: {local_result}") 
+        if 'address' in local_result:
+            full_address = local_result['address']
+            business_data['address'] = full_address  
+ 
+            address_components = extract_address_components(full_address)
+ 
+            # Set street and postal_code
+            business_data['street'] = address_components['street_address']
+            business_data['postal_code'] = address_components['postal_code']
+            
+            logger.info(f"Extracted address components:")
+            logger.info(f"Full Address: {full_address}")
+            logger.info(f"Street: {business_data['street']}")
+            logger.info(f"Postal Code: {business_data['postal_code']}")
+
+        field_mapping = {
+            'position': 'rank',
+            'title': 'title',
+            'place_id': 'place_id',
+            'data_id': 'data_id',
+            'data_cid': 'data_cid',
+            'rating': 'rating',
+            'reviews': 'reviews_count',
+            'price': 'price',
+            'types': 'type',
+            'address': 'address',
+            'postal_code': 'postal_code',
+            'city': 'city',
+            'phone': 'phone',
+            'website': 'website',
+            'description': 'description',
+            'thumbnail': 'thumbnail',
+        }
+
+        for api_field, model_field in field_mapping.items():
+            if local_result.get(api_field) is not None:
+                business_data[model_field] = local_result[api_field]
+        logger.info(f"Business data to be saved: {business_data}")
+ 
+        if 'gps_coordinates' in local_result:
+            business_data['latitude'] = local_result['gps_coordinates'].get('latitude')
+            business_data['longitude'] = local_result['gps_coordinates'].get('longitude')
+ 
+        scraped_types = None
+        if 'type' in local_result:
+            scraped_types = local_result['type']
+        elif 'types' in local_result:
+            scraped_types = local_result['types']
+
+        if scraped_types:
+            # Process the types using the utility function
+            processed_types = process_scraped_types(scraped_types)
+            logger.info(f"Processed business types: {processed_types}")
+            business_data['types'] = processed_types
+        
+        US_COUNTRY_NAMES = {'united states', 'usa', 'u.s.', 'united states of america'}
+
+        # Check if the country is one of the acceptable variations
+        if business_data.get('country', '').strip().lower() in US_COUNTRY_NAMES:
+            phone = business_data.get('phone', '')
+            if phone and not phone.startswith('+1'):
+                business_data['phone'] = f'+1{phone.lstrip(" +")}'
+                logger.info(f"Updated phone with +1 prefix: {business_data['phone']}")
+ 
+ 
+       
+        ordered_days = ['monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday', 'sunday']
+
+        if 'hours' in local_result:
+            hours_data = local_result['hours']
+            formatted_hours = {day: None for day in ordered_days}  # Initialize with None values
+
+            if isinstance(hours_data, dict):
+                # If hours_data is already a dictionary
+                for day in ordered_days:
+                    formatted_hours[day] = hours_data.get(day, None)
+            
+            elif isinstance(hours_data, list):
+                # If hours_data is a list of schedules
+                for schedule_item in hours_data:
+                    if isinstance(schedule_item, dict):
+                        # Update formatted_hours with any found schedules
+                        formatted_hours.update(schedule_item)
+
+            business_data['operating_hours'] = formatted_hours
+            logger.info(f"Formatted hours data: {formatted_hours}")
+
+
+        elif 'operating_hours' in local_result:
+            hours_data = local_result['operating_hours']
+            formatted_hours = {}
+            ordered_days = ['monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday', 'sunday']
+            
+            if isinstance(hours_data, dict):
+                formatted_hours = {
+                    day: hours_data.get(day, None) 
+                    for day in ordered_days
+                }
+            elif isinstance(hours_data, list):
+                for day in ordered_days:
+                    day_schedule = next(
+                        (schedule for schedule in hours_data 
+                        if isinstance(schedule, str) and day in schedule.lower()),
+                        None
+                    )
+                    formatted_hours[day] = day_schedule
+            
+            business_data['operating_hours'] = formatted_hours
+
+        if 'extensions' in local_result:
+            extensions = local_result['extensions']
+            if isinstance(extensions, list):
+                cleaned_extensions = []
+                for category_dict in extensions:
+                    if isinstance(category_dict, dict):
+                        for category, values in category_dict.items():
+                            if values:  
+                                cleaned_extensions.append({category: values})
+                business_data['service_options'] = cleaned_extensions
+                logger.info(f"Processed extensions data: {cleaned_extensions}")
+        elif 'service_options' in local_result:
+            service_opts = local_result['service_options']
+            if isinstance(service_opts, dict):
+                formatted_options = [{
+                    'general': [
+                        f"{key}: {'Yes' if value else 'No'}"
+                        for key, value in service_opts.items()
+                    ]
+                }]
+                business_data['service_options'] = formatted_options
+ 
+        fill_missing_address_components(business_data, task, query, form_data=form_data)
+
+        if 'place_id' not in business_data:
+            logger.warning(f"Skipping business entry for task {task.id} due to missing 'place_id'")
+            return None  
+
+        # Create or update the business FIRST
+        business, created = Business.objects.update_or_create(
+            place_id=business_data['place_id'],
+            defaults=business_data
+        )
+
+        if created:
+            logger.info(f"New business created: {business.title} (ID: {business.id})")
+        else:
+            logger.info(f"Existing business updated: {business.title} (ID: {business.id})")
+
+        # THEN save popular times
+        popular_times_data = local_result.get('popular_times')  
+        if popular_times_data:
+            save_popular_times(business, popular_times_data)
+
+        # Save categories
+        categories = local_result.get('categories', [])
+        for category_id in categories:
+            try:
+                category = Category.objects.get(id=category_id)
+                business.main_category.add(category)
+            except Category.DoesNotExist:
+                logger.warning(f"Category ID {category_id} does not exist.")
+
+        # Save additional info
+        additional_info = [
+            AdditionalInfo(
+                business=business,
+                key=key,
+                value=value
+            )
+            for key, value in local_result.get('additionalInfo', {}).items()
+        ]
+        AdditionalInfo.objects.bulk_create(additional_info, ignore_conflicts=True)
+        logger.info(f"Additional data saved for business {business.id}")
+
+        # Save service options
+        service_options = local_result.get('serviceOptions', {})
+        if service_options:
+            business.service_options = service_options
+            business.save()
+
+        logger.info(f"All business data processed and saved for business {business.id}")
+        logger.info(f"Address components saved - Street: {business.street}, "
+            f"Postal Code: {business.postal_code}, City: {business.city}")
+
+        # Download images
+        try:
+            image_paths = download_images(business, local_result)
+            logger.info(f"Downloaded {len(image_paths)} images for business {business.id}")
+        except Exception as e:
+            logger.error(f"Error downloading images for business {business.id}: {str(e)}", exc_info=True)
+
+        return business
+
+    except Exception as e:
+        logger.error(f"Error saving business data for task {task.id}: {str(e)}", exc_info=True)
+        raise
+
+
 def parse_address(address): 
     components = address.split(',')
     parsed = {
@@ -4246,7 +4470,7 @@ class UploadScrapingResultsView(View):
                             continue
                     
                     # Process the business with country and destination context
-                    business = save_single_business(
+                    business = save_business(
                         task, 
                         business_data, 
                         search_query,
